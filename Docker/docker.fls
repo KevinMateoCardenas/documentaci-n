@@ -1,9 +1,9 @@
-PWD /home/quind/Documentos/Clases/Documentación/Docker
+PWD /home/quind/Documentos/Clases/Documentación/documentation/Docker
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/quind/Documentos/Clases/Documentación/Docker/docker.tex
+INPUT /home/quind/Documentos/Clases/Documentación/documentation/Docker/docker.tex
 OUTPUT docker.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls

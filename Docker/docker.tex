@@ -50,7 +50,7 @@
     colorlinks=true,
     linkcolor=black,
     filecolor=magenta,      
-    urlcolor=cyan,
+    urlcolor=gray,
 }
 
 \lstset{style=mystyle}
@@ -623,6 +623,75 @@ Las imágenes se construyen a partir de un archivo de configuración llamado Doc
 \\
 Al utilizar imágenes de Docker, los desarrolladores pueden garantizar que sus aplicaciones se ejecuten de manera consistente en diferentes entornos y sistemas, lo que facilita la implementación y la administración de aplicaciones.\\
 
+\subsection{Construcción de una imagen}
+La construcción de una imagen en Docker se lleva a cabo mediante el uso de un archivo de configuración llamado Dockerfile. Un Dockerfile es un archivo de texto plano que contiene una serie de instrucciones que Docker utiliza para crear una imagen de contenedor.\\
+La construcción de una imagen implica seguir los siguientes pasos:
+\begin{enumerate}
+      \item Crear un archivo Dockerfile: se debe definir el sistema operativo base y las dependencias necesarias para el contenedor.
+      \item Ejecutar el comando docker build: una vez que se tiene el Dockerfile, se debe usar el comando \enquote*{docker build} para construir la imagen del contenedor. Este comando leerá el Dockerfile y creará una imagen de contenedor a partir de las instrucciones que contiene.
+      \item Enviar la imagen a un registro de contenedores (opcional): si se desea utilizar la imagen en diferentes máquinas, se puede enviar la imagen a un registro de contenedores como Docker Hub para que esté disponible para su descarga.
+\end{enumerate}
+En el proceso de construcción, Docker crea una serie de capas para la imagen de contenedor. Cada instrucción en el Dockerfile crea una nueva capa en la imagen. Cada capa se puede reutilizar en imágenes de contenedor futuras, lo que permite la creación de imágenes más pequeñas y rápidas.\\
+Te muestro como construir una imagen.
+\begin{enumerate}
+      \item Empecemos creando un nuevo directorio y moviendonos allí. \lstinline{mkdir imagenes} y \lstinline{cd imagenes/}
+      \item Creemos un nuevo \enquote*{Dockerfile}, con \lstinline{touch Dockerfile} y lo abrimos \enquote*{vs code}, con \lstinline{code .}
+      \item Lo que escribiremos en el Dockerfile será:
+      \begin{lstlisting}[numbers=none]
+FROM ubuntu:latest
 
+RUN touch /usr/src/hola-mundo.txt \end{lstlisting}
+      \begin{itemize}
+            \item La primera línea es una instrucción \enquote*{FROM} que indica que se utilizará la imagen \enquote*{ubuntu:latest} como la imagen base para construir la nueva imagen. La imagen base es la imagen en la que se basa la nueva imagen y sobre la cual se construirá.
+            \item La segunda línea es una instrucción \enquote*{RUN} que ejecutará el comando \enquote*{touch /usr/src/hola-mundo.txt} dentro del contenedor. La instrucción RUN se utiliza para ejecutar comandos durante el proceso de construcción de la imagen. En este caso, el comando crea un archivo llamado \enquote*{hola-mundo.txt} en la ruta \enquote*{/usr/src} dentro del contenedor.
+      \end{itemize}
+      \item Ahora vamos a una terminal en este directorio y ejecutamos 
+      \begin{lstlisting}[numbers=none]
+docker build -t ubuntu:mi_version . \end{lstlisting} 
+      que construye una nueva imagen Docker con la etiqueta \enquote*{mi\_version} a partir del archivo Dockerfile en el directorio actual (\enquote*{.}).\\
+      Si hacemos \lstinline{docker image ls}, vemos la imagen que acabamos de construir:
+      \begin{lstlisting}[numbers=none]
+$docker image ls
+REPOSITORY     TAG          IMAGE ID       CREATED          SIZE
+ubuntu         mi_version   0f7a46bfc059   18 minutes ago   77.8MB
+mi-sitio-web   latest       59155fb8a06a   22 hours ago     142MB
+nginx          latest       3f8a00f137a0   12 days ago      142MB
+mongo          latest       a440572ac3c1   2 weeks ago      639MB
+ubuntu         20.04        e40cf56b4be3   2 weeks ago      72.8MB
+ubuntu         latest       58db3edaf2be   3 weeks ago      77.8MB
+hello-world    latest       feb5d9fea6a5   17 months ago    13.3kB \end{lstlisting}
 
+\end{enumerate}
+Podemos correr un nuevo contenedor a partir de la imagen anterior:
+\begin{enumerate}
+      \item Hagamos \lstinline{docker run -it ubuntu:mi_version}, necesitamos sber si el archivo \enquote*{hola-mundo.txt} existe en el contenedor, para eso sólo hacemos \lstinline{ll /usr/src}, que nos da como respuesta:
+      \begin{lstlisting}[numbers=none]
+drwxr-xr-x 1 root root 4096 Feb 21 13:11 ./
+drwxr-xr-x 1 root root 4096 Jan 26 02:03 ../
+-rw-r--r-- 1 root root    0 Feb 21 13:11 hola-mundo.txt \end{lstlisting}
+            efectivamente existe.
+\end{enumerate}
+Podemos publicar esta imagen con \lstinline{docker login}, logueandote con las credenciales en \href{https://hub.docker.com/}{docher hub},\\
+luego hacemos \lstinline{docker tag ubuntu:mi_version kevincardenas/ubuntu:mi_version}, \enquote*{kevincardenas} es mi nombre de usuario, debes usar el tuyo.\\ 
+Podemos ver con \lstinline{docker image ls}:
+\begin{lstlisting}[numbers=none]
+$ docker image ls
+REPOSITORY             TAG          IMAGE ID       CREATED             SIZE
+kevincardenas/ubuntu   mi_version   0f7a46bfc059   About an hour ago   77.8MB
+ubuntu                 mi_version   0f7a46bfc059   About an hour ago   77.8MB
+mi-sitio-web           latest       59155fb8a06a   23 hours ago        142MB
+nginx                  latest       3f8a00f137a0   12 days ago         142MB
+mongo                  latest       a440572ac3c1   2 weeks ago         639MB
+ubuntu                 20.04        e40cf56b4be3   2 weeks ago         72.8MB
+ubuntu                 latest       58db3edaf2be   3 weeks ago         77.8MB
+hello-world            latest       feb5d9fea6a5   17 months ago       13.3kB      \end{lstlisting}
+que hay una \enquote*{nueva} imagen, en realidad es solo un nuevo tag para poder publicarlo.\\
+Al final simplemente \lstinline{docker push kevincardenas/ubuntu:mi_version} con resultado:
+\begin{lstlisting}[numbers=none]
+$ docker push kevincardenas/ubuntu:mi_version
+The push refers to repository [docker.io/kevincardenas/ubuntu]
+3b68e1ecf7cd: Pushed 
+c5ff2d88f679: Mounted from library/mongo 
+mi_version: digest: sha256:25916b7347413f131f8d983f8b041795417e92b7526bd58cc1f6af4ec34752ab size: 736\end{lstlisting}
+Ten cuidado con las imagenes que publicas, y ten en cuenta que después de cierto  tiempo de no uso de una imagen, esta puede ser borrada automaticamente.
 \end{document}
