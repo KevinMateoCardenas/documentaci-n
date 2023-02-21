@@ -600,7 +600,7 @@ Un ejemplo de comando de Docker para crear un contenedor que use un tmpfs mount 
 docker run -d --name mycontainer --mount type=tmpfs,destination=/app/tmpfs,readonly=false,size=100m myimage\end{lstlisting}
 En este ejemplo, se está creando un contenedor con el nombre mycontainer, que utiliza un tmpfs mount con un tamaño máximo de 100 MB. El directorio /app/tmpfs se monta en el tmpfs mount, que se usa para almacenar archivos temporales.
 
-\subsection{insertar y extraer datos de un contenedor}
+\subsection{Insertar y extraer datos de un contenedor}
 Para insertar y extraer datos en un contenedor de Docker, puedes utilizar el siguiente comando:\\
 \lstinline{docker cp}: te permite copiar archivos o directorios desde o hacia un contenedor Docker en ejecución.\\
 Te muestro cómo:
@@ -694,4 +694,90 @@ The push refers to repository [docker.io/kevincardenas/ubuntu]
 c5ff2d88f679: Mounted from library/mongo 
 mi_version: digest: sha256:25916b7347413f131f8d983f8b041795417e92b7526bd58cc1f6af4ec34752ab size: 736\end{lstlisting}
 Ten cuidado con las imagenes que publicas, y ten en cuenta que después de cierto  tiempo de no uso de una imagen, esta puede ser borrada automaticamente.
+\subsection{Dive}
+Dive es una herramienta de línea de comandos que permite analizar y explorar las capas de una imagen de Docker. Con Dive, se puede ver una vista previa de los cambios que se realizan en una imagen a medida que se construye, se modifican o se actualizan. La herramienta proporciona una interfaz de usuario interactiva que permite explorar las capas de la imagen y ver cómo se relacionan.\\
+
+Es muy útil para depurar problemas en las imágenes, identificar archivos innecesarios o redundantes que se agregan a la imagen, y para optimizar el tamaño de la imagen en general. También es útil para detectar posibles vulnerabilidades y problemas de seguridad en la imagen.\\
+
+Para usar Dive, primero debe instalar la herramienta en su sistema. Luego, puede ejecutar el comando \enquote*{dive} seguido del nombre de la imagen que desea analizar. La herramienta mostrará una vista previa de la imagen y se pueden explorar las diferentes capas y sus cambios\\
+
+También ofrece una variedad de opciones y argumentos de línea de comandos para personalizar su análisis de la imagen, como excluir archivos o directorios específicos de la imagen. En general, Dive es una herramienta muy útil para cualquier persona que trabaje con imágenes de Docker y quiera comprender mejor cómo se construyen y cómo se relacionan sus diferentes capas.\\
+
+Te muestro Cómo instalar esta herramienta en Linux:
+\begin{enumerate}
+      \item Agrega el repositorio de dive e instálalo:
+      \begin{lstlisting}[numbers=none]
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E04F0923
+sudo add-apt-repository "deb http://ppa.launchpad.net/nazunalika/dive/ubuntu bionic main"
+sudo apt update
+sudo apt install dive \end{lstlisting}
+      \item Agrega el repositorio de dive a tu sistema:
+            \begin{lstlisting}[numbers=none]
+sudo add-apt-repository "deb http://ppa.launchpad.net/nvbn-rm/ppa/ubuntu bionic main"           \end{lstlisting}
+      \item Actualiza la lista de paquetes e instala dive:
+\begin{lstlisting}[numbers=none]
+sudo apt update
+sudo apt install dive\end{lstlisting}
+\end{enumerate}
+
+Si los pasos anteriores no funcionan sigue estos pasos:
+\begin{enumerate}
+      \item Visite la página de releases de Dive en GitHub: \href{https://github.com/wagoodman/dive/releases}{github.com/wagoodman/dive/releases}
+      \item Descargue el paquete correspondiente a su arquitectura y sistema operativo. Si está en Ubuntu, es posible que desee buscar la versión para Debian o para Linux en general.
+      \item Una vez descargado, abra una terminal y navegue hasta el directorio donde se encuentra el archivo descargado.
+      \item Ejecute el siguiente comando para instalar Dive:
+      \begin{lstlisting}[numbers=none]
+sudo dpkg -i dive_<version>_<arch>.deb           \end{lstlisting}
+            Si instalamos la versión \enquote*{\lstinline{dive\_0.10.0\_linux\_amd64.deb}} el comando sería
+            \begin{lstlisting}[numbers=none]
+sudo dpkg -i dive_0.10.0_linux_amd64.deb         \end{lstlisting}
+\end{enumerate}
+\subsubsection{docker history}
+\enquote*{docker history} es un comando de Docker que te permite ver el historial de una imagen de Docker. Con este comando, puedes ver los distintos cambios que se han realizado en una imagen a lo largo de su desarrollo.\\
+Al ejecutar \enquote*{docker history}, se muestra una lista de todas las capas que componen la imagen, con información adicional para cada capa, como su ID, su tamaño, el comando utilizado para crearla y el autor de la capa. La salida se presenta en orden cronológico inverso, lo que significa que las capas más recientes aparecen primero en la lista.\\
+El comando \enquote*{docker history} es útil para entender cómo se construyó una imagen y cómo se crearon las diferentes capas que la componen. También es una herramienta útil para identificar posibles problemas en una imagen, como la inclusión de paquetes o archivos innecesarios, que pueden hacer que la imagen sea más grande de lo necesario. Con esta información, puedes optimizar la imagen y reducir su tamaño para que sea más fácil de transferir y almacenar.\\
+Por ejemplo:
+\begin{lstlisting}[numbers=none]
+$ docker history ubuntu:mi_version
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+0f7a46bfc059   2 hours ago   RUN /bin/sh -c touch /usr/src/hola-mundo.txt... 0B        buildkit.dockerfile.v0
+<missing>      3 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop) ADD file:18e71f049606f6339... 77.8MB    
+<missing>      3 weeks ago   /bin/sh -c #(nop)  LABEL org.opencontainers...  0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop)  LABEL org.opencontainers...  0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH...  0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop)  ARG RELEASE...               0B     \end{lstlisting}
+Se muestra el historial de la imagen \enquote*{ubuntu:mi\_version}. La primera columna muestra el ID de la capa, la segunda columna muestra cuándo se creó la capa y la tercera columna muestra el comando que se utilizó para crear esa capa. En este caso, la imagen tiene seis capas. La capa superior, creada hace 2 horas, muestra que se agregó un archivo \enquote*{hola-mundo.txt} en el directorio \enquote*{/usr/src} utilizando el comando \enquote*{touch} en el archivo Dockerfile. La capa inferior no tiene ID y representa la capa base de la imagen, que contiene el sistema de archivos inicial de la imagen \enquote*{ubuntu:mi\_version}.
+
+\subsubsection{Hagamos lo mismo con dave}
+El comando dive \lstinline{ubuntu:mi\_version} utiliza la herramienta \enquote*{dive} para analizar la capas de la imagen \enquote*{ubuntu:mi\_version} y proporcionar una visualización interactiva y detallada de su contenido.\\
+Por ejemplo:
+\begin{lstlisting}[numbers=none]
+$ dive ubuntu:mi_version
+Image Source: docker://ubuntu:mi_version
+Fetching image... (this can take a while for large images)
+Analyzing image...
+Building cache...      \end{lstlisting}
+
+\begin{lstlisting}[numbers=none]
+Cmp   Size  Command                                                          
+78 MB  FROM 7c1cd5e64627ede    
+0 B  RUN /bin/sh -c touch /usr/src/hola-mundo.txt # buildkit  
+\end{lstlisting}
+Dive es una herramienta de línea de comandos de código abierto que se utiliza para explorar y analizar imágenes de contenedores Docker. Permite a los usuarios examinar y explorar cada capa de la imagen y proporciona una descripción detallada de los cambios que se producen en cada capa. También proporciona una descripción detallada de las capas que se han agregado o eliminado en una nueva versión de la imagen.
+
+Al ejecutar el comando \lstinline{dive ubuntu:mi\_version}, Dive analiza la imagen \enquote*{ubuntu:mi\_version} y muestra una visualización interactiva de las capas de la imagen, lo que permite al usuario navegar por cada capa y ver los cambios que se han producido en ella. Esta herramienta puede ser útil para optimizar y reducir el tamaño de una imagen de contenedor, ya que permite identificar archivos o capas que pueden eliminarse o comprimirse para reducir el tamaño final de la imagen.
+
+
+\newpage
+\section{Bibliografía}
+\begin{thebibliography}{9}
+
+      \bibitem{docker-page}
+      Docker. \textit{Página oficial de Docker}. Recuperado el 15 de febrero de 2023, de \url{https://www.docker.com/}.
+      
+      \bibitem{platzi-course}
+      Platzi. \textit{Curso de Docker}. Recuperado el 15 de febrero de 2023, de \url{https://platzi.com/cursos/docker/}.
+      
+      \end{thebibliography}
 \end{document}

@@ -41,3 +41,4 @@
 \contentsline {subsubsection}{\numberline {7.1.1}Hacer un quickstart de Kafka Connect}{35}{subsubsection.7.1.1}%
 \contentsline {subsubsection}{\numberline {7.1.2}Ejemplo práctico de Kafka Connect}{36}{subsubsection.7.1.2}%
 \contentsline {subsection}{\numberline {7.2}Ejemplo de Kafka Connect leyendo un archivo de texto plano y enviándolo a un tema de Kafka en formato JSON}{38}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Bibliografía}{39}{section.8}%

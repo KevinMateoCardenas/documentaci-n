@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.2.16)  21 FEB 2023 07:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.2.16)  21 FEB 2023 10:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -401,7 +401,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--169
 
  []
 
-<figure2.1.png, id=260, 644.4075pt x 332.24126pt>
+<figure2.1.png, id=265, 644.4075pt x 332.24126pt>
 File: figure2.1.png Graphic file (type png)
 <use figure2.1.png>
 Package pdftex.def Info: figure2.1.png  used on input line 170.
@@ -427,7 +427,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 184--189
  []
 
 [6 <./figure2.1.png>]
-<figure2.2.png, id=269, 654.445pt x 217.81375pt>
+<figure2.2.png, id=274, 654.445pt x 217.81375pt>
 File: figure2.2.png Graphic file (type png)
 <use figure2.2.png>
 Package pdftex.def Info: figure2.2.png  used on input line 196.
@@ -442,7 +442,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
-<figure2.3.png, id=270, 650.43pt x 481.8pt>
+<figure2.3.png, id=275, 650.43pt x 481.8pt>
 File: figure2.3.png Graphic file (type png)
 <use figure2.3.png>
 Package pdftex.def Info: figure2.3.png  used on input line 202.
@@ -507,7 +507,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 244--245
 
  []
 
-<figure3.1.png, id=293, 652.4375pt x 500.87125pt>
+<figure3.1.png, id=298, 652.4375pt x 500.87125pt>
 File: figure3.1.png Graphic file (type png)
 <use figure3.1.png>
 Package pdftex.def Info: figure3.1.png  used on input line 248.
@@ -543,7 +543,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--265
  []
 
 [14]
-<figure4.1.png, id=308, 658.46pt x 272.01625pt>
+<figure4.1.png, id=313, 658.46pt x 272.01625pt>
 File: figure4.1.png Graphic file (type png)
 <use figure4.1.png>
 Package pdftex.def Info: figure4.1.png  used on input line 271.
@@ -564,7 +564,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 277--278
  []
 
 [16]
-<figure4.2.png, id=319, 658.46pt x 328.22626pt>
+<figure4.2.png, id=324, 658.46pt x 328.22626pt>
 File: figure4.2.png Graphic file (type png)
 <use figure4.2.png>
 Package pdftex.def Info: figure4.2.png  used on input line 288.
@@ -585,7 +585,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 295--296
  []
 
 [17 <./figure4.2.png>]
-<figure4.3.png, id=325, 694.595pt x 393.47pt>
+<figure4.3.png, id=330, 694.595pt x 393.47pt>
 File: figure4.3.png Graphic file (type png)
 <use figure4.3.png>
 Package pdftex.def Info: figure4.3.png  used on input line 305.
@@ -606,7 +606,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 313--314
  []
 
 [19 <./figure4.3.png>]
-<figure4.4.png, id=336, 654.445pt x 362.35374pt>
+<figure4.4.png, id=341, 654.445pt x 362.35374pt>
 File: figure4.4.png Graphic file (type png)
 <use figure4.4.png>
 Package pdftex.def Info: figure4.4.png  used on input line 319.
@@ -626,7 +626,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 328--332
 
  []
 
-<figure4.5.png, id=342, 647.41875pt x 232.87pt>
+<figure4.5.png, id=347, 647.41875pt x 232.87pt>
 File: figure4.5.png Graphic file (type png)
 <use figure4.5.png>
 Package pdftex.def Info: figure4.5.png  used on input line 336.
@@ -712,21 +712,21 @@ LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
 Package rerunfilecheck Info: File `apache_kafka.out' has not changed.
-(rerunfilecheck)             Checksum: A5785C7817BFB31F019B8CA79EF19984;10026.
+(rerunfilecheck)             Checksum: 1D75D626A35338E374FB0F12EE62D9C6;10133.
  ) 
 Here is how much of TeX's memory you used:
- 12857 strings out of 478023
- 197461 string characters out of 5841208
+ 12859 strings out of 478023
+ 197481 string characters out of 5841208
  649225 words of memory out of 5000000
- 30804 multiletter control sequences out of 15000+600000
+ 30805 multiletter control sequences out of 15000+600000
  481310 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,6n,77p,1405b,1170s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf/fonts/type1/public/cm-super/sfbi1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on apache_kafka.pdf (40 pages, 1000665 bytes).
+Output written on apache_kafka.pdf (40 pages, 1001253 bytes).
 PDF statistics:
- 834 PDF objects out of 1000 (max. 8388607)
- 739 compressed objects within 8 object streams
- 357 named destinations out of 1000 (max. 500000)
- 382 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 839 PDF objects out of 1000 (max. 8388607)
+ 744 compressed objects within 8 object streams
+ 358 named destinations out of 1000 (max. 500000)
+ 390 words of extra memory for PDF output out of 10000 (max. 10000000)
 
