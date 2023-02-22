@@ -151,7 +151,7 @@ Para instalar Docker, sigue estos pasos:
 \end{enumerate}
 
 \subsection{Primeros pasos: hola mundo}
-En una terminal camos a ejecutar el comando \lstinline{docker fun hello-world}\\
+En una terminal vamos a ejecutar el comando \lstinline{docker run hello-world}\\
 Obtendremos como salida:
 \begin{lstlisting}[numbers=none]
 Unable to find image 'hello-world:latest' locally
@@ -379,8 +379,8 @@ El comando \lstinline{docker logs --tail 10 -f proxy} permite visualizar los úl
 De esta manera, al ejecutar este comando en la terminal, se mostrarán en tiempo real los últimos 10 registros del log del contenedor \enquote*{proxy}. Si se quiere visualizar más registros, se puede cambiar el valor de \enquote*{--tail} por un número mayor.
 
 \newpage
-\section{Ejemplos prácticos}
-A continuación, se presentan algunos ejemplos prácticos de cómo utilizar Docker.
+\section{Ejemplo práctico}
+A continuación, se presentan un ejemplo práctico de cómo utilizar Docker.
 \subsection{Crear una imagen de Docker a partir de un Dockerfile}
 Te muestro un ejemplo básico de cómo crear una imagen de Docker a partir de un Dockerfile:
 \begin{enumerate}
@@ -426,62 +426,6 @@ Este comando crea un contenedor a partir de la imagen mi-\enquote*{sitio-web} y 
 \end{enumerate}
 Ahora tienes una imagen de Docker que puede ser utilizada para ejecutar tu sitio web en cualquier servidor de Docker.
 
-\subsection{Crear una imagen de Docker para una aplicación web Flask}
-En este ejemplo, vamos a crear una imagen de Docker para una aplicación web Flask simple que mostrará un mensaje en la página principal.
-
-\begin{enumerate}
-    \item Crea un archivo llamado \lstinline{app.py} en el directorio de trabajo actual y agrega el siguiente código:
-
-          \begin{lstlisting}[numbers=none]
-from flask import Flask
-
-app = Flask(name)
-
-@app.route('/')
-def hello_world():
-return 'Hola, mundo!'
-
-if name == 'main':
-app.run(host='0.0.0.0')
-\end{lstlisting}
-
-          Este es un ejemplo básico de una aplicación web Flask que muestra un mensaje en la página principal.
-    \item Crea un archivo llamado \lstinline{requirements.txt} en el directorio de trabajo actual y agrega la siguiente línea:
-          \begin{lstlisting}[numbers=none]
-Flask==1.1.2
-\end{lstlisting}
-
-          Este archivo especifica las dependencias de Python que se necesitan para ejecutar la aplicación web.
-    \item Crea un archivo llamado \lstinline{Dockerfile} en el directorio de trabajo actual y agrega el siguiente contenido:
-
-          \begin{lstlisting}[numbers=none]
-FROM python:3.9-slim-buster
-WORKDIR /app
-COPY . /app
-RUN pip install -r requirements.txt
-EXPOSE 5000
-CMD ["python", "app.py"]
-\end{lstlisting}
-
-          Este archivo Dockerfile especifica una imagen base de Python 3.9 y agrega el código y las dependencias necesarias para ejecutar la aplicación web Flask. También expone el puerto 5000 y especifica el comando que se ejecutará cuando se ejecute el contenedor.
-
-    \item Crea una imagen de Docker ejecutando el siguiente comando:
-          \begin{lstlisting}[numbers=none]
-docker build -t myflaskapp .
-\end{lstlisting}
-
-          Este comando construye una imagen de Docker con el nombre \lstinline{myflaskapp} utilizando el Dockerfile y los archivos en el directorio actual.
-    \item Ejecuta un contenedor de la imagen que acabas de crear:
-          \begin{lstlisting}[numbers=none]
-docker run -p 5000:5000 myflaskapp
-\end{lstlisting}
-
-          Este comando ejecuta un contenedor de la imagen que acabas de crear y mapea el puerto 5000 del contenedor al puerto 5000 del host.
-    \item Abre un navegador web y navega a \lstinline{http://localhost:5000}. Verás la aplicación web Flask que acabas de crear, que muestra el mensaje \enquote*{Hola, mundo} en la página principal.
-
-\end{enumerate}
-
-Este es un ejemplo básico de cómo crear una imagen de Docker para una aplicación web Flask y ejecutarla en un contenedor. Puedes personalizar este ejemplo para adaptarlo a tus necesidades y crear tus propias imágenes de Docker para tus aplicaciones web.
 \newpage
 \section{Manejo de datos}
 En Docker, puedes manejar datos de varias maneras.
@@ -750,7 +694,7 @@ IMAGE          CREATED       CREATED BY                                      SIZ
 Se muestra el historial de la imagen \enquote*{ubuntu:mi\_version}. La primera columna muestra el ID de la capa, la segunda columna muestra cuándo se creó la capa y la tercera columna muestra el comando que se utilizó para crear esa capa. En este caso, la imagen tiene seis capas. La capa superior, creada hace 2 horas, muestra que se agregó un archivo \enquote*{hola-mundo.txt} en el directorio \enquote*{/usr/src} utilizando el comando \enquote*{touch} en el archivo Dockerfile. La capa inferior no tiene ID y representa la capa base de la imagen, que contiene el sistema de archivos inicial de la imagen \enquote*{ubuntu:mi\_version}.
 
 \subsubsection{Hagamos lo mismo con dive}
-El comando dive \lstinline{ubuntu:mi\_version} utiliza la herramienta \enquote*{dive} para analizar la capas de la imagen \enquote*{ubuntu:mi\_version} y proporcionar una visualización interactiva y detallada de su contenido.\\
+El comando dive \lstinline{ubuntu:mi_version} utiliza la herramienta \enquote*{dive} para analizar la capas de la imagen \enquote*{ubuntu:mi\_version} y proporcionar una visualización interactiva y detallada de su contenido.\\
 Por ejemplo:
 \begin{lstlisting}[numbers=none]
 $ dive ubuntu:mi_version
@@ -766,7 +710,7 @@ Cmp   Size  Command
 \end{lstlisting}
 Dive es una herramienta de línea de comandos de código abierto que se utiliza para explorar y analizar imágenes de contenedores Docker. Permite a los usuarios examinar y explorar cada capa de la imagen y proporciona una descripción detallada de los cambios que se producen en cada capa. También proporciona una descripción detallada de las capas que se han agregado o eliminado en una nueva versión de la imagen.
 
-Al ejecutar el comando \lstinline{dive ubuntu:mi\_version}, Dive analiza la imagen \enquote*{ubuntu:mi\_version} y muestra una visualización interactiva de las capas de la imagen, lo que permite al usuario navegar por cada capa y ver los cambios que se han producido en ella. Esta herramienta puede ser útil para optimizar y reducir el tamaño de una imagen de contenedor, ya que permite identificar archivos o capas que pueden eliminarse o comprimirse para reducir el tamaño final de la imagen.
+Al ejecutar el comando \lstinline{dive ubuntu:mi_version}, Dive analiza la imagen \enquote*{ubuntu:mi\_version} y muestra una visualización interactiva de las capas de la imagen, lo que permite al usuario navegar por cada capa y ver los cambios que se han producido en ella. Esta herramienta puede ser útil para optimizar y reducir el tamaño de una imagen de contenedor, ya que permite identificar archivos o capas que pueden eliminarse o comprimirse para reducir el tamaño final de la imagen.
 
 
 \newpage
@@ -774,10 +718,10 @@ Al ejecutar el comando \lstinline{dive ubuntu:mi\_version}, Dive analiza la imag
 \begin{thebibliography}{9}
 
       \bibitem{docker-page}
-      Docker. \textit{Página oficial de Docker}. Recuperado el 15 de febrero de 2023, de \url{https://www.docker.com/}.
+      Docker. \textit{Página oficial de Docker}. Recuperado en febrero de 2023, de \url{https://www.docker.com/}.
       
       \bibitem{platzi-course}
-      Platzi. \textit{Curso de Docker}. Recuperado el 15 de febrero de 2023, de \url{https://platzi.com/cursos/docker/}.
+      Platzi. \textit{Curso de Docker}. Recuperado en febrero de 2023, de \url{https://platzi.com/cursos/docker/}.
       
       \end{thebibliography}
 \end{document}
