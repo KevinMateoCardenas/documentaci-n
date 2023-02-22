@@ -1,16 +1,19 @@
 \documentclass{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
 \usepackage{graphicx} % Required for inserting images
-\usepackage[spanish]{babel}
+\usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage[left=1.00cm, right=1.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
 \setlength{\parindent}{0.5in}
 \usepackage{setspace}
 \doublespacing
-\usepackage{listings}
+
 \lstset{
   basicstyle=\ttfamily,
   columns=fullflexible
@@ -39,11 +42,7 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=2,
-    basicstyle=\ttfamily,
-    showspaces=false,
-    showtabs=false,
-    breaklines=true
+    tabsize=2
 }
 
 % Configuración del paquete hyperref
@@ -51,14 +50,10 @@
     colorlinks=true,
     linkcolor=black,
     filecolor=magenta,      
-    urlcolor=cyan,
+    urlcolor=gray,
 }
 
-\lstset{style=mystyle,
-    basicstyle=\ttfamily,
-    showspaces=false,
-    showtabs=false,
-    breaklines=true}
+\lstset{style=mystyle}
 
 \renewcommand{\baselinestretch}{1.5}
 
@@ -639,11 +634,8 @@ Recuerda que si estás usando un sistema operativo distinto a Ubuntu, los pasos 
     docker rm <container_id>\end{lstlisting}
 \end{enumerate}
 Estos son solo los comandos básicos de Docker, hay muchos otros comandos y características disponibles para manejar contenedores y imágenes.\\
-\subsection{Ejemplos prácticos}
 
-A continuación, se presentan algunos ejemplos prácticos de cómo utilizar Docker.
-
-\subsubsection{Crear una imagen de Docker a partir de un Dockerfile}
+\subsection{Crear una imagen de Docker a partir de un Dockerfile}
 
 Para crear una imagen de Docker a partir de un Dockerfile, sigue estos pasos:
 
@@ -663,63 +655,6 @@ CMD [-python-, -app.py-]
 \item Abre un navegador web y navega a \lstinline{http://localhost:5000}. Verás la aplicación web que acabas de crear.
 \end{enumerate}
 
-\subsubsection{Crear una imagen de Docker para una aplicación web Flask}
-
-En este ejemplo, vamos a crear una imagen de Docker para una aplicación web Flask simple que mostrará un mensaje en la página principal.
-
-\begin{enumerate}
-\item Crea un archivo llamado \lstinline{app.py} en el directorio de trabajo actual y agrega el siguiente código:
-
-\begin{lstlisting}[numbers=none]
-from flask import Flask
-
-app = Flask(name)
-
-@app.route('/')
-def hello_world():
-    return 'Hola, mundo!'
-
-if name == 'main':
-    app.run(host='0.0.0.0')
-\end{lstlisting}
-
-Este es un ejemplo básico de una aplicación web Flask que muestra un mensaje en la página principal.
-\item Crea un archivo llamado \lstinline{requirements.txt} en el directorio de trabajo actual y agrega la siguiente línea:
-\begin{lstlisting}[numbers=none]
-Flask==1.1.2
-\end{lstlisting}
-
-Este archivo especifica las dependencias de Python que se necesitan para ejecutar la aplicación web.
-\item Crea un archivo llamado \lstinline{Dockerfile} en el directorio de trabajo actual y agrega el siguiente contenido:
-
-\begin{lstlisting}[numbers=none]
-FROM python:3.9-slim-buster
-WORKDIR /app
-COPY . /app
-RUN pip install -r requirements.txt
-EXPOSE 5000
-CMD [-python-, -app.py-]
-\end{lstlisting}
-
-Este archivo Dockerfile especifica una imagen base de Python 3.9 y agrega el código y las dependencias necesarias para ejecutar la aplicación web Flask. También expone el puerto 5000 y especifica el comando que se ejecutará cuando se ejecute el contenedor.
-
-\item Crea una imagen de Docker ejecutando el siguiente comando:
-\begin{lstlisting}[numbers=none]
-docker build -t myflaskapp .
-\end{lstlisting}
-
-Este comando construye una imagen de Docker con el nombre \lstinline{myflaskapp} utilizando el Dockerfile y los archivos en el directorio actual.
-\item Ejecuta un contenedor de la imagen que acabas de crear:
-\begin{lstlisting}[numbers=none]
-docker run -p 5000:5000 myflaskapp
-\end{lstlisting}
-
-Este comando ejecuta un contenedor de la imagen que acabas de crear y mapea el puerto 5000 del contenedor al puerto 5000 del host.
-\item Abre un navegador web y navega a \lstinline{http://localhost:5000}. Verás la aplicación web Flask que acabas de crear, que muestra el mensaje -Hola, mundo!- en la página principal.
-
-\end{enumerate}
-
-Este es un ejemplo básico de cómo crear una imagen de Docker para una aplicación web Flask y ejecutarla en un contenedor. Puedes personalizar este ejemplo para adaptarlo a tus necesidades y crear tus propias imágenes de Docker para tus aplicaciones web.
 \newpage
 \section{Kafka connect}
 Kafka Connect es un framework para conectar aplicaciones externas con Apache Kafka. Proporciona una manera de transferir datos de manera fácil, escalable y confiable desde sistemas externos a Kafka o desde Kafka a sistemas externos. Los usuarios pueden definir las conexiones mediante una configuración simple y los datos se transfieren automáticamente, sin la necesidad de programación adicional. Esto hace que sea ideal para la integración de datos en el entorno de big data de Apache Kafka.\\
@@ -731,34 +666,34 @@ A continuación, seguimos los siguientes pasos:
 \begin{itemize}
     \item \textbf{Inicia Apache ZooKeeper:}
     \begin{lstlisting}[numbers=none]
-    bin/zookeeper-server-start.sh config/zookeeper.properties\end{lstlisting}
+bin/zookeeper-server-start.sh config/zookeeper.properties\end{lstlisting}
     \item \textbf{Inicia Apache Kafka:}
     \begin{lstlisting}[numbers=none]
-    bin/kafka-server-start.sh config/server.properties\end{lstlisting}
-    \item \textbf{Crea un topic de prueba:}\\
-        \texttt{
-        bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test}
-        \item \textbf{Inicia Apache Kafka Connect:}\\
-        \texttt{
-        bin/connect-standalone.sh config/connect-standalone.properties}
+bin/kafka-server-start.sh config/server.properties\end{lstlisting}
+    \item \textbf{Crea un topic de prueba:}
+    \begin{lstlisting}[numbers=none]
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test\end{lstlisting}
+    \item \textbf{Inicia Apache Kafka Connect:}
+    \begin{lstlisting}[numbers=none]
+bin/connect-standalone.sh config/connect-standalone.properties\end{lstlisting}
     \item \textbf{Crea un archivo de configuración de plugin para un conector de archivos de texto:}
     \begin{lstlisting}[numbers=none]
-    name=local-file-sink
-    connector.class=FileStreamSink
-    tasks.max=1
-    topics=test
-    file=test.txt\end{lstlisting}
+name=local-file-sink
+connector.class=FileStreamSink
+tasks.max=1
+topics=test
+file=test.txt\end{lstlisting}
     \item \textbf{Envía algunos mensajes a tu topic de prueba:}
     \begin{lstlisting}[numbers=none]
-    bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test\end{lstlisting}
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test\end{lstlisting}
     \item Verifica los archivos de logs de Apache Kafka Connect y deberías ver los mensajes que enviaste a tu topic de prueba.
     \item \textbf{Detén Apache Kafka Connect y Apache Kafka}.\\
     Utiliza el siguiente comando para detener la ejecución de Apache Kafka Connect:
     \begin{lstlisting}[numbers=none]
-    bin/connect-standalone.sh stop\end{lstlisting}
-    Verifica que Apache Kafka Connect ya no esté ejecutándose utilizando el siguiente comando:
+bin/connect-standalone.sh stop\end{lstlisting}
+Verifica que Apache Kafka Connect ya no esté ejecutándose utilizando el siguiente comando:
     \begin{lstlisting}[numbers=none]
-    ps aux | grep connect\end{lstlisting}
+ps aux | grep connect\end{lstlisting}
     Si Apache Kafka Connect ya no aparece en la lista de procesos en ejecución, significa que ha sido detenido correctamente.
 \end{itemize}
 \subsubsection{Hacer un quickstart de Kafka Connect}
