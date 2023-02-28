@@ -1,0 +1,525 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[left=1.00cm, right=1.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\doublespacing
+
+\lstset{
+    language=Java,
+    basicstyle=\ttfamily,
+    columns=fullflexible
+}
+
+% Define colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configuración de lstlisting
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\lstset{style=mystyle}
+
+\title{Informe sobre JAVA}
+\author{Kevin Cárdenas}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{JAVA}}
+        \\[18cm]
+
+        \large\emph{Autor:}\\
+        Kevin Cárdenas.
+        \\[1cm]
+        {\large 2023}
+    \end{center}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+\section{introducción}
+Java es un lenguaje de programación orientado a objetos diseñado para ser portable, seguro y fácil de entender. La programación orientada a objetos (POO) es una técnica de programación que se centra en la organización del código en torno a objetos, que son entidades que contienen datos y métodos para manipular esos datos.
+
+Java es un lenguaje compilado e interpretado. Cuando se escribe un programa en Java, se escribe en un archivo fuente que luego se compila en un archivo ejecutable. Este archivo ejecutable se puede ejecutar en cualquier plataforma que tenga una máquina virtual Java (JVM) instalada. La JVM es un software que permite que los programas Java se ejecuten en diferentes sistemas operativos sin necesidad de recompilar el código fuente.
+
+El proceso de compilación de Java convierte el código fuente en un formato binario conocido como bytecode, que es un conjunto de instrucciones que la JVM puede interpretar y ejecutar en tiempo de ejecución. La JVM interpreta el bytecode y lo convierte en código de máquina nativo para la plataforma específica en la que se está ejecutando.
+
+En resumen, Java es un lenguaje orientado a objetos que se compila en bytecode y se interpreta en tiempo de ejecución por la JVM, lo que lo hace altamente portable y seguro.
+\subsection{Instalación}
+Te proporciono las instrucciones para instalar Java en Linux utilizando la terminal:
+\begin{enumerate}
+    \item Abre una terminal: Abre una ventana de terminal en Linux. En la mayoría de las distribuciones de Linux, puedes abrir una terminal haciendo clic en el botón de aplicaciones en la barra de tareas y buscando "terminal".
+    \item Actualiza el sistema: Antes de instalar Java, asegúrate de actualizar el sistema. Para hacerlo, ejecuta el siguiente comando en la terminal:
+\begin{lstlisting}[language=Bash]
+sudo apt-get update    \end{lstlisting}
+        Este comando actualizará la lista de paquetes disponibles en el sistema.
+    \item Instala Java: Para instalar Java en Linux, puedes utilizar el comando apt-get. Ejecuta el siguiente comando en la terminal para instalar la versión más reciente de Java:
+\begin{lstlisting}[language=Bash]
+sudo apt-get install default-jdk\end{lstlisting}
+Si deseas instalar una versión específica de Java, puedes reemplazar \enquote*{default-jdk} con el nombre de la versión que deseas instalar (por ejemplo, \enquote*{openjdk-11-jdk})
+    \item Verifica la instalación: Una vez que se haya completado la instalación, verifica que Java se haya instalado correctamente. Para hacerlo, ejecuta el siguiente comando en la terminal:
+\begin{lstlisting}[language=Bash]
+java -version\end{lstlisting}
+\end{enumerate}
+Si deseas instalar inteligent IDEA sólo ejecuta el comando \lstinline{sudo snap install intellij-idea-community --classic}
+
+Y ahora puedes escribir tu primer \enquote*{Hola Mundo}, abriendo un nuevo proyecto en nuestro IDE Creando un archivo llamado \enquote*{HolaMundo.java} y escribiendo en el lo siguiente:
+\begin{lstlisting}
+    public class HelloWorld {
+        public static void main(String[] args) {
+            System.out.println("Hola Mundo!");
+        }
+    }
+\end{lstlisting}
+    comienza con la definición de la clase "HelloWorld". Todas las clases de Java deben tener una definición como esta. La clase principal del programa debe tener el mismo nombre que el archivo de código fuente (en este caso, \enquote*{HolaMundo.java}).
+
+    Dentro de la clase \enquote*{HelloWorld}, se define un método llamado \enquote*{main}. Este método es el punto de entrada del programa. Todos los programas de Java deben tener un método \enquote*{main} como este.
+
+    Dentro del método \enquote*{main}, se utiliza la función \enquote*{println} de la clase \enquote*{System} para imprimir el mensaje \enquote*{Hola Mundo!} en la consola. El mensaje debe estar entre comillas dobles para indicar que es una cadena de texto.
+
+\subsection{Tipos de Variables}
+
+En Java, existen diferentes tipos de variables que se pueden utilizar para almacenar diferentes tipos de datos. Algunos de los tipos de variables más comunes en Java son:
+
+\begin{itemize}
+\item \textbf{int}: este tipo de variable se utiliza para almacenar valores enteros. Por ejemplo: \lstinline{int edad = 30;}
+\item \textbf{double}: este tipo de variable se utiliza para almacenar valores decimales. Por ejemplo: \lstinline{double altura = 1.75;}
+\item \textbf{boolean}: este tipo de variable se utiliza para almacenar valores booleanos (verdadero o falso). Por ejemplo: \lstinline{boolean esMayorDeEdad = true;}
+\item \textbf{char}: este tipo de variable se utiliza para almacenar caracteres individuales. Por ejemplo: \lstinline{char inicial = 'J';}
+\item \textbf{String}: este tipo de variable se utiliza para almacenar cadenas de texto. A diferencia de los otros tipos, la sintaxis de una variable de tipo String se escribe con mayúscula al inicio. Por ejemplo: \lstinline{String nombre = "Juan";}
+\end{itemize}
+
+Además de estos tipos de variables básicos, existen otros tipos más complejos en Java, como arreglos, listas, objetos, etc.
+
+Es importante tener en cuenta que las variables en Java son de tipado estático, lo que significa que una vez que se ha declarado el tipo de una variable, no se puede cambiar. Esto ayuda a prevenir errores comunes en tiempo de ejecución.
+
+Por ejemplo:
+\begin{lstlisting}
+public class EjemploVariables {
+
+    public static void main(String[] args) {
+
+        int edad = 30;
+        double altura = 1.75;
+        boolean esMayorDeEdad = true;
+        char inicial = 'J';
+        String nombre = "Juan";
+
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad);
+        System.out.println("Altura: " + altura);
+        System.out.println("Es mayor de edad?: " + esMayorDeEdad);
+        System.out.println("Inicial: " + inicial);
+    }
+\end{lstlisting}
+
+En este ejemplo, se declaran variables de diferentes tipos y se les asignan valores. Luego, se imprimen los valores de estas variables en la consola utilizando el método \enquote*{println} de la clase \enquote*{System}. La salida del programa sería la siguiente:
+\begin{lstlisting}[numbers=none]
+Nombre: Juan
+Edad: 30
+Altura: 1.75
+Es mayor de edad?: true
+Inicial: J
+\end{lstlisting}
+En este caso, el programa imprime los valores de las variables \enquote*{nombre}, \enquote*{edad}, \enquote*{altura}, \enquote*{esMayorDeEdad} e \enquote*{inicial}. Cada valor se concatena con una cadena de texto que describe qué valor se está imprimiendo.
+
+En programación orientada a objetos (POO), además de los tipos de variables primitivos como \lstinline{int}, \lstinline{double}, \lstinline{boolean} y \lstinline{char}, existen también los tipos de variables de objeto, que se definen a partir de clases.
+
+Los tipos de variables de objeto se utilizan para representar objetos de una clase. Por ejemplo, si tenemos una clase \lstinline{Persona}, podemos crear un objeto \lstinline{persona1} de esa clase y utilizar una variable para hacer referencia a ese objeto:
+
+\begin{lstlisting}[language=Java]
+Persona persona1 = new Persona();
+\end{lstlisting}
+
+En este caso, \lstinline{persona1} es una variable de tipo \lstinline{Persona} que hace referencia a un objeto de la clase \lstinline{Persona}. Podemos utilizar métodos y propiedades de la clase \lstinline{Persona} para interactuar con el objeto al que hace referencia la variable \lstinline{persona1}.
+
+Además, en POO también existe el concepto de variables de instancia y variables de clase. Las variables de instancia son variables que se definen en una clase y que pertenecen a cada objeto creado a partir de esa clase. Por ejemplo, si tenemos una clase \lstinline{Persona} con una variable de instancia \lstinline{nombre}, cada objeto \lstinline{persona1}, \lstinline{persona2}, etc. tendría su propio valor de la variable \lstinline{nombre}.
+
+Por otro lado, las variables de clase se definen en una clase y son compartidas por todos los objetos creados a partir de esa clase. Para definir una variable de clase, se utiliza la palabra clave \lstinline{static}. Por ejemplo, si queremos tener una variable \lstinline{contador} que cuente la cantidad de objetos \lstinline{Persona} creados, podemos definirla como una variable de clase:
+
+\begin{lstlisting}[language=Java]
+public class Persona {
+    static int contador = 0;
+    String nombre;
+    public Persona(String nombre) {
+        this.nombre = nombre;
+        contador++;
+    }
+}
+\end{lstlisting}
+
+En este caso, la variable \lstinline{contador} se incrementa cada vez que se crea un objeto \lstinline{Persona}. Todas las instancias de la clase \lstinline{Persona} comparten la misma variable \lstinline{contador}.
+
+\subsubsection*{Longitud de un número}
+El tipo de dato \enquote*{int} en Java es un tipo primitivo que representa números enteros. Este tipo de dato es utilizado para almacenar valores numéricos que no tienen decimales, y ocupa 32 bits (4 bytes) en la memoria.
+
+Esto significa que un valor de tipo \enquote*{int} puede representar cualquier número entero en el rango de \enquote*{-2,147,483,648} a \enquote*{2,147,483,647}. Si intentamos almacenar un valor fuera de este rango, se producirá un error en tiempo de ejecución.
+
+Es importante tener en cuenta que el tipo de dato \enquote*{int} es de tamaño fijo, lo que significa que siempre ocupa la misma cantidad de memoria, independientemente del valor que esté almacenando. Esto lo hace más eficiente en términos de memoria que otros tipos de datos que permiten una mayor precisión, como el tipo \enquote*{double} o \enquote*{float}.
+
+Si necesitamos almacenar números enteros fuera del rango de un \enquote*{int}, podemos utilizar tipos de datos de mayor tamaño, como \enquote*{long}, que ocupa 64 bits (8 bytes) en la memoria y puede almacenar valores en el rango de \enquote*{-9,223,372,036,854,775,808} a \enquote*{9,223,372,036,854,775,807}.
+
+\subsection*{Diferencia entre float y double}
+En Java, existen dos tipos de datos de punto flotante: \textbf{float} y \textbf{double}. Ambos se utilizan para representar números decimales, pero difieren en su precisión y tamaño en memoria.
+
+El tipo de dato \textbf{float} ocupa 32 bits en memoria y tiene una precisión de aproximadamente 6-7 dígitos decimales significativos. Por otro lado, el tipo de dato \textbf{double} ocupa 64 bits en memoria y tiene una precisión de aproximadamente 15-16 dígitos decimales significativos.
+
+Por lo tanto, se recomienda utilizar el tipo de dato \textbf{float} cuando se necesita una precisión menor y se quiere ahorrar memoria. Por ejemplo, cuando se trabaja con grandes cantidades de datos en una aplicación. Por otro lado, se recomienda utilizar el tipo de dato \textbf{double} cuando se necesita una mayor precisión y no se tiene restricción en cuanto al uso de memoria.
+
+Es importante tener en cuenta que al asignar valores a variables de tipo \textbf{float} o \textbf{double}, se deben incluir los sufijos \textbf{f} o \textbf{d}, respectivamente. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+float numeroFloat = 3.14159f;
+double numeroDouble = 3.14159d;
+\end{lstlisting}
+
+De lo contrario, el compilador de Java asumirá que se trata de un valor de tipo \textbf{double}.
+
+\subsubsection*{Tipo de dato char}
+El tipo de dato \lstinline{char} en Java es utilizado para almacenar un único carácter alfanumérico o un símbolo en Unicode. La sintaxis para declarar una variable de tipo \lstinline{char} es la siguiente:
+
+\begin{lstlisting}[language=Java]
+char variableChar = 'a';
+\end{lstlisting}
+
+Aquí, se declara una variable llamada \lstinline{variableChar} de tipo \lstinline{char}, y se le asigna el valor de la letra 'a'. Es importante notar que los valores de tipo \lstinline{char} siempre deben estar encerrados en comillas simples.
+
+Además, el tipo de dato \lstinline{char} también puede representar valores numéricos utilizando su representación en la tabla ASCII. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+char variableNum = 65;
+\end{lstlisting}
+
+Aquí, la variable \lstinline{variableNum} de tipo \lstinline{char} representa el valor numérico 65 en la tabla ASCII, que es la letra 'A'. Es importante mencionar que la representación en ASCII está limitada a los caracteres del conjunto ASCII, por lo que algunos caracteres especiales pueden no tener una representación ASCII válida.
+
+Es importante tener en cuenta que una variable \lstinline{char} ocupa 2 bytes de memoria en Java. Esto significa que puede representar valores de caracteres Unicode que se encuentran en el rango de 0 a 65,535.
+
+\subsubsection*{Tipo de dato boolean}
+El tipo de dato \textbf{boolean} en Java es un tipo de dato que puede tener dos valores: \textbf{true} o \textbf{false}. Este tipo de dato es útil cuando se desea representar una condición lógica en el programa.
+
+A diferencia de otros tipos de datos como int o double, que pueden tener una amplia gama de valores, un boolean solo puede tener dos posibles valores. Estos valores son útiles para representar situaciones donde una condición es verdadera o falsa, como por ejemplo en una sentencia de control de flujo como un \textbf{if} o un \textbf{while}.
+
+Es importante recordar que los valores true y false en Java son sensibles a mayúsculas y minúsculas. Además, el tipo de dato boolean solo ocupa un bit en la memoria, lo que lo convierte en uno de los tipos de datos más eficientes en términos de espacio de almacenamiento.
+
+\subsubsection*{Tipo de dato var}
+A partir de Java 10, se introdujo el tipo de dato \texttt{var}, que permite al compilador inferir el tipo de la variable en tiempo de compilación.
+
+En lugar de declarar una variable como:
+
+\begin{lstlisting}[language=Java]
+String nombre = "Juan";
+\end{lstlisting}
+
+Podemos usar \texttt{var}:
+
+\begin{lstlisting}[language=Java]
+var nombre = "Juan";
+\end{lstlisting}
+
+En este caso, el compilador inferirá que el tipo de la variable \texttt{nombre} es \texttt{String}. También podemos usar \texttt{var} para tipos de datos más complejos, como colecciones:
+
+\begin{lstlisting}[language=Java]
+var lista = new ArrayList<String>();
+\end{lstlisting}
+
+En este caso, el compilador infiere que el tipo de la variable \texttt{lista} es \texttt{ArrayList<String>}. Sin embargo, es importante tener en cuenta que el tipo de la variable no es dinámico, una vez que se ha inferido en tiempo de compilación, el tipo de la variable no puede cambiar.
+
+El uso de \texttt{var} puede hacer que el código sea más conciso y fácil de leer, especialmente en casos donde el tipo de dato es complejo o largo de escribir. Sin embargo, también puede hacer que el código sea menos legible si se abusa de su uso o si no se usa con cuidado.
+
+\subsubsection*{Variables constantes}
+En Java, también se pueden declarar variables que no pueden cambiar su valor después de haber sido inicializadas. Estas variables se llaman \textbf{variables constantes} o \textbf{constantes} y se declaran utilizando la palabra clave \lstinline{final}.
+Por convención, el nombre de las constantes se escribe en mayúsculas y se separan las palabras con guiones bajos (\lstinline{CONSTANTE_EJEMPLO}).
+Por ejemplo, podemos declarar una constante para el valor de PI de la siguiente manera:
+
+\begin{lstlisting}[language=Java]
+final double PI = 3.14159265358979323846;
+\end{lstlisting}
+Una vez que se ha asignado un valor a una constante, no se puede cambiar. Si intentamos hacerlo, el compilador nos dará un error.
+
+El uso de constantes puede ayudar a que nuestro código sea más fácil de leer y entender, ya que nos permite asignar un significado semántico a valores que de otra manera podrían ser difíciles de interpretar. Además, el hecho de que las constantes no puedan ser cambiadas accidentalmente nos ayuda a evitar errores en nuestro código.
+
+\subsubsection{Uso de variables}
+Para utilizar una variable en Java, primero se debe declarar, lo que significa reservar un espacio en memoria para la variable. La declaración de una variable se realiza especificando el tipo y el nombre de la variable, como se muestra en el siguiente ejemplo:
+
+\begin{lstlisting}[language=Java]
+int edad;
+\end{lstlisting}
+En este caso, se está declarando una variable de tipo \lstinline{int} llamada \lstinline{edad}. Después de la declaración, se puede asignar un valor a la variable utilizando el operador de asignación \lstinline{=}, como se muestra a continuación:
+
+\begin{lstlisting}[language=Java]
+edad = 25;
+\end{lstlisting}
+En este caso, se está asignando el valor \lstinline{25} a la variable \lstinline{edad}.
+
+También se puede declarar y asignar un valor a una variable en la misma línea, como se muestra en el siguiente ejemplo:
+
+\begin{lstlisting}[language=Java]
+double precio = 10.99;
+\end{lstlisting}
+En este caso, se está declarando una variable de tipo \lstinline{double} llamada \lstinline{precio} y se le está asignando el valor \lstinline{10.99}.
+
+Una vez que se ha declarado y asignado un valor a una variable, se puede utilizar en el código para hacer cálculos y tomar decisiones. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+int edad = 25;
+if (edad >= 18) {
+System.out.println("Eres mayor de edad");
+} else {
+System.out.println("Eres menor de edad");
+}
+\end{lstlisting}
+En este caso, se está utilizando la variable \lstinline{edad} para determinar si una persona es mayor o menor de edad.
+
+También se puede actualizar el valor de una variable utilizando el operador de asignación. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+int contador = 0;
+contador = contador + 1;
+\end{lstlisting}
+En este caso, se está incrementando el valor de la variable \lstinline{contador} en uno.
+
+Es importante tener en cuenta que las variables en Java ocupan espacio en memoria y que este espacio es limitado. Por lo tanto, es importante utilizar variables de manera eficiente e intentar no crear más variables de las necesarias. Además, las variables que ya no se necesitan podriamos eliminarlas para liberar espacio en memoria y evitar fugas de memoria.
+
+\subsubsection{Convención de nombres}
+La convención de nombres en programación es importante para escribir código legible y fácilmente comprensible. En Java, existen algunas reglas de convención de nombres que se deben seguir para escribir código legible y coherente.
+
+Primero, es importante recordar que Java es sensible a mayúsculas y minúsculas, lo que significa que una letra mayúscula se considera diferente de su contraparte en minúscula. Por ejemplo, la variable \enquote*{nombre} es diferente de la variable \enquote*{Nombre} en Java.
+
+Además, existen algunas convenciones de nomenclatura comunes que se utilizan en Java. Por ejemplo, las variables generalmente se nombran usando una convención llamada \enquote*{camelCase}. En camelCase, el primer carácter de la primera palabra es en minúscula, y la primera letra de cada palabra subsiguiente se escribe en mayúscula. Por ejemplo, \enquote*{nombreDeUsuario} es un buen nombre de variable en camelCase.
+
+En cuanto a los caracteres permitidos en los nombres de variables en Java, estos pueden contener letras, números y guiones bajos. Sin embargo, el primer carácter de un nombre de variable no puede ser un número. Además, los nombres de variables no pueden incluir espacios ni caracteres especiales como signos de puntuación o símbolos matemáticos.
+
+Es importante seguir estas convenciones de nomenclatura para que el código sea fácil de leer y entender. Además, seguir las convenciones de nomenclatura también puede ayudar a prevenir errores en el código y hacer que sea más fácil de mantener y actualizar en el futuro.
+
+El libro \enquote*{Clean Code} de Robert C. Martin es una gran referencia para escribir código limpio y legible. Aquí hay un resumen de algunos de los conceptos clave:
+\begin{itemize}
+    \item Nombres descriptivos: Elige nombres que describan claramente lo que hace una variable, método o clase. Nombres descriptivos hacen que el código sea más fácil de entender y de mantener.
+    \item Funciones y métodos cortos: Las funciones y los métodos deben ser lo más cortos posible, idealmente menos de 20 líneas de código. Esto hace que el código sea más fácil de entender y de probar.
+    \item Mantener un estilo consistente: Es importante mantener un estilo consistente en todo el código, desde la indentación hasta la nomenclatura de las variables. Esto hace que el código sea más fácil de leer y de mantener.
+    \item Eliminar duplicación: La duplicación de código puede ser un problema importante en el código, ya que hace que el código sea más difícil de mantener y actualizar. Es importante identificar y eliminar la duplicación siempre que sea posible.
+    \item Comentarios: Los comentarios deben ser utilizados para explicar el por qué del código, no el qué. El código debe ser lo suficientemente claro para entender lo que está haciendo sin necesidad de comentarios. Los comentarios pueden ser útiles para explicar decisiones arquitectónicas o decisiones de diseño.
+    \item Pruebas unitarias: Las pruebas unitarias son esenciales para escribir código limpio y de calidad. Las pruebas unitarias aseguran que el código funciona correctamente y que los cambios en el código no introducen nuevos errores.
+    \end{itemize}
+Estos son sólo algunos de los conceptos clave que se discuten en \enquote*{Clean Code}. Siguiendo estos principios, podemos escribir código limpio y fácil de entender que es más fácil de mantener y actualizar en el futuro.    
+
+\subsubsection*{Convención de nombres: Upper Camel Case y Lower Camel Case}
+En Java, se utilizan dos convenciones de nombres comunes: Upper Camel Case y Lower Camel Case.
+
+\textbf{Upper Camel Case}, también conocido como \textbf{PascalCase}, se utiliza para nombrar clases y tipos de datos. En Upper Camel Case, la primera letra de cada palabra se escribe en mayúscula, y no se utilizan espacios ni guiones bajos para separar las palabras. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+public class MiClaseEjemplo {
+// class code
+}
+\end{lstlisting}
+
+\textbf{Lower Camel Case}, también conocido como \textbf{camelCase}, se utiliza para nombrar variables, métodos y funciones. En Lower Camel Case, la primera letra de la primera palabra se escribe en minúscula, y la primera letra de cada palabra siguiente se escribe en mayúscula. No se utilizan espacios ni guiones bajos para separar las palabras. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+int edadDelUsuario = 25;
+public void miMetodoEjemplo() {
+// method code
+}
+\end{lstlisting}
+
+\subsection{Operadores}
+En programación, los operadores son símbolos o palabras reservadas que se utilizan para realizar operaciones matemáticas o lógicas sobre variables o valores. En Java, existen diferentes tipos de operadores que se utilizan en distintas situaciones.
+
+\subsubsection*{Operadores aritméticos}
+
+Los operadores aritméticos se utilizan para realizar operaciones matemáticas básicas entre variables numéricas. Los operadores aritméticos en Java son los siguientes:
+
+\begin{itemize}
+\item Suma (+): se utiliza para sumar dos valores.
+\item Resta (-): se utiliza para restar un valor de otro.
+\item Multiplicación (*): se utiliza para multiplicar dos valores.
+\item División (/): se utiliza para dividir un valor por otro.
+\item Módulo (%): se utiliza para obtener el resto de una división.
+\end{itemize}
+
+\subsubsection*{Operadores de asignación}
+
+Los operadores de asignación se utilizan para asignar un valor a una variable. El operador de asignación en Java es el signo igual (=). También existen operadores de asignación compuestos, que realizan una operación y luego asignan el resultado a la variable. Algunos ejemplos son:
+
+\begin{itemize}
+\item +=: suma el valor de la variable y el valor especificado y asigna el resultado a la variable.
+\item -=: resta el valor especificado de la variable y asigna el resultado a la variable.
+\item *=: multiplica el valor de la variable y el valor especificado y asigna el resultado a la variable.
+\item /=: divide el valor de la variable por el valor especificado y asigna el resultado a la variable.
+\item \%=: obtiene el resto de la división entre la variable y el valor especificado y asigna el resultado a la variable.
+\end{itemize}
+
+\subsubsection*{Operadores de comparación}
+
+Los operadores de comparación se utilizan para comparar dos valores y devuelven un valor booleano (verdadero o falso) como resultado. Los operadores de comparación en Java son los siguientes:
+
+\begin{itemize}
+\item Igual que (==): devuelve verdadero si los dos valores son iguales.
+\item Distinto que (!=): devuelve verdadero si los dos valores son distintos.
+\item Mayor que ($>$): devuelve verdadero si el primer valor es mayor que el segundo valor.
+\item Menor que ($<$): devuelve verdadero si el primer valor es menor que el segundo valor.
+\item Mayor o igual que ($>=$): devuelve verdadero si el primer valor es mayor o igual que el segundo valor.
+\item Menor o igual que ($<=$): devuelve verdadero si el primer valor es menor o igual que el segundo valor.
+\end{itemize}
+
+\subsubsection*{Operadores lógicos}
+
+Los operadores lógicos son aquellos que se utilizan para realizar operaciones booleanas entre dos expresiones, cuyo resultado será verdadero o falso. Los operadores lógicos en Java son los siguientes:
+
+\begin{itemize}
+\item \textbf{AND lógico (\&\&)}: Este operador devuelve verdadero si ambas expresiones son verdaderas.
+\item \textbf{OR lógico (||)}: Este operador devuelve verdadero si al menos una de las expresiones es verdadera.
+\item \textbf{NOT lógico (!)}: Este operador se utiliza para negar el resultado de una expresión booleana. Si la expresión original es verdadera, el resultado será falso, y viceversa.
+\end{itemize}
+
+A continuación, se muestran algunos ejemplos de uso de operadores lógicos:
+
+\begin{lstlisting}[language=Java]
+boolean a = true;
+boolean b = false;
+
+boolean c = a && b; // false
+
+boolean d = a || b; // true
+
+boolean e = !a; // false
+\end{lstlisting}
+
+
+Podemos hacer un ejemplo sencillo que combine varios conceptos que hemos visto. Por ejemplo, podemos escribir un programa que le pregunte al usuario su edad y, dependiendo de si es mayor o menor de edad, le dé la bienvenida o le indique que debe esperar un poco más para poder acceder al contenido.
+
+Vamos a crear un programa que permita al usuario ingresar su edad y verifique si es mayor de edad o no. Para ello, utilizaremos los conceptos vistos anteriormente.
+
+\begin{lstlisting}[language=Java]
+import java.util.Scanner;
+    
+public class Main {
+    public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    System.out.print("Ingrese su edad: ");
+    int edad = input.nextInt();
+
+    boolean esMayorDeEdad = edad >= 18;
+
+    System.out.println("Usted tiene " + edad + " a~nos.");
+    System.out.println("Es mayor de edad?: " + esMayorDeEdad);
+}
+}
+\end{lstlisting}
+
+En este programa, utilizamos la clase \lstinline{Scanner} para leer la entrada del usuario desde la consola. Luego, guardamos la edad ingresada en una variable de tipo \lstinline{int} llamada \lstinline{edad}.
+
+Después, utilizamos una variable de tipo \lstinline{boolean} llamada \lstinline{esMayorDeEdad} para verificar si la edad ingresada es mayor o igual a 18 años.
+
+Finalmente, imprimimos la edad ingresada y si el usuario es mayor de edad o no utilizando la función \lstinline{println} de la clase \lstinline{System} y concatenando las variables correspondientes.
+
+\subsubsection{Operaciones matemáticas con Math}
+En Java, la clase Math proporciona una serie de métodos estáticos para realizar operaciones matemáticas. A continuación se muestran algunos ejemplos:
+
+\begin{itemize}
+    \item \enquote*{\textbf{max}}: El método \enquote*{max} de Math toma dos números como argumentos y devuelve el mayor de los dos. Por ejemplo:
+    \begin{lstlisting}[language=Java]
+    int a = 10;
+    int b = 20;
+    int maximo = Math.max(a, b); // devuelve 20
+    \end{lstlisting}
+    \item \enquote*{\textbf{min}}: El método \enquote*{min} de Math toma dos números como argumentos y devuelve el menor de los dos. Por ejemplo:
+\begin{lstlisting}[language=Java]
+int a = 10;
+int b = 20;
+int minimo = Math.min(a, b); // devuelve 10
+\end{lstlisting}
+
+\item \enquote*{\textbf{abs}}: El método \enquote*{abs} de Math devuelve el valor absoluto de un número. Por ejemplo:
+\begin{lstlisting}[language=Java]
+int a = -10;
+int valorAbsoluto = Math.abs(a); // devuelve 10
+\end{lstlisting}
+
+\item \enquote*{\textbf{sqrt}}: El método \enquote*{sqrt} de Math devuelve la raíz cuadrada de un número. Por ejemplo:
+\begin{lstlisting}[language=Java]
+int a = 25;
+double raizCuadrada = Math.sqrt(a); // devuelve 5.0
+\end{lstlisting}
+
+\item \enquote*{\textbf{pow}}: El método \enquote*{pow} de Math toma dos números como argumentos y devuelve el resultado de elevar el primer número a la potencia del segundo número. Por ejemplo:
+\begin{lstlisting}[language=Java]
+int base = 2;
+int exponente = 3;
+double potencia = Math.pow(base, exponente); // devuelve 8.0
+\end{lstlisting}
+
+\item \enquote*{\textbf{sin, cos, tan}}: Los métodos \enquote*{sin}, \enquote*{cos} y \enquote*{tan} de Math calculan el seno, coseno y tangente de un ángulo en radianes, respectivamente. Por ejemplo:
+\begin{lstlisting}[language=Java]
+double angulo = Math.PI / 4; // angulo de 45 grados en radianes
+double seno = Math.sin(angulo); // devuelve 0.7071067811865475
+double coseno = Math.cos(angulo); // devuelve 0.7071067811865476
+double tangente = Math.tan(angulo); // devuelve 0.9999999999999999
+\end{lstlisting}
+
+\end{itemize}
+Es importante tener en cuenta que los métodos trigonométricos de Math toman como argumento un ángulo en radianes, no en grados. Para convertir de grados a radianes, se puede utilizar la siguiente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{bibliografía}
+\begin{thebibliography}{9}
+\bibitem{clean-code} Martin, Robert C. \textit{Clean Code: A Handbook of Agile Software Craftsmanship}. Prentice Hall, 2008.
+\bibitem{platzi-java-basico} Platzi. \textit{Curso de Java Básico}. Platzi, 2023. \url{https://platzi.com/cursos/java-basico/}
+\bibitem{platzi-java-oo} Platzi. \textit{Curso de Java Orientado a Objetos}. Platzi, 2023. \url{https://platzi.com/cursos/java-poo/}
+\bibitem{java-docs} Oracle Corporation. \textit{Java SE Documentation}. Oracle Corporation, 2023. \url{https://docs.oracle.com/en/java/javase/index.html}
+\end{thebibliography}
+
+\end{document}
