@@ -374,7 +374,7 @@ Los operadores aritméticos se utilizan para realizar operaciones matemáticas b
 \item Resta (-): se utiliza para restar un valor de otro.
 \item Multiplicación (*): se utiliza para multiplicar dos valores.
 \item División (/): se utiliza para dividir un valor por otro.
-\item Módulo (%): se utiliza para obtener el resto de una división.
+\item Módulo (\%): se utiliza para obtener el resto de una división.
 \end{itemize}
 
 \subsubsection*{Operadores de asignación}
@@ -408,7 +408,7 @@ Los operadores lógicos son aquellos que se utilizan para realizar operaciones b
 
 \begin{itemize}
 \item \textbf{AND lógico (\&\&)}: Este operador devuelve verdadero si ambas expresiones son verdaderas.
-\item \textbf{OR lógico (||)}: Este operador devuelve verdadero si al menos una de las expresiones es verdadera.
+\item \textbf{OR lógico ($||$)}: Este operador devuelve verdadero si al menos una de las expresiones es verdadera.
 \item \textbf{NOT lógico (!)}: Este operador se utiliza para negar el resultado de una expresión booleana. Si la expresión original es verdadera, el resultado será falso, y viceversa.
 \end{itemize}
 
@@ -498,13 +498,222 @@ double tangente = Math.tan(angulo); // devuelve 0.9999999999999999
 \end{lstlisting}
 
 \end{itemize}
-Es importante tener en cuenta que los métodos trigonométricos de Math toman como argumento un ángulo en radianes, no en grados. Para convertir de grados a radianes, se puede utilizar la siguiente
+Es importante tener en cuenta que los métodos trigonométricos de Math toman como argumento un ángulo en radianes, no en grados. Para convertir de grados a radianes, se puede utilizar la siguiente  fórmula:
 
+$$\theta_{rad} = \frac{\theta_{grados} \times \pi}{180}$$
 
+donde $\theta_{rad}$ es el ángulo en radianes y $\theta_{grados}$ es el ángulo en grados.
 
+Por ejemplo, si se quisiera calcular el seno de 45 grados utilizando el método sin() de Math, se debería convertir primero a radianes utilizando la fórmula anterior:
 
+$$45_{grados} = \frac{\pi}{4}_{radianes}$$
 
+Entonces, el código para calcular el seno de 45 grados utilizando el método sin() sería el siguiente:
 
+\begin{lstlisting}[language=Java]
+double anguloEnGrados = 45;
+double anguloEnRadianes = anguloEnGrados * Math.PI / 180;
+double seno = Math.sin(anguloEnRadianes);
+System.out.println("El seno de " + anguloEnGrados + " grados es: " + seno);
+\end{lstlisting}
+El resultado sería: \lstinline{El seno de 45.0 grados es: 0.7071067811865475}
+
+\subsection{Casting en Variables}
+
+El casting en Java es la conversión explícita de una variable de un tipo de dato a otro. Esto se hace poniendo entre paréntesis el tipo de dato al que se desea convertir la variable, seguido del nombre de la variable.
+
+\subsubsection{Casting Manual}
+
+En Java, algunos tipos de datos se pueden convertir manualmente en otros tipos de datos. Un ejemplo común es la conversión de un \texttt{double} a un \texttt{int}. Para hacer esto, simplemente se escribe el tipo de dato al que se desea convertir la variable entre paréntesis, seguido del nombre de la variable:
+
+\begin{lstlisting}[language=Java]
+double d = 10.5;
+int i = (int) d;
+System.out.println(i); // salida: 10
+\end{lstlisting}
+
+También se puede hacer lo contrario, es decir, convertir un \texttt{int} a un \texttt{double}:
+
+\begin{lstlisting}[language=Java]
+int i = 10;
+double d = (double) i;
+System.out.println(d); // salida: 10.0
+\end{lstlisting}
+
+\subsubsection{Casting Automático}
+
+En algunos casos, Java realiza la conversión de un tipo de dato a otro de forma automática. Esto se conoce como casting automático y sucede cuando se asigna una variable de un tipo de dato a una variable de otro tipo de dato compatible. Por ejemplo, cuando se asigna una variable \texttt{int} a una variable \texttt{double}, Java convierte automáticamente el \texttt{int} a un \texttt{double}:
+
+\begin{lstlisting}[language=Java]
+int i = 10;
+double d = i;
+System.out.println(d); // salida: 10.0
+\end{lstlisting}
+
+Sin embargo, no todos los tipos de datos son compatibles entre sí. En estos casos, es necesario hacer un casting manual para convertir la variable.
+
+\subsection{Casting en otros tipos de datos}
+
+El casting manual también se puede utilizar en otros tipos de datos, como en el caso de los tipos de datos \texttt{char} y \texttt{boolean}. Por ejemplo, para convertir un \texttt{char} a un \texttt{int}, se puede hacer lo siguiente:
+
+\begin{lstlisting}[language=Java]
+char c = 'a';
+int i = (int) c;
+System.out.println(i); // salida: 97
+\end{lstlisting}
+
+Y para convertir un \texttt{boolean} a un \texttt{int}, se puede hacer lo siguiente:
+
+\begin{lstlisting}[language=Java]
+boolean b = true;
+int i = b ? 1 : 0;
+System.out.println(i); // salida: 1
+\end{lstlisting}
+
+Es importante tener en cuenta que los tipos de datos deben ser compatibles entre sí para poder hacer un casting automático. En caso contrario, es necesario hacer un casting manual para convertir la variable al tipo de dato deseado.
+
+\subsection{Versiones de Java y JDK}
+
+Java es un lenguaje de programación popular utilizado en una variedad de aplicaciones, desde aplicaciones web hasta aplicaciones móviles. A lo largo de los años, ha habido varias versiones de Java, cada una con sus propias características y mejoras.
+
+El Java Development Kit (JDK) es un kit de herramientas de desarrollo para Java que incluye el compilador Java, la biblioteca de clases Java y otras herramientas de desarrollo. El JDK es necesario para desarrollar y ejecutar programas en Java.
+
+A continuación, se muestran algunas de las versiones de Java y JDK más populares:
+
+\subsubsection{Java SE 8}
+
+Java SE 8 es una de las versiones más populares de Java. Fue lanzada en marzo de 2014 y es conocida por sus mejoras en el rendimiento y la seguridad. Java SE 8 también introdujo la programación funcional en Java con la adición de las expresiones lambda.
+
+\subsubsection{Java SE 11}
+
+Java SE 11 es otra versión popular de Java. Fue lanzada en septiembre de 2018 y es conocida por sus mejoras en la seguridad y la estabilidad. Java SE 11 también introdujo la noción de lanzamientos a largo plazo (LTS), que son lanzamientos que reciben soporte a largo plazo.
+
+\subsubsection{Java SE 16}
+
+Java SE 16 es la versión más reciente de Java en el momento de escribir esto. Fue lanzada en marzo de 2021 y es conocida por sus mejoras en la programación funcional y en la seguridad.
+
+Es importante tener en cuenta que las diferentes versiones de Java pueden tener diferentes funcionalidades y características. Al seleccionar una versión de Java, es importante considerar las necesidades del proyecto y las características específicas de cada versión.
+
+Además, es importante tener en cuenta que la elección del JDK también es importante para el desarrollo de programas en Java. Es recomendable utilizar la última versión del JDK para aprovechar al máximo las características y mejoras de Java.
+
+\subsubsection{Archivos .jar}
+
+Un archivo JAR (Java ARchive) es un archivo comprimido que contiene código y recursos que puede ser utilizado por una máquina virtual de Java. Estos archivos suelen utilizarse para distribuir bibliotecas de clases reutilizables o aplicaciones completas escritas en Java.
+
+Para crear un archivo .jar desde la línea de comandos, se utiliza el comando \texttt{jar} proporcionado por el JDK de Java. La sintaxis básica del comando es la siguiente:
+
+\begin{lstlisting}[language=Java]
+jar cf jar-file input-file(s)
+\end{lstlisting}
+
+Donde \texttt{jar-file} es el nombre del archivo .jar que se desea crear, y \texttt{input-file(s)} es la lista de archivos que se desean incluir en el archivo .jar. Por ejemplo, para crear un archivo .jar que contenga todos los archivos .class en el directorio actual, se puede utilizar el siguiente comando:
+
+\begin{lstlisting}[language=Java]
+jar cf mylibrary.jar *.class
+\end{lstlisting}
+
+Para utilizar una biblioteca JAR en un proyecto de Java, primero se debe agregar la biblioteca al classpath del proyecto. Esto se puede hacer de varias formas, dependiendo del entorno de desarrollo utilizado. En Eclipse, por ejemplo, se puede agregar una biblioteca JAR al classpath de un proyecto haciendo clic derecho en el proyecto, seleccionando \enquote*{Propiedades}, y luego seleccionando \enquote*{Java Build Path} en el menú de la izquierda. A continuación, se debe hacer clic en la pestaña \enquote*{Librerías}, y luego en el botón \enquote*{Agregar JARs...} para seleccionar el archivo .jar que se desea agregar.
+
+Una vez que se ha agregado la biblioteca al classpath del proyecto, se pueden importar las clases y utilizarlas en el código de la misma manera que se importan y utilizan las clases de la biblioteca estándar de Java.
+
+Es importante tener en cuenta que los archivos JAR pueden contener código malicioso o peligroso. Por esta razón, se debe tener precaución al descargar y utilizar archivos JAR de fuentes desconocidas.
+
+\section{Ciclos en Java}
+
+Los ciclos son estructuras de control que permiten repetir una o varias instrucciones mientras se cumpla una condición. En Java, existen varios tipos de ciclos, cada uno con su propia sintaxis y uso específico.
+
+\subsection{Ciclo condicional: \texttt{if}}
+
+El ciclo condicional \texttt{if} permite ejecutar una o varias instrucciones si se cumple una condición determinada. Su sintaxis es la siguiente:
+
+\begin{lstlisting}[language=Java]
+if (condicion) {
+// Instrucciones a ejecutar si se cumple la condicion
+}
+\end{lstlisting}
+
+Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Si la condición es falsa, se omite la ejecución de las instrucciones y se continúa con la siguiente línea de código. También se puede utilizar la instrucción \texttt{else} para especificar un bloque de código a ejecutar en caso de que la condición sea falsa:
+
+\begin{lstlisting}[language=Java]
+if (condicion) {
+// Instrucciones a ejecutar si se cumple la condicion
+} else {
+// Instrucciones a ejecutar si NO se cumple la condicion
+}
+\end{lstlisting}
+
+\subsection{Ciclo repetitivo: \texttt{for}}
+
+El ciclo repetitivo \texttt{for} permite ejecutar una o varias instrucciones un número determinado de veces. Su sintaxis es la siguiente:
+
+\begin{lstlisting}[language=Java]
+for (inicializacion; condicion; incremento) {
+// Instrucciones a ejecutar en cada iteracion
+}
+\end{lstlisting}
+
+La \texttt{inicializacion} define una variable de control y su valor inicial. La \texttt{condicion} define la condición que debe cumplirse para continuar ejecutando el ciclo. El \texttt{incremento} se ejecuta después de cada iteración y permite modificar el valor de la variable de control. Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Después de cada iteración, se evalúa la condición nuevamente. Si la condición es falsa, se sale del ciclo.
+
+\subsection{Ciclo repetitivo: \texttt{while}}
+
+El ciclo repetitivo \texttt{while} permite ejecutar una o varias instrucciones mientras se cumpla una condición determinada. Su sintaxis es la siguiente:
+
+\begin{lstlisting}[language=Java]
+while (condicion) {
+// Instrucciones a ejecutar mientras se cumpla la condicion
+}
+\end{lstlisting}
+
+Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Después de cada ejecución, se evalúa la condición nuevamente. Si la condición es falsa, se sale del ciclo.
+
+\subsection{Ciclo repetitivo: \texttt{do-while}}
+
+El ciclo repetitivo \texttt{do-while} es similar al ciclo \texttt{while}, pero la evaluación de la condición se realiza después de la primera ejecución del bloque de código. Su sintaxis es la siguiente:
+
+\begin{lstlisting}[language=Java]
+do {
+// bloque de codigo
+} while (condicion);
+\end{lstlisting}
+    
+    En este caso, el bloque de código se ejecuta al menos una vez, independientemente de si la condición es verdadera o falsa en la primera evaluación. Después de la primera ejecución, la condición se evalúa nuevamente. Si es verdadera, el bloque de código se ejecuta de nuevo y así sucesivamente, hasta que la condición se vuelva falsa.
+
+\subsection{Ejemplo practico}
+Te dejo un ejemplo de método de análisis numérico de bisección implementado en Java:
+\begin{lstlisting}[language=Java]
+public class BisectionMethod {
+
+    public static double findRoot(double a, double b, double epsilon) {
+        double mid = (a + b) / 2.0;
+        while (Math.abs(a - b) > epsilon) {
+            if (function(mid) == 0) {
+                return mid;
+            }
+            if (function(a) * function(mid) < 0) {
+                b = mid;
+            } else {
+                a = mid;
+            }
+            mid = (a + b) / 2.0;
+        }
+        return mid;
+    }
+
+    public static double function(double x) {
+        // Define la funcion cuya raiz se quiere encontrar
+        return Math.pow(x,2)-2;
+    }
+
+    public static void main(String[] args) {
+        double a = 0;
+        double b = 2;
+        double epsilon = 0.001;
+        double root = findRoot(a, b, epsilon);
+        System.out.println("La raiz de la funcion es: " + root);
+    }
+}
+\end{lstlisting}
+Este programa calcula la raíz cuadrada de 2 usando el método de bisección. La función \texttt{f} define la función que se va a evaluar, en este caso $f(x) = x^2 - 2$. El método \texttt{bisection} toma como entrada los límites del intervalo, una tolerancia y el número máximo de iteraciones, y devuelve la aproximación de la raíz. El programa principal simplemente llama al método \texttt{bisection} con los parámetros deseados y muestra el resultado.
 
 
 
