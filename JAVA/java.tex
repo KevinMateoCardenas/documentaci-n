@@ -199,7 +199,7 @@ Es importante tener en cuenta que el tipo de dato \enquote*{int} es de tamaño f
 
 Si necesitamos almacenar números enteros fuera del rango de un \enquote*{int}, podemos utilizar tipos de datos de mayor tamaño, como \enquote*{long}, que ocupa 64 bits (8 bytes) en la memoria y puede almacenar valores en el rango de \enquote*{-9,223,372,036,854,775,808} a \enquote*{9,223,372,036,854,775,807}.
 
-\subsection*{Diferencia entre float y double}
+\subsubsection*{Diferencia entre float y double}
 En Java, existen dos tipos de datos de punto flotante: \textbf{float} y \textbf{double}. Ambos se utilizan para representar números decimales, pero difieren en su precisión y tamaño en memoria.
 
 El tipo de dato \textbf{float} ocupa 32 bits en memoria y tiene una precisión de aproximadamente 6-7 dígitos decimales significativos. Por otro lado, el tipo de dato \textbf{double} ocupa 64 bits en memoria y tiene una precisión de aproximadamente 15-16 dígitos decimales significativos.
@@ -552,7 +552,7 @@ System.out.println(d); // salida: 10.0
 
 Sin embargo, no todos los tipos de datos son compatibles entre sí. En estos casos, es necesario hacer un casting manual para convertir la variable.
 
-\subsection{Casting en otros tipos de datos}
+\subsubsection{Casting en otros tipos de datos}
 
 El casting manual también se puede utilizar en otros tipos de datos, como en el caso de los tipos de datos \texttt{char} y \texttt{boolean}. Por ejemplo, para convertir un \texttt{char} a un \texttt{int}, se puede hacer lo siguiente:
 
@@ -572,7 +572,7 @@ System.out.println(i); // salida: 1
 
 Es importante tener en cuenta que los tipos de datos deben ser compatibles entre sí para poder hacer un casting automático. En caso contrario, es necesario hacer un casting manual para convertir la variable al tipo de dato deseado.
 
-\subsection{Versiones de Java y JDK}
+\subsection*{Versiones de Java y JDK}
 
 Java es un lenguaje de programación popular utilizado en una variedad de aplicaciones, desde aplicaciones web hasta aplicaciones móviles. A lo largo de los años, ha habido varias versiones de Java, cada una con sus propias características y mejoras.
 
@@ -580,15 +580,15 @@ El Java Development Kit (JDK) es un kit de herramientas de desarrollo para Java 
 
 A continuación, se muestran algunas de las versiones de Java y JDK más populares:
 
-\subsubsection{Java SE 8}
+\subsubsection*{Java SE 8}
 
 Java SE 8 es una de las versiones más populares de Java. Fue lanzada en marzo de 2014 y es conocida por sus mejoras en el rendimiento y la seguridad. Java SE 8 también introdujo la programación funcional en Java con la adición de las expresiones lambda.
 
-\subsubsection{Java SE 11}
+\subsubsection*{Java SE 11}
 
 Java SE 11 es otra versión popular de Java. Fue lanzada en septiembre de 2018 y es conocida por sus mejoras en la seguridad y la estabilidad. Java SE 11 también introdujo la noción de lanzamientos a largo plazo (LTS), que son lanzamientos que reciben soporte a largo plazo.
 
-\subsubsection{Java SE 16}
+\subsubsection*{Java SE 16}
 
 Java SE 16 es la versión más reciente de Java en el momento de escribir esto. Fue lanzada en marzo de 2021 y es conocida por sus mejoras en la programación funcional y en la seguridad.
 
@@ -596,7 +596,7 @@ Es importante tener en cuenta que las diferentes versiones de Java pueden tener 
 
 Además, es importante tener en cuenta que la elección del JDK también es importante para el desarrollo de programas en Java. Es recomendable utilizar la última versión del JDK para aprovechar al máximo las características y mejoras de Java.
 
-\subsubsection{Archivos .jar}
+\subsubsection*{Archivos .jar}
 
 Un archivo JAR (Java ARchive) es un archivo comprimido que contiene código y recursos que puede ser utilizado por una máquina virtual de Java. Estos archivos suelen utilizarse para distribuir bibliotecas de clases reutilizables o aplicaciones completas escritas en Java.
 
@@ -618,11 +618,11 @@ Una vez que se ha agregado la biblioteca al classpath del proyecto, se pueden im
 
 Es importante tener en cuenta que los archivos JAR pueden contener código malicioso o peligroso. Por esta razón, se debe tener precaución al descargar y utilizar archivos JAR de fuentes desconocidas.
 
-\section{Ciclos en Java}
+\subsection{Ciclos en Java}
 
 Los ciclos son estructuras de control que permiten repetir una o varias instrucciones mientras se cumpla una condición. En Java, existen varios tipos de ciclos, cada uno con su propia sintaxis y uso específico.
 
-\subsection{Ciclo condicional: \texttt{if}}
+\subsubsection{Ciclo condicional: \texttt{if}}
 
 El ciclo condicional \texttt{if} permite ejecutar una o varias instrucciones si se cumple una condición determinada. Su sintaxis es la siguiente:
 
@@ -642,7 +642,7 @@ if (condicion) {
 }
 \end{lstlisting}
 
-\subsection{Ciclo repetitivo: \texttt{for}}
+\subsubsection{Ciclo repetitivo: \texttt{for}}
 
 El ciclo repetitivo \texttt{for} permite ejecutar una o varias instrucciones un número determinado de veces. Su sintaxis es la siguiente:
 
@@ -654,7 +654,7 @@ for (inicializacion; condicion; incremento) {
 
 La \texttt{inicializacion} define una variable de control y su valor inicial. La \texttt{condicion} define la condición que debe cumplirse para continuar ejecutando el ciclo. El \texttt{incremento} se ejecuta después de cada iteración y permite modificar el valor de la variable de control. Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Después de cada iteración, se evalúa la condición nuevamente. Si la condición es falsa, se sale del ciclo.
 
-\subsection{Ciclo repetitivo: \texttt{while}}
+\subsubsection{Ciclo repetitivo: \texttt{while}}
 
 El ciclo repetitivo \texttt{while} permite ejecutar una o varias instrucciones mientras se cumpla una condición determinada. Su sintaxis es la siguiente:
 
@@ -666,7 +666,7 @@ while (condicion) {
 
 Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Después de cada ejecución, se evalúa la condición nuevamente. Si la condición es falsa, se sale del ciclo.
 
-\subsection{Ciclo repetitivo: \texttt{do-while}}
+\subsubsection{Ciclo repetitivo: \texttt{do-while}}
 
 El ciclo repetitivo \texttt{do-while} es similar al ciclo \texttt{while}, pero la evaluación de la condición se realiza después de la primera ejecución del bloque de código. Su sintaxis es la siguiente:
 
@@ -678,7 +678,7 @@ do {
     
     En este caso, el bloque de código se ejecuta al menos una vez, independientemente de si la condición es verdadera o falsa en la primera evaluación. Después de la primera ejecución, la condición se evalúa nuevamente. Si es verdadera, el bloque de código se ejecuta de nuevo y así sucesivamente, hasta que la condición se vuelva falsa.
 
-\subsection{Ejemplo practico}
+\subsubsection{Ejemplos practicos}
 Te dejo un ejemplo de método de análisis numérico de bisección implementado en Java:
 \begin{lstlisting}[language=Java]
 public class BisectionMethod {
