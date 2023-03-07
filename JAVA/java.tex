@@ -1,6 +1,8 @@
-\documentclass{article}
+\documentclass[executivepaper]{article}
 
+\usepackage{graphicx}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[spanish]{babel} % Establece el idioma español
 \usepackage{csquotes} % Carga el paquete csquotes
 \usepackage{graphicx} % Required for inserting images
@@ -16,6 +18,7 @@
 \doublespacing
 
 \lstset{
+    inputencoding=utf8,
     language=Java,
     basicstyle=\ttfamily,
     columns=fullflexible
@@ -77,7 +80,7 @@
 \newpage
 \tableofcontents
 \newpage
-\section{introducción}
+\section{Introducción a JAVA}
 Java es un lenguaje de programación orientado a objetos diseñado para ser portable, seguro y fácil de entender. La programación orientada a objetos (POO) es una técnica de programación que se centra en la organización del código en torno a objetos, que son entidades que contienen datos y métodos para manipular esos datos.
 
 Java es un lenguaje compilado e interpretado. Cuando se escribe un programa en Java, se escribe en un archivo fuente que luego se compila en un archivo ejecutable. Este archivo ejecutable se puede ejecutar en cualquier plataforma que tenga una máquina virtual Java (JVM) instalada. La JVM es un software que permite que los programas Java se ejecuten en diferentes sistemas operativos sin necesidad de recompilar el código fuente.
@@ -271,12 +274,66 @@ En Java, también se pueden declarar variables que no pueden cambiar su valor de
 Por convención, el nombre de las constantes se escribe en mayúsculas y se separan las palabras con guiones bajos (\lstinline{CONSTANTE_EJEMPLO}).
 Por ejemplo, podemos declarar una constante para el valor de PI de la siguiente manera:
 
-\begin{lstlisting}[language=Java]
-final double PI = 3.14159265358979323846;
-\end{lstlisting}
-Una vez que se ha asignado un valor a una constante, no se puede cambiar. Si intentamos hacerlo, el compilador nos dará un error.
+\subsubsection{Arrays en Java}
 
-El uso de constantes puede ayudar a que nuestro código sea más fácil de leer y entender, ya que nos permite asignar un significado semántico a valores que de otra manera podrían ser difíciles de interpretar. Además, el hecho de que las constantes no puedan ser cambiadas accidentalmente nos ayuda a evitar errores en nuestro código.
+Un arreglo (\textbf{array}) en Java es una estructura de datos que permite almacenar un conjunto de elementos del mismo tipo. Los elementos de un array se almacenan en posiciones consecutivas de memoria y se acceden mediante un índice numérico.
+
+Para declarar un array en Java, se debe especificar el tipo de datos de los elementos y la cantidad de elementos que tendrá el array. Por ejemplo, para declarar un array de enteros con 5 elementos, se utilizaría la siguiente sintaxis:
+
+\begin{lstlisting}[language=Java]
+int[] miArray = new int[5];
+\end{lstlisting}
+
+Es importante tener en cuenta que los índices en un array comienzan en cero y terminan en el tamaño del array menos uno. Por ejemplo, si se tiene un array de enteros con 5 elementos, el primer elemento se accedería con el índice 0 y el último con el índice 4.
+
+Además de la declaración básica de un array, existen varios métodos útiles para manipularlos en Java:
+
+\begin{itemize}
+\item \textbf{length}: devuelve la longitud del array.
+\item \textbf{clone}: crea una copia exacta del array.
+\item \textbf{sort}: ordena los elementos del array en orden ascendente.
+\end{itemize}
+
+También es posible declarar arrays multidimensionales en Java, es decir, arrays que contienen otros arrays como elementos. Por ejemplo, se podría declarar un array bidimensional de enteros de la siguiente manera:
+
+\begin{lstlisting}[language=Java]
+int[][] miArrayBidimensional = new int[3][2];
+\end{lstlisting}
+
+Este array tendría 3 elementos, cada uno de los cuales sería un array de enteros con 2 elementos. Para acceder a un elemento específico de un array multidimensional, se deben utilizar índices separados por comas. Por ejemplo, para acceder al segundo elemento del primer array del array bidimensional anterior, se utilizaría la siguiente sintaxis:
+
+\begin{lstlisting}[language=Java]
+int segundoElemento = miArrayBidimensional[0][1];
+\end{lstlisting}
+
+Es importante tener en cuenta que los arrays en Java tienen un tamaño fijo una vez que se han creado. Si se necesita una estructura de datos dinámica que permita agregar o eliminar elementos, se recomienda utilizar las colecciones de Java, como por ejemplo ArrayList.
+
+\subsubsection*{Índices y búsqueda de elementos en Arrays}
+
+Los elementos de un array en Java se pueden acceder mediante su índice. El índice de un elemento en un array es un número entero que indica su posición dentro del array. En Java, los índices comienzan en cero, lo que significa que el primer elemento de un array tiene un índice de cero, el segundo elemento tiene un índice de uno, y así sucesivamente.
+
+Para acceder a un elemento en un array, se utiliza la sintaxis de corchetes []. El índice del elemento deseado se coloca entre los corchetes. Por ejemplo, si queremos acceder al tercer elemento de un array llamado "numeros", se utiliza la siguiente sintaxis:
+
+\begin{lstlisting}[language=Java]
+int[] numeros = {1, 2, 3, 4, 5};
+int tercerNumero = numeros[2]; // Tercer elemento, indice 2
+\end{lstlisting}
+
+En este ejemplo, el tercer elemento del array \enquote*{numeros} tiene un índice de 2, por lo que se utiliza la sintaxis \enquote*{numeros[2]} para acceder a ese elemento.
+
+Para buscar un elemento en un array, se puede utilizar un ciclo \enquote*{for} para iterar a través de todos los elementos y comparar cada uno con el elemento deseado. Sin embargo, Java también proporciona un método llamado \enquote*{binarySearch()} que puede buscar un elemento en un array ordenado de manera eficiente.
+
+El método \enquote*{binarySearch()} utiliza el algoritmo de búsqueda binaria para encontrar el elemento deseado en el array. El algoritmo de búsqueda binaria funciona dividiendo el array en dos mitades y comparando el elemento deseado con el elemento en el medio. Si el elemento deseado es menor que el elemento en el medio, se busca en la mitad inferior del array. Si es mayor, se busca en la mitad superior del array. Este proceso se repite hasta que se encuentra el elemento deseado o se determina que no está presente en el array.
+
+El método \enquote*{binarySearch()} tiene la siguiente sintaxis:
+
+\begin{lstlisting}[language=Java]
+Arrays.binarySearch(array, elemento);
+\end{lstlisting}
+
+Donde \enquote*{array} es el array en el que se desea buscar el elemento, y \enquote*{elemento} es el elemento que se desea buscar. El método devuelve el índice del elemento si se encuentra en el array, o un número negativo que indica el punto de inserción si el elemento no está presente en el array.
+
+Además del método \enquote*{binarySearch()}, Java proporciona otros métodos útiles para trabajar con arrays, como \enquote*{sort()}, que ordena los elementos de un array en orden ascendente, y \enquote*{equals()}, que compara dos arrays para determinar si son iguales.
 
 \subsubsection{Uso de variables}
 Para utilizar una variable en Java, primero se debe declarar, lo que significa reservar un espacio en memoria para la variable. La declaración de una variable se realiza especificando el tipo y el nombre de la variable, como se muestra en el siguiente ejemplo:
@@ -631,7 +688,6 @@ if (condicion) {
 // Instrucciones a ejecutar si se cumple la condicion
 }
 \end{lstlisting}
-
 Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Si la condición es falsa, se omite la ejecución de las instrucciones y se continúa con la siguiente línea de código. También se puede utilizar la instrucción \texttt{else} para especificar un bloque de código a ejecutar en caso de que la condición sea falsa:
 
 \begin{lstlisting}[language=Java]
@@ -642,15 +698,115 @@ if (condicion) {
 }
 \end{lstlisting}
 
-\subsubsection{Ciclo repetitivo: \texttt{for}}
+\subsubsection{\texttt{Switch} en Java}
 
-El ciclo repetitivo \texttt{for} permite ejecutar una o varias instrucciones un número determinado de veces. Su sintaxis es la siguiente:
+En Java, el \texttt{switch} es una estructura de control que permite realizar diferentes acciones según el valor de una expresión. La sintaxis básica del \texttt{switch} es la siguiente:
 
 \begin{lstlisting}[language=Java]
-for (inicializacion; condicion; incremento) {
-// Instrucciones a ejecutar en cada iteracion
+switch (expresion) {
+    case valor1:
+        // codigo para valor1
+        break;
+    case valor2:
+        // codigo para valor2
+        break;
+    case valor3:
+        // codigo para valor3
+        break;
+    default:
+        // codigo para cualquier otro valor
 }
 \end{lstlisting}
+
+En este ejemplo, la variable \texttt{expresion} es evaluada y se compara con cada uno de los valores especificados en los casos (\texttt{valor1}, \texttt{valor2} y \texttt{valor3}). Si el valor coincide con alguno de los casos, se ejecuta el código correspondiente a ese caso. Si no coincide con ninguno de los casos, se ejecuta el código dentro del bloque \texttt{default}.
+
+A continuación se presenta un ejemplo práctico de cómo utilizar el \texttt{switch} en Java para calcular el día de la semana a partir de un número del 1 al 7:
+
+\begin{lstlisting}[language=Java]
+public class DiaDeLaSemana {
+    public static void main(String[] args) {
+        int numDia = 3;
+        String dia = "";
+
+        switch (numDia) {
+            case 1:
+                dia = "Lunes";
+                break;
+            case 2:
+                dia = "Martes";
+                break;
+            case 3:
+                dia = "Miercoles";
+                break;
+            case 4:
+                dia = "Jueves";
+                break;
+            case 5:
+                dia = "Viernes";
+                break;
+            case 6:
+                dia = "Sabado";
+                break;
+            case 7:
+                dia = "Domingo";
+                break;
+            default:
+                dia = "Numero invalido";
+        }
+
+        System.out.println("El dia correspondiente al numero " + numDia + " es " + dia + ".");
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, se utiliza el \texttt{switch} para asignar un valor a la variable \texttt{dia} según el valor de la variable \texttt{numDia}. Luego, se muestra por pantalla el día correspondiente al número ingresado. Si se ingresa un número que no está dentro del rango del 1 al 7, se muestra un mensaje indicando que el número es inválido.
+
+\subsubsection{Ciclo repetitivo: \texttt{for}}
+
+El ciclo for en Java es una estructura de control utilizada para repetir un bloque de código varias veces, mientras se cumpla una condición. En Java, existen dos tipos de ciclo for: el ciclo for normal y el ciclo for each.
+
+\subsubsection*{Ciclo For Each}
+
+El ciclo for each, también conocido como for mejorado, es una forma simplificada de recorrer los elementos de una colección o un arreglo en Java. En lugar de utilizar un índice para acceder a cada elemento, el ciclo for each utiliza una variable para hacer referencia a cada uno de los elementos de la colección.
+
+La sintaxis del ciclo for each en Java es la siguiente:
+
+\begin{lstlisting}[language=Java]
+for (tipoDeDato variable : coleccion) {
+// Codigo a ejecutar
+}
+\end{lstlisting}
+En esta sintaxis, \enquote*{tipoDeDato} es el tipo de dato de la colección, \enquote*{variable} es la variable que se utilizará para hacer referencia a cada elemento de la colección y \enquote*{coleccion} es la colección que se va a recorrer.
+
+Por ejemplo, si tenemos un arreglo de números enteros y queremos imprimir cada uno de sus elementos, podemos utilizar un ciclo for each de la siguiente manera:
+
+\begin{lstlisting}[language=Java]
+int[] numeros = {1, 2, 3, 4, 5};
+for (int numero : numeros) {
+System.out.println(numero);
+}
+\end{lstlisting}
+Este código imprimirá los números 1, 2, 3, 4 y 5 en la consola.
+
+\subsubsection*{Notación más compacta}
+
+En Java, existen algunas formas de hacer la sintaxis del ciclo for más compacta. Por ejemplo, si queremos recorrer un arreglo desde la posición 0 hasta la posición n-1, podemos utilizar la siguiente sintaxis:
+
+\begin{lstlisting}[language=Java]
+for (int i = 0; i < n; i++) {
+// Codigo a ejecutar
+}
+\end{lstlisting}
+En esta sintaxis, \enquote*{i} es el índice del arreglo y \enquote*{n} es el tamaño del arreglo.
+
+También es posible utilizar la notación \enquote*{++i} en lugar de \enquote*{i++} para incrementar el valor de la variable \enquote*{i} en una unidad antes de que se ejecute el bloque de código. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+for (int i = 0; i < n; ++i) {
+// Codigo a ejecutar
+}
+\end{lstlisting}
+Esta notación puede ser útil en algunos casos en los que se desea incrementar el valor de la variable antes de utilizarla en el bloque de código.
 
 La \texttt{inicializacion} define una variable de control y su valor inicial. La \texttt{condicion} define la condición que debe cumplirse para continuar ejecutando el ciclo. El \texttt{incremento} se ejecuta después de cada iteración y permite modificar el valor de la variable de control. Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque de código entre llaves. Después de cada iteración, se evalúa la condición nuevamente. Si la condición es falsa, se sale del ciclo.
 
@@ -677,6 +833,45 @@ do {
 \end{lstlisting}
     
     En este caso, el bloque de código se ejecuta al menos una vez, independientemente de si la condición es verdadera o falsa en la primera evaluación. Después de la primera ejecución, la condición se evalúa nuevamente. Si es verdadera, el bloque de código se ejecuta de nuevo y así sucesivamente, hasta que la condición se vuelva falsa.
+
+\subsubsection{El comando \texttt{break}}
+
+    En ocasiones, puede ser necesario detener un ciclo antes de que este termine su ejecución normal. Para esto, se utiliza el comando \texttt{break}.
+    
+    El comando \texttt{break} permite salir de un ciclo de manera inmediata, incluso si la condición de finalización no se ha cumplido. Su sintaxis es la siguiente:
+    
+    \begin{lstlisting}[language=Java]
+    while (condicion) {
+      // cuerpo del ciclo
+      if (condicionDeSalida) {
+        break;
+      }
+    }
+    \end{lstlisting}
+    
+    En este ejemplo, el ciclo \texttt{while} se ejecutará mientras la condición sea verdadera. Si se cumple la condición de salida, se ejecutará el comando \texttt{break}, que hará que el ciclo se detenga inmediatamente y se salga de él.
+    
+    Es importante tener en cuenta que el comando \texttt{break} solo detiene el ciclo más interno en el que se encuentra. Si se están utilizando ciclos anidados, se puede utilizar el comando \texttt{break} para salir de uno de los ciclos, pero no de todos.
+    
+    Es posible que en algunos casos sea necesario utilizar el comando \texttt{break} en conjunto con una estructura condicional, como se muestra en el siguiente ejemplo:
+    
+    \begin{lstlisting}[language=Java]
+    while (condicion) {
+      // cuerpo del ciclo
+      if (condicionDeSalida) {
+        if (otraCondicion) {
+          break;
+        } else {
+          // hacer algo
+        }
+      }
+    }
+    \end{lstlisting}
+    
+    En este caso, si se cumple la condición de salida, se evalúa la otra condición. Si esta es verdadera, se ejecuta el comando \texttt{break}, lo que hace que se salga del ciclo \texttt{while}. Si la otra condición es falsa, se continúa con la ejecución normal del ciclo.
+    
+    El uso adecuado del comando \texttt{break} puede ser de gran utilidad en situaciones en las que se necesite salir de un ciclo de manera inmediata. Sin embargo, es importante utilizarlo con cuidado, ya que su uso excesivo puede llevar a un código difícil de entender y mantener.
+    
 
 \subsubsection{Ejemplos practicos}
 Te dejo un ejemplo de método de análisis numérico de bisección implementado en Java:
@@ -715,20 +910,511 @@ public class BisectionMethod {
 \end{lstlisting}
 Este programa calcula la raíz cuadrada de 2 usando el método de bisección. La función \texttt{f} define la función que se va a evaluar, en este caso $f(x) = x^2 - 2$. El método \texttt{bisection} toma como entrada los límites del intervalo, una tolerancia y el número máximo de iteraciones, y devuelve la aproximación de la raíz. El programa principal simplemente llama al método \texttt{bisection} con los parámetros deseados y muestra el resultado.
 
+\subsection{Funciones}
+En Java, una función se define utilizando la siguiente estructura:
+
+\begin{lstlisting}[language=Java]
+[modificadorAcceso] tipoRetorno nombreFuncion (tipoParametro1 nombreParametro1, tipoParametro2 nombreParametro2, ...) {
+// Codigo de la funcion
+return valorRetorno;
+}
+\end{lstlisting}
+
+Donde:
+
+\begin{itemize}
+\item \textbf{modificadorAcceso} indica el nivel de acceso a la función, puede ser \texttt{public}, \texttt{private} o \texttt{protected}.
+\item \textbf{tipoRetorno} es el tipo de dato que devuelve la función, puede ser un tipo primitivo o una clase.
+\item \textbf{nombreFuncion} es el nombre de la función.
+\item \textbf{tipoParametro} es el tipo de dato del parámetro que recibe la función.
+\item \textbf{nombreParametro} es el nombre del parámetro que recibe la función.
+\item \textbf{valorRetorno} es el valor que devuelve la función, debe ser del tipo de dato indicado en \texttt{tipoRetorno}.
+\end{itemize}
+
+A continuación, se muestra un ejemplo de cómo se define una función en Java:
+
+\begin{lstlisting}[language=Java]
+public int suma(int num1, int num2) {
+int resultado = num1 + num2;
+return resultado;
+}
+\end{lstlisting}
+
+Esta función recibe dos parámetros de tipo \texttt{int} y devuelve un valor de tipo \texttt{int} que es la suma de los dos parámetros.
+
+Es importante destacar que una función puede no tener parámetros y también puede no devolver ningún valor. En este caso, se utiliza el tipo de dato \texttt{void} para indicar que no se devuelve ningún valor. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+public void imprimirHola() {
+System.out.println("Hola!");
+}
+\end{lstlisting}
+
+Esta función no recibe ningún parámetro y no devuelve ningún valor, simplemente imprime en pantalla el mensaje "Hola!".
+
+
+\subsubsection{Modificadores de acceso}
+Los modificadores de acceso en Java se utilizan para controlar el nivel de acceso a las clases, métodos y variables. 
+Los cuatro modificadores de acceso que se pueden utilizar en Java son:
+
+\begin{itemize}
+\item \texttt{public}: Los miembros públicos se pueden acceder desde cualquier parte del código. Se pueden acceder desde la propia clase, desde cualquier otra clase en el mismo paquete, desde cualquier subclase y desde cualquier clase en otro paquete.
+\item \texttt{protected}: Los miembros protegidos se pueden acceder desde la propia clase, desde cualquier otra clase en el mismo paquete y desde cualquier subclase, pero no se pueden acceder desde una clase en otro paquete a menos que la clase en el otro paquete sea una subclase.
+\item \texttt{default}: Los miembros con acceso predeterminado (sin especificar ningún modificador) se pueden acceder desde la propia clase y desde cualquier otra clase en el mismo paquete, pero no se pueden acceder desde cualquier subclase o desde una clase en otro paquete.
+\item \texttt{private}: Los miembros privados solo se pueden acceder desde la propia clase. No se pueden acceder desde cualquier otra clase, ni siquiera de una subclase.
+\end{itemize}
+
+\subsubsection{El alcance o Scope de variables}
+El alcance o scope de una variable se refiere a la parte del programa en la que se puede acceder a esa variable. Hay tres tipos de alcances de variables en Java:
+\begin{itemize}
+    \item \texttt{Alcance de clase}: una variable de clase tiene un alcance que es toda la clase en la que se declara. Esto significa que la variable se puede acceder desde cualquier método en la clase y desde cualquier instancia de la clase.
+    \item \texttt{Alcance de instancia}: una variable de instancia tiene un alcance que es la instancia de la clase en la que se declara. Esto significa que la variable se puede acceder desde cualquier método en la instancia de la clase, pero no desde otros objetos o instancias.
+    \item \texttt{Alcance local}: una variable local tiene un alcance que es el bloque de código en el que se declara. Esto significa que la variable se puede acceder solo dentro del bloque de código en el que se declara, y no desde otros bloques de código o métodos.
+\end{itemize}
+Aquí hay algunos ejemplos de variables en diferentes alcances en Java:
+\begin{lstlisting}[language=Java]
+public class ScopeExample {
+// Alcance de clase
+    static int variableDeClase = 1;
+// Alcance de instancia
+    int variableDeInstancia = 2;
+    public void ejemploDeScope() {
+// Alcance local
+        int variableLocal = 3;
+    System.out.println("Variable de clase: " + variableDeClase);
+    System.out.println("Variable de instancia: " + variableDeInstancia);
+    System.out.println("Variable local: " + variableLocal);
+    }
+}
+\end{lstlisting}
+En el ejemplo anterior, la variable \texttt{variableDeClase} tiene un alcance de clase, lo que significa que se puede acceder desde cualquier parte del programa que tenga acceso a la clase \texttt{ScopeExample}. La variable \texttt{variableDeInstancia} tiene un alcance de instancia, lo que significa que es accesible para todos los métodos dentro de la clase y puede ser utilizadas por cualquier objeto de esta clase. La variable \texttt{variableLoacal} tiene un alcance local, lo que significa que solo es accesiblet dentro de este método o bloque.
+
+El alcance de una variable se puede limitar utilizando el modificador de acceso.  Las variables públicas son accesibles desde cualquier parte del código, mientras que las variables protegidas solo son accesibles por la propia clase, las subclases y otras clases dentro del mismo paquete. Las variables privadas solo son accesibles por la propia clase y no pueden ser accedidas desde ninguna otra clase. Las variables sin modificador solo son accesibles dentro del mismo paquete.
 
 
 
+\subsection{Documentación con Javadoc}
+La documentación es una parte esencial de cualquier proyecto de programación, ya que permite a otros programadores entender el propósito, funcionamiento y uso del código. En Java, una herramienta muy útil para generar documentación es Javadoc.\\
 
+Javadoc es una herramienta que genera documentación en formato HTML a partir del código fuente y los comentarios del desarrollador. Los comentarios de Javadoc comienzan con el símbolo \texttt{/**} y terminan con el símbolo \texttt{*/}. El contenido de los comentarios de Javadoc se puede utilizar para generar documentación, incluyendo información sobre la clase, los campos, los métodos y los parámetros.\\
 
+La documentación generada por Javadoc se puede ver en cualquier navegador web y se puede integrar en herramientas de desarrollo, como Eclipse o NetBeans, para permitir una fácil navegación a través del código y la documentación.\\
 
+Para documentar una clase, un método o un campo con Javadoc, es necesario agregar comentarios Javadoc al código fuente. Los comentarios de Javadoc deben seguir ciertas convenciones y etiquetas para que la documentación se genere correctamente. Por ejemplo, para documentar un método, es necesario incluir la etiqueta \texttt{@param} para cada parámetro del método y la etiqueta \texttt{@return} para indicar el valor de retorno del método.\\
+
+Un ejemplo de comentario Javadoc para documentar un método sería:\\
+\begin{lstlisting}[language=Java]
+/**
+Este metodo suma dos numeros enteros y devuelve el resultado.
+*@param a El primer numero a sumar
+*@param b El segundo numero a sumar
+*@return La suma de a y b
+*/
+
+public int sumar(int a, int b) {
+return a + b;
+}
+\end{lstlisting}
+Javadoc es una herramienta útil para generar documentación a partir del código fuente y los comentarios del desarrollador. La documentación generada por Javadoc ayuda a otros programadores a entender el propósito, funcionamiento y uso del código, lo que es esencial para el mantenimiento y la colaboración en proyectos de programación.
+
+\subsubsection{Tags de Java Docs}
+Los tags de Javadoc se utilizan para proporcionar información adicional sobre una clase, un método o un campo, como el autor, la versión, los parámetros y el valor de retorno.
+
+Los tags de Javadoc comienzan con el símbolo \texttt{@} y se colocan en el comentario Javadoc. Algunos de los tags de Javadoc más comunes incluyen:
+
+\begin{itemize}
+\item \texttt{@author}: especifica el autor de la clase o el método.
+\item \texttt{@version}: especifica la versión del código.
+\item \texttt{@param}: describe un parámetro de un método o constructor.
+\item \texttt{@return}: describe el valor de retorno de un método.
+\item \texttt{@throws}: describe las excepciones que se pueden lanzar desde un método.
+\item \texttt{@deprecated}: indica que un método o clase está obsoleto y se eliminará en una versión futura.
+\item \texttt{@see}: proporciona un enlace a otra clase, método o campo relacionado.
+\end{itemize}
+
+Por ejemplo, aquí hay un método documentado con algunos tags de Javadoc:
+\begin{lstlisting}[language=Java]
+    /**
+    
+    Este metodo multiplica dos numeros enteros y devuelve el resultado.
+    @param a El primer numero a multiplicar
+    @param b El segundo numero a multiplicar
+    @return El producto de a y b
+    @throws IllegalArgumentException si a o b es negativo
+    @since 1.0
+    @deprecated Desde la versiun 2.0, usar el mutodo multiplicar(int a, int b, int c)
+    */
+    @Deprecated
+    public int multiplicar(int a, int b) {
+    if (a < 0 || b < 0) {
+    throw new IllegalArgumentException("a y b deben ser positivos");
+    }
+    return a * b;
+    }
+    \end{lstlisting}
+    En este ejemplo, el método está documentado con los tags \texttt{@param}, \texttt{@return} y \texttt{@throws}. También se utiliza el tag \texttt{@since} para indicar la versión en la que se introdujo el método y el tag \texttt{@deprecated} para indicar que el método se eliminará en una versión futura.
 
 \newpage
-\section{bibliografía}
+
+\section{Programación orentada a objetos}
+La programación orientada a objetos (\enquote*{POO}) es un paradigma de programación que se enfoca en la creación de objetos que contienen tanto datos como funciones que actúan sobre esos datos. Esta técnica de programación se centra en la creación de \textit{clases} que definen los objetos, y los objetos son instancias de esas clases.
+
+En POO, los objetos son considerados como \enquote*{cosas} que tienen ciertas propiedades y comportamientos. Cada objeto puede tener un conjunto de datos asociados (denominados \enquote*{atributos} o \enquote*{propiedades}), así como una serie de funciones o \enquote*{métodos} que pueden realizar acciones sobre esos datos.
+
+Una de las principales ventajas de la POO es que permite la modularidad del código, lo que significa que puedes dividir el código en pequeñas secciones que se pueden desarrollar, probar y mantener de forma independiente. Además, la POO también hace que el código sea más fácil de entender y mantener a largo plazo, ya que las funciones y datos relacionados están agrupados en objetos que tienen un propósito claro.
+
+\subsection{Encapsulación, Herencia, Polimorfismo y Abstracción}
+En POO, hay cuatro conceptos fundamentales que se deben entender:
+\begin{enumerate}
+    \item \textit{Encapsulación}: este concepto se refiere a la ocultación de datos y métodos dentro de un objeto para que solo puedan ser accedidos por el objeto mismo o por otros objetos que tengan una relación específica con él.
+    \item \textit{Herencia}: la herencia permite crear una clase nueva a partir de una ya existente, pero añadiéndole o modificando sus propiedades y métodos.
+    \item \textit{Polimorfismo}: este concepto se refiere a la capacidad de diferentes objetos de una misma clase para responder de manera distinta a un mismo mensaje o función.
+    \item \textit{Abstracción}: la abstracción se refiere a la capacidad de crear una clase que representa un concepto o idea abstracta, sin necesidad de especificar todos los detalles en su definición.
+\end{enumerate}
+La POO se utiliza en muchos lenguajes de programación populares, como Java, Python, C++ y muchos otros
+
+\subsection*{JAVA orientado a objetos}
+Java es uno de los lenguajes de programación más populares y utilizados en el mundo, y también es conocido por su fuerte orientación a objetos. En Java, todo es un objeto, incluso los tipos primitivos, como los enteros y los caracteres, se representan como objetos.
+
+La POO en Java se basa en la definición de clases y objetos. Una \textit{clase} es un plano o plantilla que define la estructura, atributos y métodos de los objetos que se pueden crear a partir de ella. Un \textit{objeto} es una instancia de una clase, es decir, un miembro concreto de la clase que contiene sus propios valores para los atributos definidos en la clase.
+
+La encapsulación en Java se logra mediante el uso de modificadores de acceso, como \texttt{private}, \texttt{protected} y \texttt{public}, que permiten controlar el acceso a los atributos y métodos de una clase desde otras clases. La herencia se logra mediante la extensión de una clase existente mediante la palabra clave \texttt{extends}. El polimorfismo se logra mediante la implementación de interfaces o mediante la sobrecarga y la anulación de métodos.
+
+La abstracción en Java se logra mediante el uso de interfaces y clases abstractas. Una \textit{interface} es una colección de métodos sin implementación que una clase puede implementar para proporcionar su propia implementación. Una \textit{clase abstracta} es una clase que no se puede instanciar directamente, sino que debe ser subclasificada y extendida.
+
+\subsection*{Python orientado a objetos}
+Python es un lenguaje de programación de alto nivel y fácil de aprender que también es conocido por su fuerte orientación a objetos. En Python, todo es un objeto, desde los números y las cadenas hasta las funciones y las clases.
+
+La POO en Python se basa en la definición de clases y objetos. Una \textit{clase} es un plano o plantilla que define la estructura, atributos y métodos de los objetos que se pueden crear a partir de ella. Un \textit{objeto} es una instancia de una clase, es decir, un miembro concreto de la clase que contiene sus propios valores para los atributos definidos en la clase.
+
+La encapsulación en Python se logra mediante el uso de convenciones de nomenclatura, como el uso de guiones bajos (\lstinline{_}) o doble guiones bajos (\lstinline{__}) para indicar la visibilidad de los atributos y métodos. La herencia se logra mediante la herencia de una clase existente mediante la palabra clave \lstinline{class ClassName(ParentClass)}. El polimorfismo se logra mediante la implementación de métodos con el mismo nombre en diferentes clases.
+
+La abstracción en Python se logra mediante el uso de clases abstractas y métodos abstractos. Una \textit{clase abstracta} es una clase que no se puede instanciar directamente, sino que debe ser subclasificada y extendida. Un \textit{método abstracto} es un método que se define en una clase abstracta pero no se implementa, lo que significa que las subclases deben proporcionar su propia implementación.
+
+Python también es conocido por su soporte para la programación orientada a objetos basada en funciones. En este enfoque, las funciones se utilizan para encapsular la lógica de la clase y para proporcionar una interfaz más clara para el uso de la clase.
+
+\subsection{Modelado}
+El modelado es una parte fundamental de la programación orientada a objetos. El objetivo del modelado es crear un modelo conceptual de un sistema o aplicación en términos de clases, objetos, atributos, métodos y relaciones entre ellos.
+
+En el modelado, se utilizan diagramas de clases para representar la estructura de un sistema. Un diagrama de clases es una representación gráfica de las clases en un sistema y las relaciones entre ellas. Las clases se representan como cajas con el nombre de la clase, sus atributos y métodos. Las relaciones entre las clases se representan mediante líneas que indican la naturaleza de la relación.
+
+Además de los diagramas de clases, también se utilizan otros diagramas para modelar otros aspectos de la programación orientada a objetos. Por ejemplo, el diagrama de secuencia se utiliza para modelar la interacción entre objetos en un sistema, el diagrama de estado se utiliza para modelar el comportamiento de un objeto en diferentes estados y el diagrama de actividades se utiliza para modelar el flujo de trabajo de un proceso.
+
+El modelado es una parte importante del desarrollo de software orientado a objetos porque ayuda a los desarrolladores a comprender mejor el sistema que están construyendo y a identificar y resolver problemas potenciales antes de escribir cualquier código. También ayuda a garantizar que el sistema sea modular, fácil de entender y mantener a largo plazo.
+
+\subsection*{UML - Lenguaje de Modelado Unificado}
+
+UML (\enquote*{Lenguaje de Modelado Unificado}) es un lenguaje de modelado visual utilizado para el diseño y la documentación de sistemas de software orientados a objetos. UML es una herramienta popular utilizada por los desarrolladores de software para visualizar, especificar, construir y documentar los sistemas de software.
+
+El lenguaje UML consta de varios tipos de diagramas, cada uno de los cuales se utiliza para modelar diferentes aspectos de un sistema de software. Estos diagramas incluyen:
+
+\begin{enumerate}
+\item Diagrama de Clases: representa la estructura estática del sistema, incluyendo las clases, los atributos y los métodos, y las relaciones entre ellos.
+\item Diagrama de Objetos: representa una instancia específica de una clase en un punto específico del tiempo, incluyendo los valores de los atributos.
+\item Diagrama de Casos de Uso: representa los actores, los casos de uso y las relaciones entre ellos.
+\item Diagrama de Secuencia: representa la interacción entre los objetos en una secuencia de eventos.
+\item Diagrama de Actividad: representa el flujo de trabajo de un proceso o algoritmo.
+\item Diagrama de Estados: representa el comportamiento de un objeto en diferentes estados.
+\item Diagrama de Componentes: representa los componentes del sistema y las relaciones entre ellos.
+\item Diagrama de Despliegue: representa la distribución física del sistema en el hardware.
+\end{enumerate}
+
+Estos diagramas son útiles para modelar diferentes aspectos de un sistema de software y proporcionan una visión completa del sistema desde diferentes perspectivas. Los diagramas de UML son útiles tanto para los desarrolladores como para los interesados en el sistema, como los gerentes de proyecto y los clientes, ya que proporcionan una visión clara y detallada del sistema.
+
+\subsubsection*{Clases}
+Las clases se representan así:\\
+\includegraphics[scale=0.5]{2.1.png}\\
+En la parte superior se colocan los atributos o propiedades, y debajo las operaciones de la clase. Notarás que el primer caracter con el que empiezan es un símbolo. Este denotará la visibilidad del atributo o método, esto es un término que tiene que ver con Encapsulamiento y veremos más adelante a detalle.\\
+Estos son los niveles de visibilidad que puedes tener:
+\begin{enumerate}
+    \item $-$  private
+    \item $+$  public
+    \item $\#$  protected
+    \item $~$  default
+\end{enumerate}
+
+Una forma de representar las relaciones que tendrá un elemento con otro es a través de las flechas en UML, y aquí tenemos varios tipos, estos son los más comunes:
+\subsubsection*{Asociación}
+Como su nombre lo dice, notarás que cada vez que esté referenciada este tipo de flecha significará que ese elemento contiene al otro en su definición.\\
+\includegraphics[scale=0.5]{2.2.png}\\
+La flecha apuntará hacia la dependencia.\\
+\includegraphics[scale=0.5]{2.3.png}\\
+Con esto vemos que la ClaseA está asociada y depende de la ClaseB.
+\subsubsection*{Herencia}
+Siempre que veamos este tipo de flecha se estará expresando la herencia.\\
+\includegraphics[scale=0.5]{2.4.png}\\
+La dirección de la flecha irá desde el hijo hasta el padre.\\
+\includegraphics[scale=0.5]{2.5.png}\\
+Con esto vemos que la ClaseB hereda de la ClaseA
+\subsubsection*{Agregación}
+Este se parece a la asociación en que un elemento dependerá del otro, pero en este caso será: Un elemento dependerá de muchos otros.\\
+\includegraphics[scale=0.5]{2.6.png}\\
+Aquí tomamos como referencia la multiplicidad del elemento. Lo que comúnmente conocerías en Bases de Datos como Relaciones uno a muchos.\\
+\includegraphics[scale=0.5]{2.7.png}\\
+Con esto decimos que la ClaseA contiene varios elementos de la ClaseB. Estos últimos son comúnmente representados con listas o colecciones de datos.
+\subsubsection*{Composición}
+Este es similar al anterior solo que su relación es totalmente compenetrada.\\
+\includegraphics[scale=0.5]{2.8.png}\\
+De tal modo que conceptualmente una de estas clases no podría vivir si no existiera la otra.\\
+\includegraphics[scale=0.5]{2.9.png}\\
+
+\newpage
+\section{JAVA orientada a objetos}
+Java es un lenguaje de programación orientado a objetos (POO) que se ha convertido en uno de los más populares en la actualidad. Su éxito se debe en gran medida a su capacidad para manejar de manera eficiente la programación orientada a objetos. 
+\subsection{Clase}
+\begin{lstlisting}
+class Person{
+    String name = "";
+    void walk(){
+
+    }
+} 
+\end{lstlisting}
+Este fregmento define una clase llamada "Person" que tiene un atributo "name" de tipo String y un método "walk" que no hace nada.
+
+\subsection{Ejemplo práctico: Sistema de gestión de una biblioteca}
+
+Imaginemos que queremos crear un sistema de gestión de una biblioteca en Java. Para ello, podemos utilizar los conceptos de modularidad, abstracción, polimorfismo, herencia y encapsulamiento.
+
+\subsubsection*{Modularidad}
+
+La modularidad se refiere a la división del código en módulos independientes que pueden ser desarrollados, probados y mantenidos por separado. En nuestro sistema de gestión de biblioteca, podemos utilizar la modularidad para dividir el código en diferentes clases, cada una de las cuales es responsable de una funcionalidad específica. Por ejemplo, podemos tener una clase para la gestión de libros, otra clase para la gestión de usuarios, y otra clase para la gestión de préstamos.
+
+\subsubsection*{Abstracción}
+
+La abstracción se refiere a la capacidad de ocultar los detalles complejos y mostrar sólo la información esencial. En nuestro sistema de gestión de biblioteca, podemos utilizar la abstracción para crear una clase abstracta llamada \texttt{Item} que representa tanto a los libros como a otros elementos de la biblioteca, como DVDs o CDs. Esta clase podría contener métodos y propiedades que son comunes a todos los elementos de la biblioteca, como un número de identificación y un título.
+
+\subsubsection*{Polimorfismo}
+
+El polimorfismo se refiere a la capacidad de los objetos de tomar diferentes formas. En nuestro sistema de gestión de biblioteca, podemos utilizar el polimorfismo para crear diferentes tipos de elementos de la biblioteca, como libros y DVDs, que heredan de la clase \texttt{Item} y tienen sus propios métodos y propiedades únicas. Podríamos tener una clase \texttt{Book} que hereda de la clase \texttt{Item} y tiene propiedades como el autor y la fecha de publicación, y una clase \texttt{DVD} que también hereda de \texttt{Item} y tiene propiedades como la duración y el género.
+
+\subsubsection*{Herencia}
+
+La herencia se refiere a la capacidad de las clases hijas de heredar propiedades y métodos de la clase padre. En nuestro sistema de gestión de biblioteca, podemos utilizar la herencia para crear una jerarquía de clases en la que las clases hijas heredan propiedades y métodos de la clase padre. Por ejemplo, la clase \texttt{Book} podría heredar de la clase \texttt{Item} y tener acceso a sus propiedades y métodos.
+
+\subsubsection*{Encapsulamiento}
+
+El encapsulamiento se refiere a la capacidad de ocultar los detalles de implementación y proteger los datos y métodos de una clase de acceso no autorizado. En nuestro sistema de gestión de biblioteca, podemos utilizar el encapsulamiento para proteger los datos de los elementos de la biblioteca y limitar el acceso a ellos. Podemos definir las propiedades y métodos de la clase \texttt{Item} como privados para que sólo puedan ser accedidos y modificados por métodos dentro de la misma clase.
+
+Para el ejemplo Es útil realizar el diagrama UML:\\
+\begin{center}
+    \includegraphics[scale=0.2]{3.1.png}\\ 
+\end{center}
+Donde\\
+\begin{center}
+    \includegraphics[scale=0.3]{3.2.png}\\ 
+\end{center}
+
+Comencemos a escribir codigo:\\ 
+Creamos la clase Biblioteca:
+\begin{lstlisting}
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Biblioteca {
+    private String nombre;
+    private ArrayList<Libro> libros;
+    private ArrayList<Usuario> usuarios;
+
+    public Biblioteca(String nombre) {
+        this.nombre = nombre;
+        libros = new ArrayList<Libro>();
+        usuarios = new ArrayList<Usuario>();
+    }
+
+    public void agregarLibro(Libro libro) {
+        libros.add(libro);
+    }
+
+    public void agregarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+    }
+
+    public void prestarLibro(Libro libro, Usuario usuario) {
+        if (libros.contains(libro) && !libro.prestado) {
+            libro.changeEstado();
+            usuario.prestarLibro(libro);
+            System.out.println("El libro " + libro.getTitulo() + " ha sido prestado a " + usuario.getNombre());
+        } else {
+            System.out.println("No se puede prestar el libro " + libro.getTitulo() + " a " + usuario.getNombre());
+        }
+    }
+
+    public void devolverLibro(Libro libro, Usuario usuario) {
+        if (libros.contains(libro) && !libro.prestado) {
+            usuario.devolverLibro(libro);
+            usuario.devolverLibro(libro);
+            libro.changeEstado();
+            System.out.println("El libro " + libro.getTitulo() + " ha sido devuelto por " + usuario.getNombre());
+        }
+    }
+    public ArrayList<Libro> getLibrosDisponibles() {
+        ArrayList<Libro> librosDisponibles = new ArrayList<Libro>();
+        for(Libro libro : libros){
+            if(!libro.prestado){
+                librosDisponibles.add(libro);
+                System.out.println("El libro " + libro.getTitulo() + " Esta disponible");
+            }
+        }
+        return librosDisponibles;
+    }
+}
+\end{lstlisting}
+Y hablando de herencia, podemos podemos agregar una clase Usuario y luego crear dos subclases Estudiante y Profesor que hereden de ella. De esta manera, los objetos de tipo Estudiante y Profesor tendrán todos los atributos y métodos de la clase Usuario, además de los propios.
+\begin{lstlisting}
+import java.util.ArrayList;
+
+class Usuario {
+    private String nombre;
+    private String email;
+    private ArrayList<Libro>librosPrestados;
+    public Usuario(String nombre, String email) {
+        this.nombre = nombre;
+        this.email = email;
+        this.librosPrestados = new ArrayList<Libro>();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public ArrayList<Libro> getLibrosPrestados() {
+        return librosPrestados;
+    }
+
+    public void setLibrosPrestados(ArrayList<Libro> librosPrestados) {
+        this.librosPrestados = librosPrestados;
+    }
+
+    public void prestarLibro(Libro libro) {
+        librosPrestados.add(libro);
+    }
+
+    public void devolverLibro(Libro libro) {
+        librosPrestados.remove(libro);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [nombre=" + nombre + ", email=" + email + ", librosPrestados=" + librosPrestados + "]";
+    }
+}
+
+class Estudiante extends Usuario {
+    private String carrera;
+
+    public Estudiante(String nombre, String email, String carrera) {
+        super(nombre,email);
+        this.carrera = carrera;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+}
+
+class Profesor extends Usuario {
+    private String departamento;
+
+    public Profesor(String nombre, String email, String carrera) {
+        super(nombre,email);
+        this.departamento = departamento;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+}
+\end{lstlisting}
+Aquí hemos creado dos subclases Estudiante y Profesor que heredan de la clase Usuario. Ahora podemos crear objetos de estas subclases y usar todos los métodos y atributos de la clase Usuario, además de los métodos y atributos adicionales de cada subclase. Por ejemplo, podemos crear un objeto Estudiante.
+
+Pero también debemos crear la clase Libro:
+\begin{lstlisting}
+class Libro {
+    private String titulo;
+    private String autor;
+    public boolean prestado;
+
+    public Libro(String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.prestado = false;
+    }
+    public void changeEstado() {
+        this.prestado = !prestado;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro [titulo=" + titulo + ", autor=" + autor +  ", prestado="
+                + prestado + "]";
+    }
+}
+\end{lstlisting}
+
+Mostremos un ejemplo de cómo se podría instanciar y usar los métodos de las clases que hemos definido:
+\begin{lstlisting}
+public class Main {
+    public static void main(String[] args) {
+        Biblioteca biblioteca = new Biblioteca("Biblioteca Municipal");
+
+        // Agregamos algunos libros a la biblioteca
+        Libro libro1 = new Libro("100 a~nos de soledad", "Gabriel Garc'ia M'arquez");
+        Libro libro2 = new Libro("El Aleph", "Jorge Luis Borges");
+        Libro libro3 = new Libro("Rayuela", "Julio Cort'azar");
+        biblioteca.agregarLibro(libro1);
+        biblioteca.agregarLibro(libro2);
+        biblioteca.agregarLibro(libro3);
+
+        // Agregamos algunos usuarios a la biblioteca
+        Usuario usuario1 = new Usuario("Juan", "P'erez");
+        Usuario usuario2 = new Usuario("Mar'ia", "Gonz'alez");
+        biblioteca.agregarUsuario(usuario1);
+        biblioteca.agregarUsuario(usuario2);
+
+        // Imprimimos la informaci'on del libro 1
+        System.out.println(libro1);
+
+        // Imprimimos los libros que est'an disponibles en la biblioteca
+        System.out.println("Libros disponibles:");
+        biblioteca.getLibrosDisponibles();
+    }
+\end{lstlisting}
+Cuando lo ejecutemos la salida será:
+\begin{verbatim}
+Libro [titulo=100 años de soledad, autor=Gabriel García Márquez, prestado=false]
+Libros disponibles:
+El libro 100 años de soledad Está disponible
+El libro El Aleph Está disponible
+El libro Rayuela Está disponible
+
+Process finished with exit code 0
+\end{verbatim}
+
+\newpage
+\section{Bibliografía}
 \begin{thebibliography}{9}
 \bibitem{clean-code} Martin, Robert C. \textit{Clean Code: A Handbook of Agile Software Craftsmanship}. Prentice Hall, 2008.
-\bibitem{platzi-java-basico} Platzi. \textit{Curso de Java Básico}. Platzi, 2023. \url{https://platzi.com/cursos/java-basico/}
-\bibitem{platzi-java-oo} Platzi. \textit{Curso de Java Orientado a Objetos}. Platzi, 2023. \url{https://platzi.com/cursos/java-poo/}
-\bibitem{java-docs} Oracle Corporation. \textit{Java SE Documentation}. Oracle Corporation, 2023. \url{https://docs.oracle.com/en/java/javase/index.html}
+\bibitem{platzi-java-basico} Platzi. \textit{Curso de Java Básico}. Platzi, 2023.\\ \url{https://platzi.com/cursos/java-basico/}
+\bibitem{platzi-java-oo} Platzi. \textit{Curso de Java Orientado a Objetos}. Platzi, 2023.\\ \url{https://platzi.com/cursos/java-poo/}
+\bibitem{java-docs} Oracle Corporation. \textit{Java SE Documentation}. Oracle Corporation, 2023.\\ \url{https://docs.oracle.com/en/java/javase/index.html}
 \end{thebibliography}
+
+
 
 \end{document}
