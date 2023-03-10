@@ -1073,27 +1073,7 @@ En POO, hay cuatro conceptos fundamentales que se deben entender:
 \end{enumerate}
 La POO se utiliza en muchos lenguajes de programación populares, como Java, Python, C++ y muchos otros
 
-\subsection*{JAVA orientado a objetos}
-Java es uno de los lenguajes de programación más populares y utilizados en el mundo, y también es conocido por su fuerte orientación a objetos. En Java, todo es un objeto, incluso los tipos primitivos, como los enteros y los caracteres, se representan como objetos.
-
-La POO en Java se basa en la definición de clases y objetos. Una \textit{clase} es un plano o plantilla que define la estructura, atributos y métodos de los objetos que se pueden crear a partir de ella. Un \textit{objeto} es una instancia de una clase, es decir, un miembro concreto de la clase que contiene sus propios valores para los atributos definidos en la clase.
-
-La encapsulación en Java se logra mediante el uso de modificadores de acceso, como \texttt{private}, \texttt{protected} y \texttt{public}, que permiten controlar el acceso a los atributos y métodos de una clase desde otras clases. La herencia se logra mediante la extensión de una clase existente mediante la palabra clave \texttt{extends}. El polimorfismo se logra mediante la implementación de interfaces o mediante la sobrecarga y la anulación de métodos.
-
-La abstracción en Java se logra mediante el uso de interfaces y clases abstractas. Una \textit{interface} es una colección de métodos sin implementación que una clase puede implementar para proporcionar su propia implementación. Una \textit{clase abstracta} es una clase que no se puede instanciar directamente, sino que debe ser subclasificada y extendida.
-
-\subsection*{Python orientado a objetos}
-Python es un lenguaje de programación de alto nivel y fácil de aprender que también es conocido por su fuerte orientación a objetos. En Python, todo es un objeto, desde los números y las cadenas hasta las funciones y las clases.
-
-La POO en Python se basa en la definición de clases y objetos. Una \textit{clase} es un plano o plantilla que define la estructura, atributos y métodos de los objetos que se pueden crear a partir de ella. Un \textit{objeto} es una instancia de una clase, es decir, un miembro concreto de la clase que contiene sus propios valores para los atributos definidos en la clase.
-
-La encapsulación en Python se logra mediante el uso de convenciones de nomenclatura, como el uso de guiones bajos (\lstinline{_}) o doble guiones bajos (\lstinline{__}) para indicar la visibilidad de los atributos y métodos. La herencia se logra mediante la herencia de una clase existente mediante la palabra clave \lstinline{class ClassName(ParentClass)}. El polimorfismo se logra mediante la implementación de métodos con el mismo nombre en diferentes clases.
-
-La abstracción en Python se logra mediante el uso de clases abstractas y métodos abstractos. Una \textit{clase abstracta} es una clase que no se puede instanciar directamente, sino que debe ser subclasificada y extendida. Un \textit{método abstracto} es un método que se define en una clase abstracta pero no se implementa, lo que significa que las subclases deben proporcionar su propia implementación.
-
-Python también es conocido por su soporte para la programación orientada a objetos basada en funciones. En este enfoque, las funciones se utilizan para encapsular la lógica de la clase y para proporcionar una interfaz más clara para el uso de la clase.
-
-\subsection{Modelado}
+\subsubsection{Modelado}
 El modelado es una parte fundamental de la programación orientada a objetos. El objetivo del modelado es crear un modelo conceptual de un sistema o aplicación en términos de clases, objetos, atributos, métodos y relaciones entre ellos.
 
 En el modelado, se utilizan diagramas de clases para representar la estructura de un sistema. Un diagrama de clases es una representación gráfica de las clases en un sistema y las relaciones entre ellas. Las clases se representan como cajas con el nombre de la clase, sus atributos y métodos. Las relaciones entre las clases se representan mediante líneas que indican la naturaleza de la relación.
@@ -1102,7 +1082,7 @@ Además de los diagramas de clases, también se utilizan otros diagramas para mo
 
 El modelado es una parte importante del desarrollo de software orientado a objetos porque ayuda a los desarrolladores a comprender mejor el sistema que están construyendo y a identificar y resolver problemas potenciales antes de escribir cualquier código. También ayuda a garantizar que el sistema sea modular, fácil de entender y mantener a largo plazo.
 
-\subsection*{UML - Lenguaje de Modelado Unificado}
+\subsection{UML - Lenguaje de Modelado Unificado}
 
 UML (\enquote*{Lenguaje de Modelado Unificado}) es un lenguaje de modelado visual utilizado para el diseño y la documentación de sistemas de software orientados a objetos. UML es una herramienta popular utilizada por los desarrolladores de software para visualizar, especificar, construir y documentar los sistemas de software.
 
@@ -1121,7 +1101,7 @@ El lenguaje UML consta de varios tipos de diagramas, cada uno de los cuales se u
 
 Estos diagramas son útiles para modelar diferentes aspectos de un sistema de software y proporcionan una visión completa del sistema desde diferentes perspectivas. Los diagramas de UML son útiles tanto para los desarrolladores como para los interesados en el sistema, como los gerentes de proyecto y los clientes, ya que proporcionan una visión clara y detallada del sistema.
 
-\subsubsection*{Clases}
+\subsubsection{Clases}
 Las clases se representan así:\\
 \includegraphics[scale=0.5]{2.1.png}\\
 En la parte superior se colocan los atributos o propiedades, y debajo las operaciones de la clase. Notarás que el primer caracter con el que empiezan es un símbolo. Este denotará la visibilidad del atributo o método, esto es un término que tiene que ver con Encapsulamiento y veremos más adelante a detalle.\\
@@ -1134,25 +1114,25 @@ Estos son los niveles de visibilidad que puedes tener:
 \end{enumerate}
 
 Una forma de representar las relaciones que tendrá un elemento con otro es a través de las flechas en UML, y aquí tenemos varios tipos, estos son los más comunes:
-\subsubsection*{Asociación}
+\subsubsection{Asociación}
 Como su nombre lo dice, notarás que cada vez que esté referenciada este tipo de flecha significará que ese elemento contiene al otro en su definición.\\
 \includegraphics[scale=0.5]{2.2.png}\\
 La flecha apuntará hacia la dependencia.\\
 \includegraphics[scale=0.5]{2.3.png}\\
 Con esto vemos que la ClaseA está asociada y depende de la ClaseB.
-\subsubsection*{Herencia}
+\subsubsection{Herencia}
 Siempre que veamos este tipo de flecha se estará expresando la herencia.\\
 \includegraphics[scale=0.5]{2.4.png}\\
 La dirección de la flecha irá desde el hijo hasta el padre.\\
 \includegraphics[scale=0.5]{2.5.png}\\
 Con esto vemos que la ClaseB hereda de la ClaseA
-\subsubsection*{Agregación}
+\subsubsection{Agregación}
 Este se parece a la asociación en que un elemento dependerá del otro, pero en este caso será: Un elemento dependerá de muchos otros.\\
 \includegraphics[scale=0.5]{2.6.png}\\
 Aquí tomamos como referencia la multiplicidad del elemento. Lo que comúnmente conocerías en Bases de Datos como Relaciones uno a muchos.\\
 \includegraphics[scale=0.5]{2.7.png}\\
 Con esto decimos que la ClaseA contiene varios elementos de la ClaseB. Estos últimos son comúnmente representados con listas o colecciones de datos.
-\subsubsection*{Composición}
+\subsubsection{Composición}
 Este es similar al anterior solo que su relación es totalmente compenetrada.\\
 \includegraphics[scale=0.5]{2.8.png}\\
 De tal modo que conceptualmente una de estas clases no podría vivir si no existiera la otra.\\
@@ -1160,23 +1140,107 @@ De tal modo que conceptualmente una de estas clases no podría vivir si no exist
 
 \newpage
 \section{JAVA orientada a objetos}
-Java es un lenguaje de programación orientado a objetos (POO) que se ha convertido en uno de los más populares en la actualidad. Su éxito se debe en gran medida a su capacidad para manejar de manera eficiente la programación orientada a objetos. 
-\subsection{Clase}
-\begin{lstlisting}
-class Person{
-    String name = "";
-    void walk(){
+Java es uno de los lenguajes de programación más populares y utilizados en el mundo, y también es conocido por su fuerte orientación a objetos. En Java, todo es un objeto, incluso los tipos primitivos, como los enteros y los caracteres, se representan como objetos.
 
-    }
-} 
+La POO en Java se basa en la definición de clases y objetos. Una \textit{clase} es un plano o plantilla que define la estructura, atributos y métodos de los objetos que se pueden crear a partir de ella. Un \textit{objeto} es una instancia de una clase, es decir, un miembro concreto de la clase que contiene sus propios valores para los atributos definidos en la clase.
+
+La encapsulación en Java se logra mediante el uso de modificadores de acceso, como \texttt{private}, \texttt{protected} y \texttt{public}, que permiten controlar el acceso a los atributos y métodos de una clase desde otras clases. La herencia se logra mediante la extensión de una clase existente mediante la palabra clave \texttt{extends}. El polimorfismo se logra mediante la implementación de interfaces o mediante la sobrecarga y la anulación de métodos.
+
+La abstracción en Java se logra mediante el uso de interfaces y clases abstractas. Una \textit{interface} es una colección de métodos sin implementación que una clase puede implementar para proporcionar su propia implementación. Una \textit{clase abstracta} es una clase que no se puede instanciar directamente, sino que debe ser subclasificada y extendida.
+
+\subsection{sintaxis}
+La programación orientada a objetos en Java se basa en la definición de clases. Una clase se define con la palabra clave \enquote*{class}, seguida del nombre de la clase y las llaves que encierran el cuerpo de la clase. Por ejemplo:
+\begin{lstlisting}
+public class MiClase {
+    // cuerpo de la clase
+    }  
 \end{lstlisting}
-Este fregmento define una clase llamada "Person" que tiene un atributo "name" de tipo String y un método "walk" que no hace nada.
+
+Dentro de la clase, podemos definir atributos y métodos. Los atributos se definen con el tipo de dato y el nombre del atributo. Por ejemplo:
+\begin{lstlisting}
+public class MiClase {
+    int miVariable;
+    }    
+\end{lstlisting}
+En este ejemplo, se define un atributo \enquote*{miVariable} de tipo entero.
+
+Los métodos se definen con el tipo de retorno, el nombre del método, los parámetros que recibe entre paréntesis y el cuerpo del método encerrado entre llaves. Por ejemplo:
+\begin{lstlisting}
+public class MiClase {
+    int miVariable;
+    public void miMetodo(int parametro) {
+    // cuerpo del metodo
+    }
+}
+\end{lstlisting}
+En este ejemplo, se define un método \enquote*{miMetodo} que no devuelve ningún valor (\enquote*{void}) y recibe un parámetro de tipo entero llamado \enquote*{parametro}.
+
+Java también admite la herencia, que se define con la palabra clave \enquote*{extends}. Por ejemplo:
+\begin{lstlisting}
+public class MiSubclase extends MiClase {
+    // cuerpo de la subclase
+}
+\end{lstlisting}
+En este ejemplo, se define una subclase llamada \enquote*{MiSubclase} que extiende la clase \enquote*{MiClase}.
+
+El polimorfismo también es una característica importante de la programación orientada a objetos en Java. Por ejemplo, podemos definir una variable de tipo de la clase base que puede referirse a una instancia de cualquiera de sus subclases. Por ejemplo:
+\begin{lstlisting}
+MiClase miObjeto = new MiSubclase();
+\end{lstlisting}
+En este ejemplo, la variable \enquote*{miObjeto} se declara como un objeto de tipo \enquote*{MiClase}, pero se inicializa como una instancia de la subclase \enquote*{MiSubclase}.
+
+Finalmente, el encapsulamiento es una técnica importante en la programación orientada a objetos que permite ocultar la complejidad interna de una clase. En Java, podemos definir variables y métodos como privados con la palabra clave \enquote*{private}, lo que significa que solo se pueden acceder desde dentro de la clase. Por ejemplo:
+\begin{lstlisting}
+public class MiClase {
+    private int miVariable;
+    private void miMetodoPrivado() {
+        // cuerpo del metodo
+    }
+}
+\end{lstlisting}
+En este ejemplo, tanto la variable \enquote*{miVariable} como el método \enquote*{miMetodoPrivado} solo son accesibles desde dentro de la clase \enquote*{MiClase}.
+
+\subsubsection{Metodo constructor en una clase}
+Un constructor es un método especial que se utiliza para inicializar una instancia de una clase. El constructor se llama automáticamente cuando se crea una nueva instancia de la clase utilizando el operador \enquote*{new}. El constructor se define con el mismo nombre que la clase y no tiene un tipo de retorno explícito. Por ejemplo:
+\begin{lstlisting}[language=Java]
+public class MiClase {
+    int miVariable;
+    public MiClase() {
+        // cuerpo del constructor
+    }
+    
+    public MiClase(int valor) {
+        miVariable = valor;
+    }
+}
+\end{lstlisting}
+En este ejemplo, se define una clase llamada \enquote*{MiClase} que contiene dos constructores: uno sin parámetros y otro que recibe un parámetro de tipo entero. El constructor sin parámetros simplemente tiene un cuerpo vacío, mientras que el constructor que recibe un parámetro inicializa la variable \enquote*{miVariable} con el valor que se le pasa como argumento.
+
+Es importante tener en cuenta que si se define un constructor para una clase, el compilador de Java no generará automáticamente un constructor predeterminado sin parámetros. Si se desea tener un constructor predeterminado, se debe definir explícitamente en la clase, como se muestra en el siguiente ejemplo:
+\begin{lstlisting}[language=Java]
+public class MiClase {
+    int miVariable;
+    public MiClase() {
+        // cuerpo del constructor sin parametros
+    }
+    
+    public MiClase(int valor) {
+        miVariable = valor;
+    }
+    
+    // Constructor predeterminado
+    public MiClase() {
+        // cuerpo del constructor sin parametros
+    }
+}
+\end{lstlisting}
+En este ejemplo, se define explícitamente un constructor predeterminado sin parámetros en la clase \enquote*{MiClase}, lo que permite crear instancias de la clase sin pasar ningún argumento al constructor.
 
 \subsection{Ejemplo práctico: Sistema de gestión de una biblioteca}
 
 Imaginemos que queremos crear un sistema de gestión de una biblioteca en Java. Para ello, podemos utilizar los conceptos de modularidad, abstracción, polimorfismo, herencia y encapsulamiento.
 
-\subsubsection*{Modularidad}
+\subsubsection{Modularidad}
 
 La modularidad se refiere a la división del código en módulos independientes que pueden ser desarrollados, probados y mantenidos por separado. En nuestro sistema de gestión de biblioteca, podemos utilizar la modularidad para dividir el código en diferentes clases, cada una de las cuales es responsable de una funcionalidad específica. Por ejemplo, podemos tener una clase para la gestión de libros, otra clase para la gestión de usuarios, y otra clase para la gestión de préstamos.
 
