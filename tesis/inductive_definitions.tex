@@ -1,0 +1,342 @@
+\documentclass[executivepaper]{article}
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[left=1.00cm, right=1.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\doublespacing
+
+\lstset{
+    inputencoding=utf8,
+    language=Java,
+    basicstyle=\ttfamily,
+    columns=fullflexible
+}
+
+% Define colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configuración de lstlisting
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\lstset{style=mystyle}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\newtheorem{propo}{Proposición}[section]
+\newtheorem{lema}[propo]{Lema}
+\newtheorem{teo}[propo]{Teorema}
+\newtheorem{coro}[propo]{Corolario}
+\newtheorem{defi}[propo]{Definición}
+\newtheorem{obs}[propo]{Observación}
+\newtheorem{ejemplo}[propo]{Ejemplo}
+
+\newcommand{\Al}{(\mathcal{A},\mathds{F},\odot)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathds{N}}
+\newcommand{\fu}{f:D\longrightarrow \mathds{R}}
+\newcommand{\fun}{f:[a,b]\longrightarrow \mathds{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathds{F}}
+\newcommand{\op}{``}
+\newcommand{\cl}{''}
+\newcommand{\po}{^}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Q}{\matbbb{Q}}
+
+\title{Definiciones inductivas}
+\author{Kevin Cárdenas}
+
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{Definiciones inductivas}}
+        \\[18cm]
+
+        \large\emph{Autor:}\\
+        Kevin Cárdenas.
+        \\[1cm]
+        {\large 2023}
+    \end{center}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+\section{Definiciones Inductivas}
+\subsection{¿Qué es una definición inductiva?}
+\begin{defi}
+\textbf{Regla, $\phi-$cerrado, Conjunto inductivamente definido}
+\begin{enumerate}
+\item Una regla es un par $(A,x)$, donde $A$ es un conjunto, llamado \textbf{el conjunto de premisas}, y $x$ es la conclusión.
+\item Si $\phi$ es un conjunto de reglas, entonces un conjunto $A$ es $\phi - \textbf{cerrado}$ si cada regla de $\phi$ tiene sus premisas en $A$.
+\item Dado $\phi$ un conjunto de reglas, definimos $I(\phi)$ como el conjunto inductivamente definido por $\phi$, que se define como:
+$$L(\phi) = \bigcap\{A \, : A\,\, \phi-cerrado\}$$
+\end{enumerate}
+\end{defi}
+Esta definición establece que una regla es un par que consiste en un conjunto de premisas y una conclusión. Un conjunto $A$ es $\phi - \textbf{cerrado}$ si cada regla de $\phi$ tiene sus premisas en $A$. Finalmente, se define el conjunto inductivamente definido por $\phi$ como el menor conjunto que contiene todos los elementos del conjunto de premisas de $\phi$ y que es cerrado bajo $\phi$. Este conjunto se define como la intersección de todos los conjuntos $\phi-$cerrados.
+
+\begin{ejemplo}\textbf{$\mathrm{N}$ Como conjunto inductivamente definido}\\
+Desde la definición que hemos dado, podemos definir los números naturales $\mathrm{N}$ como un conjunto inductivamente definido. Para ello, definimos $\phi$ como un conjunto de reglas que contienen las siguientes dos reglas:
+\begin{enumerate}
+\item $(\emptyset,0)$, donde $0$ es un número natural.
+\item $({n},s(n))$, donde $n$ es un número natural y $s(n)$ es el sucesor de $n$.
+\end{enumerate}
+De ahí, es claro ver que $\mathrm{N} = I(\phi)$, pues $\mathrm{N}$ es el menor conjunto que contiene a $0$ y es cerrado bajo la operación sucesor.
+\end{ejemplo}
+
+\begin{defi}
+\textbf{$\phi-$prueba}\\
+$a_1, a_2, \ldots, a_n$ es una $\phi-$prueba de $b$ si
+\begin{enumerate}
+\item $a_n = b$
+\item si $m \leq n$, entonces existe $X\subseteq \{a_i\}_{i<m}$ tal que $\phi : X \rightarrow a_m$
+\end{enumerate}
+Si $x$ tiene una $\phi-$prueba, entonces decimos que $x$ es $\phi-$demostrable.
+\end{defi}
+En general, una prueba matemática es una secuencia de afirmaciones, llamadas pasos de la prueba, que conducen a la conclusión deseada. Con esta definición, una demostración de una fórmula $b$ en un conjunto de reglas $\phi$ es una secuencia de fórmulas $a_1, a_2, \ldots, a_n$ tal que $a_n=b$ y para cada $a_i$, si $i \leq n$, entonces existe un subconjunto finito $X$ de ${a_1, a_2, \ldots, a_{i-1}}$ tal que $\phi(X)=a_i$. Es decir, cada fórmula en la secuencia es obtenida a partir de las fórmulas previas mediante la aplicación de alguna regla de $\phi$ cuyas premisas son un subconjunto finito de las fórmulas previas.
+
+\begin{propo}.\\
+Para $\phi$ un conjunto de reglas finito:
+$$I(\phi) = \{b \,\,: b\,\, tiene\,\, una\,\, prueba\}$$
+
+Sea $\phi$ un conjunto de reglas finito. $B = \{b \,\,: b\,\, tiene\,\, una\,\, prueba\}$.
+
+Para demostrar esta proposición, primero demostraremos que $I(\phi) \subseteq B$, donde $B$ es el conjunto de elementos que tienen una prueba. La prueba se realiza por inducción en la longitud de las pruebas.
+
+Base de inducción: Si la longitud de la prueba es 1, entonces el elemento es una premisa directa de una regla en $\phi$, y por lo tanto pertenece a cualquier conjunto cerrado bajo $\phi$. Por lo tanto, cualquier elemento que tenga una prueba de longitud 1 pertenece a $I(\phi)$.
+
+Hipótesis de inducción: Supongamos que para cualquier prueba de longitud $n$, si $b$ tiene una $\phi$-prueba de longitud $n$, entonces $b$ pertenece a $I(\phi)$.
+
+Paso inductivo: Supongamos que $b$ tiene una $\phi$-prueba de longitud $n+1$. Por definición de una $\phi$-prueba, $b$ es la conclusión de una regla en $\phi$ cuyas premisas son elementos $a_1, a_2, ..., a_k$ con $k < n+1$. Cada uno de estos elementos tiene una $\phi$-prueba de longitud $n_i$ con $n_i \leq n$, por lo tanto, por nuestra hipótesis de inducción, cada $a_i$ pertenece a $I(\phi)$. Entonces, $b$ pertenece a cualquier conjunto cerrado bajo $\phi$ que contenga a $a_1, a_2, ..., a_k$, lo que implica que $b$ pertenece a $I(\phi)$. Por lo tanto, cualquier elemento que tenga una $\phi$-prueba de longitud $n+1$ también pertenece a $I(\phi)$.
+
+Por lo tanto, hemos demostrado que $I(\phi) \subseteq B$.
+
+Ahora demostraremos que $B \subseteq I(\phi)$. La demostración se basa en la definición de $B$: cualquier elemento en $B$ tiene una $\phi$-prueba, lo que significa que puede construirse una cadena finita de reglas de $\phi$ que conecte cualquier premisa de la prueba con la conclusión. Por lo tanto, cualquier elemento en $B$ pertenece a cualquier conjunto cerrado bajo $\phi$ que contenga las premisas de la $\phi$-prueba. Como $I(\phi)$ es la intersección de todos los conjuntos cerrados bajo $\phi$, cualquier elemento en $B$ también pertenece a $I(\phi)$. Por lo tanto, $B \subseteq I(\phi)$.
+
+Hemos demostrado que $I(\phi) \subseteq B$ y $B \subseteq I(\phi)$, lo que implica que $I(\phi) = B$, y por lo tanto, la proposición se cumple.
+\end{propo}
+
+\subsection{La parte bien fundamentada de una relación}
+Sea $A$ un conjunto, $<$ una relación en $A$, definimos \textbf{la parte bien fundamentada de $<$} como 
+$$W(<) = \{a\in A\,\, : \forall \{a_i\}\subseteq A (a_0 = a, a_{i+1}<a_i\rightarrow |\{a_i\}|<\infty)\}$$
+Es decir el conjunto de los elementos sin secuencias infinitas de descendientes. Decimos que $<$ es bien fundamentada, si $w(<) = A$
+
+$w(<)$ puede ser definido inductivamente del conjunto de reglas definido por $((<a),a) \in\phi_<$ para $a\in A$, donde $(<a) = \{x\in A: x<a\}$
+
+\begin{propo}
+    $$W(<) = I(\phi_<)$$
+    La proposición establece que la parte bien fundamentada de la relación $<$ es igual al conjunto inductivamente definido por el conjunto de reglas $\phi_<$, lo que significa que todos los elementos que tienen una prueba en $\phi_<$ son precisamente los elementos que no tienen una cadena infinita de descendientes en la relación $<$. Esto tiene sentido, ya que la definición inductiva de $\phi_<$ se construye a partir de las relaciones de orden de $<$ en $A$, lo que significa que la definición de $\phi_<$ está intrínsecamente relacionada con la estructura de orden de $<$. Por lo tanto, los elementos que tienen una prueba en $\phi_<$ son aquellos que cumplen la propiedad de no tener una cadena infinita de descendientes en la relación $<$, lo que significa que pertenecen a $W(<)$.
+\end{propo}
+Note que uando la relación $<$ es bien fundamentada, entonces el principio de $\phi_<$-inducción se convierte en el principio de inducción transfinita.
+
+El principio de inducción transfinita es un principio más general que el principio de inducción finita, ya que permite realizar una demostración inductiva no solo en los números naturales, sino en cualquier conjunto que tenga una relación de orden bien fundamentada.
+Asociado con esta inducción transfinita está el metodo de dedefinición por recirsión transfinita. El método de definición por recursión transfinita es una técnica que se utiliza para definir una función $f: A \rightarrow B$ en un conjunto $A$ mediante la recursión sobre la relación bien fundamentada $<$. Este método utiliza el principio de inducción transfinita para definir $f$ en cada elemento $a$ de $A$ en términos de los valores $f(a')$ para todos los elementos $a'$ de $A$ que son menores que $a$ en la relación $<$.
+
+\begin{defi}\textbf{Conjuntos de reglas deterministas}\\
+    El conjunto de reglas $\phi$ es llamado \textbf{determinista} si $\phi:X_1\rightarrow x$ y $\phi:X_2\rightarrow x$ implica que $X_1=X_2$
+\end{defi}
+\begin{ejemplo}
+Veamos un par de ejemplos interesantes:\\
+    \begin{itemize}
+        \item $\phi_<$ Siempre es determinista.\\
+        $\phi_< $ es determinista porque para dos subconjuntos $X_1$ y $X_2$ tales que $\phi_< : X_1\rightarrow x$ y $\phi_< : X_2\rightarrow x$, si $X_1 \neq X_2$ entonces existe un elemento $a \in X_1\Delta X_2$ que es el mínimo elemento en $X_1\Delta X_2$, donde $\Delta$ denota la diferencia simétrica entre conjuntos. Entonces, sin pérdida de generalidad, podemos suponer que $a\in X_1$ y $a\notin X_2$, lo que significa que para cualquier $b \in X_2$ se tiene $a<b$, y por lo tanto $\phi_<(X_2) \subseteq (<a)$, lo que contradice el hecho de que $\phi_<(X_2) = x$. Por lo tanto, $X_1 = X_2$ y $\phi_<$ es determinista.
+        \item El conjunto de reglas que define los terminos y formulas de la lógica de primer orden no es determinista.\\
+        El conjunto de reglas para la lógica de primer orden consiste en:
+        \begin{enumerate}
+            \item El conjunto $\mathcal{V}$ de variables.
+            \item Un conjunto $\mathcal{C}$ de constantes.
+            \item Para cada $n$ un conjunto $\mathcal{F}_n$ de símbolos de función de aridad $n$.
+            \item Para cada $n$ un conjunto $\mathcal{R}_n$ de símbolos de relación de aridad $n$.
+            \item Un conjunto $\mathcal{L}$ de símbolos lógicos, que incluye al menos a $\neg$, $\vee$, $\wedge$, $\rightarrow$, $\leftrightarrow$, $\forall$, y $\exists$.
+        \end{enumerate}
+        A partir de estos conjuntos, podemos construir los términos y fórmulas de la lógica de primer orden mediante las siguientes reglas:
+        \begin{itemize}
+            \item Todo elemento de $\mathcal{V} \cup \mathcal{C}$ es un término.
+            \item Si $f \in \mathcal{F}_n$ y $t_1,\ldots,t_n$ son términos, entonces $f(t_1,\ldots,t_n)$ es un término.
+            \item Si $R \in \mathcal{R}_n$ y $t_1,\ldots,t_n$ son términos, entonces $R(t_1,\ldots,t_n)$ es una fórmula atómica.
+            \item Si $A$ y $B$ son fórmulas, entonces $\neg A$, $(A \vee B)$, $(A \wedge B)$, $(A \rightarrow B)$, y $(A \leftrightarrow B)$ son fórmulas.
+            \item Si $A$ es una fórmula y $x \in \mathcal{V}$, entonces $\forall x,A$ y $\exists x,A$ son fórmulas.
+        \end{itemize}
+        Este conjunto de reglas no es determinista, ya que, por ejemplo, podemos tener dos símbolos de función distintos que tengan el mismo nombre pero aridades diferentes, lo que llevaría a una ambigüedad en la interpretación de las fórmulas que los usan.
+    \end{itemize}
+\end{ejemplo}
+
+Ahora bien, sea $\phi$ determinista y $A$ un conjunto de conclusiones de reglas en $\phi$. para $x,y\in A$ sea $x<y$ si $\phi: x\rightarrow y$ para algun conjunto $X$ tal que $x\in X$ y $X\subseteq A$. Entonces $\phi_<$ es el conjunto de reglas $X\rightarrow x$ en $\phi$ tal que $X\subseteq A$. Además tenemos:
+\begin{propo}
+    Si $\phi$ es determinista:
+    $$I(\phi)=I(\phi_<)$$
+\end{propo}
+La proposición establece que si $\phi$ es determinista, entonces el conjunto de fórmulas demostrables mediante $\phi$ es igual al conjunto de fórmulas demostrables mediante $\phi_<$, es decir, $I(\phi) = I(\phi_<)$.
+
+\subsection{Definiciones inductivas como operadores}
+Sea $\varphi:Pow(A)\rightarrow Pow(A)$, donde $Pow(A)=\{X:X\subseteq A\}$. El operador $\phi$ es \textbf{monotono} si $X\subseteq Y \subseteq A$ implica que $\varphi(X)\subseteq \varphi(Y) \subseteq A$.\\ 
+Dado $\varphi:Pow(A)\rightarrow Pow(A)$ sea $\phi_{\varphi}$ el conjunto de reglas $X\rightarrow x$ tal que $X\subseteq A$ y $x \in \varphi(X)$. Para $\phi$ monotona, $X \subseteq A$ es $\phi_{\varphi}$-cerrado justo en el caso $\varphi(X) \subseteq X$. Asi $I(\phi_{\varphi})=\bigcap\{X \subseteq A: \varphi(X) \subseteq X\}$. Además, es natural extender la terminología concerniente a definiciones inductivas a operadores monotonos $\varphi$ y escribimos $I(\varphi)=\bigcap\{X \subseteq A: \varphi(X) \subseteq X\}$ y lo llamaremos el \textbf{conjunto intuctivamente definido por $\varphi$.} Todas las definiciones inductivas pueden ser obtenidas usando operadores monotonos. Para $\phi$ un conjunto de reglas en $A$ ($X\cup\{x\}\subseteq A$ cuando $\phi:X\rightarrow x$) Podemos definir un operador monotono mediante $\varphi:Pow(A)\rightarrow Pow(A)$ por:
+$$\varphi(Y)=\{x\in A:\exists X\subseteq Y (\phi:X\rightarrow x)\}$$
+Entonces $Y\subseteq A$ es $\phi$-cerrado cuando $\phi(Y)\subseteq Y$, así $I(\varphi)=I(\phi)$.\\
+
+Sea $\varphi : Pow(A) \rightarrow Pow(A)$ un operador monotono, entonces se define $\varphi^\lambda\subseteq A$
+$$\varphi^\lambda = \bigcup_{\mu<\lambda}\varphi^{\mu}\cup(\bigcup_{\mu<\lambda}\varphi^{\mu}) $$
+Entonces $\varphi^{\infty}=\bigcup_{\lambda}\varphi^{\lambda}$
+\begin{propo}
+    Para $\phi:Pow(A)\rightarrow Pow(A)$ monotono:
+    \begin{enumerate}
+        \item $I(\varphi)=\varphi^{\infty}$
+        \item $I(\varphi)$ es el punto fijo más pequeño de $\varphi$
+    \end{enumerate}
+
+Veamos una demostración
+\begin{enumerate}
+    \item Para la primera inclusión, tomemos un elemento $x \in \varphi^\infty$. Entonces, por definición, $x \in \varphi^\lambda$ para algún $\lambda \in \mathcal{N}$. Por lo tanto, $x \in \varphi^\mu$ para todo $\mu \geq \lambda$. Como $x \in \varphi^\mu$, entonces existe un $n_\mu \in \mathcal{N}$ tal que $\varphi^{n_\mu}(A) \subseteq \varphi^\mu(A)$ y $x \in \varphi^\mu(A)$. Por lo tanto, $x \in \varphi^{n_\mu}(A)$. Ahora, tomemos el conjunto $X = {\varphi^{n_\mu}(A) : \mu \geq \lambda}$. Como $\varphi$ es monotono, $X$ es cerrado bajo $\varphi$. Además, $x \in \bigcup X$, por lo que $x \in I(\varphi)$. Así, hemos demostrado que $\varphi^\infty \subseteq I(\varphi)$.
+
+    Para la segunda inclusión, tomemos un elemento $x \in I(\varphi)$. Entonces, por definición, $\varphi(X) \subseteq X$ para algún $X \subseteq A$. Ahora, para cada $n \in \mathcal{N}$, consideremos el conjunto $X_n = \varphi^n(X)$. Como $\varphi$ es monotono, $X_{n+1} = \varphi(X_n) \subseteq \varphi(X) \subseteq X_0 = X$. Por lo tanto, ${X_n}$ es una cadena descendente de conjuntos cerrados bajo $\varphi$. Como $A$ es un conjunto completo, $\bigcap_{n=0}^\infty X_n$ es el punto fijo más pequeño de $\varphi$. Por lo tanto, $x \in \bigcap_{n=0}^\infty X_n$. Como $X \subseteq X_0 = X$, entonces $X \subseteq \bigcap_{n=0}^\infty X_n$. Por lo tanto, $x \in \bigcap_{n=0}^\infty X_n$, lo que implica que $x \in \varphi^\infty$. Así, hemos demostrado que $I(\varphi) \subseteq \varphi^\infty$.
+
+    \item Supongamos que $X\in I(\varphi)$. Entonces, por definición, $\varphi(X)\subseteq X$. Como $X\subseteq A$, podemos concluir que $\varphi(X)\subseteq A$ y, por lo tanto, $\varphi(X)\in Pow(A)$. Ahora, como $\varphi$ es monotono, tenemos que $\varphi(\varphi(X))\subseteq \varphi(X)$, lo que implica que $\varphi(X)\in I(\varphi)$. Así, $I(\varphi)$ es un punto fijo de $\varphi$.
+
+    Ahora, supongamos que $Y$ es un punto fijo de $\varphi$. Queremos demostrar que $I(\varphi)\subseteq Y$.
+    
+    Supongamos que $X\in I(\varphi)$. Entonces, por definición, $\varphi(X)\subseteq X$. Como $Y$ es un punto fijo de $\varphi$, tenemos que $\varphi(X)\subseteq Y$. Ahora, como $\varphi$ es monotono, tenemos que $\varphi^2(X)\subseteq \varphi(\varphi(X))\subseteq \varphi(X)\subseteq Y$. Por inducción, podemos demostrar que $\varphi^k(X)\subseteq Y$ para todo $k\geq 1$.
+    
+    Ahora, sea $x\in \varphi^\infty(X)$. Entonces, por definición, $x\in \varphi^k(X)$ para algún $k\geq 1$. Pero como $\varphi^k(X)\subseteq Y$, tenemos que $x\in Y$. Así, $\varphi^\infty(X)\subseteq Y$.
+\end{enumerate}
+\end{propo}
+\subsection{Concepto de prueba para inducción monotona}
+Un cardinal regular es un cardinal $\kappa$ tal que para cualquier colección de conjuntos $\{A_i\}_{i\in I}$, si $\vert A_i \vert < \kappa$ para todo $i\in I$, entonces $\left\vert \bigcup_{i\in I} A_i \right\vert < \kappa$.
+
+\begin{defi}
+    Sea $\varphi$ un operador monotono en $A$. Una secuencia transfinita $\{a_{\mu}\}_{\mu\leq\lambda}$ es una $\varphi$-prueba de $b$ con longitud $\lambda$ si 
+    \begin{enumerate}
+        \item $a_{\lambda} =b$
+        \item $a_{\nu}\in\varphi\{a_{\mu}\,\,:\mu<\nu\}$ para todo $\nu\leq\lambda$
+    \end{enumerate}
+\end{defi}
+La definición de $\varphi$-prueba establece una condición para demostrar que un elemento $b\in A$ pertenece a $\varphi^\lambda$ para alguna $\lambda$. Es decir, una $\varphi$-prueba de $b$ es una secuencia de elementos en $A$ que cumple ciertas condiciones.
+
+La primera condición de la definición es que el último elemento de la secuencia es precisamente $b$. La segunda condición es que cada elemento en la secuencia puede ser obtenido aplicando el operador $\varphi$ a la colección de elementos previos de la secuencia.\\
+
+Por otra parte definimos $\varphi^{<\lambda}$ recursivamente por:
+$$\varphi^{<0} = \emptyset, \,\,\,\,\,\, \varphi^{<\lambda + 1} = \varphi^{<\lambda} \cup \varphi(\varphi^{<\lambda})$$
+\begin{center}
+    $\varphi^{<\lambda} = \bigcup_{\mu<\lambda} \varphi^{<\mu}$ para un limite $\lambda$
+\end{center}
+
+\begin{propo}
+    \begin{enumerate}
+        \item Para cualquier cardinal regular $\kappa$\\
+        $\varphi^{<\kappa}=\{a\in A \,\,\,; \exists_{\{a_{mu}\}_{\nu<\kappa}}(a_{\kappa} =b \land \forall_{\nu\leq\kappa}a_{\nu}\in\varphi\{a_{\mu}\,\,:\mu<\nu\}\}$ Es decir $a$ tiene una $\varphi$-prueba de longitud $\kappa$.
+        \item $I(\varphi)=\{\{a\in A \,\,\,; \exists_{\kappa}\exists_{\{a_{mu}\}_{\nu<\kappa}}(a_{\kappa} = b \land \forall_{\nu\leq\kappa}a_{\nu}\in\varphi\{a_{\mu}\,\,:\mu<\nu\}\}\}$ es decir que $I(\varphi)$ es el conjunto de formulas $\varphi$-probables.
+    \end{enumerate}
+\end{propo}
+La proposición establece que el conjunto $I(\varphi)$ de puntos fijos de $\varphi$ es precisamente el conjunto de elementos en $A$ que tienen una $\varphi$-prueba de longitud $\kappa$ para cualquier cardinal regular $\kappa$. En otras palabras, un elemento $a\in A$ pertenece a $I(\varphi)$ si y solo si existe una $\varphi$-prueba infinita que comienza con $a$ y cumple con las condiciones de la definición. De esta manera, $I(\varphi)$ se puede entender como el conjunto de elementos en $A$ que son $\varphi$-probables bajo el operador, ya que tienen una prueba infinita que los justifica.
+
+La demostración se puede hacer en dos partes:
+\begin{enumerate}
+    \item Para la primera parte, se puede demostrar que si $a$ tiene una $\varphi$-prueba de longitud $\kappa$, entonces $a \in \varphi^{<\kappa}$. Para ello, se puede hacer una demostración por inducción transfinita en $\kappa$. El caso base ($\kappa = 0$) es trivial, ya que la longitud de la prueba es 0, entonces $a_{0} = a$, y como $\emptyset \subseteq \varphi(\emptyset)$, se tiene que $a_{0} \in \varphi^{<0}$. Para el paso inductivo, se supone que el resultado es cierto para todo ordinal menor a $\kappa$, y se demuestra que es cierto para $\kappa$. Se toma una $\varphi$-prueba de longitud $\kappa$ para $a$, es decir, una sucesión $\{a_{\mu}\}_{\mu<\kappa}$ tal que $a{0} = a$ y $a_{\mu} \in \varphi\{a_{\nu}\}_{\nu<\mu}$ para todo $\mu<\kappa$. Luego, se define $b = \bigcup_{\mu<\kappa} a_{\mu}$, y se demuestra que $b \in \varphi({a_{\mu}}_{\mu<\kappa})$ y que $a \in \varphi^{<\kappa}$.
+    
+    \item Para la segunda parte, se puede demostrar que si $a \in I(\varphi)$, entonces $a$ tiene una $\varphi$-prueba de longitud $\kappa$ para algún cardinal regular $\kappa$. Para ello, se toma cualquier $a \in I(\varphi)$, y se define $\kappa$ como el mínimo cardinal regular tal que $a$ tiene una $\varphi$-prueba de longitud $\kappa$. Luego, se demuestra que $\varphi^{<\kappa} \subseteq I(\varphi)$ y con lo anterior implica la igualdad que buscamos y que $a$ tiene una $\varphi$-prueba de longitud $\kappa$.
+\end{enumerate}
+
+\begin{defi}
+    Un arbol bien fundamentado $T$ es un conjunto de secuencias finitas de longitud mayor que $0$ tal que
+    \begin{enumerate}
+        \item Hay exactamente una sequencia de longitud $1$ en $T$, es llamada la raíz $(a_{T})$ del arbol.
+        \item si $(a_1,\ldots,a_{n+1})\in T$, entonces $(a_1,\ldots,a_{n})\in T$
+        \item $T$ es bien fundamentado en el sentido de que no hay sequencias infinitas $a_1,\ldots,a_n,\ldots$ tal que $(a_1,\ldots,a_{n})\in T$ para cada $n>0$.\\
+        Alternativamente $<_T$ es bien fundamentada, cuando:
+        $$(a_1,\ldots,a_{m}) = (b_1,\ldots,b_{n}) \,\,\,\ leftrightarrow \,\,\,\ n = m+1$$
+        y $a_i = b_i$ para $i\in\{1,\ldots, m\}$
+    \end{enumerate}
+\end{defi}
+Un árbol bien fundamentado es un conjunto de secuencias finitas que cumple ciertas condiciones. La primera condición es que hay una única secuencia de longitud 1, que es la raíz del árbol. La segunda condición es que si una secuencia $(a_1,\ldots,a_{n+1})$ está en el árbol, entonces su prefijo $(a_1,\ldots,a_n)$ también debe estar en el árbol. La tercera condición es que el árbol es "bien fundamentado", lo que significa que no hay secuencias infinitas en el árbol.
+
+\begin{defi}
+    Si $\phi$ es un conjunto de regla, un arbol $T$ es una $\phi$-prueba de un $a = a_T$ y $\phi: T_{(a_1,\ldots,a_{n})}\rightarrow a_n$, siempre que $(a_1,\ldots,a_{n})\in T$, donde:
+    $$T_{(a_1,\ldots,a_{n})} = \{a \,\, : (a_1,\ldots,a_{n},a) \in T\}$$
+\end{defi}
+Esta definición se refiere a la noción de una prueba en un árbol utilizando un conjunto de reglas $\phi$. En particular, si tenemos un árbol $T$ y un elemento $a$ que se quiere demostrar, podemos decir que $T$ es una $\phi$-prueba de $a$ si se cumplen las siguientes condiciones:
+\begin{enumerate}
+    \item El elemento raíz del árbol es $a$.
+    \item Para cada nodo intermedio $(a_1,\ldots,a_n)$ en el árbol, se aplica una regla $\phi$ para producir un nuevo elemento $a_{n+1}$ en el siguiente nivel del árbol. Es decir, $\phi: T_{(a_1,\ldots,a_n)}\rightarrow a_{n+1}$, donde $T_{(a_1,\ldots,a_n)}$ es el conjunto de hijos del nodo $(a_1,\ldots,a_n)$ en el árbol $T$.
+    \item Si se llega a un nivel del árbol donde no se puede aplicar ninguna regla de $\phi$ para producir un nuevo elemento, entonces la prueba se detiene. Si en este punto se ha llegado a un elemento $a$, entonces se dice que el árbol $T$ es una $\phi$-prueba de $a$.
+\end{enumerate}
+
+\begin{propo}
+    \begin{enumerate}
+        \item $I(\phi) = \{a\,\,:\exists_{T}(T\rightarrow a)\}$ el conjunto de elementos tal que tienen un arbol que lo $\phi$-prueban.
+        \item si $\phi$ es un conjunto de reglas en $A$ con su correspondiente operador monotono $\varphi:Pow(A)\rightarrow Pow(A)$, entonces para todo ordinal $\lambda$,
+        $$\varphi^{\lambda} = \{a\,\,:\exists_{T}(|T|\leq\lambda\,\,\land\,\,\,T\rightarrow a)\}$$
+    \end{enumerate}
+
+    Para demostrar esto tenemos que (1), sale de la definición de arbol 1.12 en (2) y (3). Por otra parte (2) sale de la definición de $\varphi^{\lambda}$ como en la proposición (1.9).
+\end{propo}
+\subsection{Kernels - el dual de una definición inductiva}
+$\phi$ es un conjunto de reglasn decimos que $X$ es \textbf{$\phi$-denso} si para todo $x\in X$ hay un conjunto $Y\subset X$ tal que $\phi:Y\rightarrow x$.\\
+
+Definimos $K(\phi) = \bigcup\{X\,\,\, : X \,\,es\,\,\phi-denso\}$, $K(\phi)$ es $\phi$-denso en si mismo  y es el más grande con esta propiedad.\\
+
+Si $\phi$ es un conunto de reglas en $A$ y $\varphi:Pow(A)\rightarrow Pow(A)$ es el operador monotono asociado a $\phi$ entonces $X$ es $\phi$-denso si y solo si $X\subseteq \varphi(X)$.
+Ademas, $K(\phi) = \bigcup\{X\,\,\, : X \,\,es\,\,\phi-denso\} = \bigcup\{X\,\,\, : X\subseteq \varphi(X)\}$\\
+
+Para hacer explicita la dualidad entre la construcción y la definición inductiva definimos el operador dual de un operador $\varphi$, como $\varphi^{*}$ tomando $\varphi^{*}(X) = \neg\varphi(\neg X)$, donde $\neg X = A - X$ para $X\in A$.\\
+
+Entonces $X\in A$ es $\phi$-denso si y solo si $\neg X$ es $\phi$-cerrado, así $I(\varphi) = \neg I(\varphi^{*})$. Y $K(\phi)$ puede ser definido en terminos de iteraciones transfinitas
+\begin{center}
+    $\varphi^{|\lambda|} = \neg\varphi^{*|\lambda|}$, como $K(\varphi) = \bigcap \varphi^{|\lambda|}$
+\end{center}
+donde $\varphi^{|\lambda|} = \varphi (\bigcap_{\mu<\lambda} \varphi^{|\mu|})$
+
+\newpage
+\section{Inducción en teoría de recursión}
+\begin{defi} \textbf{Conjunto de reglas recursivos.}\\
+    Sea $\phi$ un conjunto de reglas finito en $\omega$. $\phi$ es recursivo (r.e.) si la relación $R_{\phi}$ es recursiva, donde  $R_{\phi}$ es el conjunto de pares ordenados $(<a_1,\ldots, a_n>,b)$ tal que $\phi: \{a_1,\ldots, a_n\}\rightarrow b$
+\end{defi}
+
+\begin{propo} \textbf{$I(\varphi)$ es recursivo, si $\phi$ un conjunto de reglas finito recursivo.}\\
+    Si $\phi$ un conjunto de reglas finito recursivo en $\omega$, entonces $I(\varphi)$ es recursivo
+\end{propo}
+\end{document} 

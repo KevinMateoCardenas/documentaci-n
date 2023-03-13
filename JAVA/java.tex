@@ -1260,11 +1260,12 @@ La herencia se refiere a la capacidad de las clases hijas de heredar propiedades
 
 El encapsulamiento se refiere a la capacidad de ocultar los detalles de implementación y proteger los datos y métodos de una clase de acceso no autorizado. En nuestro sistema de gestión de biblioteca, podemos utilizar el encapsulamiento para proteger los datos de los elementos de la biblioteca y limitar el acceso a ellos. Podemos definir las propiedades y métodos de la clase \texttt{Item} como privados para que sólo puedan ser accedidos y modificados por métodos dentro de la misma clase.
 
-Para el ejemplo Es útil realizar el diagrama UML:\\
+\newpage
+Para el ejemplo Es útil realizar el diagrama UML:
 \begin{center}
     \includegraphics[scale=0.2]{3.1.png}\\ 
 \end{center}
-Donde\\
+Donde
 \begin{center}
     \includegraphics[scale=0.3]{3.2.png}\\ 
 \end{center}
@@ -1461,14 +1462,113 @@ public class Main {
 \end{lstlisting}
 Cuando lo ejecutemos la salida será:
 \begin{verbatim}
-Libro [titulo=100 años de soledad, autor=Gabriel García Márquez, prestado=false]
-Libros disponibles:
-El libro 100 años de soledad Está disponible
-El libro El Aleph Está disponible
-El libro Rayuela Está disponible
+    Libro [titulo=100 años de soledad, autor=Gabriel García Márquez, prestado=false]
+    Libros disponibles:
+    El libro 100 años de soledad Está disponible
+    El libro El Aleph Está disponible
+    El libro Rayuela Está disponible
 
-Process finished with exit code 0
+    Process finished with exit code 0
 \end{verbatim}
+
+\subsection{Clases abstractas e interfaces}
+Las clases abstractas y las interfaces son dos herramientas importantes en la programación orientada a objetos de Java. Ambas permiten definir una estructura común para un conjunto de clases relacionadas, pero difieren en la forma en que se definen y se utilizan.
+
+Las clases abstractas se utilizan como plantillas para otras clases que sí se pueden instanciar. Estas clases contienen métodos abstractos (es decir, métodos sin implementación) y métodos concretos (con implementación). Las clases hijas deben implementar todos los métodos abstractos definidos en la clase padre. De esta manera, se garantiza que la clase hija tenga una funcionalidad coherente con la clase padre.
+
+Por otro lado, las interfaces son un tipo especial de clase abstracta que define sólo métodos abstractos. Estas interfaces se utilizan para definir un conjunto de métodos que deben ser implementados por cualquier clase que implemente la interfaz. De esta manera, se asegura que todas las clases que implementan la interfaz tengan un comportamiento consistente y coherente en todo momento.
+
+Tanto las clases abstractas como las interfaces permiten establecer una jerarquía de clases y definir una estructura común para un conjunto de clases relacionadas. Sin embargo, la elección entre utilizar una clase abstracta o una interfaz depende de la situación específica y de las necesidades del proyecto en cuestión.
+
+En esta sección, profundizaremos en la sintaxis y uso de las interfaces.
+
+\subsubsection{Clases abstractas}
+
+Las clases abstractas en Java son clases que no se pueden instanciar directamente, sino que se utilizan como plantillas para otras clases que sí se pueden instanciar. Es decir, son clases que sirven como base para otras clases más específicas.
+
+Una clase abstracta se define utilizando la palabra clave \texttt{abstract}, y puede contener métodos abstractos (es decir, métodos sin implementación) y métodos concretos (con implementación). Los métodos abstractos deben ser implementados por las clases hijas, mientras que los métodos concretos pueden ser heredados o sobrescritos.
+
+Una clase que extiende de una clase abstracta debe implementar todos los métodos abstractos definidos en la clase padre. De esta manera, se garantiza que la clase hija tenga una funcionalidad coherente con la clase padre.
+
+Veamos un ejemplo sencillo:
+
+\begin{lstlisting}[language=Java]
+public abstract class Figura {
+    protected String color;
+    public Figura(String color) {
+    this.color = color;
+    }
+
+    public abstract double area();
+    public abstract double perimetro();
+}
+\end{lstlisting}
+En este ejemplo, la clase \texttt{Figura} es abstracta y define dos métodos abstractos (\texttt{area()} y \texttt{perimetro()}). También define un constructor que recibe un parámetro \texttt{color}. Esta clase es una plantilla para otras clases que representen figuras geométricas concretas (como círculos, rectángulos, etc.).
+
+A continuación, se muestra un ejemplo de una clase hija que extiende de la clase \texttt{Figura}:
+\begin{lstlisting}[language=Java]
+    public class Circulo extends Figura {
+    private double radio;
+    public Circulo(String color, double radio) {
+    super(color);
+    this.radio = radio;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * Math.pow(radio, 2);
+    }
+
+    @Override
+    public double perimetro() {
+        return 2 * Math.PI * radio;
+    }
+}
+\end{lstlisting}    
+En este ejemplo, la clase \texttt{Circulo} extiende de la clase \texttt{Figura} y define los métodos abstractos \texttt{area()} y \texttt{perimetro()}. Además, define un constructor que recibe dos parámetros (\texttt{color} y \texttt{radio}), y una variable de instancia \texttt{radio}.
+
+Como puedes ver, las clases abstractas son una herramienta útil para definir una estructura común para un conjunto de clases relacionadas, y asegurarse de que todas las clases hijas tengan una funcionalidad coherente y consistente.
+
+\subsubsection{Interfaces}
+Una interfaz es una colección de métodos abstractos y constantes que se utilizan para definir un conjunto de comportamientos que deben ser implementados por una clase.
+
+La sintaxis básica para declarar una interfaz es la siguiente:
+
+\begin{lstlisting}[language=Java]
+public interface MiInterfaz {
+    public void metodo1();
+    public int metodo2();
+}
+\end{lstlisting}
+En este ejemplo, se define una interfaz llamada \enquote*{MiInterfaz} que tiene dos métodos abstractos: \enquote*{metodo1} y \enquote*{metodo2}. Estos métodos no tienen una implementación definida y las clases que implementen esta interfaz deben proporcionar una implementación para ellos.
+
+Las interfaces también pueden incluir constantes, que se definen utilizando la palabra clave \enquote*{final}:
+
+\begin{lstlisting}[language=Java]
+public interface OtraInterfaz {
+    public static final int CONSTANTE = 42;
+    public void metodo3();
+}
+\end{lstlisting}
+
+En este ejemplo, se define una interfaz llamada \enquote*{OtraInterfaz} que tiene una constante llamada \enquote*{CONSTANTE} y un método abstracto llamado \enquote*{metodo3}.
+
+Para implementar una interfaz en una clase, se utiliza la palabra clave \enquote*{implements}. Por ejemplo:
+
+\begin{lstlisting}[language=Java]
+public class MiClase implements MiInterfaz {
+    public void metodo1() {
+    System.out.println("Implementando metodo1...");
+    }
+    public int metodo2() {
+    return 42;
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, se define una clase llamada \enquote*{MiClase} que implementa la interfaz \enquote*{MiInterfaz}. La clase proporciona una implementación para los métodos abstractos de la interfaz.
+
+Las interfaces son una herramienta poderosa en Java que se utilizan para definir comportamientos comunes que deben ser implementados por diferentes clases. Esto permite crear código más modular y reutilizable en una amplia variedad de aplicaciones.
 
 \newpage
 \section{Bibliografía}
