@@ -817,7 +817,7 @@ Algunas de las características de la arquitectura basada en microservicios son:
 
 Aunque la arquitectura basada en microservicios ofrece muchas ventajas, también presenta algunos desafíos. Por ejemplo, la complejidad de la arquitectura puede aumentar a medida que se agregan más servicios a la aplicación. Además, se requiere una buena planificación y coordinación para garantizar que los servicios se comuniquen entre sí de manera efectiva y que la aplicación en su conjunto funcione correctamente.
 
-\subsection{Comparando estilos: ¿Cómo elijo?}
+\subsection*{Comparando estilos: ¿Cómo elijo?}
 
 \subsubsection*{Estilos monolíticos}
 
@@ -842,5 +842,54 @@ Los estilos distribuidos se caracterizan por desplegar componentes que luego se 
 \end{itemize}
 
 Entonces, ¿cómo elijo qué estilo de arquitectura utilizar? Es importante tener en cuenta los requisitos, objetivos de negocio/arquitectura de software, atributos de calidad, estrategias de arquitectura, escenarios y decisiones arquitectónicas con el fin de analizar qué sacrificios, riesgos y no riesgos tengo y cómo impactan en mi proyecto.
+
+\newpage
+\section{Patrones de arquitectura}
+Los patrones de arquitectura son soluciones comprobadas y efectivas para problemas recurrentes en el diseño de software. Estos patrones ofrecen una guía y un enfoque para resolver problemas comunes en el diseño de software. Los patrones de arquitectura se han desarrollado y perfeccionado a lo largo de los años y se han convertido en un recurso valioso para los arquitectos de software.
+
+Existen varios patrones de arquitectura, cada uno de los cuales se enfoca en diferentes aspectos de la arquitectura de software. Algunos de los patrones de arquitectura más comunes incluyen:
+
+\subsection{Patrón Modelo-Vista-Controlador (MVC)}
+
+El patrón Modelo-Vista-Controlador (MVC) es uno de los patrones de arquitectura de software más utilizados en la actualidad. Se utiliza principalmente para separar la lógica de presentación de la lógica de negocio en una aplicación, lo que facilita su mantenimiento, escalabilidad y evolución.
+
+El patrón se divide en tres componentes principales:
+
+\begin{itemize}
+\item \textbf{Modelo}: Representa la lógica de negocio de la aplicación y los datos asociados. Se encarga de manejar la interacción con la base de datos y de realizar las operaciones de lectura/escritura de los datos.
+
+\item \textbf{Vista}: Es la interfaz de usuario que interactúa con el usuario final. Se encarga de presentar los datos y permitir que el usuario interactúe con ellos.
+
+\item \textbf{Controlador}: Se encarga de coordinar la interacción entre la vista y el modelo. Recibe las solicitudes del usuario y las pasa al modelo para su procesamiento, y luego actualiza la vista con los resultados obtenidos del modelo.
+\end{itemize}
+
+Un ejemplo práctico del uso del patrón MVC puede ser un sistema de gestión de reservas de hoteles. En este caso, el modelo se encargaría de manejar los datos de los usuarios, las reservas, las habitaciones disponibles, etc. La vista presentaría al usuario una interfaz gráfica con la que podría realizar búsquedas de hoteles, seleccionar habitaciones y hacer reservas. El controlador sería el intermediario entre el modelo y la vista, procesando las solicitudes del usuario y actualizando la vista con los resultados obtenidos del modelo.
+
+Este patrón de arquitectura de software es muy útil para construir aplicaciones escalables y de fácil mantenimiento, ya que separa claramente las responsabilidades de cada componente y permite realizar cambios en la lógica de negocio sin afectar la interfaz de usuario, y viceversa.
+
+\subsection{Patrón Capas}
+
+El patrón de arquitectura de software de Capas se basa en separar los componentes de una aplicación en capas, donde cada capa tiene una función específica y se comunica únicamente con las capas adyacentes. Las capas están organizadas en una jerarquía, donde la capa inferior es la más cercana al hardware y la capa superior es la interfaz de usuario.
+
+Este patrón proporciona una serie de beneficios, como una mayor modularidad, facilidad de mantenimiento y escalabilidad. Además, al separar la lógica empresarial de la interfaz de usuario, se mejora la reutilización de código y se facilita la realización de pruebas.
+
+Un ejemplo de este patrón sería una aplicación web de compras en línea. La capa inferior sería la capa de acceso a datos, donde se encontrarían las bases de datos y la lógica de acceso a ellas. La capa siguiente sería la capa de negocio, donde se realizarían las operaciones de negocio, como agregar productos al carrito de compras o realizar el pago. Finalmente, la capa superior sería la capa de presentación, donde se encontraría la interfaz de usuario de la aplicación web.
+
+En este patrón, cada capa es responsable de realizar una tarea específica y se comunica solo con las capas adyacentes. Por ejemplo, la capa de presentación solo se comunica con la capa de negocio para realizar las operaciones comerciales necesarias, y la capa de negocio solo se comunica con la capa de acceso a datos para acceder a los datos necesarios para llevar a cabo dichas operaciones.
+
+\subsection{Atributos de calidad en la arquitectura de software}
+
+Los atributos de calidad son los criterios de evaluación para el éxito de una arquitectura de software. Los atributos de calidad incluyen la capacidad de mantener, extender, reusar y evolucionar el software, la capacidad de satisfacer los requisitos funcionales y no funcionales del sistema, y la capacidad de ser fácilmente entendido y mantenido por los desarrolladores. Algunos de los atributos de calidad más importantes son:
+
+\begin{itemize}
+\item \textbf{Mantenibilidad:} la capacidad de un sistema para ser modificado, corregido o mejorado con facilidad.
+\item \textbf{Escalabilidad:} la capacidad de un sistema para manejar grandes volúmenes de datos o un gran número de usuarios sin perder rendimiento.
+\item \textbf{Seguridad:} la capacidad de un sistema para protegerse contra amenazas externas y garantizar la privacidad y la integridad de los datos.
+\item \textbf{Fiabilidad:} la capacidad de un sistema para funcionar correctamente y sin errores durante largos períodos de tiempo.
+\item \textbf{Usabilidad:} la capacidad de un sistema para ser fácilmente utilizado por los usuarios y proporcionar una experiencia de usuario satisfactoria.
+\item \textbf{Portabilidad:} la capacidad de un sistema para ser instalado y ejecutado en diferentes plataformas y entornos sin cambios significativos.
+\end{itemize}
+
+Para garantizar estos atributos de calidad, la arquitectura de software debe ser cuidadosamente diseñada y documentada. Además, se deben utilizar técnicas de diseño y patrones de arquitectura que fomenten la modularidad, la escalabilidad y la mantenibilidad del software.
 
 \end{document}
