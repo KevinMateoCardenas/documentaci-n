@@ -1,0 +1,846 @@
+\documentclass[executivepaper]{article}
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[left=1.00cm, right=1.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\doublespacing
+
+\lstset{
+    inputencoding=utf8,
+    language=Java,
+    basicstyle=\ttfamily,
+    columns=fullflexible
+}
+
+% Define colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configuración de lstlisting
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\lstset{style=mystyle}
+
+\title{Arquitectura de Software, Principios de Código Limpio y Test Driven Development (TDD)}
+\author{Kevin Cárdenas}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{Arquitectura de Software}}
+        \\[18cm]
+
+        \large\emph{Autor:}\\
+        Kevin Cárdenas.
+        \\[1cm]
+        {\large 2023}
+    \end{center}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+En el desarrollo de software, es importante tener en cuenta los principios de código limpio y Test Driven Development (TDD) para asegurar que el código sea mantenible, escalable y fácil de entender.
+
+\section{Principios de Código Limpio}
+El código limpio es aquel que es fácil de entender, modificar y mantener. Los principios de código limpio ayudan a los desarrolladores a escribir código que sea fácil de leer y entender. Hablemos de algunos de los principios más importantes de código limpio:
+
+\subsection*{Nombres significativos}
+Es importante que los nombres de las variables, funciones, clases y métodos sean significativos y descriptivos. Los nombres deben ser claros y concisos para que cualquier persona que lea el código pueda entender qué hace cada elemento.
+
+\subsection*{Funciones pequeñas}
+Las funciones deben ser lo más pequeñas posible para facilitar su comprensión y mantenimiento. Idealmente, una función no debe tener más de 10 líneas de código. Si una función es demasiado larga, debe dividirse en funciones más pequeñas para simplificar su lógica y estructura.
+
+\subsection*{Comentarios útiles}
+Los comentarios son útiles para explicar el propósito de un código y cómo funciona. Sin embargo, no deben usarse en exceso o como una forma de explicar un código mal escrito. Los comentarios deben ser claros, concisos y útiles.
+
+\subsection*{Evitar código duplicado}
+El código duplicado es un problema común en el desarrollo de software que puede hacer que el código sea difícil de mantener. En su lugar, se debe crear una función o método que se pueda reutilizar en lugar de duplicar el código en varias partes del programa.
+
+\newpage
+\subsection{principios SOLID}
+\textbf{SOLID:} Este es un acrónimo para cinco principios que son ampliamente utilizados en el diseño de software:
+
+\begin{itemize}
+\item \textbf{S:} Principio de responsabilidad única (SRP).\\
+    Este principio establece que una clase o módulo debería tener una única responsabilidad. En otras palabras, una clase debería tener un solo propósito y no debería hacer más de lo que se espera de ella. Esto hace que el código sea más fácil de mantener, modificar y probar.
+
+\item \textbf{O:} Principio abierto/cerrado (OCP)\\
+    Este principio establece que una entidad de software debería estar abierta para la extensión, pero cerrada para la modificación. Esto significa que se deben poder agregar nuevas funcionalidades al software sin cambiar el código existente. Esto permite que el software sea más flexible y fácil de mantener.
+
+\item \textbf{L:} Principio de sustitución de Liskov (LSP)\\ 
+    Este principio establece que una clase derivada debería ser capaz de ser utilizada como su clase base sin que se produzcan errores. Esto significa que cualquier instancia de una clase base debería poder ser reemplazada por una instancia de una clase derivada sin cambiar el comportamiento del programa.
+
+\item \textbf{I:} Principio de segregación de interfaces (ISP)\\
+    Este principio establece que una clase no debería depender de interfaces que no utiliza. En otras palabras, una clase no debería verse obligada a implementar métodos o funcionalidades que no necesita. Esto hace que el software sea más modular y más fácil de mantener.
+\item \textbf{D:} Principio de inversión de dependencia (DIP)\\
+Este principio establece que los módulos de software de alto nivel no deberían depender de los módulos de bajo nivel. En su lugar, ambos deberían depender de abstracciones. Esto hace que el software sea más flexible y fácil de mantener.
+\end{itemize}
+Estos cinco principios están diseñados para hacer que el código sea más modular, más fácil de mantener y más fácil de entender. En conjunto, estos principios ayudan a garantizar que el software sea robusto, escalable y fácil de mantener.
+
+\newpage
+\subsection{Principio KISS}
+El principio KISS (Keep It Simple, Stupid) es un principio fundamental en el diseño de software que se enfoca en la simplicidad como un valor en sí mismo. Este principio establece que el diseño de software debe ser simple y fácil de entender.
+
+La simplicidad no significa que el software deba ser limitado o insuficiente. En lugar de eso, significa que la solución debe ser lo suficientemente simple para cumplir con los requisitos, pero no más compleja de lo necesario. El objetivo es hacer que el software sea fácil de entender, mantener y escalar.
+
+Al aplicar el principio KISS, los diseñadores de software buscan reducir la complejidad y la sobrecarga cognitiva. Al reducir la complejidad, se reduce la cantidad de código y la cantidad de errores potenciales que pueden surgir. También se reduce el tiempo y el esfuerzo necesarios para comprender el software.
+
+El principio KISS también se aplica al diseño de interfaces de usuario. La simplicidad es importante en el diseño de interfaces porque ayuda a los usuarios a comprender y utilizar el software de manera efectiva. Al mantener la interfaz simple, se reduce el tiempo necesario para aprender cómo usar el software y se reduce la cantidad de errores cometidos por los usuarios.
+
+Es importante tener en cuenta que la simplicidad no siempre es fácil de lograr. El diseño simple requiere un pensamiento cuidadoso y un enfoque consciente. A menudo, la simplicidad se logra a través de la eliminación de características innecesarias, la reducción de la complejidad del diseño y la atención a los detalles.
+
+\newpage
+\subsection{Principios DRY}
+Los principios DRY (\enquote*{Don't Repeat Yourself} o \enquote*{No te repitas a ti mismo}) son un conjunto de principios de diseño de software que se enfocan en reducir la repetición de código y mejorar la eficiencia y la mantenibilidad del sistema.
+
+El principio DRY se basa en la idea de que la repetición de código es propensa a errores y dificulta la mantenibilidad del sistema a largo plazo. En lugar de copiar y pegar código en diferentes partes del sistema, se deben crear abstracciones y funciones reutilizables que se puedan utilizar en diferentes lugares del sistema.
+
+Al seguir los principios DRY, se logra un código más limpio y organizado, que es más fácil de entender y mantener. Además, al tener funciones y abstracciones reutilizables, se reduce la cantidad de código que se necesita escribir, lo que puede mejorar la eficiencia y reducir el tiempo y los costos de desarrollo.
+
+Un ejemplo de cómo aplicar los principios DRY sería el diseño de un sistema de gestión de usuarios para una aplicación web. En lugar de escribir código repetitivo para manejar la autenticación y autorización de los usuarios en diferentes partes del sistema, se podría crear una función o clase reutilizable que maneje estas funcionalidades.
+
+Esta función o clase se puede llamar desde diferentes partes del sistema, en lugar de tener que escribir el mismo código una y otra vez. De esta manera, se reduce la cantidad de código que se necesita escribir y se logra un sistema más eficiente y fácil de mantener.
+
+\newpage
+\section{Test Driven Development(TDD)}
+Los \textbf{unit tests} (pruebas unitarias) y TDD (Desarrollo Guiado por Pruebas) son prácticas comunes en el desarrollo de software para mejorar la calidad del código y reducir los errores.
+
+Las pruebas unitarias son una técnica de pruebas que se enfoca en probar el comportamiento de unidades individuales de código (como funciones, métodos o clases) en aislamiento del resto del sistema. Esto se logra escribiendo código adicional para probar el código principal, lo que permite detectar y solucionar errores de forma temprana en el proceso de desarrollo. Las pruebas unitarias también pueden utilizarse para garantizar que el código cumpla con los requisitos y especificaciones del cliente.
+
+Por otro lado, TDD es una práctica de desarrollo de software que se centra en escribir las pruebas unitarias antes de escribir el código real. El proceso comienza escribiendo una prueba para una función o método, luego se escribe el código que debe pasar la prueba y, finalmente, se refactoriza el código para que sea más limpio y eficiente. Esta práctica asegura que el código cumpla con los requisitos y especificaciones desde el principio, y reduce la probabilidad de errores y bugs.
+
+El uso de pruebas unitarias y TDD puede tener varios beneficios, como:
+
+\begin{itemize}
+\item Reducción de errores y bugs en el código
+\item Mejora de la calidad y mantenibilidad del código
+\item Reducción del tiempo y costos de desarrollo
+\item Aceleración de la detección y corrección de errores
+\item Facilitación de la integración continua y entrega continua (CI/CD)
+\end{itemize}
+
+El TDD se divide en tres etapas principales:
+
+\begin{enumerate}
+\item Red: En esta etapa, el desarrollador escribe una prueba unitaria que falla porque aún no se ha escrito el código que la hace pasar. Esta prueba debe ser lo suficientemente específica para demostrar que la funcionalidad que se va a implementar no está presente. Esta etapa se llama "Red" porque la prueba falla y la pantalla del editor de código a menudo se muestra en rojo.
+\item Green: En esta etapa, el desarrollador escribe el código mínimo necesario para que la prueba unitaria pase. El código no necesita ser perfecto o completo en esta etapa, solo debe ser suficiente para que la prueba pase. Una vez que se ha escrito el código, se ejecuta la prueba y, si pasa, la pantalla del editor de código cambia de rojo a verde, lo que indica que la prueba ha pasado con éxito.
+\item Refactor: En esta etapa, el desarrollador revisa el código para mejorar su calidad. Se busca eliminar la redundancia, mejorar la claridad y la legibilidad del código, y en general hacerlo más fácil de entender y mantener. Es importante que la refactorización no agregue nuevas funcionalidades al código, sino que solo mejore su estructura. Luego, se repiten las etapas de Red y Green para probar la refactorización y verificar que la funcionalidad aún se cumpla correctamente.
+\end{enumerate}
+
+En cada iteración de TDD, el objetivo es agregar una pequeña cantidad de funcionalidad, escribir una prueba unitaria para validarla y asegurarse de que la prueba pase antes de continuar. Esto ayuda a los desarrolladores a comprender completamente los requisitos y asegurarse de que su código cumpla con ellos. También ayuda a reducir el riesgo de errores y bugs en el código, ya que las pruebas unitarias se ejecutan automáticamente cada vez que se realiza una modificación.
+
+\subsection{Pruebas Unitarias}
+
+Las pruebas unitarias son una técnica de prueba de software que se enfoca en probar unidades individuales de código en aislamiento del resto del sistema. El objetivo principal de las pruebas unitarias es validar que las unidades de código, como métodos o funciones, funcionan como se espera. Estas pruebas son escritas por los desarrolladores y deben ser automatizadas para ser eficaces.
+
+Para crear pruebas unitarias, los desarrolladores utilizan un marco de pruebas que proporciona una interfaz para crear, ejecutar y validar pruebas. Los resultados de estas pruebas se muestran en un informe que indica si las pruebas pasaron o fallaron. Si las pruebas fallan, el desarrollador debe corregir el código hasta que la prueba pase.
+
+Las pruebas unitarias son útiles porque:
+
+\begin{itemize}
+\item Permiten detectar y solucionar errores tempranamente en el proceso de desarrollo.
+\item Aseguran que el código cumple con los requisitos y especificaciones del cliente.
+\item Ayudan a documentar cómo se espera que funcione una unidad de código.
+\item Reducen el riesgo de errores y bugs en el código.
+\end{itemize}
+
+\textbf{Desarrollo Guiado por Pruebas (TDD)}
+
+El Desarrollo Guiado por Pruebas (TDD) es una práctica de desarrollo de software en la que los desarrolladores escriben pruebas unitarias antes de escribir el código que implementa una funcionalidad. El proceso comienza con la creación de una prueba que define lo que se espera que haga la funcionalidad. Luego, el desarrollador escribe el código mínimo necesario para que la prueba pase. Una vez que la prueba pasa, el desarrollador refactoriza el código para hacerlo más eficiente y fácil de mantener. Luego se repite este proceso para la siguiente funcionalidad.
+
+TDD es útil porque:
+
+\begin{itemize}
+\item Ayuda a los desarrolladores a comprender completamente los requisitos antes de comenzar a escribir el código.
+\item Reduce el riesgo de errores y bugs en el código.
+\item Asegura que el código cumpla con los requisitos y especificaciones del cliente.
+\item Fomenta el diseño modular y la creación de código más limpio y eficiente.
+\end{itemize}
+
+\newpage
+\section{Metodologías Ágiles}
+Las metodologías ágiles son un enfoque iterativo e incremental para la entrega de software. Se basan en los principios establecidos en el Manifiesto Ágil y se centran en la colaboración, el cambio, la entrega rápida y la mejora continua.
+
+En lugar de planificar todo el proyecto de software al inicio, las metodologías ágiles dividen el trabajo en iteraciones más pequeñas y manejables, llamadas sprints. Cada sprint se centra en la entrega de un conjunto de características y funcionalidades definidas previamente. Durante cada sprint, el equipo de desarrollo trabaja en estrecha colaboración con el cliente o usuario final para asegurarse de que las características y funcionalidades se ajusten a sus necesidades.
+
+Uno de los principios clave de las metodologías ágiles es la priorización del trabajo basada en el valor. En lugar de trabajar en todas las características de un proyecto al mismo tiempo, el equipo de desarrollo se centra en las características más importantes y valiosas para el cliente. Esto ayuda a garantizar que el cliente obtenga un valor real y tangible del software entregado.
+
+Otro principio importante es la colaboración y comunicación frecuente. Los equipos de desarrollo ágiles se esfuerzan por trabajar en estrecha colaboración con los clientes y usuarios finales, y entre ellos mismos, para asegurarse de que el proyecto avance de manera fluida y se realicen los ajustes necesarios en el camino.
+
+Las metodologías ágiles también valoran el cambio y la adaptación. En lugar de seguir un plan rígido, el equipo de desarrollo está abierto a cambiar las características y funcionalidades durante el proceso de desarrollo a medida que las necesidades del cliente evolucionan.
+
+Algunas de las metodologías ágiles más populares incluyen Scrum, Kanban, Extreme Programming (XP) y Crystal. Cada una de estas metodologías tiene sus propias características y enfoques únicos, pero todas están diseñadas para ayudar a los equipos de desarrollo a entregar software de alta calidad de manera eficiente y efectiva.
+
+\newpage
+\subsection{El Manifiesto Ágil y su Impacto en el Desarrollo de Software}
+
+El Manifiesto Ágil es un marco de trabajo utilizado en el desarrollo de software que se enfoca en la entrega rápida y continua de software funcionando y en la adaptación a los cambios y desafíos que surgen durante el ciclo de vida del software. Este marco de trabajo establece cuatro valores fundamentales y 12 principios que deben ser seguidos por los equipos de desarrollo de software ágil.
+
+El enfoque ágil se diferencia de los enfoques tradicionales de desarrollo de software en que prioriza la entrega temprana y continua de software funcionando, la colaboración con el cliente y los usuarios finales, y la adaptación a los cambios y desafíos que surgen durante el ciclo de vida del software. En lugar de seguir un plan rígido y exhaustivo, el enfoque ágil enfatiza la importancia de la comunicación constante y la respuesta al cambio.
+
+Los cuatro valores fundamentales del Manifiesto Ágil son:
+
+\begin{itemize}
+\item Individuos e interacciones sobre procesos y herramientas.
+\item Software funcionando sobre documentación exhaustiva.
+\item Colaboración con el cliente sobre negociación contractual.
+\item Respuesta al cambio sobre seguir un plan.
+\end{itemize}
+
+Estos valores establecen la importancia de las personas y la comunicación en el proceso de desarrollo de software, y enfatizan la necesidad de adaptarse a los cambios y desafíos que surgen durante el ciclo de vida del software.
+
+Los 12 principios del Manifiesto Ágil establecen un marco de trabajo para el desarrollo de software ágil. Algunos de los principios más importantes son:
+
+\begin{itemize}
+\item La entrega temprana y continua de software funcionando.
+\item La colaboración constante con el cliente y los usuarios finales.
+\item La adaptación al cambio y la capacidad de responder a los cambios de requisitos.
+\item La atención a la calidad técnica del software.
+\item La mejora continua del proceso de desarrollo de software.
+\end{itemize}
+
+Estos principios establecen un enfoque centrado en el cliente y en la entrega de valor, lo que permite a los equipos de desarrollo de software ágil adaptarse a los cambios y desafíos que surgen durante el ciclo de vida del software.
+
+La adopción del Manifiesto Ágil ha demostrado ser efectiva para mejorar la capacidad de los equipos de desarrollo de software para entregar software de alta calidad de manera rápida y efectiva. Al adoptar el enfoque ágil en el desarrollo de software, los equipos pueden mejorar la colaboración con el cliente y los usuarios finales, y pueden adaptarse más fácilmente a los cambios y desafíos que surgen durante el ciclo de vida del software.
+
+Además, el Manifiesto Ágil enfatiza la importancia de la calidad técnica del software, lo que puede ayudar a prevenir problemas en el futuro y garantizar la escalabilidad y mantenibilidad del software a largo plazo.
+
+\subsection{Metodologías tradicionales}
+Las metodologías tradicionales, también conocidas como metodologías en cascada, se caracterizan por seguir un enfoque secuencial y lineal para el desarrollo de software. Esto significa que cada fase del proceso, desde la planificación hasta la implementación y el mantenimiento, se realiza en secuencia y no se comienza una fase hasta que la anterior se haya completado.
+
+El enfoque tradicional es adecuado para proyectos con requisitos bien definidos y estables, y en los que el resultado final se puede predecir con cierta precisión. En este caso, el plan detallado y la secuencia lineal de tareas pueden proporcionar una forma eficaz de gestionar y controlar el proyecto.
+
+Sin embargo, las metodologías tradicionales no son adecuadas para proyectos que requieren una mayor flexibilidad y adaptabilidad, como aquellos en los que los requisitos cambian frecuentemente o no están claros desde el principio. Además, debido a la naturaleza secuencial de las metodologías tradicionales, cualquier cambio que se realice en una fase posterior del proyecto puede requerir la revisión y la repetición de las fases anteriores, lo que puede resultar en retrasos y costos adicionales.
+
+En el contexto de la arquitectura de software, las metodologías tradicionales se centran en la creación de una arquitectura de software sólida y detallada antes de comenzar la implementación. Se espera que el arquitecto de software defina claramente los requisitos y los objetivos del sistema y diseñe una arquitectura que cumpla con estos requisitos.
+
+Sin embargo, esto también puede limitar la capacidad de adaptación del sistema a los cambios en los requisitos y puede hacer que el proceso de desarrollo sea más rígido y menos colaborativo. Las metodologías tradicionales también pueden hacer que sea más difícil para el arquitecto de software responder a los problemas que surgen durante el proceso de desarrollo.
+
+\newpage
+\subsection{Metodología Ágil: Scrum}
+
+Scrum es una metodología ágil que se utiliza comúnmente en proyectos de software. Es una de las metodologías más populares debido a su capacidad para adaptarse a cambios rápidos, su enfoque en la colaboración y su capacidad para entregar software funcional de manera iterativa.
+
+Scrum se basa en un enfoque iterativo e incremental para el desarrollo de software. Cada iteración se conoce como un sprint y tiene una duración de 2 a 4 semanas. Durante cada sprint, el equipo de desarrollo trabaja en un conjunto de tareas definidas por el Product Owner.
+
+Scrum se enfoca en equipos pequeños y altamente colaborativos. Cada miembro del equipo tiene roles y responsabilidades específicas, incluyendo el Scrum Master, el Product Owner y el equipo de desarrollo.
+
+\subsubsection*{Roles en Scrum}
+
+\begin{itemize}
+\item Scrum Master: el Scrum Master es el facilitador del equipo. Es responsable de asegurarse de que el equipo esté siguiendo los procesos y las prácticas de Scrum. También ayuda a eliminar cualquier obstáculo que pueda impedir el progreso del equipo.
+\item Product Owner: el Product Owner es el representante del cliente. Es responsable de definir las características y funcionalidades que se deben incluir en el producto. También es responsable de priorizar estas características para asegurarse de que el equipo de desarrollo esté trabajando en las funcionalidades más importantes.
+\item Equipo de Desarrollo: el equipo de desarrollo es responsable de construir y entregar el software. El equipo de desarrollo es autoorganizado y multidisciplinario, lo que significa que tiene todas las habilidades necesarias para entregar el software sin depender de otras personas fuera del equipo.
+\end{itemize}
+
+\subsubsection*{Artefactos en Scrum}
+
+Scrum define tres artefactos principales que se utilizan para planificar, monitorear y comunicar el progreso del proyecto:
+
+\begin{itemize}
+\item \textbf{Product Backlog:} es una lista priorizada de las funcionalidades, características, mejoras y correcciones que deben ser implementadas en el producto. El Product Owner es el responsable de mantener y actualizar el Product Backlog, asegurándose de que refleje las necesidades y requisitos del cliente y de la organización.
+\item \textbf{Sprint Backlog:} es una lista de tareas que el equipo ha comprometido completar durante el siguiente sprint. El Sprint Backlog se crea a partir de los elementos del Product Backlog que se han priorizado para el sprint actual. El equipo es responsable de definir las tareas necesarias para completar cada elemento del Sprint Backlog y actualizarlo diariamente durante el Daily Scrum.
+\item \textbf{Incremento:} es el resultado del trabajo completado durante un sprint. Es un producto funcional que agrega valor al producto en su conjunto. Cada incremento debe ser completamente integrado, probado y verificado para asegurar su calidad. Cada incremento debe construir sobre los incrementos previos y agregar valor al producto en su conjunto.
+\end{itemize}
+
+Estos artefactos son importantes porque permiten al equipo mantenerse enfocado en las funcionalidades y objetivos a corto plazo mientras trabaja hacia el objetivo final del proyecto. Además, ayudan a mantener la transparencia y la comunicación entre los miembros del equipo y el Product Owner, lo que permite una toma de decisiones más informada.
+
+\subsubsection*{Eventos en Scrum}
+
+Scrum define una serie de eventos o reuniones que se llevan a cabo durante un sprint para planificar, monitorear y revisar el progreso del equipo:
+
+\begin{itemize}
+\item \textbf{Sprint Planning:} es una reunión en la que el equipo y el Product Owner definen los objetivos y funcionalidades a completar durante el siguiente sprint. En esta reunión, el equipo también divide el trabajo en tareas y se compromete a completarlas durante el sprint.
+\item \textbf{Daily Scrum:} es una reunión diaria en la que el equipo se sincroniza sobre el progreso y las tareas pendientes. Durante el Daily Scrum, cada miembro del equipo informa sobre lo que hizo el día anterior, lo que planea hacer ese día y si hay algún impedimento que lo esté afectando.
+\item \textbf{Sprint Review:} es una reunión al final de cada sprint en la que el equipo presenta el incremento y recibe comentarios y retroalimentación del Product Owner y otros stakeholders. En la Sprint Review, el equipo también discute los resultados del sprint y revisa el Product Backlog para planificar el siguiente sprint.
+\item \textbf{Sprint Retrospective:} es una reunión en la que el equipo reflexiona sobre el sprint anterior y busca maneras de mejorar su proceso y trabajo en equipo. Durante la Sprint Retrospective, el equipo discute lo que salió bien, lo que salió mal y cómo pueden trabajar mejor en el futuro.
+\end{itemize}
+
+Estos eventos son importantes porque permiten al equipo mantenerse enfocado en los objetivos del sprint, comunicarse y resolver problemas en tiempo real, recibir retro
+
+\newpage
+\subsection{Metodología Ágil: Kanban}
+
+Kanban es una metodología ágil que se enfoca en la visualización del trabajo y la mejora continua del proceso. Fue inicialmente desarrollada para el control de inventario en Toyota, pero ha sido adoptada por equipos de desarrollo de software en todo el mundo debido a su simplicidad y efectividad.
+
+\subsubsection*{Principios de Kanban}
+
+Kanban se basa en los siguientes principios:
+
+\begin{itemize}
+\item Visualizar el flujo de trabajo
+\item Limitar el trabajo en progreso
+\item Gestionar el flujo
+\item Hacer que el proceso sea explícito
+\item Implementar políticas explícitas de gestión de cambios
+\item Mejorar de forma colaborativa y evolutiva
+\end{itemize}
+
+\subsubsection*{Artefactos en Kanban}
+
+Kanban se enfoca en la visualización del trabajo y el seguimiento de su progreso a través de un tablero Kanban. Este tablero se divide en columnas que representan las distintas etapas del proceso de trabajo, como por ejemplo "en espera", "en progreso" y "terminado". Los elementos del trabajo se representan mediante tarjetas Kanban, que se mueven a lo largo del tablero de izquierda a derecha a medida que se completan las tareas.
+
+\subsubsection*{Roles en Kanban}
+
+A diferencia de Scrum, Kanban no tiene roles definidos, lo que permite una mayor flexibilidad en la organización del equipo. Sin embargo, algunos roles comunes en Kanban incluyen el propietario del producto, el gerente de flujo y el equipo de trabajo.
+
+\subsubsection*{Eventos en Kanban}
+
+Kanban no tiene eventos predefinidos como Scrum, ya que el enfoque es en la mejora continua y la adaptabilidad. Sin embargo, se pueden programar reuniones regulares para discutir el progreso y los desafíos del equipo.
+
+\subsubsection*{Ventajas de Kanban}
+
+Algunas ventajas de Kanban incluyen:
+
+\begin{itemize}
+\item Mayor visibilidad del progreso del trabajo
+\item Menos desperdicio de tiempo y recursos
+\item Mayor flexibilidad en la organización del equipo
+\item Mejora continua del proceso
+\end{itemize}
+
+\subsubsection*{Limitaciones de Kanban}
+
+Sin embargo, Kanban también tiene algunas limitaciones, como:
+
+\begin{itemize}
+\item Puede ser difícil de implementar en equipos nuevos o sin experiencia en metodologías ágiles
+\item Puede ser difícil de escalar a proyectos grandes o complejos
+\item Requiere un enfoque constante en la mejora continua y la adaptabilidad
+\end{itemize}
+
+\newpage
+\subsection{Metodología Ágil: Extreme Programming (XP)}
+
+Extreme Programming (XP) es una metodología ágil que se centra en el desarrollo de software de alta calidad y en la satisfacción del cliente. Fue creada por Kent Beck en la década de 1990 y se basa en cuatro valores fundamentales: comunicación, simplicidad, retroalimentación y coraje.
+
+\subsubsection*{Características de XP}
+
+XP se caracteriza por las siguientes prácticas y principios:
+
+\begin{itemize}
+\item {\bf Pruebas unitarias continuas:} En XP se escriben pruebas unitarias antes de escribir el código para asegurarse de que el código funciona correctamente. Las pruebas se ejecutan automáticamente con frecuencia y cualquier fallo se corrige de inmediato.
+
+\item {\bf Integración continua:} XP se basa en la integración continua para garantizar que todas las partes del sistema funcionen correctamente juntas. Se integra el código de los desarrolladores varias veces al día, lo que permite detectar problemas de integración de forma temprana.
+
+\item {\bf Programación en parejas:} En XP, dos programadores trabajan juntos en una misma tarea, compartiendo un ordenador. Esto aumenta la calidad del código, ya que los errores se detectan y corrigen más rápidamente.
+
+\item {\bf Diseño simple:} XP se basa en un diseño simple y limpio para evitar la complejidad innecesaria y reducir los errores. Se utiliza el principio KISS (Keep It Simple, Stupid) para mantener la simplicidad del diseño.
+
+\item {\bf Refactorización continua:} XP fomenta la refactorización continua del código para mantenerlo limpio y fácil de mantener. Esto implica cambiar la estructura del código sin cambiar su funcionalidad.
+
+\item {\bf Historias de usuario:} XP utiliza historias de usuario para definir los requisitos del software desde la perspectiva del usuario final. Las historias de usuario se utilizan para planificar las iteraciones y el desarrollo del software.
+
+\item {\bf Reuniones diarias:} XP incluye reuniones diarias cortas para mantener a todos los miembros del equipo al día y asegurarse de que todos están avanzando en la misma dirección.
+
+\item {\bf Propiedad colectiva del código:} En XP, todo el equipo es responsable del código y de su calidad. Esto fomenta la colaboración y el trabajo en equipo.
+
+\end{itemize}
+
+\subsubsection*{Proceso de XP}
+
+El proceso de Extreme Programming se divide en cuatro fases:
+
+\begin{enumerate}
+\item Exploración (Exploration)
+\item Planificación (Planning)
+\item Desarrollo de iteraciones (Iteration)
+\item Mantenimiento (Maintenance)
+\end{enumerate}
+
+\textbf{Exploración:} Esta fase se enfoca en determinar los requisitos del sistema y en la identificación de los casos de uso para el software que se está desarrollando. Se establecen los objetivos de los clientes y se define el alcance del proyecto. Durante esta fase, los miembros del equipo exploran diferentes soluciones y tecnologías para el desarrollo del software.
+
+\textbf{Planificación:} La fase de planificación implica la definición de los objetivos del proyecto, la planificación de las iteraciones y la asignación de las tareas a los miembros del equipo. La planificación se realiza en dos niveles: la planificación a largo plazo (meses) y la planificación a corto plazo (semanas).
+
+\textbf{Desarrollo de iteraciones:} Durante esta fase, el equipo de desarrollo trabaja en iteraciones cortas para desarrollar y entregar software funcional. Cada iteración se enfoca en el desarrollo de características específicas del software y se planifica antes de que comience. El equipo realiza pruebas continuas y el software se integra constantemente para asegurar que no haya errores.
+
+\textbf{Mantenimiento:} La fase de mantenimiento se centra en la corrección de errores y en la actualización del software después de que se ha entregado. Se realizan pruebas de aceptación por parte del cliente y se corrigen los errores encontrados. Además, se agregan nuevas características y funcionalidades al software.
+
+\subsubsection*{Principios de XP}
+
+La metodología XP se basa en 12 principios, que son:
+
+\begin{enumerate}
+\item Comunicación.
+\item Simplicidad.
+\item Feedback.
+\item Coraje.
+\item Respeto.
+\item Aceptación del cambio.
+\item Valor.
+\item Enfoque.
+\item Flujo.
+\item Calidad.
+\item Pequeñas mejoras.
+\item Acoplamiento estrecho.
+\end{enumerate}
+
+Cada uno de estos principios se enfoca en aspectos importantes del proceso de desarrollo de software, como la comunicación efectiva entre los miembros del equipo, la simplicidad en el diseño y la codificación, el feedback constante, el coraje para hacer cambios, el respeto mutuo entre los miembros del equipo, la aceptación del cambio, el valor entregado al cliente, el enfoque en los objetivos del proyecto, la gestión del flujo de trabajo, la calidad del software, la implementación de pequeñas mejoras continuas y el acoplamiento estrecho entre las diferentes partes del software.
+
+\subsubsection*{Prácticas de XP}
+
+XP define una serie de prácticas que se utilizan en su proceso de desarrollo. Estas prácticas son:
+
+\begin{itemize}
+\item \textbf{Programación en parejas:} dos programadores trabajan en una misma estación de trabajo, colaborando en el diseño y la codificación del software. Esto conlleva a un código de mayor calidad, una menor tasa de errores y un mejor ambiente de trabajo.
+\item \textbf{Diseño simple:} se busca mantener el diseño del software lo más simple posible, evitando la complejidad innecesaria. Asimismo, se fomenta la refactorización constante del código para mantenerlo legible y mantenible.
+\item \textbf{Desarrollo guiado por pruebas (TDD):} se escriben pruebas automatizadas antes de comenzar a programar, de modo que los errores puedan ser detectados tempranamente en el proceso de desarrollo. Además, permite una mayor confianza en el código al momento de realizar cambios.
+\item \textbf{Integración continua:} se busca integrar el trabajo de todos los desarrolladores en una base de código común de forma frecuente (varias veces al día), de manera que se detecten errores rápidamente y se resuelvan antes de que afecten el desarrollo del proyecto.
+\item \textbf{Entrega continua:} se busca tener el software en un estado constantemente entregable, de modo que en cualquier momento se pueda desplegar el último avance del proyecto sin inconvenientes.
+\item \textbf{Metáfora:} se utiliza una metáfora para representar el proyecto, lo que facilita la comprensión y comunicación del mismo por parte del equipo de desarrollo y stakeholders.
+\item \textbf{Propiedad colectiva del código:} todo el equipo es responsable de todo el código, lo que fomenta la colaboración y el aprendizaje mutuo.
+\item \textbf{Estándares de codificación:} se establecen estándares de codificación claros y concisos, que permiten una mayor calidad del código y una menor tasa de errores.
+\item \textbf{40 horas semanales:} se limita la cantidad de horas trabajadas a 40 por semana para fomentar un ambiente de trabajo equilibrado y una mayor productividad.
+\item \textbf{Cliente en sitio:} se recomienda que el cliente esté presente en el sitio de desarrollo para facilitar la comunicación y la toma de decisiones.
+\end{itemize}
+
+Estas prácticas, en conjunto con los valores de XP, buscan fomentar la colaboración, la simplicidad y la adaptabilidad en el proceso de desarrollo, permitiendo una mayor calidad en el software entregado.
+
+\subsection{Crystal}
+
+Crystal es una familia de metodologías ágiles desarrollada por Alistair Cockburn. A diferencia de Scrum o XP, Crystal se adapta a diferentes tamaños y complejidades de proyectos, por lo que no existe una metodología única para todos los casos, sino que se utilizan diferentes variantes según las características de cada proyecto.
+
+Las metodologías Crystal se basan en la idea de que la estructura de comunicación y colaboración entre los miembros del equipo de desarrollo es fundamental para el éxito del proyecto, y se centran en mejorar la comunicación y la cooperación en el equipo. Además, se basan en la premisa de que los miembros del equipo son profesionales y conocen mejor que nadie cómo hacer su trabajo, por lo que se les da una gran libertad para tomar decisiones.
+
+\subsubsection*{Características de Crystal}
+
+Las características principales de las metodologías Crystal son las siguientes:
+
+\begin{itemize}
+\item \textbf{Flexibilidad:} Como ya se ha mencionado, Crystal se adapta a diferentes tamaños y complejidades de proyectos. Esto significa que las metodologías Crystal pueden variar en cuanto a sus procesos y artefactos según las necesidades de cada proyecto.
+\item \textbf{Enfoque en las personas:} Crystal pone un gran énfasis en las personas y en su interacción. Se considera que el éxito del proyecto depende en gran medida de la comunicación y la colaboración entre los miembros del equipo de desarrollo, por lo que se busca fomentar una cultura de confianza y colaboración en el equipo.
+\item \textbf{Enfoque en la simplicidad:} Las metodologías Crystal se centran en hacer las cosas de la forma más sencilla posible. Se busca minimizar la complejidad y los procesos innecesarios, y se prioriza la entrega temprana y frecuente de software funcional.
+\item \textbf{Roles definidos:} Aunque los miembros del equipo tienen una gran libertad para tomar decisiones, en Crystal se definen ciertos roles, como el de "campeón" o "facilitador", que tienen como objetivo garantizar que se siguen los procesos y se cumplen los objetivos del proyecto.
+\item \textbf{Procesos ligeros:} Las metodologías Crystal tienen procesos ligeros y mínimos, que se adaptan a las necesidades de cada proyecto. Se busca minimizar el tiempo y los recursos dedicados a procesos y artefactos que no añaden valor al proyecto.
+\item \textbf{Enfoque en la calidad:} Crystal se centra en la entrega de software de alta calidad. Se fomenta el uso de prácticas como la integración continua, las pruebas automatizadas y la revisión por pares para garantizar la calidad del software entregado.
+\end{itemize}
+
+\subsubsection*{Proceso de Crystal}
+Su proceso es adaptable y puede ser modificado para adaptarse a las necesidades del equipo y del proyecto en particular. El proceso Crystal incluye tres fases principales:
+
+\begin{itemize}
+\item \textbf{Inicio}: En esta fase, se establecen los objetivos del proyecto y se crea un plan de acción. El equipo se forma y se establecen las expectativas y la comunicación.
+\item \textbf{Iteración}: En esta fase, se lleva a cabo el trabajo del proyecto en iteraciones cortas. Cada iteración tiene una duración fija, generalmente de dos a seis semanas, y se enfoca en la entrega de un conjunto de características valiosas. Se realizan pruebas de aceptación y se asegura la calidad del software.
+\item \textbf{Conclusión}: En esta fase, se entrega el software final y se realiza la revisión del proyecto. Se analiza el éxito del proyecto y se identifican oportunidades para mejorar en futuros proyectos.
+\end{itemize}
+
+Además, el proceso Crystal enfatiza en la importancia de la comunicación, la colaboración y el compromiso entre los miembros del equipo. La comunicación regular y efectiva entre los miembros del equipo es esencial para garantizar que se alcancen los objetivos del proyecto. También se alienta al equipo a ser flexible y adaptarse a los cambios a medida que surgen.
+
+\newpage
+\section{Arquitectura de Software}
+La arquitectura de software es la estructura o el esqueleto del software que permite que diferentes componentes funcionen juntos de manera eficiente y eficaz. Aquí están las etapas comunes en el desarrollo de la arquitectura de software:
+
+\subsection*{Análisis}
+En la etapa de análisis, los desarrolladores identifican los requisitos del software y las limitaciones del sistema. Esto incluye definir los objetivos del software, identificar los usuarios y establecer los requisitos de rendimiento.
+
+\subsection*{Diseño de la solución}
+En la etapa de diseño, los desarrolladores crean una solución arquitectónica para cumplir con los requisitos identificados en la etapa de análisis. Esto incluye la definición de la estructura de datos, la arquitectura de la aplicación y la selección de las herramientas y tecnologías necesarias.
+
+\subsection*{Desarrollo}
+En la etapa de desarrollo, se escriben los códigos y se construyen los componentes del software según el diseño arquitectónico. Es importante asegurarse de que el código siga los principios de código limpio para garantizar su mantenibilidad y escalabilidad.
+
+\subsection*{Despliegue}
+En la etapa de despliegue, el software se prueba y se implementa en el entorno de producción. Se asegura de que el software cumpla con los requisitos de rendimiento y que esté listo para su uso.
+
+\subsection*{Mantenimiento}
+En la etapa de mantenimiento, se realizan mejoras y correcciones de errores en el software para asegurar que siga funcionando correctamente. Es importante asegurarse de que el código siga los principios de código limpio y que se realicen pruebas adecuadas para evitar errores en el futuro.
+
+
+\subsection{Problemas Accidentales en la Arquitectura de Software}
+
+Los problemas accidentales en la arquitectura de software son aquellos que surgen como resultado de factores externos o situaciones imprevistas. A menudo, estos problemas son causados por decisiones o acciones tomadas durante el proceso de desarrollo de software que no fueron previstas o planificadas adecuadamente.
+
+Algunos ejemplos de problemas accidentales que pueden surgir en la arquitectura de software incluyen:
+
+\begin{itemize}
+\item Cambios inesperados en los requisitos del cliente o del mercado.
+\item Problemas de compatibilidad con otros sistemas o plataformas.
+\item Errores humanos, como la falta de comunicación o la falta de pruebas adecuadas.
+\item Problemas de rendimiento o escalabilidad que surgen a medida que se agregan más usuarios o datos al sistema.
+\item Problemas de seguridad que surgen como resultado de vulnerabilidades en el código o en la infraestructura del sistema.
+\end{itemize}
+
+Estos problemas pueden tener un impacto significativo en la arquitectura de software y en su capacidad para cumplir con los requisitos y expectativas del cliente y del usuario final. Para mitigar estos problemas, es importante que los equipos de desarrollo de software tomen medidas proactivas para prever y planificar adecuadamente la gestión de estos riesgos.
+
+Algunas formas de mitigar los problemas accidentales en la arquitectura de software incluyen:
+
+\begin{itemize}
+\item Adoptar un enfoque ágil de desarrollo de software, que permita una respuesta rápida y eficaz a los cambios y desafíos que surjan durante el ciclo de vida del software.
+\item Realizar pruebas rigurosas en todas las etapas del ciclo de vida del software, para identificar y corregir errores y problemas antes de que se conviertan en problemas mayores.
+\item Utilizar estándares y mejores prácticas reconocidos en la industria de la arquitectura de software, para asegurar la calidad y la compatibilidad del sistema con otros sistemas y plataformas.
+\item Establecer medidas de seguridad robustas, incluyendo la adopción de prácticas de seguridad y privacidad del código, el cifrado de datos sensibles y la implementación de protecciones de autenticación y autorización adecuadas.
+\end{itemize}
+
+Al tomar medidas proactivas para prever y planificar adecuadamente la gestión de los problemas accidentales en la arquitectura de software, los equipos de desarrollo de software pueden reducir significativamente el riesgo de problemas en el futuro y garantizar que el sistema cumpla con los requisitos y expectativas del cliente y del usuario final.
+
+\subsection{Problemas Esenciales en la Arquitectura de Software}
+
+Los problemas esenciales en la arquitectura de software son aquellos que están inherentemente relacionados con el diseño y la estructura del sistema en sí. A menudo, estos problemas son el resultado de decisiones tomadas durante la fase de diseño o de decisiones arquitectónicas que no se ajustan adecuadamente a las necesidades del sistema o del usuario final.
+
+Algunos ejemplos de problemas esenciales que pueden surgir en la arquitectura de software incluyen:
+
+\begin{itemize}
+\item Falta de modularidad y escalabilidad, lo que hace que el sistema sea difícil de mantener y actualizar a medida que crece.
+\item Falta de cohesión y acoplamiento inadecuado entre los componentes del sistema, lo que dificulta la integración y la interoperabilidad.
+\item Inadecuada separación de preocupaciones, lo que puede conducir a la duplicación de código, la complejidad excesiva y la falta de flexibilidad en el sistema.
+\item Falta de abstracción y generalización, lo que puede hacer que el sistema sea demasiado específico y difícil de adaptar a nuevas necesidades o casos de uso.
+\end{itemize}
+
+Estos problemas esenciales pueden tener un impacto significativo en la capacidad del sistema para cumplir con los requisitos y expectativas del cliente y del usuario final, así como en la eficacia y eficiencia del proceso de desarrollo de software en sí. Para abordar estos problemas esenciales, es importante que los equipos de desarrollo de software adopten enfoques de arquitectura de software bien fundamentados y las mejores prácticas reconocidas en la industria.
+
+Algunas formas de abordar los problemas esenciales en la arquitectura de software incluyen:
+
+\begin{itemize}
+\item Adoptar un enfoque de diseño modular y escalable que permita la adición o eliminación de componentes sin afectar el sistema en su conjunto.
+\item Asegurarse de que los componentes del sistema sean altamente cohesivos y estén acoplados adecuadamente para facilitar la integración y la interoperabilidad.
+\item Implementar una adecuada separación de preocupaciones mediante la asignación de responsabilidades claras y específicas a los diferentes componentes del sistema.
+\item Utilizar patrones de diseño y abstracciones adecuadas para asegurar que el sistema sea lo suficientemente generalizable y flexible para adaptarse a nuevos casos de uso y necesidades.
+\end{itemize}
+
+Al abordar los problemas esenciales en la arquitectura de software, los equipos de desarrollo de software pueden garantizar que el sistema sea lo suficientemente robusto, flexible y eficaz para cumplir con los requisitos y expectativas del cliente y del usuario final. Además, también pueden aumentar la eficiencia y eficacia del proceso de desarrollo de software en sí, lo que puede tener un impacto positivo en la rentabilidad y el éxito general del proyecto.
+
+\subsection{El arquitecto de software}
+El arquitecto de software es un rol clave en el desarrollo de software, especialmente en proyectos de gran envergadura y complejidad. En las metodologías ágiles, el rol del arquitecto es crucial para lograr un diseño de software eficiente, escalable y flexible. El arquitecto trabaja en colaboración con el equipo de desarrollo y el cliente para asegurar que se cumplan los objetivos y requisitos del software.
+
+\subsubsection*{Funciones del arquitecto de software}
+
+Las funciones del arquitecto de software pueden variar según la metodología ágil utilizada y la organización para la que trabaja. Sin embargo, algunas de las funciones más comunes incluyen:
+
+\begin{itemize}
+\item Diseñar y documentar la arquitectura del software.
+\item Establecer estándares de diseño y codificación para garantizar la calidad del software.
+\item Identificar los requisitos del software y definir los casos de uso.
+\item Identificar los riesgos y mitigarlos a través de la implementación de medidas de seguridad y pruebas de validación.
+\item Trabajar con el equipo de desarrollo y el cliente para garantizar que se cumplan los requisitos del software.
+\item Establecer una estrategia para la evolución y la mejora continua del software.
+\item Identificar y resolver problemas técnicos y de diseño.
+\item Participar en reuniones de equipo y presentaciones para el cliente.
+\end{itemize}
+
+\subsubsection*{El trabajo del arquitecto de software en función de los requerimientos y los problemas}
+
+El arquitecto de software trabaja en función de los requerimientos y problemas que surgen durante el desarrollo del software. Para ello, debe tener en cuenta a los diferentes stakeholders, que pueden tener requisitos y necesidades distintas. El arquitecto de software debe equilibrar estos requerimientos y necesidades para tomar decisiones informadas sobre la arquitectura del software.
+
+Cuando surgen problemas técnicos o de diseño, el arquitecto de software debe trabajar en colaboración con el equipo de desarrollo para resolverlos. Además, debe ser capaz de identificar y anticipar posibles problemas y riesgos para tomar medidas preventivas. Por ejemplo, puede establecer pruebas de validación para mitigar los riesgos de seguridad o diseñar una arquitectura modular para facilitar la mantenibilidad y la evolución del software.
+
+\subsection{Arquitectura y metodologias}
+La arquitectura de software es un tema crítico en cualquier proyecto de desarrollo de software, ya que determina cómo se construirá y cómo se integrarán los diferentes componentes de software. La elección de una metodología adecuada es crucial para garantizar una arquitectura sólida y escalable que pueda satisfacer las necesidades de los usuarios finales y los requisitos comerciales.
+
+En este sentido, las metodologías ágiles han surgido como una alternativa a las metodologías tradicionales, que se centran en la planificación y el control riguroso del proyecto. Las metodologías ágiles, por otro lado, se enfocan en la colaboración y el feedback continuo entre los miembros del equipo y los stakeholders, lo que permite una respuesta rápida a los cambios en los requisitos y una mayor flexibilidad en el proceso de desarrollo.
+
+La importancia del feedback en las metodologías ágiles radica en su capacidad para mejorar el proceso de desarrollo de software en tiempo real. Los miembros del equipo y los stakeholders pueden proporcionar retroalimentación constante, lo que permite a los desarrolladores ajustar y mejorar continuamente el software para satisfacer las necesidades cambiantes del usuario final.
+
+En este sentido, el arquitecto de software desempeña un papel clave en las metodologías ágiles, ya que puede proporcionar una guía y dirección claras para el equipo de desarrollo, a la vez que se adapta a los cambios en los requisitos y proporciona soluciones para problemas emergentes.
+
+En comparación con las metodologías tradicionales, donde el arquitecto de software suele tener un papel más pasivo y de supervisión, en las metodologías ágiles, el arquitecto de software se convierte en un miembro activo del equipo de desarrollo. El arquitecto trabaja en estrecha colaboración con los desarrolladores y los stakeholders para proporcionar soluciones innovadoras y escalables que se adapten a los requisitos cambiantes del usuario final.
+
+\subsubsection*{Espacio de Problemas vs Espacio de Solución en la Arquitectura de Software}
+
+En la arquitectura de software, es importante distinguir entre el espacio de problemas y el espacio de solución. El espacio de problemas es el conjunto de problemas que el software se supone que resuelve. El espacio de solución es el conjunto de soluciones que se han propuesto para resolver estos problemas.
+
+Es crucial que los arquitectos de software comprendan bien el espacio de problemas antes de comenzar a trabajar en el espacio de solución. Esto implica comprender las necesidades y requisitos de los usuarios, los problemas que están tratando de resolver y cómo los usuarios interactúan con el sistema.
+
+\subsubsection*{Entendimiento del Problema en la Arquitectura de Software}
+
+El primer paso en la arquitectura de software es comprender el problema que se está intentando resolver. Esto implica recopilar información sobre los usuarios, sus necesidades y cómo el software puede ayudar a resolver sus problemas.
+
+Es importante que los arquitectos de software trabajen en colaboración con los usuarios y otros miembros del equipo de desarrollo para comprender completamente el problema. También pueden usar técnicas como el diseño centrado en el usuario y la investigación de usuarios para ayudar a comprender mejor el problema.
+
+\subsubsection*{Entendimiento de Requerimientos en la Arquitectura de Software}
+
+Una vez que se ha entendido el problema, el siguiente paso es comprender los requerimientos del software. Esto implica identificar las funcionalidades que el software debe tener para resolver el problema.
+
+Los requerimientos se pueden clasificar en dos categorías: funcionales y no funcionales. Los requerimientos funcionales son aquellos que describen lo que el software debe hacer. Los requerimientos no funcionales son aquellos que describen cómo el software debe hacerlo, como la escalabilidad, la seguridad y el rendimiento.
+
+Es importante que los arquitectos de software comprendan completamente los requerimientos del software antes de comenzar a trabajar en la solución. Esto les permitirá diseñar una arquitectura que satisfaga las necesidades de los usuarios y los requisitos del sistema.
+
+\subsubsection*{Clasificación de Requerimientos en la Arquitectura de Software}
+
+Los requerimientos del software se pueden clasificar en diferentes categorías. Aquí hay algunas categorías comunes:
+
+\begin{itemize}
+\item Requerimientos funcionales: describen lo que el software debe hacer.
+\item Requerimientos no funcionales: describen cómo el software debe hacerlo, como la escalabilidad, la seguridad y el rendimiento.
+\item Requerimientos de calidad: describen la calidad del software, como la facilidad de uso, la fiabilidad y la capacidad de mantenimiento.
+\item Requerimientos de restricciones: describen las limitaciones en el desarrollo del software, como el presupuesto, el tiempo y los recursos.
+\end{itemize}
+
+Es importante que los arquitectos de software comprendan y clasifiquen los requerimientos correctamente para diseñar una arquitectura que satisfaga las necesidades del sistema y de los usuarios.
+
+\newpage
+\section{Estilos de arquitectura}
+
+La arquitectura de software es una disciplina que se enfoca en la estructura y organización de los sistemas de software. Un aspecto importante de la arquitectura de software es la selección del estilo de arquitectura adecuado para el sistema en cuestión. Los estilos de arquitectura son patrones o esquemas que se utilizan para guiar el diseño y la construcción de sistemas de software.
+
+Cada estilo de arquitectura tiene sus propias características, ventajas y desventajas, y se elige en función de las necesidades del sistema y de los requisitos no funcionales. La elección del estilo de arquitectura correcto puede tener un impacto significativo en la calidad, escalabilidad y mantenibilidad del sistema.
+
+Por lo tanto, es importante que los arquitectos de software estén familiarizados con los diferentes estilos de arquitectura y puedan seleccionar el más adecuado para cada proyecto. Además, es importante tener en cuenta que los estilos de arquitectura no son mutuamente excluyentes y pueden combinarse para crear soluciones más complejas y escalables.
+
+A continuación, se describen algunos de los estilos de arquitectura más comunes utilizados en la industria:
+
+\begin{itemize}
+    \item Arquitectura basada en capas
+    \item Arquitectura orientada a servicios
+    \item Arquitectura basada en eventos
+    \item Arquitectura basada en microservicios
+\end{itemize}
+
+Cada uno de estos estilos de arquitectura tiene sus propias características y beneficios, y es importante elegir el estilo de arquitectura adecuado para un proyecto en particular en función de sus necesidades y requisitos específicos.
+
+\subsection*{Estilo: Llamado y retorno}
+El estilo arquitectónico llamado y retorno (call-and-return) se utiliza para estructurar sistemas de software distribuidos y paralelos. Este estilo también se conoce como invocación remota y es utilizado en sistemas distribuidos para permitir que los procesos se comuniquen y se coordinen entre sí.
+
+En este estilo, los procesos se organizan en una jerarquía de niveles y se comunican a través de llamadas y respuestas entre niveles. Cada nivel está compuesto por uno o más procesos y está diseñado para proporcionar un conjunto de servicios a los niveles superiores.
+
+Los procesos de nivel inferior proporcionan servicios a los procesos de nivel superior a través de llamadas, mientras que los procesos de nivel superior proporcionan servicios a los procesos de nivel inferior a través de respuestas. Este intercambio de mensajes a través de los niveles de la jerarquía se llama invocación remota.
+
+El estilo llamado y retorno se utiliza comúnmente en sistemas distribuidos de alta velocidad y en sistemas paralelos de procesamiento en tiempo real. Se utiliza para garantizar que la comunicación entre los procesos sea eficiente y segura. También es utilizado en sistemas distribuidos de bases de datos, donde los nodos de la base de datos se comunican a través de llamadas y respuestas para coordinar la gestión de los datos distribuidos.
+
+Una de las ventajas de este estilo arquitectónico es su capacidad para manejar grandes volúmenes de comunicación entre procesos. Además, este estilo proporciona una estructura clara para la organización de los procesos en un sistema distribuido. Sin embargo, el estilo llamado y retorno puede ser difícil de implementar y puede requerir un alto grado de coordinación entre los procesos para garantizar que se comuniquen correctamente.
+
+\subsection*{Estilo: Orientado a objetos}
+El estilo de arquitectura orientada a objetos (OOA) es un enfoque de diseño y programación que se basa en la utilización de objetos y sus relaciones para construir sistemas de software. El objetivo principal de la OOA es modelar los conceptos del mundo real como objetos, lo que facilita la comprensión del sistema y su mantenimiento.
+
+La arquitectura orientada a objetos se enfoca en la encapsulación, la herencia y el polimorfismo. La encapsulación permite ocultar la complejidad del sistema al proteger la información y los comportamientos de los objetos. La herencia permite crear nuevas clases a partir de clases existentes, lo que facilita la reutilización de código y la creación de relaciones jerárquicas entre los objetos. El polimorfismo permite que objetos de diferentes clases puedan responder a los mismos mensajes de manera diferente, lo que facilita la extensibilidad y la flexibilidad del sistema.
+
+En la arquitectura orientada a objetos, el sistema se divide en pequeños objetos que interactúan entre sí para realizar las tareas requeridas. Cada objeto es responsable de sus propias operaciones, y la comunicación entre objetos se realiza a través de mensajes. Esto permite una mayor modularidad y facilidad de mantenimiento, ya que cada objeto puede ser modificado o reemplazado sin afectar a los demás.
+
+La arquitectura orientada a objetos se utiliza comúnmente en el desarrollo de software de escritorio, aplicaciones web y móviles, y es compatible con muchas metodologías de desarrollo de software, incluyendo las metodologías ágiles.
+
+\subsection*{Estilo: Multinivel}
+El estilo de arquitectura multinivel es un enfoque de diseño que se utiliza para crear aplicaciones que se escalan de forma horizontal. Se basa en la idea de dividir una aplicación en capas lógicas, cada una de las cuales proporciona un nivel de abstracción de la funcionalidad. El estilo multinivel es similar a la arquitectura basada en capas, pero en lugar de tener una sola capa que proporciona una funcionalidad específica, el estilo multinivel permite que varias capas proporcionen la misma funcionalidad en diferentes niveles de abstracción.
+
+En una arquitectura multinivel típica, las capas se organizan en una jerarquía que se extiende desde el nivel más bajo hasta el nivel más alto. En el nivel más bajo, se encuentran las capas de acceso a datos, que se encargan de interactuar con el almacenamiento de datos subyacente. Por encima de las capas de acceso a datos, se encuentran las capas de negocio o lógica de la aplicación, que se encargan de procesar los datos y realizar cálculos. Finalmente, en la parte superior de la jerarquía se encuentran las capas de presentación o interfaz de usuario, que se encargan de presentar los datos y las funcionalidades de la aplicación al usuario final.
+
+El estilo multinivel proporciona varios beneficios, incluyendo la capacidad de escalar horizontalmente la aplicación y la facilidad para realizar cambios en una capa sin afectar a las demás capas. Sin embargo, también puede tener algunas limitaciones, como la complejidad de gestionar múltiples capas y la necesidad de una buena planificación y diseño inicial para asegurar la escalabilidad y la eficiencia del sistema.
+
+\newpage
+\subsection{Arquitectura centrada en datos}
+
+En la arquitectura centrada en datos, los datos son el elemento central y fundamental de la arquitectura, en lugar de los procesos o las funciones. El objetivo principal es asegurar que los datos sean almacenados, procesados y utilizados de manera eficiente y efectiva por la aplicación.
+
+Algunos ejemplos de estilos de arquitectura centrados en datos son:
+
+\subsubsection*{Pizarra (Blackboard)}
+
+En la arquitectura basada en pizarra, el sistema cuenta con un núcleo llamado pizarra o blackboard que funciona como punto centralizador de la información. Los componentes externos se encargan de procesar un dato y escribirlo en la pizarra. Cuando la pizarra ya tiene todos los datos necesarios, puede generar una salida.
+
+Este estilo de arquitectura es útil en sistemas de inteligencia artificial y aprendizaje automático, ya que permite que múltiples componentes trabajen juntos en la solución de un problema. Cada componente se encarga de procesar una parte del problema y actualizar la información en la pizarra. De esta forma, se logra una solución colaborativa y eficiente.
+
+Un ejemplo de arquitectura basada en pizarra es el sistema de diagnóstico médico MYCIN, desarrollado en la década de 1970. Este sistema utiliza una pizarra para almacenar la información recopilada por los diferentes componentes del sistema, como los módulos de adquisición de datos, los módulos de diagnóstico y los módulos de retroalimentación. La pizarra actúa como un coordinador central que integra la información y toma decisiones basadas en ella.
+
+Otro ejemplo de arquitectura basada en pizarra es el sistema de reconocimiento de voz Dragon NaturallySpeaking. En este sistema, la pizarra se encarga de almacenar la información acústica y lingüística recopilada por los diferentes módulos del sistema, como el módulo de análisis acústico, el módulo de reconocimiento de patrones y el módulo de procesamiento lingüístico. La pizarra coordina la información y genera una salida en forma de texto.
+
+\subsubsection*{Arquitectura basada en base de datos}
+
+La arquitectura basada en base de datos es un estilo de arquitectura centrada en datos en la que múltiples componentes comparten una misma base de datos para su almacenamiento y recuperación de información. En este estilo, la base de datos actúa como un componente centralizado y compartido por todos los componentes de la arquitectura.
+
+Este estilo de arquitectura es común en aplicaciones web y móviles, donde múltiples usuarios necesitan acceso a los mismos datos desde diferentes dispositivos y ubicaciones. Un ejemplo de aplicación que utiliza este estilo de arquitectura es una aplicación de banca en línea, donde los usuarios pueden acceder a sus cuentas bancarias y realizar transacciones desde cualquier lugar utilizando diferentes dispositivos.
+
+Un ejemplo de arquitectura basada en base de datos es la arquitectura de tres capas, que consta de una capa de presentación, una capa de lógica de negocio y una capa de acceso a datos. En esta arquitectura, la capa de acceso a datos es responsable de interactuar con la base de datos y proporcionar la información necesaria a la capa de lógica de negocio y a la capa de presentación.
+
+Otro ejemplo es la arquitectura cliente-servidor, donde el servidor actúa como una base de datos centralizada y el cliente interactúa con el servidor para acceder y manipular los datos. Este estilo de arquitectura es común en aplicaciones empresariales que requieren acceso a una gran cantidad de datos desde diferentes ubicaciones y dispositivos.
+
+\subsubsection*{Sistema experto basado en reglas}
+
+Un sistema experto basado en reglas es una arquitectura que se basa en la utilización de un conjunto de reglas explícitas que permiten tomar decisiones o realizar acciones específicas en respuesta a ciertos estímulos. Este tipo de arquitectura se utiliza principalmente en situaciones en las que se dispone de un conocimiento especializado y se desea utilizarlo para resolver problemas o tomar decisiones.
+
+En un sistema experto basado en reglas, el conocimiento se representa mediante un conjunto de reglas condicionales del tipo "si-entonces". Cada regla establece una condición que debe cumplirse y una acción que se debe tomar en caso de que se cumpla dicha condición. Estas reglas se almacenan en una base de conocimientos que es consultada por el sistema en tiempo de ejecución.
+
+Un ejemplo de sistema experto basado en reglas es un sistema de diagnóstico médico. En este tipo de sistema, las reglas se utilizan para representar el conocimiento médico y las relaciones entre los síntomas y las enfermedades. Cuando un paciente presenta ciertos síntomas, el sistema utiliza las reglas para inferir la enfermedad subyacente y proporcionar un diagnóstico. Otro ejemplo de sistema experto basado en reglas es un sistema de recomendación de productos en línea, donde las reglas se utilizan para inferir las preferencias del usuario y ofrecerle recomendaciones de productos relevantes.
+
+\newpage
+\subsection*{Estilos de componentes independientes}
+
+Los sistemas de software actuales se caracterizan por ser altamente distribuidos y heterogéneos. Por lo tanto, es importante contar con una arquitectura que permita la comunicación y colaboración entre diferentes componentes independientes de manera eficiente y efectiva. Los estilos de componentes independientes se centran en cómo se comunican los componentes de un sistema distribuido. En general, se pueden distinguir dos enfoques: la invocación implícita y la invocación explícita. Cada uno tiene sus propias ventajas y desventajas, y se adapta mejor a diferentes tipos de sistemas y aplicaciones. En esta sección, exploraremos en detalle ambos enfoques y proporcionaremos ejemplos de cómo se aplican en la práctica.
+
+\subsubsection*{Invocación implícita}
+
+En este estilo de comunicación, los componentes se comunican a través de un BUS de eventos en el cual los componentes van a escribir algunos eventos y luego el BUS los comunica a los componentes que les conciernan dichos eventos. Existen varios tipos de BUS.
+
+\begin{itemize}
+\item \textbf{Publicar/suscribir}: En este tipo de BUS, el componente inicial es el que publica un evento y los componentes que están suscritos reciben la notificación de dicha publicación.
+\item \textbf{Orientado a servicios (Enterprise Service BUS)}: En este caso, el BUS es un componente inteligente, en el que los componentes notifican al BUS a través de eventos y el BUS decide a quién notificar dichos eventos.
+\end{itemize}
+
+La invocación implícita es un estilo de componente independiente en el que varios componentes se comunican a través de un BUS de eventos, en el que los componentes escriben eventos y el BUS los comunica a los componentes que les conciernen. Este estilo es especialmente útil para aplicaciones distribuidas en las que los componentes pueden estar ubicados en diferentes sistemas o redes.
+
+Existen varios tipos de BUS de eventos, entre los cuales se destacan el publicar/suscribir y el orientado a servicios (Enterprise Service BUS). En el primero, el componente inicial publica un evento y los componentes que están suscritos reciben la notificación de dicha publicación. En el segundo, el BUS es un componente inteligente en el que los componentes notifican al BUS a través de eventos y éste decide a quién notificar dichos eventos.
+
+El estilo de invocación implícita es muy útil para aplicaciones de alta disponibilidad y escalabilidad, ya que permite la comunicación entre componentes distribuidos sin necesidad de una conexión permanente y directa entre ellos. Además, el uso de un BUS de eventos reduce la complejidad de la comunicación y hace que los componentes sean más independientes entre sí.
+
+Un ejemplo de aplicación que utiliza este estilo es un sistema de sensores en el que múltiples sensores envían datos a un BUS de eventos, que a su vez los comunica a diferentes componentes que se encargan de procesar los datos y generar respuestas en tiempo real. Otro ejemplo es una aplicación de comercio electrónico en la que los diferentes componentes de la aplicación (por ejemplo, carrito de compras, procesamiento de pagos, envío de pedidos) se comunican a través de un BUS de eventos para coordinar la ejecución de las diferentes tareas.
+
+\subsubsection*{Invocación explícita}
+
+En el estilo de invocación explícita, los componentes se comunican directamente entre sí, sin necesidad de un bus de eventos como en la invocación implícita. Para lograr esto, los componentes tienen que conocerse mutuamente y acordar cómo se van a comunicar.
+
+Existen varios patrones de diseño que se pueden utilizar para lograr la invocación explícita. Uno de los más comunes es el patrón de Inyección de Dependencias, en el cual cada componente declara sus dependencias en su constructor o en algún otro método de inicialización, y luego un contenedor de inversión de control se encarga de inyectar estas dependencias en el componente cuando este es creado. Otro patrón de diseño común es el patrón de Fachada, en el cual se define una interfaz simplificada y unificada para un conjunto de componentes más complejos y se comunica con ellos a través de esta interfaz.
+
+Algunos ejemplos de aplicaciones que utilizan la invocación explícita son los frameworks de desarrollo web, como Ruby on Rails o Django. En estos frameworks, cada componente es un módulo independiente que se comunica con otros módulos a través de interfaces explícitas, como clases o funciones. También es común en aplicaciones empresariales, donde los componentes se comunican directamente entre sí para realizar tareas específicas, como procesar transacciones financieras o gestionar pedidos de clientes.
+
+\newpage
+\subsection{Arquitectura basada en capas}
+
+La arquitectura basada en capas, también conocida como arquitectura en niveles, es un estilo de arquitectura de software que separa la lógica del negocio en distintas capas o niveles, cada uno con su propia responsabilidad y funcionalidad.
+
+En esta arquitectura, cada capa solo se comunica con la capa inmediatamente superior o inferior, lo que permite que cada capa sea independiente y modular. Las capas pueden ser físicas o lógicas, dependiendo de la implementación.
+
+Algunas de las ventajas de la arquitectura basada en capas son:
+
+\begin{itemize}
+\item Separación de responsabilidades: cada capa tiene una responsabilidad específica, lo que facilita la implementación y el mantenimiento del sistema.
+\item Modularidad: cada capa es independiente, lo que permite reutilizar y actualizar cada una sin afectar al resto del sistema.
+\item Escalabilidad: al separar la lógica del negocio en distintas capas, se pueden agregar o quitar capas según las necesidades de escalabilidad del sistema.
+\item Flexibilidad: al tener capas separadas y bien definidas, se puede cambiar o mejorar una capa sin afectar al resto del sistema.
+\end{itemize}
+
+Algunas de las capas comunes en la arquitectura basada en capas son:
+
+\begin{itemize}
+\item Capa de presentación: esta capa se encarga de la interfaz de usuario y la interacción con el usuario final. Puede ser una aplicación de escritorio, una aplicación web, una aplicación móvil, entre otras.
+\item Capa de aplicación: esta capa se encarga de la lógica del negocio y las reglas de negocio. Aquí se realizan cálculos, se accede a bases de datos, se validan datos, entre otras tareas.
+\item Capa de persistencia: esta capa se encarga del almacenamiento y recuperación de datos. Aquí se accede a la base de datos y se realizan operaciones de lectura y escritura.
+\end{itemize}
+
+Es importante tener en cuenta que la arquitectura basada en capas no es adecuada para todos los sistemas. En algunos casos, puede resultar demasiado rígida o limitante, especialmente en sistemas grandes y complejos. En esos casos, puede ser necesario considerar otros estilos de arquitectura, como la arquitectura basada en microservicios o la arquitectura basada en eventos.
+
+\subsection{Arquitectura orientada a servicios}
+
+La arquitectura orientada a servicios (SOA por sus siglas en inglés) es un estilo de arquitectura de software que se enfoca en el desarrollo y la implementación de servicios, los cuales son componentes independientes que ofrecen funcionalidades específicas y que se comunican entre sí a través de una red.
+
+La arquitectura SOA tiene como objetivo principal la creación de sistemas de software más flexibles y escalables, ya que permite la integración de diferentes aplicaciones y sistemas sin necesidad de cambiar el código fuente de cada uno. Además, los servicios pueden ser reutilizados en diferentes contextos y aplicaciones, lo que reduce los costos de desarrollo y mejora la eficiencia.
+
+En una arquitectura SOA, los servicios se organizan en capas, donde cada capa ofrece un conjunto de servicios relacionados. La capa superior se comunica con la capa inferior a través de una interfaz definida y estandarizada, lo que permite que los servicios sean independientes de la implementación y tecnología subyacente.
+
+La arquitectura SOA se basa en estándares abiertos y tecnologías como XML, SOAP, REST, WSDL, entre otros. Estos estándares permiten que los servicios sean interoperables y puedan ser accedidos por diferentes aplicaciones y sistemas.
+
+Algunas de las ventajas de la arquitectura SOA son:
+
+\begin{itemize}
+\item Reutilización de servicios: Los servicios pueden ser utilizados en diferentes aplicaciones y contextos, lo que reduce los costos de desarrollo y mejora la eficiencia.
+\item Integración de sistemas: La arquitectura SOA permite la integración de diferentes sistemas y aplicaciones sin necesidad de cambiar el código fuente de cada uno.
+\item Flexibilidad y escalabilidad: La arquitectura SOA permite la adición y modificación de servicios de forma fácil y rápida, lo que permite la adaptación a cambios en el entorno y a las necesidades de los usuarios.
+\item Interoperabilidad: Los estándares abiertos utilizados en la arquitectura SOA permiten que los servicios sean interoperables y puedan ser accedidos por diferentes aplicaciones y sistemas.
+\end{itemize}
+
+Algunas de las desventajas de la arquitectura SOA son:
+
+\begin{itemize}
+\item Complejidad: La arquitectura SOA puede ser compleja de implementar y mantener, ya que involucra la coordinación de diferentes servicios y sistemas.
+\item Sobrecarga de comunicación: La comunicación entre servicios puede generar una sobrecarga en la red, lo que puede afectar el rendimiento del sistema.
+\item Dependencia de los estándares: La arquitectura SOA depende de los estándares utilizados, lo que puede limitar la elección de tecnologías y herramientas.
+\end{itemize}
+
+\subsection{Arquitectura basada en eventos}
+
+La arquitectura basada en eventos es un enfoque en el que los componentes del sistema se comunican a través de eventos, en lugar de llamadas directas o sincrónicas. Los eventos son notificaciones asincrónicas que se envían cuando ocurre un cambio de estado en un componente del sistema. Este enfoque proporciona una gran flexibilidad y escalabilidad, ya que los componentes no tienen que conocerse mutuamente, sino simplemente responder a los eventos que reciben.
+
+En la arquitectura basada en eventos, los eventos se envían a un sistema de mensajería, que actúa como intermediario entre los componentes. Los componentes pueden suscribirse a los eventos que les interesan y recibir notificaciones cuando se producen. Este enfoque permite que los componentes se comuniquen de manera eficiente sin tener que saber nada el uno del otro, lo que facilita la integración de sistemas y la implementación de sistemas distribuidos.
+
+Entre las ventajas de la arquitectura basada en eventos se incluyen:
+
+\begin{itemize}
+\item Flexibilidad y escalabilidad: Los componentes no tienen que conocerse mutuamente, lo que permite la implementación de sistemas distribuidos y el reemplazo de componentes individuales sin afectar al resto del sistema.
+\item Adaptabilidad: Los componentes pueden adaptarse fácilmente a cambios en el entorno o en los requisitos del sistema simplemente suscribiéndose o dejando de suscribirse a eventos específicos.
+\item Separación de preocupaciones: La arquitectura basada en eventos permite una separación clara entre el procesamiento del evento y la lógica de negocio, lo que facilita la comprensión y el mantenimiento del sistema.
+\item Tolerancia a fallos: La arquitectura basada en eventos puede proporcionar una mayor tolerancia a fallos, ya que los componentes pueden seguir funcionando incluso si otros componentes fallan o se desconectan.
+\end{itemize}
+
+Sin embargo, la arquitectura basada en eventos también tiene algunas limitaciones y desventajas. Por ejemplo:
+
+\begin{itemize}
+\item Complejidad: La implementación de la arquitectura basada en eventos puede ser más compleja que otros enfoques arquitectónicos, especialmente cuando se trata de garantizar la consistencia de los datos en sistemas distribuidos.
+\item Latencia: El envío de eventos a través de un sistema de mensajería puede introducir una latencia adicional en el sistema, lo que puede ser problemático en aplicaciones que requieren una respuesta en tiempo real.
+\item Dependencia de la mensajería: La arquitectura basada en eventos depende de un sistema de mensajería para la comunicación entre componentes, lo que puede ser un punto único de fallo si el sistema de mensajería falla.
+\end{itemize}
+
+Algunos ejemplos de sistemas que utilizan arquitectura basada en eventos son sistemas de comercio electrónico, sistemas de sensores y sistemas de monitoreo de aplicaciones.
+
+\subsection{Arquitectura basada en microservicios}
+
+La arquitectura basada en microservicios es un enfoque para el desarrollo de software que se centra en construir una aplicación como un conjunto de servicios pequeños e independientes que se comunican entre sí a través de una interfaz definida. Cada servicio se enfoca en realizar una tarea específica dentro de la aplicación y se puede desarrollar, desplegar y escalar de manera independiente.
+
+Los microservicios están diseñados para ser altamente escalables, confiables y resilientes. Cada microservicio se ejecuta en su propio proceso, lo que significa que si un servicio falla, solo afectará a ese servicio en particular y no a toda la aplicación. Además, la arquitectura basada en microservicios permite a los equipos de desarrollo trabajar de manera más ágil y rápida, ya que los servicios se pueden desarrollar y desplegar de forma independiente.
+
+Algunas de las características de la arquitectura basada en microservicios son:
+
+\begin{itemize}
+\item \textbf{Desacoplamiento:} Los microservicios están diseñados para ser independientes entre sí, lo que significa que se pueden desarrollar, desplegar y escalar de manera independiente. Esto permite que los equipos de desarrollo trabajen de manera más ágil y rápida, ya que pueden realizar cambios en un servicio sin afectar a otros servicios de la aplicación.
+\item \textbf{Escalabilidad:} Cada microservicio se puede escalar de manera independiente según sea necesario, lo que permite manejar cargas de trabajo pesadas en partes específicas de la aplicación sin afectar a otras partes.
+\item \textbf{Resiliencia:} Los microservicios están diseñados para ser resistentes a fallas. Si un servicio falla, solo afectará a ese servicio en particular y no a toda la aplicación.
+\item \textbf{Flexibilidad tecnológica:} Cada microservicio se puede desarrollar en diferentes tecnologías, lo que permite a los equipos de desarrollo utilizar las herramientas y tecnologías más adecuadas para cada tarea específica.
+\item \textbf{Facilidad de mantenimiento:} Al dividir la aplicación en pequeños servicios, es más fácil mantener y actualizar cada servicio por separado. También es más fácil probar y depurar cada servicio individualmente.
+\end{itemize}
+
+Aunque la arquitectura basada en microservicios ofrece muchas ventajas, también presenta algunos desafíos. Por ejemplo, la complejidad de la arquitectura puede aumentar a medida que se agregan más servicios a la aplicación. Además, se requiere una buena planificación y coordinación para garantizar que los servicios se comuniquen entre sí de manera efectiva y que la aplicación en su conjunto funcione correctamente.
+
+\subsection{Comparando estilos: ¿Cómo elijo?}
+
+\subsubsection*{Estilos monolíticos}
+
+Los estilos monolíticos se caracterizan por desplegar un artefacto de software que contiene todos los componentes del sistema. Algunas ventajas de este enfoque son:
+
+\begin{itemize}
+\item \textbf{Eficiencia:} Al tener un solo artefacto se puede ser optimizado de manera más personalizada. En estilos distribuidos, es un problema debido a los canales de comunicación, red e internet que comunican los componentes.
+\item \textbf{Curva de aprendizaje:} El monolítico contiene toda la información allí. Un monolítico bien diseñado permite tener todas las piezas en el mismo lugar, por lo que se facilita la lectura y entendimiento. En el caso distribuido hay que entender cada componente. Nota: Un componente interno en un distribuido puede ser visto como un monolítico. Es la base de los microservicios.
+\item \textbf{Capacidad de prueba:} Son más fáciles de probar una funcionalidad de principio a fin. En sistemas distribuidos, necesito tener todos los componentes disponibles, incluyendo los BUS de eventos.
+\item \textbf{Capacidad de modificación:} Un cambio que se despliega todo junto garantiza menos estados intermedios. Las versiones nunca coexisten. En sistemas distribuidos, diferentes componentes tienen diferentes versiones, por lo que requiere de compatibilidad entre versiones. Una modificación en un sistema distribuido es más difícil de hacer llegar.
+\end{itemize}
+
+\subsubsection*{Estilos distribuidos}
+
+Los estilos distribuidos se caracterizan por desplegar componentes que luego se conectan de alguna forma. Algunas ventajas de este enfoque son:
+
+\begin{itemize}
+\item \textbf{Modularidad:} Permite separar componentes que prestan servicios.
+\item \textbf{Disponibilidad:} Es mayor que en el estilo monolítico, ya que podemos tener múltiples copias de un componente. Tener una copia entera de un monolítico es mucho más caro que copiar el componente distribuido que necesitamos que escale. Los microservicios aprovechan los recursos disponibles.
+\item \textbf{Uso de recursos:} Es más fácil gestionar los recursos del sistema.
+\item \textbf{Adaptabilidad:} Al ser distribuido, se puede detectar mucho más fácil qué componente necesita ser adaptado del sistema y es más fácil realizar esa actualización. En sistemas monolíticos, puede ser mucho más complicado, como lanzar una aplicación en un sistema operativo diferente.
+\end{itemize}
+
+Entonces, ¿cómo elijo qué estilo de arquitectura utilizar? Es importante tener en cuenta los requisitos, objetivos de negocio/arquitectura de software, atributos de calidad, estrategias de arquitectura, escenarios y decisiones arquitectónicas con el fin de analizar qué sacrificios, riesgos y no riesgos tengo y cómo impactan en mi proyecto.
+
+\end{document}
