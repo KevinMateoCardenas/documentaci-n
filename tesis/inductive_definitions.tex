@@ -95,20 +95,23 @@
 \begin{document}
 \begin{titlepage}
     \begin{center}
-        {\Huge \textbf{Definiciones inductivas}}
-        \\[18cm]
-
+        {\Huge \textbf{Definiciones Inductivas y Coinductivas}}
+        \\[9cm]
+        
         \large\emph{Autor:}\\
         Kevin Cárdenas.
-        \\[1cm]
-        {\large 2023}
+        \\[9cm]
+        \large\emph{Ascesor:}
+        Juan Carlos Agudelo.\\
+        Trabajo de grado en modalidad de monografía para el titulo como matemático.\\
+        2023
     \end{center}
 \end{titlepage}
 
 \newpage
 \tableofcontents
 \newpage
-\section{Definiciones Inductivas}
+\section{Definiciones Inductivas y Coinductivas}
 \subsection{¿Qué es una definición inductiva?}
 \begin{defi}
 \textbf{Regla, $\phi-$cerrado, Conjunto inductivamente definido}
@@ -121,7 +124,7 @@ $$L(\phi) = \bigcap\{A \, : A\,\, \phi-cerrado\}$$
 \end{defi}
 Esta definición establece que una regla es un par que consiste en un conjunto de premisas y una conclusión. Un conjunto $A$ es $\phi - \textbf{cerrado}$ si cada regla de $\phi$ tiene sus premisas en $A$. Finalmente, se define el conjunto inductivamente definido por $\phi$ como el menor conjunto que contiene todos los elementos del conjunto de premisas de $\phi$ y que es cerrado bajo $\phi$. Este conjunto se define como la intersección de todos los conjuntos $\phi-$cerrados.
 
-\begin{ejemplo}\textbf{$\mathrm{N}$ Como conjunto inductivamente definido}\\
+\begin{ejemplo}\textbf{$\mathbf{N}$ Como conjunto inductivamente definido}\\
 Desde la definición que hemos dado, podemos definir los números naturales $\mathrm{N}$ como un conjunto inductivamente definido. Para ello, definimos $\phi$ como un conjunto de reglas que contienen las siguientes dos reglas:
 \begin{enumerate}
 \item $(\emptyset,0)$, donde $0$ es un número natural.
@@ -143,46 +146,34 @@ En general, una prueba matemática es una secuencia de afirmaciones, llamadas pa
 
 \begin{propo}.\\
 Para $\phi$ un conjunto de reglas finito:
-$$I(\phi) = \{b \,\,: b\,\, tiene\,\, una\,\, prueba\}$$
-
-Sea $\phi$ un conjunto de reglas finito. $B = \{b \,\,: b\,\, tiene\,\, una\,\, prueba\}$.
-
-Para demostrar esta proposición, primero demostraremos que $I(\phi) \subseteq B$, donde $B$ es el conjunto de elementos que tienen una prueba. La prueba se realiza por inducción en la longitud de las pruebas.
-
-Base de inducción: Si la longitud de la prueba es 1, entonces el elemento es una premisa directa de una regla en $\phi$, y por lo tanto pertenece a cualquier conjunto cerrado bajo $\phi$. Por lo tanto, cualquier elemento que tenga una prueba de longitud 1 pertenece a $I(\phi)$.
-
-Hipótesis de inducción: Supongamos que para cualquier prueba de longitud $n$, si $b$ tiene una $\phi$-prueba de longitud $n$, entonces $b$ pertenece a $I(\phi)$.
-
-Paso inductivo: Supongamos que $b$ tiene una $\phi$-prueba de longitud $n+1$. Por definición de una $\phi$-prueba, $b$ es la conclusión de una regla en $\phi$ cuyas premisas son elementos $a_1, a_2, ..., a_k$ con $k < n+1$. Cada uno de estos elementos tiene una $\phi$-prueba de longitud $n_i$ con $n_i \leq n$, por lo tanto, por nuestra hipótesis de inducción, cada $a_i$ pertenece a $I(\phi)$. Entonces, $b$ pertenece a cualquier conjunto cerrado bajo $\phi$ que contenga a $a_1, a_2, ..., a_k$, lo que implica que $b$ pertenece a $I(\phi)$. Por lo tanto, cualquier elemento que tenga una $\phi$-prueba de longitud $n+1$ también pertenece a $I(\phi)$.
-
-Por lo tanto, hemos demostrado que $I(\phi) \subseteq B$.
-
-Ahora demostraremos que $B \subseteq I(\phi)$. La demostración se basa en la definición de $B$: cualquier elemento en $B$ tiene una $\phi$-prueba, lo que significa que puede construirse una cadena finita de reglas de $\phi$ que conecte cualquier premisa de la prueba con la conclusión. Por lo tanto, cualquier elemento en $B$ pertenece a cualquier conjunto cerrado bajo $\phi$ que contenga las premisas de la $\phi$-prueba. Como $I(\phi)$ es la intersección de todos los conjuntos cerrados bajo $\phi$, cualquier elemento en $B$ también pertenece a $I(\phi)$. Por lo tanto, $B \subseteq I(\phi)$.
-
-Hemos demostrado que $I(\phi) \subseteq B$ y $B \subseteq I(\phi)$, lo que implica que $I(\phi) = B$, y por lo tanto, la proposición se cumple.
+$$I(\phi) = \{b \quad: b\,\, tiene\,\, una\,\, prueba\}$$
 \end{propo}
 
 \subsection{La parte bien fundamentada de una relación}
-Sea $A$ un conjunto, $<$ una relación en $A$, definimos \textbf{la parte bien fundamentada de $<$} como 
+Sea $A$ un conjunto, $<$ una relación de orden parcial en $A$, definimos \textbf{la parte bien fundamentada de $<$} como 
+
 $$W(<) = \{a\in A\,\, : \forall \{a_i\}\subseteq A (a_0 = a, a_{i+1}<a_i\rightarrow |\{a_i\}|<\infty)\}$$
-Es decir el conjunto de los elementos sin secuencias infinitas de descendientes. Decimos que $<$ es bien fundamentada, si $w(<) = A$
 
-$w(<)$ puede ser definido inductivamente del conjunto de reglas definido por $((<a),a) \in\phi_<$ para $a\in A$, donde $(<a) = \{x\in A: x<a\}$
+Es decir el conjunto de los elementos sin secuencias infinitas de descendientes.\\ 
+Decimos que $<$ es bien fundamentada, si $w(<) = A$
 
-\begin{propo}
-    $$W(<) = I(\phi_<)$$
-    La proposición establece que la parte bien fundamentada de la relación $<$ es igual al conjunto inductivamente definido por el conjunto de reglas $\phi_<$, lo que significa que todos los elementos que tienen una prueba en $\phi_<$ son precisamente los elementos que no tienen una cadena infinita de descendientes en la relación $<$. Esto tiene sentido, ya que la definición inductiva de $\phi_<$ se construye a partir de las relaciones de orden de $<$ en $A$, lo que significa que la definición de $\phi_<$ está intrínsecamente relacionada con la estructura de orden de $<$. Por lo tanto, los elementos que tienen una prueba en $\phi_<$ son aquellos que cumplen la propiedad de no tener una cadena infinita de descendientes en la relación $<$, lo que significa que pertenecen a $W(<)$.
+\begin{propo}\textbf{$w(<)$ definido inductivamente}\\
+    $w(<)$ puede ser definido inductivamente del conjunto de reglas definido por:
+    \begin{itemize}
+        \item $((<a),a) \in\phi_<$ para $a\in A$, donde $(<a) = \{x\in A: x<a\}$    
+    \end{itemize} 
 \end{propo}
-Note que uando la relación $<$ es bien fundamentada, entonces el principio de $\phi_<$-inducción se convierte en el principio de inducción transfinita.
 
-El principio de inducción transfinita es un principio más general que el principio de inducción finita, ya que permite realizar una demostración inductiva no solo en los números naturales, sino en cualquier conjunto que tenga una relación de orden bien fundamentada.
-Asociado con esta inducción transfinita está el metodo de dedefinición por recirsión transfinita. El método de definición por recursión transfinita es una técnica que se utiliza para definir una función $f: A \rightarrow B$ en un conjunto $A$ mediante la recursión sobre la relación bien fundamentada $<$. Este método utiliza el principio de inducción transfinita para definir $f$ en cada elemento $a$ de $A$ en términos de los valores $f(a')$ para todos los elementos $a'$ de $A$ que son menores que $a$ en la relación $<$.
+\begin{propo}\textbf{Otra interpretación de un conjunto definido inductivamente}
+    $$W(<) = I(\phi_<) = \{b \quad: b\,\, tiene\,\, una\,\, prueba\}$$
+    Es decir El conjunto inductivamente definido por el conjunto de reglas definido por una relación de orden parcial es la parte bien fundamentada de $<$ y a su vez el conjunto de los elementos $\varphi_<$-demostrables.
+\end{propo}
 
 \begin{defi}\textbf{Conjuntos de reglas deterministas}\\
     El conjunto de reglas $\phi$ es llamado \textbf{determinista} si $\phi:X_1\rightarrow x$ y $\phi:X_2\rightarrow x$ implica que $X_1=X_2$
 \end{defi}
 \begin{ejemplo}
-Veamos un par de ejemplos interesantes:\\
+Veamos un par de ejemplos interesantes:
     \begin{itemize}
         \item $\phi_<$ Siempre es determinista.\\
         $\phi_< $ es determinista porque para dos subconjuntos $X_1$ y $X_2$ tales que $\phi_< : X_1\rightarrow x$ y $\phi_< : X_2\rightarrow x$, si $X_1 \neq X_2$ entonces existe un elemento $a \in X_1\Delta X_2$ que es el mínimo elemento en $X_1\Delta X_2$, donde $\Delta$ denota la diferencia simétrica entre conjuntos. Entonces, sin pérdida de generalidad, podemos suponer que $a\in X_1$ y $a\notin X_2$, lo que significa que para cualquier $b \in X_2$ se tiene $a<b$, y por lo tanto $\phi_<(X_2) \subseteq (<a)$, lo que contradice el hecho de que $\phi_<(X_2) = x$. Por lo tanto, $X_1 = X_2$ y $\phi_<$ es determinista.
@@ -207,7 +198,7 @@ Veamos un par de ejemplos interesantes:\\
     \end{itemize}
 \end{ejemplo}
 
-Ahora bien, sea $\phi$ determinista y $A$ un conjunto de conclusiones de reglas en $\phi$. para $x,y\in A$ sea $x<y$ si $\phi: x\rightarrow y$ para algun conjunto $X$ tal que $x\in X$ y $X\subseteq A$. Entonces $\phi_<$ es el conjunto de reglas $X\rightarrow x$ en $\phi$ tal que $X\subseteq A$. Además tenemos:
+Ahora bien, sea $\phi$ determinista y $A$ un conjunto de conclusiones de reglas en $\phi$. para $x,y\in A$ sea $x<y$ si $\phi: X\rightarrow y$ para algun conjunto $X$ tal que $x\in X$ y $X\subseteq A$. Entonces $\phi_<$ es el conjunto de reglas $X\rightarrow x$ en $\phi$ tal que $X\subseteq A$. Además tenemos:
 \begin{propo}
     Si $\phi$ es determinista:
     $$I(\phi)=I(\phi_<)$$
@@ -230,22 +221,8 @@ Entonces $\varphi^{\infty}=\bigcup_{\lambda}\varphi^{\lambda}$
         \item $I(\varphi)$ es el punto fijo más pequeño de $\varphi$
     \end{enumerate}
 
-Veamos una demostración
-\begin{enumerate}
-    \item Para la primera inclusión, tomemos un elemento $x \in \varphi^\infty$. Entonces, por definición, $x \in \varphi^\lambda$ para algún $\lambda \in \mathcal{N}$. Por lo tanto, $x \in \varphi^\mu$ para todo $\mu \geq \lambda$. Como $x \in \varphi^\mu$, entonces existe un $n_\mu \in \mathcal{N}$ tal que $\varphi^{n_\mu}(A) \subseteq \varphi^\mu(A)$ y $x \in \varphi^\mu(A)$. Por lo tanto, $x \in \varphi^{n_\mu}(A)$. Ahora, tomemos el conjunto $X = {\varphi^{n_\mu}(A) : \mu \geq \lambda}$. Como $\varphi$ es monotono, $X$ es cerrado bajo $\varphi$. Además, $x \in \bigcup X$, por lo que $x \in I(\varphi)$. Así, hemos demostrado que $\varphi^\infty \subseteq I(\varphi)$.
-
-    Para la segunda inclusión, tomemos un elemento $x \in I(\varphi)$. Entonces, por definición, $\varphi(X) \subseteq X$ para algún $X \subseteq A$. Ahora, para cada $n \in \mathcal{N}$, consideremos el conjunto $X_n = \varphi^n(X)$. Como $\varphi$ es monotono, $X_{n+1} = \varphi(X_n) \subseteq \varphi(X) \subseteq X_0 = X$. Por lo tanto, ${X_n}$ es una cadena descendente de conjuntos cerrados bajo $\varphi$. Como $A$ es un conjunto completo, $\bigcap_{n=0}^\infty X_n$ es el punto fijo más pequeño de $\varphi$. Por lo tanto, $x \in \bigcap_{n=0}^\infty X_n$. Como $X \subseteq X_0 = X$, entonces $X \subseteq \bigcap_{n=0}^\infty X_n$. Por lo tanto, $x \in \bigcap_{n=0}^\infty X_n$, lo que implica que $x \in \varphi^\infty$. Así, hemos demostrado que $I(\varphi) \subseteq \varphi^\infty$.
-
-    \item Supongamos que $X\in I(\varphi)$. Entonces, por definición, $\varphi(X)\subseteq X$. Como $X\subseteq A$, podemos concluir que $\varphi(X)\subseteq A$ y, por lo tanto, $\varphi(X)\in Pow(A)$. Ahora, como $\varphi$ es monotono, tenemos que $\varphi(\varphi(X))\subseteq \varphi(X)$, lo que implica que $\varphi(X)\in I(\varphi)$. Así, $I(\varphi)$ es un punto fijo de $\varphi$.
-
-    Ahora, supongamos que $Y$ es un punto fijo de $\varphi$. Queremos demostrar que $I(\varphi)\subseteq Y$.
-    
-    Supongamos que $X\in I(\varphi)$. Entonces, por definición, $\varphi(X)\subseteq X$. Como $Y$ es un punto fijo de $\varphi$, tenemos que $\varphi(X)\subseteq Y$. Ahora, como $\varphi$ es monotono, tenemos que $\varphi^2(X)\subseteq \varphi(\varphi(X))\subseteq \varphi(X)\subseteq Y$. Por inducción, podemos demostrar que $\varphi^k(X)\subseteq Y$ para todo $k\geq 1$.
-    
-    Ahora, sea $x\in \varphi^\infty(X)$. Entonces, por definición, $x\in \varphi^k(X)$ para algún $k\geq 1$. Pero como $\varphi^k(X)\subseteq Y$, tenemos que $x\in Y$. Así, $\varphi^\infty(X)\subseteq Y$.
-\end{enumerate}
 \end{propo}
-\subsection{Concepto de prueba para inducción monotona}
+\subsection*{Concepto de prueba para inducción monotona}
 Un cardinal regular es un cardinal $\kappa$ tal que para cualquier colección de conjuntos $\{A_i\}_{i\in I}$, si $\vert A_i \vert < \kappa$ para todo $i\in I$, entonces $\left\vert \bigcup_{i\in I} A_i \right\vert < \kappa$.
 
 \begin{defi}
@@ -274,14 +251,7 @@ $$\varphi^{<0} = \emptyset, \,\,\,\,\,\, \varphi^{<\lambda + 1} = \varphi^{<\lam
 \end{propo}
 La proposición establece que el conjunto $I(\varphi)$ de puntos fijos de $\varphi$ es precisamente el conjunto de elementos en $A$ que tienen una $\varphi$-prueba de longitud $\kappa$ para cualquier cardinal regular $\kappa$. En otras palabras, un elemento $a\in A$ pertenece a $I(\varphi)$ si y solo si existe una $\varphi$-prueba infinita que comienza con $a$ y cumple con las condiciones de la definición. De esta manera, $I(\varphi)$ se puede entender como el conjunto de elementos en $A$ que son $\varphi$-probables bajo el operador, ya que tienen una prueba infinita que los justifica.
 
-La demostración se puede hacer en dos partes:
-\begin{enumerate}
-    \item Para la primera parte, se puede demostrar que si $a$ tiene una $\varphi$-prueba de longitud $\kappa$, entonces $a \in \varphi^{<\kappa}$. Para ello, se puede hacer una demostración por inducción transfinita en $\kappa$. El caso base ($\kappa = 0$) es trivial, ya que la longitud de la prueba es 0, entonces $a_{0} = a$, y como $\emptyset \subseteq \varphi(\emptyset)$, se tiene que $a_{0} \in \varphi^{<0}$. Para el paso inductivo, se supone que el resultado es cierto para todo ordinal menor a $\kappa$, y se demuestra que es cierto para $\kappa$. Se toma una $\varphi$-prueba de longitud $\kappa$ para $a$, es decir, una sucesión $\{a_{\mu}\}_{\mu<\kappa}$ tal que $a{0} = a$ y $a_{\mu} \in \varphi\{a_{\nu}\}_{\nu<\mu}$ para todo $\mu<\kappa$. Luego, se define $b = \bigcup_{\mu<\kappa} a_{\mu}$, y se demuestra que $b \in \varphi({a_{\mu}}_{\mu<\kappa})$ y que $a \in \varphi^{<\kappa}$.
-    
-    \item Para la segunda parte, se puede demostrar que si $a \in I(\varphi)$, entonces $a$ tiene una $\varphi$-prueba de longitud $\kappa$ para algún cardinal regular $\kappa$. Para ello, se toma cualquier $a \in I(\varphi)$, y se define $\kappa$ como el mínimo cardinal regular tal que $a$ tiene una $\varphi$-prueba de longitud $\kappa$. Luego, se demuestra que $\varphi^{<\kappa} \subseteq I(\varphi)$ y con lo anterior implica la igualdad que buscamos y que $a$ tiene una $\varphi$-prueba de longitud $\kappa$.
-\end{enumerate}
-
-\begin{defi}
+\begin{defi}\textbf{Un arbol bien fundamentado}\\
     Un arbol bien fundamentado $T$ es un conjunto de secuencias finitas de longitud mayor que $0$ tal que
     \begin{enumerate}
         \item Hay exactamente una sequencia de longitud $1$ en $T$, es llamada la raíz $(a_{T})$ del arbol.
@@ -298,48 +268,90 @@ Un árbol bien fundamentado es un conjunto de secuencias finitas que cumple cier
     Si $\phi$ es un conjunto de regla, un arbol $T$ es una $\phi$-prueba de un $a = a_T$ y $\phi: T_{(a_1,\ldots,a_{n})}\rightarrow a_n$, siempre que $(a_1,\ldots,a_{n})\in T$, donde:
     $$T_{(a_1,\ldots,a_{n})} = \{a \,\, : (a_1,\ldots,a_{n},a) \in T\}$$
 \end{defi}
-Esta definición se refiere a la noción de una prueba en un árbol utilizando un conjunto de reglas $\phi$. En particular, si tenemos un árbol $T$ y un elemento $a$ que se quiere demostrar, podemos decir que $T$ es una $\phi$-prueba de $a$ si se cumplen las siguientes condiciones:
-\begin{enumerate}
-    \item El elemento raíz del árbol es $a$.
-    \item Para cada nodo intermedio $(a_1,\ldots,a_n)$ en el árbol, se aplica una regla $\phi$ para producir un nuevo elemento $a_{n+1}$ en el siguiente nivel del árbol. Es decir, $\phi: T_{(a_1,\ldots,a_n)}\rightarrow a_{n+1}$, donde $T_{(a_1,\ldots,a_n)}$ es el conjunto de hijos del nodo $(a_1,\ldots,a_n)$ en el árbol $T$.
-    \item Si se llega a un nivel del árbol donde no se puede aplicar ninguna regla de $\phi$ para producir un nuevo elemento, entonces la prueba se detiene. Si en este punto se ha llegado a un elemento $a$, entonces se dice que el árbol $T$ es una $\phi$-prueba de $a$.
-\end{enumerate}
-
 \begin{propo}
     \begin{enumerate}
         \item $I(\phi) = \{a\,\,:\exists_{T}(T\rightarrow a)\}$ el conjunto de elementos tal que tienen un arbol que lo $\phi$-prueban.
         \item si $\phi$ es un conjunto de reglas en $A$ con su correspondiente operador monotono $\varphi:Pow(A)\rightarrow Pow(A)$, entonces para todo ordinal $\lambda$,
         $$\varphi^{\lambda} = \{a\,\,:\exists_{T}(|T|\leq\lambda\,\,\land\,\,\,T\rightarrow a)\}$$
     \end{enumerate}
-
-    Para demostrar esto tenemos que (1), sale de la definición de arbol 1.12 en (2) y (3). Por otra parte (2) sale de la definición de $\varphi^{\lambda}$ como en la proposición (1.9).
 \end{propo}
-\subsection{Kernels - el dual de una definición inductiva}
-$\phi$ es un conjunto de reglasn decimos que $X$ es \textbf{$\phi$-denso} si para todo $x\in X$ hay un conjunto $Y\subset X$ tal que $\phi:Y\rightarrow x$.\\
 
-Definimos $K(\phi) = \bigcup\{X\,\,\, : X \,\,es\,\,\phi-denso\}$, $K(\phi)$ es $\phi$-denso en si mismo  y es el más grande con esta propiedad.\\
+\subsection{Puntos fijos en un lattice completo}
+\begin{defi}\textbf{Poset}\\
+    Un conjunto parcialmente ordenado o poset, es un conjunto no vacío equipado con una relación de orden parcial, es decir \textbf{reflexiva, antisimetrica y transitiva}, usualmente lo denotamos como $(A,<)$, donde $A$ es el conjunto y $<$ es la relación de orden parcial
+\end{defi}
+A continuación algunos ejemplos:
+\begin{ejemplo}\textbf{Conjuintos ordenados}
+    \begin{enumerate} 
+        \item El conjunto de los números enteros $\mathbf{Z}$, junto con la relación de orden parcial $<$. Es decir, para $a, b \in \mathbf{Z}$, $a < b$ si y solo si $a$ es menor o igual que $b$.
+        \item El conjunto de los subconjuntos de un conjunto dado $X$, junto con la relación de orden parcial "$\subset$". Es decir, para $A, B \subset X$, $A \subset B$ si y solo si todos los elementos de $A$ también están en $B$.
+        \item El conjunto de los productos cartesianos $A \times B$ de dos conjuntos $A$ y $B$, junto con la relación de orden parcial $<_{\times}$ llamado \textbf{orden lexicográfico}. Es decir, para $(a_1,b_1),(a_2,b_2) \in A \times B$, $(a_1,b_1) <_{\times} (a_2,b_2)$ si y solo si $a_1 < a_2$ o ($a_1 = a_2$ y $b_1 < b_2$).
+    \end{enumerate}
+\end{ejemplo}
+\begin{ejemplo}\textbf{Preorden}\\
+    Un conjunto preordenado es un conjunto no vacío equipado con una relación \textbf{reflexiva y transitiva}. Si $L$ es este preorden definimos la siguiente relación de equivalencia como.
+    $$x \sim y \quad si\,\, y \,\, solo \,\, si \quad x \geq y \,\, \land \,\, y \geq x$$ 
+    definimos $A = L/\sim$, con el orden inducido por esta relación de equivalencia.
+\end{ejemplo}
 
-Si $\phi$ es un conunto de reglas en $A$ y $\varphi:Pow(A)\rightarrow Pow(A)$ es el operador monotono asociado a $\phi$ entonces $X$ es $\phi$-denso si y solo si $X\subseteq \varphi(X)$.
-Ademas, $K(\phi) = \bigcup\{X\,\,\, : X \,\,es\,\,\phi-denso\} = \bigcup\{X\,\,\, : X\subseteq \varphi(X)\}$\\
-
-Para hacer explicita la dualidad entre la construcción y la definición inductiva definimos el operador dual de un operador $\varphi$, como $\varphi^{*}$ tomando $\varphi^{*}(X) = \neg\varphi(\neg X)$, donde $\neg X = A - X$ para $X\in A$.\\
-
-Entonces $X\in A$ es $\phi$-denso si y solo si $\neg X$ es $\phi$-cerrado, así $I(\varphi) = \neg I(\varphi^{*})$. Y $K(\phi)$ puede ser definido en terminos de iteraciones transfinitas
-\begin{center}
-    $\varphi^{|\lambda|} = \neg\varphi^{*|\lambda|}$, como $K(\varphi) = \bigcap \varphi^{|\lambda|}$
-\end{center}
-donde $\varphi^{|\lambda|} = \varphi (\bigcap_{\mu<\lambda} \varphi^{|\mu|})$
-
-\newpage
-\section{Inducción en teoría de recursión}
-\begin{defi} \textbf{Conjunto de reglas recursivos.}\\
-    Sea $\phi$ un conjunto de reglas finito en $\omega$. $\phi$ es recursivo (r.e.) si la relación $R_{\phi}$ es recursiva, donde  $R_{\phi}$ es el conjunto de pares ordenados $(<a_1,\ldots, a_n>,b)$ tal que $\phi: \{a_1,\ldots, a_n\}\rightarrow b$
+\begin{defi}\textbf{Infimo y supremo}\\
+    Sea $\mathbf{R}$ un poset, definimos:
+\begin{itemize}
+    \item \textbf{infimo (met):} Dado un conjunto $A \subseteq \mathbf{R}$, $m \in \mathbf{R}$ se llama infimo de $A$ si se cumple que:
+    \begin{enumerate}
+        \item $m$ es cota inferior de $A$, es decir, $m \leq a$ para todo $a \in A$.
+        \item Cualquier otra cota inferior de $A$ es mayor o igual que $m$, es decir, si $m' \leq a$ para todo $a \in A$, entonces $m' \geq m$.
+    \end{enumerate}
+    El infimo de $A$ se denota como $\inf(A)=met(A)$.
+    \item \textbf{supremo (join):}  Dado un conjunto $A \subseteq \mathbf{R}$, $M \in \mathbf{R}$ se llama supremo de $A$ si se cumple que:
+    \begin{enumerate}
+        \item $M$ es cota superior de $A$, es decir, $M \geq a$ para todo $a \in A$.
+        \item Cualquier otra cota superior de $A$ es menor o igual que $M$, es decir, si $M' \geq a$ para todo $a \in A$, entonces $M' \leq M$.
+    \end{enumerate}
+    El supremo de $A$ se denota como $\sup(A)=join(A)$.
+\end{itemize}    
 \end{defi}
 
-\begin{propo} \textbf{$I(\varphi)$ es recursivo, si $\phi$ un conjunto de reglas finito recursivo.}\\
-    Si $\phi$ un conjunto de reglas finito recursivo en $\omega$, entonces $I(\varphi)$ es recursivo
-\end{propo}
+\begin{ejemplo}\textbf{Dual de un poset}\\
+    Dado un poset $(A,<)$, su dual o inverso $(A^{op},>)$ es el poset que se obtiene al invertir la relación de orden, es decir, $a>b$ en el dual si y solo si $b>a$ en el poset original. Formalmente, $(A{op},>)$ es un poset con $A$ como conjunto y la relación de orden $>$ definida como:
+    $$a > b \,\,en\,\,A^{op} \quad si\,\, y\,\, solo\,\, si \quad b < a\,\,en\,\,A \quad para\,\, todo \quad a,b \in A$$
+    El dual de un poset conserva las propiedades de reflexividad, antisimetría y transitividad.
 
+    si $(A, <)$ es un poset y $B \subseteq A$ tiene un ínfimo $m$ en $(A, <)$, entonces $m$ es el supremo de $B$ en $(A^{op}, >)$. Por otro lado, si $B$ tiene un supremo $M$ en $(A, <)$, entonces $M$ es el ínfimo de $B$ en $(A^{op}, >)$.
+\end{ejemplo}
+
+\begin{defi}
+    Dado un poset $(L, \leq)$ y una endofunción $F: L \rightarrow L$, definimos:
+    \begin{itemize}
+        \item $F$ es \textbf{monótono} si preserva el orden parcial, es decir, para todo $x, y \in L$, si $x \leq y$, entonces $f(x) \leq f(y)$.
+        \item Los \textbf{puntos pre-fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) \leq x$. De manera similar, los \textbf{puntos post-fijos} son los elementos $x \in L$ tales que $x \leq f(x)$.\\ 
+        Es decir, un punto pre-fijo es un elemento que el endofunción no puede llevar más allá de sí mismo, mientras que un punto post-fijo es un elemento que el endofunción no puede llevar por debajo de sí mismo.
+        \item Los \textbf{puntos fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) = x$. Es decir, son los elementos que el endofunción deja inalterados.
+    \end{itemize} 
+\end{defi}
+
+\begin{ejemplo}\textbf{El algoritmo de la división como una endofunción}\\
+    Consideremos el conjunto $A = \mathbf{N}^2$ con el orden lexicográfico definido como $(a,b) < (c,d)$ si $a < c$ o si $a = c$ y $b < d$. Sea $f: A \rightarrow A$ el endofunción definido por el algoritmo de la división, es decir, $f(x,y) = (m,r)$ si $0 < y$, $x = ym + r$, donde $0 \leq r < y$, y si $y=0$, $f(x,0) = (0,x)$ 
+
+    \begin{itemize}
+        \item Un punto prefijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) \leq (x,y)$ en el orden lexicográfico. En este caso, podemos ver que si $(x,y)\leq(m,r)$ si $x < m$ o si $x = m$ y $y \leq r$, vemos que en todo momento $x \geq m$, por lo que $x = m$ y $y \leq r$, por lo tanto $y = 0$, y por tanto $x = 0$, y vemos que es también el unico punto fijo
+        \item Un punto postfijo de $f$ es un elemento $(x,y) \in A$ tal que $(x,y) \leq f(x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(x,y)\geq(m,r)$ es un punto postfijo si $m < x$ o si $x = m$ y $r \leq y$, entonces, si $x \geq y$ o $y = 0$
+        \item Un punto fijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) = (x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(0,0)$ es el único punto fijo de $f$, ya que $f(0,0) = (0,0)$ y no hay otro elemento $(x,y)$ que sea igual a $(0,0)$ en el orden lexicográfico.
+    \end{itemize}
+    Es facil ver que no es un monomorfismo.
+\end{ejemplo}
+
+\begin{defi}\textbf{enrejado (lattice) completo}\\
+    Un lattice completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjunto no vacío tiene supremo.
+\end{defi}
+Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del infimo en todo conjunto. Esto por la definición. Es decir en un lattice completo todo subconjunto no vacío posee infimo. También tenemos que los lattices completos son acotados, es decir poseen maximo y minimo.
+
+\begin{teo}\textbf{Teorema del punto fijo}\\
+    En un lattice completo, una endofunción tiene un lattice completo de puntos fijos. En particlar el punto fijo más pequeño de la funcíon es el infimo de los puntos pre-fijos, el más grande es el supremo de los puntos postfijos. Más aún por la condición de sobreyectividad estos son el minimo y el máximo del lattice. 
+
+\subsection{Conjuntos definidos inductiva y coinductivamente}
+
+\end{teo}
 \newpage
 \begin{thebibliography}{9}
     \bibitem{Aczel}
