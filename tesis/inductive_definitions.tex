@@ -205,6 +205,116 @@ Ahora bien, sea $\phi$ determinista y $A$ un conjunto de conclusiones de reglas 
 \end{propo}
 La proposición establece que si $\phi$ es determinista, entonces el conjunto de fórmulas demostrables mediante $\phi$ es igual al conjunto de fórmulas demostrables mediante $\phi_<$, es decir, $I(\phi) = I(\phi_<)$.
 
+\subsection{Puntos fijos en un lattice completo}
+\begin{defi}\textbf{Poset}\\
+    Un conjunto parcialmente ordenado o poset, es un conjunto no vacío equipado con una relación de orden parcial, es decir \textbf{reflexiva, antisimetrica y transitiva}, usualmente lo denotamos como $(A,<)$, donde $A$ es el conjunto y $<$ es la relación de orden parcial
+\end{defi}
+A continuación algunos ejemplos:
+\begin{ejemplo}\textbf{Conjuintos ordenados}
+    \begin{enumerate} 
+        \item El conjunto de los números enteros $\mathbf{Z}$, junto con la relación de orden parcial $<$. Es decir, para $a, b \in \mathbf{Z}$, $a < b$ si y solo si $a$ es menor o igual que $b$.
+        \item El conjunto de los subconjuntos de un conjunto dado $X$, junto con la relación de orden parcial "$\subset$". Es decir, para $A, B \subset X$, $A \subset B$ si y solo si todos los elementos de $A$ también están en $B$.
+        \item El conjunto de los productos cartesianos $A \times B$ de dos conjuntos $A$ y $B$, junto con la relación de orden parcial $<_{\times}$ llamado \textbf{orden lexicográfico}. Es decir, para $(a_1,b_1),(a_2,b_2) \in A \times B$, $(a_1,b_1) <_{\times} (a_2,b_2)$ si y solo si $a_1 < a_2$ o ($a_1 = a_2$ y $b_1 < b_2$).
+    \end{enumerate}
+\end{ejemplo}
+\begin{ejemplo}\textbf{Preorden}\\
+    Un conjunto preordenado es un conjunto no vacío equipado con una relación \textbf{reflexiva y transitiva}. Si $L$ es este preorden definimos la siguiente relación de equivalencia como.
+    $$x \sim y \quad si\,\, y \,\, solo \,\, si \quad x \geq y \,\, \land \,\, y \geq x$$ 
+    definimos $A = L/\sim$, con el orden inducido por esta relación de equivalencia.
+\end{ejemplo}
+
+\begin{defi}\textbf{Infimo y supremo}\\
+    Sea $\mathbf{R}$ un poset, definimos:
+\begin{itemize}
+    \item \textbf{infimo (meet):} Dado un conjunto $A \subseteq \mathbf{R}$, $m \in \mathbf{R}$ se llama infimo de $A$ si se cumple que:
+    \begin{enumerate}
+        \item $m$ es cota inferior de $A$, es decir, $m \leq a$ para todo $a \in A$.
+        \item Cualquier otra cota inferior de $A$ es mayor o igual que $m$, es decir, si $m' \leq a$ para todo $a \in A$, entonces $m' \geq m$.
+    \end{enumerate}
+    El infimo de $A$ se denota como $\inf(A)=met(A)$.
+    \item \textbf{supremo (join):}  Dado un conjunto $A \subseteq \mathbf{R}$, $M \in \mathbf{R}$ se llama supremo de $A$ si se cumple que:
+    \begin{enumerate}
+        \item $M$ es cota superior de $A$, es decir, $M \geq a$ para todo $a \in A$.
+        \item Cualquier otra cota superior de $A$ es menor o igual que $M$, es decir, si $M' \geq a$ para todo $a \in A$, entonces $M' \leq M$.
+    \end{enumerate}
+    El supremo de $A$ se denota como $\sup(A)=join(A)$.
+\end{itemize}    
+\end{defi}
+
+\begin{ejemplo}\textbf{Dual de un poset}\\
+    Dado un poset $(A,<)$, su dual o inverso $(A^{op},>)$ es el poset que se obtiene al invertir la relación de orden, es decir, $a>b$ en el dual si y solo si $b>a$ en el poset original. Formalmente, $(A{op},>)$ es un poset con $A$ como conjunto y la relación de orden $>$ definida como:
+    $$a > b \,\,en\,\,A^{op} \quad si\,\, y\,\, solo\,\, si \quad b < a\,\,en\,\,A \quad para\,\, todo \quad a,b \in A$$
+    El dual de un poset conserva las propiedades de reflexividad, antisimetría y transitividad.
+
+    si $(A, <)$ es un poset y $B \subseteq A$ tiene un ínfimo $m$ en $(A, <)$, entonces $m$ es el supremo de $B$ en $(A^{op}, >)$. Por otro lado, si $B$ tiene un supremo $M$ en $(A, <)$, entonces $M$ es el ínfimo de $B$ en $(A^{op}, >)$.
+\end{ejemplo}
+
+\begin{defi}
+    Dado un poset $(L, \leq)$ y una endofunción $F: L \rightarrow L$, definimos:
+    \begin{itemize}
+        \item $F$ es \textbf{monótono} si preserva el orden parcial, es decir, para todo $x, y \in L$, si $x \leq y$, entonces $f(x) \leq f(y)$.
+        \item Los \textbf{puntos pre-fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) \leq x$. De manera similar, los \textbf{puntos post-fijos} son los elementos $x \in L$ tales que $x \leq f(x)$.\\ 
+        Es decir, un punto pre-fijo es un elemento que el endofunción no puede llevar más allá de sí mismo, mientras que un punto post-fijo es un elemento que el endofunción no puede llevar por debajo de sí mismo.
+        \item Los \textbf{puntos fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) = x$. Es decir, son los elementos que el endofunción deja inalterados.
+    \end{itemize} 
+\end{defi}
+
+\begin{ejemplo}\textbf{El algoritmo de la división como una endofunción}\\
+    Consideremos el conjunto $A = \mathbf{N}^2$ con el orden lexicográfico definido como $(a,b) < (c,d)$ si $a < c$ o si $a = c$ y $b < d$. Sea $f: A \rightarrow A$ el endofunción definido por el algoritmo de la división, es decir, $f(x,y) = (m,r)$ si $0 < y$, $x = ym + r$, donde $0 \leq r < y$, y si $y=0$, $f(x,0) = (0,x)$ 
+
+    \begin{itemize}
+        \item Un punto prefijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) \leq (x,y)$ en el orden lexicográfico. En este caso, podemos ver que si $(x,y)\leq(m,r)$ si $x < m$ o si $x = m$ y $y \leq r$, vemos que en todo momento $x \geq m$, por lo que $x = m$ y $y \leq r$, por lo tanto $y = 0$, y por tanto $x = 0$, y vemos que es también el unico punto fijo
+        \item Un punto postfijo de $f$ es un elemento $(x,y) \in A$ tal que $(x,y) \leq f(x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(x,y)\geq(m,r)$ es un punto postfijo si $m < x$ o si $x = m$ y $r \leq y$, entonces, si $x \geq y$ o $y = 0$
+        \item Un punto fijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) = (x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(0,0)$ es el único punto fijo de $f$, ya que $f(0,0) = (0,0)$ y no hay otro elemento $(x,y)$ que sea igual a $(0,0)$ en el orden lexicográfico.
+    \end{itemize}
+    Es facil ver que no es un monomorfismo.
+\end{ejemplo}
+
+\begin{defi}\textbf{enrejado (lattice) completo}\\
+    Un lattice completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjunto no vacío tiene supremo.
+\end{defi}
+Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del infimo en todo conjunto. Esto por la definición. Es decir en un lattice completo todo subconjunto no vacío posee infimo. También tenemos que los lattices completos son acotados, es decir poseen maximo y minimo.
+
+\begin{teo}\textbf{Teorema del punto fijo}\\
+    En un lattice completo $L$, una endofunción monotona $F:L\rightarrow L$ tiene un lattice completo de puntos fijos. En particlar el punto fijo más pequeño de la funcíon es el infimo de los puntos pre-fijos, el más grande es el supremo de los puntos postfijos. Más aún por la condición de sobreyectividad estos son el minimo y el máximo del lattice. 
+\end{teo}
+Sea $A \subseteq L$ el conjunto de puntos fijos, y sea $B \subseteq A$, como $L$ es lattice completo, existe $s\in L$ tal que $s = sup(B)$ veamos que $\in A$, para esto basta ver que $F(s) = s$\\ 
+Tomemos $Y=\{y\in L| F(y)\leq y \land \forall_{x\in B}(x\leq y)\} \subseteq L$, sea $i = inf (Y) \in L$, por lo tanto $s = i$, $F(s)\leq s$ 
+
+\subsection{Conjuntos definidos inductiva y coinductivamente}
+
+\begin{defi}\textbf{Conjuntos definidos inductiva y coinductivamente} \\
+    Sea L un lattice completo cuyos puntos son conjuntos, (Podriamos decir $L\subseteq Pow(A)$, para algún conjunto $A$), ordenado bajo la relación de ordén de inclusión, y $F:L\rightarrow L$ una enfofunción en $L$, Los conjuntos:
+    $$F_{ind} = \bigcap \{x|F(x)\subseteq x\}$$
+    $$F_{coind} = \bigcap \{x|x\subseteq F(x)\}$$
+    (El meet de de los puntos pre-fijos, y el join de los puntos post-fijos) son, respectivamente el conjunto definido inductiva por $F$ y definido coinductivamente por $F$.
+\end{defi}
+
+\begin{propo}\textbf{Principio de inducción y coinduccion}\\
+    para una endofinción monotona $F:L\rightarrow L$ sobre un lattices tenemos
+    \begin{center}
+        $F(x)\leq x \rightarrow F_{ind}\leq x$ (Principio de inducción)\\
+        $F(x)\geq x \rightarrow F_{coind}\geq x$ (Principio de coinducción)
+    \end{center}
+\end{propo}
+
+\begin{ejemplo}
+    Consideremos las reglas para listas:\\
+    Sea $A$ un conjunto. El conjunto de listas finitas con elementos de $A$ es el conjunto $\mathbf{L}_A$ inductivamente generado por las siguentes teglas:
+    \begin{enumerate}
+        \item $(\emptyset,nill \in \mathbf{L}_A)$ esta representa la lista vacía.
+        \item $(s \in \mathbf{L}_A\,\,\land\,\, a\in A, <a>\cdot s \in \mathbf{L}_A)$, esta regla representa que si concatenamos a izquierda un elemento de $A$ en una lista de $\mathbf{L}_A$, esto genera una nueva lista.
+    \end{enumerate}
+    Por otra parte, tomemos:\\ 
+    $X$ como el conjunto de todos los strings finitos o infinitos con elementos del alfabeto $A\cup\{nill, \cdot, <, >\}$, el funcional correspondiente $\varphi_{\mathbf{L}_A}$ es:
+    $$\varphi_{\mathbf{L}_A}(T) = \{nill\} \cup \{<a>\cdot s \mid a\in A \land s \in T \}$$
+    Que es un operador monotono sobre un latice completo.\\
+    Tenemos finalmente que $\mathbf{L}_A = \bigcap \{T \mid \varphi_{\mathbf{L}_A}(T)\subseteq T\}$, es el conjunto inductivamente definido por este operador, y los elementos aquó son justamente los de la forma:\\
+    $$<a_1>\cdot<a_2>\cdot<a_3>\cdot<a_4>\cdot<a_5>\cdot\,\cdots\,\cdot <a_n> \cdot nill\:\: para\,\, a_i \in A$$
+    Además, El conjunto coinductivamente definido $\mathbf{{I}}_A = \bigcup \{T \mid T\subseteq\varphi_{\mathbf{L}_A}(T)\}$, coincide con el conjunto de las listas finitas o infinitas de elementos en $A$.
+\end{ejemplo}
+
+
 \subsection{Definiciones inductivas como operadores}
 Sea $\varphi:Pow(A)\rightarrow Pow(A)$, donde $Pow(A)=\{X:X\subseteq A\}$. El operador $\phi$ es \textbf{monotono} si $X\subseteq Y \subseteq A$ implica que $\varphi(X)\subseteq \varphi(Y) \subseteq A$.\\ 
 Dado $\varphi:Pow(A)\rightarrow Pow(A)$ sea $\phi_{\varphi}$ el conjunto de reglas $X\rightarrow x$ tal que $X\subseteq A$ y $x \in \varphi(X)$. Para $\phi$ monotona, $X \subseteq A$ es $\phi_{\varphi}$-cerrado justo en el caso $\varphi(X) \subseteq X$. Asi $I(\phi_{\varphi})=\bigcap\{X \subseteq A: \varphi(X) \subseteq X\}$. Además, es natural extender la terminología concerniente a definiciones inductivas a operadores monotonos $\varphi$ y escribimos $I(\varphi)=\bigcap\{X \subseteq A: \varphi(X) \subseteq X\}$ y lo llamaremos el \textbf{conjunto intuctivamente definido por $\varphi$.} Todas las definiciones inductivas pueden ser obtenidas usando operadores monotonos. Para $\phi$ un conjunto de reglas en $A$ ($X\cup\{x\}\subseteq A$ cuando $\phi:X\rightarrow x$) Podemos definir un operador monotono mediante $\varphi:Pow(A)\rightarrow Pow(A)$ por:
@@ -276,86 +386,13 @@ Un árbol bien fundamentado es un conjunto de secuencias finitas que cumple cier
     \end{enumerate}
 \end{propo}
 
-\subsection{Puntos fijos en un lattice completo}
-\begin{defi}\textbf{Poset}\\
-    Un conjunto parcialmente ordenado o poset, es un conjunto no vacío equipado con una relación de orden parcial, es decir \textbf{reflexiva, antisimetrica y transitiva}, usualmente lo denotamos como $(A,<)$, donde $A$ es el conjunto y $<$ es la relación de orden parcial
-\end{defi}
-A continuación algunos ejemplos:
-\begin{ejemplo}\textbf{Conjuintos ordenados}
-    \begin{enumerate} 
-        \item El conjunto de los números enteros $\mathbf{Z}$, junto con la relación de orden parcial $<$. Es decir, para $a, b \in \mathbf{Z}$, $a < b$ si y solo si $a$ es menor o igual que $b$.
-        \item El conjunto de los subconjuntos de un conjunto dado $X$, junto con la relación de orden parcial "$\subset$". Es decir, para $A, B \subset X$, $A \subset B$ si y solo si todos los elementos de $A$ también están en $B$.
-        \item El conjunto de los productos cartesianos $A \times B$ de dos conjuntos $A$ y $B$, junto con la relación de orden parcial $<_{\times}$ llamado \textbf{orden lexicográfico}. Es decir, para $(a_1,b_1),(a_2,b_2) \in A \times B$, $(a_1,b_1) <_{\times} (a_2,b_2)$ si y solo si $a_1 < a_2$ o ($a_1 = a_2$ y $b_1 < b_2$).
-    \end{enumerate}
-\end{ejemplo}
-\begin{ejemplo}\textbf{Preorden}\\
-    Un conjunto preordenado es un conjunto no vacío equipado con una relación \textbf{reflexiva y transitiva}. Si $L$ es este preorden definimos la siguiente relación de equivalencia como.
-    $$x \sim y \quad si\,\, y \,\, solo \,\, si \quad x \geq y \,\, \land \,\, y \geq x$$ 
-    definimos $A = L/\sim$, con el orden inducido por esta relación de equivalencia.
-\end{ejemplo}
-
-\begin{defi}\textbf{Infimo y supremo}\\
-    Sea $\mathbf{R}$ un poset, definimos:
-\begin{itemize}
-    \item \textbf{infimo (met):} Dado un conjunto $A \subseteq \mathbf{R}$, $m \in \mathbf{R}$ se llama infimo de $A$ si se cumple que:
-    \begin{enumerate}
-        \item $m$ es cota inferior de $A$, es decir, $m \leq a$ para todo $a \in A$.
-        \item Cualquier otra cota inferior de $A$ es mayor o igual que $m$, es decir, si $m' \leq a$ para todo $a \in A$, entonces $m' \geq m$.
-    \end{enumerate}
-    El infimo de $A$ se denota como $\inf(A)=met(A)$.
-    \item \textbf{supremo (join):}  Dado un conjunto $A \subseteq \mathbf{R}$, $M \in \mathbf{R}$ se llama supremo de $A$ si se cumple que:
-    \begin{enumerate}
-        \item $M$ es cota superior de $A$, es decir, $M \geq a$ para todo $a \in A$.
-        \item Cualquier otra cota superior de $A$ es menor o igual que $M$, es decir, si $M' \geq a$ para todo $a \in A$, entonces $M' \leq M$.
-    \end{enumerate}
-    El supremo de $A$ se denota como $\sup(A)=join(A)$.
-\end{itemize}    
-\end{defi}
-
-\begin{ejemplo}\textbf{Dual de un poset}\\
-    Dado un poset $(A,<)$, su dual o inverso $(A^{op},>)$ es el poset que se obtiene al invertir la relación de orden, es decir, $a>b$ en el dual si y solo si $b>a$ en el poset original. Formalmente, $(A{op},>)$ es un poset con $A$ como conjunto y la relación de orden $>$ definida como:
-    $$a > b \,\,en\,\,A^{op} \quad si\,\, y\,\, solo\,\, si \quad b < a\,\,en\,\,A \quad para\,\, todo \quad a,b \in A$$
-    El dual de un poset conserva las propiedades de reflexividad, antisimetría y transitividad.
-
-    si $(A, <)$ es un poset y $B \subseteq A$ tiene un ínfimo $m$ en $(A, <)$, entonces $m$ es el supremo de $B$ en $(A^{op}, >)$. Por otro lado, si $B$ tiene un supremo $M$ en $(A, <)$, entonces $M$ es el ínfimo de $B$ en $(A^{op}, >)$.
-\end{ejemplo}
-
-\begin{defi}
-    Dado un poset $(L, \leq)$ y una endofunción $F: L \rightarrow L$, definimos:
-    \begin{itemize}
-        \item $F$ es \textbf{monótono} si preserva el orden parcial, es decir, para todo $x, y \in L$, si $x \leq y$, entonces $f(x) \leq f(y)$.
-        \item Los \textbf{puntos pre-fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) \leq x$. De manera similar, los \textbf{puntos post-fijos} son los elementos $x \in L$ tales que $x \leq f(x)$.\\ 
-        Es decir, un punto pre-fijo es un elemento que el endofunción no puede llevar más allá de sí mismo, mientras que un punto post-fijo es un elemento que el endofunción no puede llevar por debajo de sí mismo.
-        \item Los \textbf{puntos fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) = x$. Es decir, son los elementos que el endofunción deja inalterados.
-    \end{itemize} 
-\end{defi}
-
-\begin{ejemplo}\textbf{El algoritmo de la división como una endofunción}\\
-    Consideremos el conjunto $A = \mathbf{N}^2$ con el orden lexicográfico definido como $(a,b) < (c,d)$ si $a < c$ o si $a = c$ y $b < d$. Sea $f: A \rightarrow A$ el endofunción definido por el algoritmo de la división, es decir, $f(x,y) = (m,r)$ si $0 < y$, $x = ym + r$, donde $0 \leq r < y$, y si $y=0$, $f(x,0) = (0,x)$ 
-
-    \begin{itemize}
-        \item Un punto prefijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) \leq (x,y)$ en el orden lexicográfico. En este caso, podemos ver que si $(x,y)\leq(m,r)$ si $x < m$ o si $x = m$ y $y \leq r$, vemos que en todo momento $x \geq m$, por lo que $x = m$ y $y \leq r$, por lo tanto $y = 0$, y por tanto $x = 0$, y vemos que es también el unico punto fijo
-        \item Un punto postfijo de $f$ es un elemento $(x,y) \in A$ tal que $(x,y) \leq f(x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(x,y)\geq(m,r)$ es un punto postfijo si $m < x$ o si $x = m$ y $r \leq y$, entonces, si $x \geq y$ o $y = 0$
-        \item Un punto fijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) = (x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(0,0)$ es el único punto fijo de $f$, ya que $f(0,0) = (0,0)$ y no hay otro elemento $(x,y)$ que sea igual a $(0,0)$ en el orden lexicográfico.
-    \end{itemize}
-    Es facil ver que no es un monomorfismo.
-\end{ejemplo}
-
-\begin{defi}\textbf{enrejado (lattice) completo}\\
-    Un lattice completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjunto no vacío tiene supremo.
-\end{defi}
-Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del infimo en todo conjunto. Esto por la definición. Es decir en un lattice completo todo subconjunto no vacío posee infimo. También tenemos que los lattices completos son acotados, es decir poseen maximo y minimo.
-
-\begin{teo}\textbf{Teorema del punto fijo}\\
-    En un lattice completo, una endofunción tiene un lattice completo de puntos fijos. En particlar el punto fijo más pequeño de la funcíon es el infimo de los puntos pre-fijos, el más grande es el supremo de los puntos postfijos. Más aún por la condición de sobreyectividad estos son el minimo y el máximo del lattice. 
-
-\subsection{Conjuntos definidos inductiva y coinductivamente}
-
-\end{teo}
 \newpage
 \begin{thebibliography}{9}
     \bibitem{Aczel}
     Aczel, P. (1997). 
     An Introduction to Inductive Definitions
+    \bibitem{Davide Sangiorgi}
+    Davide, S. (2011)
+    Introduction to bisimulation and coinduccion
 \end{thebibliography}
 \end{document} 
