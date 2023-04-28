@@ -135,7 +135,7 @@ Además, C\# permite la definición de tipos de datos personalizados a través d
 Existen convenciones para nombrar variables y otros elementos del código que ayudan a que el código sea más legible y fácil de entender. Algunas de las convenciones de nomenclatura más comunes son
 
 \begin{itemize}
-    \item CamelCase: es la convención más comúnmente utilizada. En este caso, la primera letra de la primera palabra se escribe en minúscula y la primera letra de cada palabra subsiguiente se escribe en mayúscula. Por ejemplo, \enquote*{nombreDeVariable } o \enquote*{miVariableNumeroUno}. Esta convención se utiliza comúnmente para nombrar \textbf{variables y métodos.}
+    \item CamelCase: es la convención más comúnmente utilizada. En este caso, la primera letra de la primera palabra se escribe en minúscula y la primera letra de cada palabra subsiguiente se escribe en mayúscula. Por ejemplo, \enquote*{nombreDeVariable} o \enquote*{miVariableNumeroUno}. Esta convención se utiliza comúnmente para nombrar \textbf{variables y métodos.}
     \item PascalCase: en este caso, la primera letra de cada palabra se escribe en mayúscula, sin espacios ni guiones bajos. Por ejemplo, \enquote*{NombreDeVariable} \enquote*{MiVariableNumeroUno}. Esta convención se utiliza a menudo para nombrar \textbf{clases}.
     \item Upper\_Case: en este caso, todas las letras se escriben en mayúscula. Esta convención se utiliza generalmente para nombrar constantes. Por ejemplo, \enquote*{VALOR\_MAXIMO} o \enquote*{PI}. Eta convención se utiliza comúnmente para nombrar \textbf{constantes}.
     \item snake\_case: en este caso, se utiliza una separación con guión bajo entre las palabras, todas en minúsculas. Por ejemplo, \enquote*{nombre\_de\_variable} o \enquote*{mi\_variable\_numero\_uno}. Esta convención se utiliza a menudo en otros lenguajes de programación, como Python, y algunos desarrolladores la usan para nombrar \textbf{variables y métodos.}
@@ -270,7 +270,7 @@ Algunos de los operadores de comparación en C\# son:
 
 Veamos algunos ejemplos de cómo se utilizan estos operadores en C\#:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 int edad = 25;
 bool esMayorDeEdad = edad >= 18; // Devuelve true
 bool esMenorDeEdad = edad < 18; // Devuelve false
@@ -410,7 +410,7 @@ else{
     Console.WriteLine("Eres mayor de edad");
 }
 \end{lstlisting}
-En la primera línea se declara la variable \enquote{edad} y se le asigna un valor de 25. Luego, se utiliza la sentencia if para evaluar si la edad es menor a 18, en cuyo caso se imprime por pantalla el mensaje \enquote{Eres menor de edad}. Si la edad no es menor a 18, se evalúa si la edad se encuentra en el rango de 18 a 64 años utilizando la sentencia else if. Si la edad está dentro de ese rango, se imprime por pantalla el mensaje \enquote{Eres adulto}. Si la edad no es menor a 18 y no se encuentra en el rango de 18 a 64 años, se asume que es mayor de 65 años y se imprime el mensaje \enquote{Eres mayor de edad} utilizando la sentencia else.
+En la primera línea se declara la variable \enquote*{edad} y se le asigna un valor de 25. Luego, se utiliza la sentencia if para evaluar si la edad es menor a 18, en cuyo caso se imprime por pantalla el mensaje \enquote*{Eres menor de edad}. Si la edad no es menor a 18, se evalúa si la edad se encuentra en el rango de 18 a 64 años utilizando la sentencia else if. Si la edad está dentro de ese rango, se imprime por pantalla el mensaje \enquote*{Eres adulto}. Si la edad no es menor a 18 y no se encuentra en el rango de 18 a 64 años, se asume que es mayor de 65 años y se imprime el mensaje \enquote*{Eres mayor de edad} utilizando la sentencia else.
 
 \subsubsection*{Sentencia switch}
 La sentencia switch es otra estructura condicional en C\# que permite ejecutar diferentes bloques de código dependiendo del valor de una expresión. La sintaxis de la sentencia switch es la siguiente:
@@ -603,5 +603,1706 @@ En cuanto a los tipos de métodos, además de los métodos con valor de retorno,
 En cuanto al nivel de acceso, los métodos y las variables pueden ser públicos, privados, protegidos o internos, lo que determina si se pueden acceder desde otras clases o dentro de la misma clase.
 
 Por último, en función de los argumentos y la salida, podemos encontrar métodos y funciones con parámetros de entrada y sin ellos, así como con un número variable de argumentos. También pueden ser funciones y métodos genéricos, que aceptan tipos de datos específicos como argumentos y retornan valores del mismo tipo.
+
+\subsection{Cadenas}
+
+Las cadenas de texto son muy comunes en la programación, y en C\# se cuenta con una gran cantidad de métodos para trabajar con ellas. Algunos de los métodos más utilizados son:
+
+\subsubsection*{Concatenación de cadenas}
+
+El método más básico para trabajar con cadenas es la concatenación, que consiste en unir dos o más cadenas en una sola. En C\#, se puede hacer con el operador + o con el método Concat:
+\begin{lstlisting}
+string saludo = "Hola";
+string nombre = "Juan";
+string mensaje1 = saludo + " " + nombre + "!";
+string mensaje2 = string.Concat(saludo, " ", nombre, "!");
+\end{lstlisting}
+Ambos métodos producirán la misma salida: "Hola Juan!".
+
+\subsubsection*{Métodos de formato}
+
+C\# también ofrece una serie de métodos para formatear cadenas de manera más sofisticada. Uno de ellos es el método Format, que permite crear una cadena con un formato predefinido, en el que se pueden incluir parámetros variables:
+\begin{lstlisting}
+string saludo = "Hola";
+string nombre = "Juan";
+string mensaje1 = saludo + " " + nombre + "!";
+string mensaje2 = string.Concat(saludo, " ", nombre, "!");
+\end{lstlisting}
+
+El método Format toma una cadena de formato, que contiene marcadores de posición (en este caso, los números entre llaves), y una serie de argumentos, que se sustituyen en los marcadores de posición. La salida será: \enquote*{Hola Juan, tienes 25 años.}.
+
+También se puede utilizar el operador \$ para crear una cadena interpolada, que es una forma más compacta de utilizar la sintaxis de formato:
+
+\begin{lstlisting}
+string saludo = "Hola";
+string nombre = "Juan";
+int edad = 25;
+string mensaje = $"{saludo} {nombre}, tienes {edad} anos."; \\$
+\end{lstlisting}
+La salida será la misma que en el ejemplo anterior.
+
+\subsubsection*{Métodos de búsqueda}
+
+C\# también proporciona métodos para buscar y reemplazar cadenas dentro de otras. Por ejemplo, el método IndexOf busca la primera aparición de una subcadena dentro de otra cadena:
+\begin{lstlisting}
+string texto = "La casa de Juan esta en la calle Mayor";
+int posicion = texto.IndexOf("Juan");    
+\end{lstlisting}
+El valor de posición será 12, que es la posición en la que empieza la palabra "Juan" dentro de la cadena.
+
+También se puede utilizar el método Replace para reemplazar una subcadena por otra:
+\begin{lstlisting}
+string texto = "La casa de Juan esta en la calle Mayor";
+string nuevoTexto = texto.Replace("Juan", "Pedro");
+\end{lstlisting}
+La variable nuevoTexto contendrá la cadena "La casa de Pedro está en la calle Mayor".
+
+\subsubsection*{Métodos de conversión}
+
+Por último, C\# proporciona métodos para convertir cadenas en otros tipos de datos y viceversa. Uno de los métodos más útiles es el método Parse, que convierte una cadena en un valor numérico:
+\begin{lstlisting}
+string numeroComoTexto = "123";
+int numero = int.Parse(numeroComoTexto);    
+\end{lstlisting}
+El valor de la variable número será 123, que es el valor numérico representado por la cadena.
+
+También se puede utilizar el método ToString para convertir un valor numérico en una cadena:
+
+\begin{lstlisting}
+int numero = 123;
+string numeroComoTexto = numero.ToString();    
+\end{lstlisting}
+
+\subsubsection*{StringBuilder}
+
+StringBuilder es una clase en C\# que se utiliza para manipular cadenas de caracteres de manera más eficiente que con la clase String. La clase StringBuilder tiene métodos que permiten agregar, insertar, eliminar y reemplazar caracteres en una cadena. Además, permite trabajar con cadenas de caracteres mutables (modificables), a diferencia de la clase String, que trabaja con cadenas inmutables (no modificables).
+
+En C\#, para utilizar la clase StringBuilder es necesario importar la librería System.Text. Por lo tanto, al comienzo del archivo de código se debe incluir la siguiente línea:
+\begin{lstlisting}
+using System.Text;    
+\end{lstlisting}
+
+La clase StringBuilder es especialmente útil cuando se trabaja con cadenas grandes y complejas, ya que se pueden realizar múltiples operaciones en la misma cadena sin tener que crear una nueva cadena cada vez, lo que ahorra memoria y tiempo de ejecución.
+
+Aquí hay un ejemplo de cómo se utiliza StringBuilder:
+\begin{lstlisting}
+StringBuilder sb = new StringBuilder("Hola ");
+sb.Append("mundo!");
+Console.WriteLine(sb.ToString()); // Salida: "Hola mundo!"    
+\end{lstlisting}
+En este ejemplo, se crea un nuevo objeto StringBuilder con la cadena "Hola ". Luego, se utiliza el método Append para agregar la cadena \enquote*{mundo!} al final de la cadena existente. Finalmente, se utiliza el método ToString para obtener la cadena resultante y mostrarla por consola.
+
+\subsubsection*{El método ToString}
+
+El método ToString es uno de los métodos más utilizados en C\#, ya que nos permite convertir cualquier objeto a su representación en formato de cadena. Este método se utiliza principalmente para imprimir valores en la pantalla o para concatenar cadenas.
+
+La sintaxis básica del método ToString es la siguiente:
+
+\begin{lstlisting}[language={[Sharp]C}]
+string texto = objeto.ToString();
+\end{lstlisting}
+
+Donde \textit{objeto} es el objeto que se desea convertir a una cadena y \textit{texto} es la cadena resultante.
+
+Es importante tener en cuenta que el método ToString se puede sobrescribir en una clase personalizada para proporcionar una representación de cadena personalizada del objeto. De esta manera, podemos controlar cómo se mostrará el objeto al llamar al método ToString en lugar de la representación predeterminada.
+
+Veamos un ejemplo sencillo de cómo podemos utilizar el método ToString en C\#:
+
+\begin{lstlisting}[language={[Sharp]C}]
+int num = 123;
+string cadena = num.ToString();
+Console.WriteLine(cadena); // muestra "123" en la consola
+\end{lstlisting}
+
+En este ejemplo, el método ToString se utiliza para convertir el número entero \textit{num} a una cadena. La cadena resultante se almacena en la variable \textit{cadena} y se muestra en la consola utilizando el método WriteLine de la clase Console.
+
+En resumen, el método ToString es una herramienta útil para convertir objetos a su representación en formato de cadena. Si se desea personalizar la forma en que se muestra un objeto, es posible sobrescribir este método en una clase personalizada.
+
+\subsubsection*{Otros métodos útiles en cadenas}
+
+En C\#, las cadenas tienen una serie de métodos útiles que pueden ser utilizados para realizar diversas operaciones. Algunos de los métodos más comunes son los siguientes:
+
+\begin{itemize}
+\item \textbf{Insert}: este método permite insertar una cadena en una posición específica dentro de otra cadena. Se puede utilizar de la siguiente manera:
+\begin{lstlisting}
+string cadena = "Hola mundo!";
+cadena = cadena.Insert(5, " querido");
+Console.WriteLine(cadena); // Output: Hola querido mundo!
+\end{lstlisting}
+\item \textbf{EndsWith}: este método comprueba si una cadena termina con un valor específico. Devuelve un valor booleano que indica si es verdadero o falso. Se puede utilizar de la siguiente manera:
+\begin{lstlisting}
+string cadena = "Hola mundo!";
+bool resultado = cadena.EndsWith("!");
+Console.WriteLine(resultado); // Output: True
+\end{lstlisting}
+\item \textbf{LastIndexOf}: este método busca la última aparición de una cadena dentro de otra cadena. Devuelve un entero que indica la posición donde se encuentra la última aparición de la cadena. Se puede utilizar de la siguiente manera:
+\begin{lstlisting}
+string cadena = "Hola mundo!";
+int posicion = cadena.LastIndexOf("o");
+Console.WriteLine(posicion); // Output: 7
+\end{lstlisting}
+\item \textbf{Trim}: este método elimina los espacios en blanco del principio y final de una cadena. Se puede utilizar de la siguiente manera:
+\begin{lstlisting}
+string cadena = " Hola mundo! ";
+cadena = cadena.Trim();
+Console.WriteLine(cadena); // Output: Hola mundo!
+\end{lstlisting}
+\item \textbf{string.Format}: este método permite dar formato a una cadena mediante la inclusión de valores variables. Se puede utilizar de la siguiente manera:
+\begin{lstlisting}
+string nombre = "Juan";
+int edad = 35;
+string resultado = string.Format("Mi nombre es {0} y tengo {1} years.", nombre, edad);
+Console.WriteLine(resultado); // Output: Mi nombre es Juan y tengo 35 years.
+\end{lstlisting}
+\item \textbf{DateTime.ToString}: este método permite dar formato a una fecha y hora en una cadena de texto. Se puede utilizar de la siguiente manera:
+\begin{lstlisting}
+DateTime fecha = new DateTime(2023, 4, 25, 15, 30, 0);
+string resultado = fecha.ToString("dd/MM/yyyy hh:mm:ss");
+Console.WriteLine(resultado); // Output: 25/04/2023 03:30:00 PM
+\end{lstlisting}
+\end{itemize}
+
+\subsection{Colecciones}
+
+La programación en C\# proporciona varios tipos de colecciones para almacenar y manipular conjuntos de datos. Algunos de los tipos de colecciones más comunes en C\# son los siguientes:
+
+\subsubsection*{ArrayLists}
+Un ArrayList es una colección de objetos que se pueden agregar o eliminar dinámicamente en tiempo de ejecución. El tamaño de un ArrayList puede crecer o disminuir automáticamente según sea necesario. Los elementos en un ArrayList se almacenan en orden secuencial, lo que significa que cada elemento tiene un índice numérico que representa su posición en la lista.
+
+Para utilizar un ArrayList en C\#, es necesario importar el espacio de nombres System.Collections. A continuación, se muestra un ejemplo de cómo crear y usar un ArrayList:
+
+\begin{lstlisting}
+using System.Collections;
+
+ArrayList miArrayList = new ArrayList();
+
+miArrayList.Add("Hola");
+miArrayList.Add(123);
+miArrayList.Add(true);
+miArrayList.Add(4.56);
+
+foreach (object elemento in miArrayList){
+    Console.WriteLine(elemento);
+    }
+\end{lstlisting}
+
+\subsubsection*{Pilas o stacks}
+Una pila (o stack, en inglés) es una colección de elementos que se agregan y eliminan por el mismo extremo, conocido como \enquote*{extremo superior} o \enquote*{cima de la pila}. Esto significa que el último elemento en agregarse a la pila es el primero en salir de ella.
+
+En C\#, una pila se puede implementar utilizando la clase Stack, que se encuentra en el espacio de nombres System.Collections. Aquí hay un ejemplo:
+
+\begin{lstlisting}
+using System.Collections;
+
+Stack miPila = new Stack();
+
+miPila.Push("uno");
+miPila.Push("dos");
+miPila.Push("tres");
+
+Console.WriteLine("Cima de la pila: " + miPila.Peek());
+
+while (miPila.Count > 0){
+    Console.WriteLine(miPila.Pop());
+    }
+\end{lstlisting}
+
+\subsubsection*{Colas o Queues}
+Una cola (o queue, en inglés) es una colección de elementos que se agregan por un extremo y se eliminan por el otro, conocido como \enquote*{extremo final}. Esto significa que el primer elemento en agregarse a la cola es el primero en salir de ella.
+
+En C\#, una cola se puede implementar utilizando la clase Queue, que se encuentra en el espacio de nombres System.Collections. Aquí hay un ejemplo:
+
+\begin{lstlisting}
+using System.Collections;
+
+Queue miCola = new Queue();
+
+miCola.Enqueue("uno");
+miCola.Enqueue("dos");
+miCola.Enqueue("tres");
+
+Console.WriteLine("Primer elemento de la cola: " + miCola.Peek());
+
+while (miCola.Count > 0){
+    Console.WriteLine(miCola.Dequeue());
+    }
+\end{lstlisting}
+
+\subsubsection*{HashTables}
+
+Hashtable es una estructura de datos que permite almacenar una colección de pares clave-valor. Cada elemento en un Hashtable está identificado por una clave única y asociado con un valor.
+
+Para crear una Hashtable en C\#, se utiliza la clase Hashtable que se encuentra en el espacio de nombres System.Collections.
+
+A continuación, se muestra un ejemplo de cómo crear una Hashtable y agregar elementos a ella:
+
+\begin{lstlisting}
+Hashtable ht = new Hashtable();
+ht.Add("Juan", 25);
+ht.Add("Maria", 30);
+ht.Add("Pedro", 40);
+\end{lstlisting}
+
+En este ejemplo, se ha creado una Hashtable llamada ht y se han agregado tres elementos a ella. La clave de cada elemento es un string que representa el nombre de una persona, y el valor es un entero que representa su edad.
+
+Para acceder a los elementos de una Hashtable, se utiliza la clave correspondiente. Por ejemplo:
+
+\begin{lstlisting}
+int edadMaria = (int)ht["Maria"];
+\end{lstlisting}
+
+En este ejemplo, se ha accedido al elemento cuya clave es \enquote*{Maria} y se ha almacenado su valor en la variable edadMaria. Como el valor almacenado es un entero, se ha utilizado un casting para convertirlo a ese tipo de datos.
+
+Es importante tener en cuenta que al utilizar una Hashtable, las claves deben ser únicas. Si se intenta agregar un elemento con una clave que ya existe en la Hashtable, se producirá una excepción.
+
+\section{Programación orientada a objetos}
+
+La programación orientada a objetos (POO) es un paradigma de programación que se basa en la utilización de objetos para representar y manipular los datos y su comportamiento en un programa. En POO, los objetos son instancias de una clase, que es una plantilla que define las características y el comportamiento de los objetos.
+
+El enfoque en objetos permite la modularidad y el encapsulamiento, lo que hace que el código sea más fácil de mantener y extender. Además, la POO hace uso de conceptos como la herencia, la polimorfismo y el encapsulamiento, que permiten una mayor flexibilidad y reutilización de código.
+
+\subsection{Clases y objetos}
+
+En programación orientada a objetos, una clase es una plantilla o modelo que describe las propiedades y métodos que tendrán los objetos creados a partir de ella. Por lo tanto, una clase es un concepto abstracto que define la estructura y comportamiento de los objetos.
+
+Por otro lado, un objeto es una instancia concreta de una clase. En otras palabras, es una representación tangible de la clase. Cuando se crea un objeto, se pueden establecer sus propias propiedades y métodos, aunque hereda las características definidas por la clase.
+
+Veamos un ejemplo de cómo se declara una clase en C\#:
+\begin{lstlisting}[language={[Sharp]C}]
+public class Persona {
+    // propiedades
+    public string nombre;
+    public int edad;
+    // metodo constructor
+    public Persona(string nombre, int edad){
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    // metodo
+    public void Saludar(){
+        Console.WriteLine("Hola, mi nombre es " + nombre + " y tengo " + edad + " a~nos.");
+    }
+}
+\end{lstlisting}
+En este ejemplo, se ha creado una clase llamada Persona con dos propiedades (nombre y edad) y dos métodos (el método constructor y el método Saludar). El método constructor se utiliza para inicializar las propiedades cuando se crea un objeto, mientras que el método Saludar se utiliza para imprimir un mensaje en la consola.
+
+Para crear un objeto de la clase Persona, se puede hacer lo siguiente:
+
+\begin{lstlisting}[language={[Sharp]C}]
+Persona persona1 = new Persona("Juan", 30);
+\end{lstlisting}
+
+En este caso, se está creando un objeto llamado persona1 de la clase Persona, y se están pasando como argumentos al método constructor los valores \enquote*{Juan} y 30 para las propiedades nombre y edad, respectivamente.
+
+Una vez creado el objeto, se puede llamar a su método Saludar de la siguiente manera:
+
+\begin{lstlisting}[language={[Sharp]C}]
+persona1.Saludar();
+\end{lstlisting}
+
+Este código imprimirá en la consola el mensaje \enquote*{Hola, mi nombre es Juan y tengo 30 años.}, utilizando los valores de las propiedades del objeto creado.
+
+\subsection{Herencia}
+
+La herencia es un concepto importante en la programación orientada a objetos que permite que una clase adquiera las propiedades y métodos de otra clase existente. La clase existente se conoce como la clase base o superclase, mientras que la clase que hereda de ella se conoce como la clase derivada o subclase. Puede ser útil para crear una jerarquía de clases que comparten propiedades y comportamientos comunes. Al heredar de una clase base, una clase derivada puede reutilizar el código existente y extender o modificar su comportamiento. Además de la herencia de clases, también existen las interfaces funcionales y las clases abstractas. Las interfaces funcionales son un tipo especial de interfaz que define exactamente un método abstracto y pueden ser implementadas por cualquier clase que proporcione una implementación de este método. Las clases abstractas son clases que no se pueden instanciar directamente y deben ser extendidas por clases derivadas. Las clases abstractas pueden contener métodos abstractos, que deben ser implementados por cualquier clase derivada, así como métodos concretos que se pueden usar directamente en la clase derivada.
+
+Te muestro un ejemplo de cómo la herencia puede hacer que el código sea más modular:
+
+\begin{lstlisting}
+public abstract class Animal{
+    public abstract string Sound();
+    }
+
+public class Dog : Animal{
+    public override string Sound(){
+        return "Woof!";
+    }
+}
+
+public class Cat : Animal{
+    public override string Sound(){
+        return "Meow!";
+    }
+}
+
+    public class AnimalSound{
+    public static void Main(){
+        Animal dog = new Dog();
+        Animal cat = new Cat();
+
+        Console.WriteLine(dog.Sound());
+        Console.WriteLine(cat.Sound());
+        }
+}
+\end{lstlisting}
+
+En este ejemplo, se define una clase abstracta llamada Animal que tiene un método abstracto llamado Sound(). La clase Dog y la clase Cat heredan de la clase Animal y proporcionan una implementación del método Sound(). La clase AnimalSound utiliza las clases Dog y Cat para imprimir los sonidos de un perro y un gato en la consola. Este código es más modular y fácil de mantener, ya que el comportamiento común se define en la clase Animal y las clases derivadas pueden proporcionar su propia implementación única del método Sound().
+
+\subsection{Abstracción}
+
+La abstracción es un concepto dentro de la programación orientada a objetos que se refiere al proceso mediante el cual se toman los aspectos de una entidad, asociada al objeto que queremos utilizar, y así pensar en la clase (plantilla) que al instanciar generará este objeto en cuestión. No se abstraen todos los aspectos que una entidad tiene en el mundo real, sino solo los que son realmente pertinentes en la aplicación en cuestión. 
+
+Por ejemplo, si estamos escribiendo una aplicación bancaria, podríamos crear una clase \enquote*{CuentaBancaria} que tenga propiedades como \enquote*{balance} y \enquote*{número de cuenta}, así como métodos como \enquote*{depósito} y \enquote*{retiro}. Un programador que utilice esta clase puede utilizar estos métodos y propiedades sin necesidad de conocer los detalles internos de cómo se implementan. Además, entendemos que una cuenta bancaria puede tener otras propiedades, como un dueño, y este a su vez un numero relativamente grande de propiedades, que realmente en este contexto no nos van a interesar en este contexto.
+
+\subsection{Encapsulamiento}
+
+El encapsulamiento es otro concepto clave en la programación orientada a objetos que se refiere a la ocultación de los detalles internos de una clase o estructura de datos, de manera que solo se expongan los métodos y propiedades que son necesarios para interactuar con ella. En otras palabras, se protege la información dentro de la clase para que no pueda ser modificada por otros objetos externos.
+
+Por ejemplo, en la clase \enquote*{CuentaBancaria} mencionada anteriormente, podríamos encapsular la propiedad \enquote*{balance} y el método \enquote*{retiro}, de manera que solo se pueda acceder a ellos desde dentro de la clase. Esto evita que otros objetos externos a la clase modifiquen directamente el balance de la cuenta o realicen retiros no autorizados.
+
+La sintaxis para encapsular una propiedad en C\# es la siguiente:
+\begin{lstlisting}
+private double balance;
+public double Balance
+{
+    get { return balance; }
+    private set { balance = value; }
+}
+\end{lstlisting}
+En este ejemplo, la propiedad \enquote*{balance} es privada, lo que significa que solo se puede acceder a ella desde dentro de la clase. Sin embargo, hemos creado un método público llamado \enquote*{Balance} que se utiliza para obtener el valor actual de la propiedad. También hemos creado un método privado \enquote*{set} para permitir que la propiedad sea modificada desde dentro de la clase, pero no desde fuera de ella.
+
+Otro ejemplo de encapsulamiento puede ser un método que calcule el interés de una cuenta bancaria, el cual puede ser un proceso complejo que involucre varios cálculos. Este método se puede encapsular en la clase \enquote*{CuentaBancaria} y solo exponer el resultado final para ser utilizado por otros objetos externos. Esto hace que el código sea más modular y fácil de mantener.
+
+\subsection{Polimorfismo}
+
+El polimorfismo es un concepto clave en la programación orientada a objetos que se refiere a la capacidad de objetos de diferentes clases de responder al mismo mensaje o método de diferentes maneras. Esto significa que un método puede ser implementado de manera diferente por diferentes clases, pero su llamada por parte del objeto no varía, es decir, el método se llama de la misma manera independientemente de la clase a la que pertenece el objeto.
+
+Un ejemplo común de polimorfismo es la función \enquote*{draw()} en un programa de gráficos. Diferentes objetos gráficos, como un círculo, un cuadrado o un triángulo, podrían tener su propia implementación de la función \enquote*{draw()}, que dibuja el objeto correspondiente. A pesar de que cada objeto tiene su propia implementación de la función \enquote*{draw()}, se puede llamar a la función de la misma manera para todos los objetos, lo que permite una programación más modular y flexible.
+
+El polimorfismo se puede implementar en POO utilizando la herencia y las interfaces. En la herencia, una clase hija puede tener una implementación diferente de un método heredado de la clase padre. En las interfaces, varias clases pueden implementar una misma interfaz, cada una con su propia implementación de los métodos de la interfaz.
+
+En términos de sintaxis, el polimorfismo se logra a través de la creación de clases con métodos que tienen la misma firma (nombre y parámetros) pero diferentes implementaciones. Cuando se llama a un método en un objeto, se ejecuta la implementación correspondiente de ese objeto.
+
+Te presento un ejemplo:
+\begin{lstlisting}
+using System;
+
+public class Animal
+{
+    public virtual void HacerSonido()
+    {
+        Console.WriteLine("Hace algun sonido");
+    }
+}
+
+public class Perro : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Ladra");
+    }
+}
+
+public class Gato : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Maulla");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Animal miAnimal = new Animal();
+        miAnimal.HacerSonido();  // output: "Hace algun sonido"
+
+        miAnimal = new Perro();
+        miAnimal.HacerSonido();  // output: "Ladra"
+
+        miAnimal = new Gato();
+        miAnimal.HacerSonido();  // output: "Maulla"
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, tenemos una clase Animal que tiene un método virtual HacerSonido(). Luego creamos dos clases, Perro y Gato, que heredan de Animal y sobrescriben el método HacerSonido(). Finalmente, en el método Main creamos instancias de Animal, Perro y Gato y llamamos al método HacerSonido(). Dependiendo del tipo de objeto al que se hace referencia, se invoca la implementación correspondiente del método HacerSonido(). Esto es un ejemplo de polimorfismo en acción.
+
+\subsection*{Estructuras vs clases}
+
+Las estructuras son muy prácticas cuando se desea manejar datos que tienen un vínculo entre sí. Por ejemplo, en una aplicación contable, los datos relativos a los clientes (código cliente, apellido, nombre, dirección) se pueden gestionar más fácilmente bajo la forma de una estructura que por variables individuales.
+
+\begin{itemize}
+    \item Las estructuras son tipos de valor, mientras que las clases son tipos de referencia. Esto significa que cuando una variable de estructura se asigna a otra variable, se realiza una copia de los datos de la estructura, mientras que cuando se asigna una variable de clase a otra, se está haciendo referencia al mismo objeto en memoria.
+    \item Las estructuras usan la asignación de pila, lo que significa que se almacenan en la memoria del programa que se encuentra en la parte superior de la pila. Las clases, por otro lado, usan la asignación del montón, lo que significa que se almacenan en la memoria dinámica del programa.
+    \item Los miembros de una estructura son públicos de forma predeterminada, mientras que en una clase, solo los métodos y las propiedades públicas son públicos de forma predeterminada.
+    \item Una estructura no requiere un constructor, mientras que una clase sí lo requiere. Además, las estructuras solo pueden tener constructores no compartidos si toman parámetros, mientras que las clases pueden tener constructores con o sin parámetros.
+\end{itemize}
+
+Te dejo un ejemplo:
+\begin{lstlisting}
+using System;
+
+namespace EjemploEstructuraYClase
+{
+    // Declaracndo de una estructura
+    struct PuntoEstructura
+    {
+        public int X;
+        public int Y;
+
+        public PuntoEstructura(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+    }
+
+    // Declaracndo de una clase
+    class PuntoClase
+    {
+        public int X;
+        public int Y;
+
+        public PuntoClase(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // creando de un objeto de la estructura
+            PuntoEstructura puntoEstructura = new PuntoEstructura(5, 10);
+
+            // creando de un objeto de la clase
+            PuntoClase puntoClase = new PuntoClase(10, 20);
+
+            // Modificando del valor de X en el objeto de la estructura
+            puntoEstructura.X = 7;
+
+            // Modificando del valor de X en el objeto de la clase
+            puntoClase.X = 15;
+
+            // inprimir los valores de X e Y en el objeto de la estructura
+            Console.WriteLine("PuntoEstructura: X = {0}, Y = {1}", puntoEstructura.X, puntoEstructura.Y);
+
+            // inprimir los valores de X e Y en el objeto de la clase
+            Console.WriteLine("PuntoClase: X = {0}, Y = {1}", puntoClase.X, puntoClase.Y);
+        }
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, se define una estructura PuntoEstructura y una clase PuntoClase que tienen los mismos campos X e Y. Luego, se crean objetos de ambas y se modifica el valor del campo X en cada uno de ellos. Finalmente, se imprimen los valores de los campos X e Y de ambos objetos.
+
+La principal diferencia entre una estructura y una clase es que las estructuras son tipos de valor y las clases son tipos de referencia. Esto significa que cuando se crea un objeto de una estructura, se almacena en la pila de la memoria del programa, mientras que cuando se crea un objeto de una clase, se almacena en el montón de la memoria del programa y se guarda una referencia (un puntero) a su ubicación en la memoria. En este ejemplo, podemos ver que cuando se modifica el valor de X en el objeto de la estructura, se modifica directamente el valor almacenado en la pila. En cambio, cuando se modifica el valor de X en el objeto de la clase, se modifica el valor almacenado en el montón, y se actualiza la referencia a ese objeto en el programa.
+
+\subsection{¿Cómo operar con clases?}
+
+Para trabajar con clases en la programación orientada a objetos, es necesario definir los atributos y métodos que conforman la clase. Los atributos son las características o datos que tiene un objeto de esa clase, mientras que los métodos son las acciones que se pueden realizar con ese objeto.
+
+Por ejemplo, si estamos creando una clase \enquote*{Perro}, podríamos definir los atributos \enquote*{nombre}, \enquote*{raza} y \enquote*{edad}, y los métodos \enquote*{ladrar} y \enquote*{correr}. La sintaxis para definir una clase en C\# sería la siguiente:
+
+\begin{lstlisting}
+public class Perro {
+    // atributos
+    public string nombre;
+    public string raza;
+    public int edad;
+
+    // metodos
+    public void ladrar() {
+        Console.WriteLine("Guau");
+    }
+
+    public void correr() {
+        Console.WriteLine("Estoy corriendo");
+    }
+    }
+\end{lstlisting}
+
+En este ejemplo, la clase \enquote*{Perro} tiene tres atributos (nombre, raza y edad) y dos métodos (ladrar y correr). Los atributos son públicos, lo que significa que se pueden acceder desde cualquier parte del código. Sin embargo, esto puede no ser deseable en algunos casos, por lo que se puede usar el encapsulamiento para proteger los datos de la clase.
+
+Para encapsular los datos de una clase, se pueden utilizar los modificadores de acceso \enquote*{private}, \enquote*{protected} o \enquote*{internal} para controlar quién puede acceder a los atributos y métodos de la clase. Por ejemplo, podríamos modificar la clase \enquote*{Perro} para que los atributos sean privados y solo se puedan acceder a través de métodos públicos:
+
+\begin{lstlisting}
+public class Perro {
+    // atributos privados
+    private string nombre;
+    private string raza;
+    private int edad;
+
+    // metodos publicos para acceder a los atributos
+    public string GetNombre() {
+        return nombre;
+    }
+
+    public void SetNombre(string nombre) {
+        this.nombre = nombre;
+    }
+
+    public string GetRaza() {
+        return raza;
+    }
+
+    public void SetRaza(string raza) {
+        this.raza = raza;
+    }
+
+    public int GetEdad() {
+        return edad;
+    }
+
+    public void SetEdad(int edad) {
+        this.edad = edad;
+    }
+
+    // metodos publicos
+    public void Ladrar() {
+        Console.WriteLine("Guau");
+    }
+
+    public void Correr() {
+        Console.WriteLine("Estoy corriendo");
+    }
+}
+\end{lstlisting}   
+En este ejemplo, los atributos \enquote*{nombre}, \enquote*{raza} y \enquote*{edad} son privados y solo se pueden acceder a través de los métodos \enquote*{Get} y \enquote*{Set} correspondientes. Los métodos \enquote*{Ladrar} y \enquote*{Correr} siguen siendo públicos y se pueden acceder desde cualquier parte del código.
+
+Para acceder a los métodos y atributos de una clase en la programación orientada a objetos, primero se debe instanciar la clase, lo que crea un objeto que es una instancia de esa clase. Luego, se puede acceder a los métodos y atributos a través de ese objeto utilizando el operador de punto (.) seguido del nombre del método o atributo.
+
+En el ejemplo anterior de la clase \enquote*{Perro} que has proporcionado, los métodos y atributos están definidos con modificadores de acceso \enquote*{public} y \enquote*{private}. Esto significa que los atributos \enquote*{nombre}, \enquote*{raza} y \enquote*{edad} son privados, lo que significa que solo se pueden acceder a ellos desde dentro de la propia clase. Sin embargo, hay métodos \enquote*{Get} y \enquote*{Set} públicos para cada uno de estos atributos, lo que permite a otros objetos acceder y modificar estos atributos desde fuera de la clase.
+
+Para establecer el nombre de un objeto de la clase \enquote*{Perro}, se puede llamar al método \enquote*{SetNombre} y pasar el nombre deseado como argumento:
+\begin{lstlisting}
+    Perro miPerro = new Perro();
+    miPerro.SetNombre("Fido");
+\end{lstlisting}
+
+Para recuperar el valor del atributo \enquote*{nombre}, se puede llamar al método \enquote*{GetNombre}:
+\begin{lstlisting}
+    string nombreDelPerro = miPerro.GetNombre();
+\end{lstlisting}
+También hay dos métodos públicos adicionales, \enquote*{Ladrar} y \enquote*{Correr}, que pueden ser llamados para realizar las acciones correspondientes en un objeto de la clase \enquote*{Perro}.
+
+En general, el uso de métodos \enquote*{Get} y \enquote*{Set} públicos para acceder y modificar atributos privados se conoce como encapsulamiento. Esto ayuda a asegurar que los datos de la clase sean manejados de manera controlada y consistente, lo que puede ser importante para evitar errores y garantizar la integridad de los datos.
+
+\subsection{Niveles de acceso}
+
+En la programación orientada a objetos, los niveles de acceso determinan la visibilidad de los miembros de una clase (atributos, métodos, propiedades) desde el exterior de la misma.
+
+Existen 4 niveles de acceso en C\#:
+
+\begin{itemize}
+\item \textbf{Public:} El miembro es accesible desde cualquier parte del programa.
+\item \textbf{Private:} El miembro solo es accesible desde dentro de la misma clase.
+\item \textbf{Protected:} El miembro es accesible desde dentro de la misma clase y desde las clases derivadas (heredadas).
+\item \textbf{Internal:} El miembro es accesible desde cualquier clase del mismo ensamblado (assembly). Un ensamblado es un archivo .dll o .exe que contiene uno o varios módulos.
+\end{itemize}
+
+La sintaxis para definir el nivel de acceso de un miembro es mediante los modificadores de acceso \textbf{public}, \textbf{private}, \textbf{protected} o \textbf{internal}, seguidos del tipo de miembro y su nombre. Por ejemplo:
+
+\begin{lstlisting}
+public class MiClase {
+    public int miVariablePublica;
+    private int miVariablePrivada;
+    protected int miVariableProtegida;
+    internal int miVariableInterna;
+}
+\end{lstlisting}
+
+En este ejemplo, se han declarado cuatro variables de diferentes niveles de acceso en una clase llamada \texttt{MiClase}. La variable \texttt{miVariablePublica} es pública y, por tanto, puede ser accedida desde cualquier parte del programa. La variable \texttt{miVariablePrivada} es privada, por lo que solo es accesible desde dentro de la misma clase. La variable \texttt{miVariableProtegida} es protegida, lo que significa que es accesible desde dentro de la misma clase y desde cualquier clase derivada de ella. La variable \texttt{miVariableInterna} es interna, por lo que es accesible desde cualquier clase dentro del mismo ensamblado, un ensamblado es una colección de tipos y recursos compilados para funcionar en conjunto y formar una unidad lógica de funcionalidad. Los ensamblados adoptan la forma de un archivo ejecutable (.exe) o de biblioteca de vínculos dinámicos (.dll), y son los bloques de creación de las aplicaciones.
+
+Es importante destacar que el uso adecuado de los niveles de acceso contribuye a escribir código más seguro y fácil de mantener, ya que restringe el acceso a los miembros que no deberían ser modificados o accedidos desde fuera de la clase.
+
+\subsection{Clases Abstractas}
+
+En la programación orientada a objetos, una clase abstracta es una clase que no puede ser instanciada y solo puede ser utilizada como una clase base para otras clases. Es decir, una clase abstracta solo puede ser heredada y sus métodos abstractos deben ser implementados en las clases derivadas. Por otro lado, una clase virtual es una clase que puede ser instanciada, pero sus métodos virtuales pueden ser reemplazados por las clases derivadas.
+
+A continuación, se muestra un ejemplo de una clase abstracta Animal con un método abstracto HacerSonido:
+
+\begin{lstlisting}
+public abstract class Animal {
+    public abstract void HacerSonido();
+}
+
+public class Perro : Animal {
+    public override void HacerSonido() {
+        Console.WriteLine("Guau guau!");
+    }
+}
+
+public class Gato : Animal {
+    public override void HacerSonido() {
+        Console.WriteLine("Miau miau!");
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, la clase Animal es una clase abstracta que define un método abstracto HacerSonido. Las clases Perro y Gato heredan de la clase Animal y deben implementar el método HacerSonido.
+
+Por otro lado, las clases virtuales permiten la creación de métodos virtuales que pueden ser reemplazados por las clases derivadas. A continuación, se muestra un ejemplo de una clase virtual Figura con un método virtual CalcularArea:
+
+\begin{lstlisting}
+public class Figura {
+    public virtual double CalcularArea() {
+        return 0;
+    }
+}
+
+public class Circulo : Figura {
+    private double radio;
+
+    public Circulo(double radio) {
+        this.radio = radio;
+    }
+
+    public override double CalcularArea() {
+        return Math.PI * radio * radio;
+    }
+    public Circulo(double radio) {
+        this.radio = radio;
+    }
+
+    public override double CalcularArea() {
+        return Math.PI * radio * radio;
+    }
+    public Rectangulo(double baseFigura, double altura) {
+        this.baseFigura = baseFigura;
+        this.altura = altura;
+    }
+
+    public override double CalcularArea() {
+        return baseFigura * altura;
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, la clase Figura es una clase virtual que define un método virtual CalcularArea. Las clases Circulo y Rectangulo heredan de la clase Figura y reemplazan el método CalcularArea con su propia implementación.
+
+\subsection{Clases selladas y estáticas}
+
+En C\#, las clases selladas y estáticas son dos conceptos que se utilizan para restringir la herencia y la creación de objetos, respectivamente.
+
+\subsubsection*{Clases selladas}
+
+Las clases selladas son aquellas que no se pueden heredar. Es decir, una vez definida una clase sellada, no se pueden crear subclases a partir de ella. Para declarar una clase sellada, se utiliza la palabra clave sealed. Por ejemplo:
+
+\begin{lstlisting}
+sealed class MiClaseSellada {
+// Codigo de la clase
+}
+\end{lstlisting}
+
+En este caso, la clase MiClaseSellada es sellada y no se puede heredar de ella.
+
+Las clases selladas son útiles cuando queremos evitar que se modifique el comportamiento de una clase en subclases o cuando queremos garantizar que una clase se mantendrá inmutable.
+
+\subsubsection*{Clases estáticas}
+
+Las clases estáticas son aquellas que no se pueden instanciar. Es decir, no se pueden crear objetos a partir de ellas. En lugar de eso, los miembros de una clase estática se acceden utilizando el nombre de la clase. Para declarar una clase estática, se utiliza la palabra clave static. Por ejemplo:
+
+\begin{lstlisting}
+static class MiClaseEstatica {
+public static void MiMetodoEstatico() {
+// Codigo del metodo
+}
+}
+\end{lstlisting}
+
+En este caso, la clase MiClaseEstatica es estática y el método MiMetodoEstatico se puede llamar utilizando el nombre de la clase:
+
+\begin{lstlisting}
+MiClaseEstatica.MiMetodoEstatico();
+\end{lstlisting}
+
+Las clases estáticas son útiles cuando queremos agrupar métodos y propiedades relacionados, pero no necesitamos crear instancias de la clase. También son útiles cuando queremos evitar el gasto de memoria que implica crear múltiples instancias de una clase.
+
+\subsection{Metodos de extensión, constructores y destructores}
+
+Los métodos de extensión, los constructores y los destructores son conceptos importantes en la programación orientada a objetos.
+
+\subsubsection*{Métodos de extensión}
+
+Un método de extensión es un método estático que se define en una clase estática y que se utiliza para agregar funcionalidad a una clase existente sin tener que modificar la clase original. Los métodos de extensión son útiles cuando no se tiene acceso al código fuente de la clase original o cuando se desea mantener la compatibilidad con versiones anteriores de la clase.
+
+La sintaxis de un método de extensión es similar a la de un método normal, pero con la adición de la palabra clave "this" antes del primer parámetro. El primer parámetro es el objeto al que se aplicará el método de extensión.
+
+Un ejemplo de un método de extensión en C\# que agrega una función de \enquote*{reverse} a la clase \enquote*{string} sería:
+\begin{lstlisting}
+public static class StringExtensions {
+public static string Reverse(this string str) {
+    char[] chars = str.ToCharArray();
+    Array.Reverse(chars);
+    return new string(chars);
+    }
+}
+
+// Uso del metodo de extension
+string s = "Hola mundo";
+string reversed = s.Reverse();
+Console.WriteLine(reversed);
+\end{lstlisting}
+
+\subsubsection*{Constructores}
+
+Un constructor es un método especial que se llama automáticamente cuando se crea un objeto de una clase. El constructor se utiliza para inicializar los valores de los campos y propiedades de la clase.
+
+En C\#, el constructor tiene el mismo nombre que la clase y no tiene tipo de retorno. Puede haber varios constructores con diferentes parámetros, lo que se conoce como sobrecarga de constructores.
+
+Un ejemplo de un constructor en C\# sería:
+
+\begin{lstlisting}
+public class Persona {
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
+
+    public Persona(string nombre, int edad) {
+        this.Nombre = nombre;
+        this.Edad = edad;
+    }
+}
+
+// Uso del constructor
+Persona persona = new Persona("Juan", 30);
+\end{lstlisting}
+
+\subsubsection*{Destructores}
+
+Un destructor es un método especial que se llama automáticamente cuando un objeto de una clase es destruido por el recolector de basura. El destructor se utiliza para liberar recursos no administrados como archivos, conexiones de bases de datos, etc.
+
+En C\#, el destructor tiene el mismo nombre que la clase y comienza con el símbolo "~". El destructor no tiene parámetros ni tipo de retorno.
+
+Un ejemplo de un destructor en C\# sería:
+
+\begin{lstlisting}
+public class ConexionBD {
+    private string cadenaConexion;
+    private SqlConnection conexion;
+
+    public ConexionBD(string cadenaConexion) {
+        this.cadenaConexion = cadenaConexion;
+        this.conexion = new SqlConnection(cadenaConexion);
+        this.conexion.Open();
+    }
+
+    ~ConexionBD() {
+        this.conexion.Close();
+    }
+}
+
+// Uso del destructor
+ConexionBD conexion = new ConexionBD("cadena de conexion");
+\end{lstlisting}
+
+\subsubsection*{Métodos con cuerpo de expresión (Expression-bodied members)}
+
+En C\#, los métodos, propiedades, constructores y destructores pueden ser definidos utilizando el cuerpo de expresión en lugar de un bloque de código. Esto es conocido como \enquote*{métodos con cuerpo de expresión} o \enquote*{expression-bodied members} en inglés.
+
+Por ejemplo, en lugar de definir un método como:
+
+\begin{lstlisting}
+public int Sumar(int a, int b) {
+return a + b;
+}
+\end{lstlisting}
+
+Se puede definir utilizando el cuerpo de expresión de la siguiente manera:
+
+\begin{lstlisting}
+public int Sumar(int a, int b) => a + b;
+\end{lstlisting}
+
+Los métodos con cuerpo de expresión pueden ser útiles cuando se tiene una función simple que se puede definir en una sola línea de código. También pueden hacer que el código sea más legible al reducir la cantidad de caracteres utilizados.
+
+También se pueden utilizar los métodos con cuerpo de expresión en propiedades, constructores y destructores. Por ejemplo:
+
+\begin{lstlisting}
+public class Persona {
+public string Nombre { get; set; }
+public int Edad { get; set; }
+public Persona(string nombre, int edad) => (Nombre, Edad) = (nombre, edad);
+
+~Persona() => Console.WriteLine($"Adios {Nombre}"); \\$
+}
+\end{lstlisting}
+
+En este ejemplo, el constructor utiliza el cuerpo de expresión para inicializar las propiedades \enquote*{Nombre} y \enquote*{Edad} en una sola línea de código. El destructor utiliza el cuerpo de expresión para escribir un mensaje de despedida en la consola.
+
+\subsection{Interfaces}
+
+Una interfaz es un tipo de referencia similar a una clase que solo contiene miembros abstractos, como métodos, propiedades, eventos e indexadores. Las interfaces no proporcionan implementaciones para estos miembros, sino que definen una lista de miembros que deben estar presentes en cualquier clase o estructura que implemente la interfaz.
+
+Las interfaces se utilizan para definir contratos que las clases deben cumplir, lo que significa que si una clase implementa una interfaz, debe proporcionar implementaciones para todos los miembros de la interfaz. Esto permite a los desarrolladores crear código más modular y extensible.
+
+Por ejemplo, podemos definir una interfaz IVehiculo que contenga métodos como Arrancar(), Acelerar() y Frenar(). Luego, podemos tener varias clases que implementen esta interfaz, como Automovil, Motocicleta y Camión. Cada una de estas clases proporcionaría una implementación única para los métodos de la interfaz, pero todas tendrían los mismos métodos.
+
+La herencia múltiple se refiere a la capacidad de una clase de heredar de más de una clase o interfaz. En C\#, las clases solo pueden heredar de una clase base, pero pueden implementar varias interfaces. Esto permite que una clase tenga comportamientos de múltiples fuentes sin la necesidad de heredar de múltiples clases, lo que puede resultar en una jerarquía de clases compleja y difícil de mantener.
+
+Por ejemplo, podemos tener una clase VehiculoElectrico que implemente tanto la interfaz IVehiculo como una interfaz IElectrico, que contiene métodos para cargar y descargar la batería. De esta manera, podemos asegurarnos de que todos los vehículos eléctricos tengan los mismos métodos básicos de vehículo, mientras que también proporcionamos funcionalidad específica para los vehículos eléctricos.
+
+Aquí un ejemplo:
+\begin{lstlisting}
+public interface IVehiculo {
+    void Arrancar();
+    void Acelerar();
+    void Frenar();
+    void Apagar();
+}
+
+public class Automovil : IVehiculo {
+    public void Arrancar() {
+        Console.WriteLine("El automovil arranco.");
+    }
+
+    public void Acelerar() {
+        Console.WriteLine("El automovil esta acelerando.");
+    }
+
+    public void Frenar() {
+        Console.WriteLine("El automovil esta frenando.");
+    }
+
+    public void Apagar() {
+        Console.WriteLine("El automovil se apago.");
+    }
+}
+
+public class Moto : IVehiculo {
+    public void Arrancar() {
+        Console.WriteLine("La moto arranco.");
+    }
+
+    public void Acelerar() {
+        Console.WriteLine("La moto esta acelerando.");
+    }
+
+    public void Frenar() {
+        Console.WriteLine("La moto esta frenando.");
+    }
+
+    public void Apagar() {
+        Console.WriteLine("La moto se apago.");
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, la interfaz IVehiculo define los métodos Arrancar(), Acelerar(), Frenar() y Apagar(). La clase Automovil y Moto implementan esta interfaz y proporcionan una implementación concreta para estos métodos. Esto permite que las instancias de Automovil y Moto se traten como instancias de IVehiculo y se puedan pasar a cualquier método que acepte un parámetro del tipo IVehiculo.
+
+La interfaz IVehiculo también se puede usar para realizar herencia múltiple de manera limitada en C\#, ya que una clase puede implementar múltiples interfaces. Esto permite que una clase tenga la funcionalidad de varias interfaces diferentes, lo que puede ser útil en situaciones donde una clase necesita proporcionar comportamiento para varias funcionalidades diferentes.
+
+\newpage
+\section{Conseptos avanzados}
+
+A medida que se avanza en el aprendizaje de la programación en C\#, se encuentran conceptos más avanzados que pueden mejorar la calidad y eficiencia de nuestro código. Estos conceptos incluyen delegados, métodos anónimos, tipos dinámicos, enumerados, espacios de nombres, tuplas, diccionarios, boxing y unboxing, serialización JSON, eventos, tratamiento de excepciones, trabajo con archivos y streams, y programación asíncrona.
+
+Cada uno de estos temas tiene su propia utilidad y aplicabilidad en diferentes escenarios y situaciones de programación. En esta sección, se explicará cada uno de ellos con ejemplos prácticos y claros para que puedas entender su funcionamiento y cómo puedes aplicarlos en tus proyectos de C\#.
+
+\subsection{Delegados}
+
+Los delegados son una característica importante de C\# que permiten la encapsulación de métodos en objetos y su uso como argumentos y valores de retorno de otros métodos. Un delegado es esencialmente un tipo de referencia que puede apuntar a un método con una firma determinada. Se puede pensar en un delegado como un puntero a un método en otros lenguajes de programación.
+
+Para crear un delegado, primero se debe definir un tipo de delegado que tenga la misma firma que el método al que se va a hacer referencia. Esto se hace mediante la definición de un delegado utilizando la palabra clave delegate y especificando los parámetros y el tipo de retorno del método al que se va a hacer referencia. A continuación se muestra un ejemplo:
+
+\begin{lstlisting}
+delegate int OperacionMatematica(int a, int b);
+\end{lstlisting}
+
+En este ejemplo, se define un delegado llamado OperacionMatematica que tiene dos parámetros enteros y devuelve un valor entero. Una vez que se ha definido el tipo de delegado, se puede crear una instancia del delegado y asignarle una referencia a un método que tenga la misma firma que el delegado. A continuación se muestra un ejemplo:
+
+\begin{lstlisting}
+int Suma(int a, int b) {
+return a + b;
+}
+
+OperacionMatematica operacion = Suma;
+\end{lstlisting}
+
+En este ejemplo, se define un método Suma que toma dos parámetros enteros y devuelve la suma de estos parámetros. A continuación, se crea una instancia del delegado OperacionMatematica y se le asigna una referencia al método Suma mediante el operador de asignación =.
+
+Los delegados también pueden utilizarse para añadir y eliminar métodos de un conjunto de métodos que se ejecutarán cuando se llame al delegado. Esto se hace mediante el operador += para añadir un método y -= para eliminar un método. A continuación se muestra un ejemplo:
+
+\begin{lstlisting}
+OperacionMatematica operacion = Suma;
+operacion += Resta;
+operacion += Multiplicacion;
+operacion -= Resta;
+\end{lstlisting}
+
+En este ejemplo, se crea una instancia del delegado OperacionMatematica y se le asigna una referencia al método Suma. A continuación, se añaden los métodos Resta y Multiplicacion al delegado mediante el operador +=. Finalmente, se elimina el método Resta del delegado mediante el operador -=.
+
+Es importante tener en cuenta que los métodos añadidos a un delegado se ejecutan en el orden en que se añadieron. Por lo tanto, en el ejemplo anterior, se ejecutará primero el método Suma, seguido del método Multiplicacion.
+
+Además, los delegados también pueden utilizarse como atributos en clases y estructuras, lo que permite crear eventos que pueden ser suscritos y desuscritos por otros métodos. Los eventos son un concepto importante en la programación de GUI y se utilizan para notificar a los objetos cuando ocurren ciertos eventos, como hacer clic en un botón.
+
+Te dejo un ejemplo:
+
+\begin{lstlisting}
+using System;
+
+// Declaracion de un delegado
+delegate void MiDelegado(int parametro);
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creacion de una instancia del delegado y asignacion del metodo que queremos ejecutar
+        MiDelegado miDelegado = new MiDelegado(MetodoEjemplo);
+
+        // Invocacion del delegado
+        miDelegado(5); // Salida: "El parametro recibido es: 5"
+
+        // Agregar otro metodo al delegado
+        miDelegado += MetodoAdicional;
+
+        // Invocacion del delegado nuevamente
+        miDelegado(10); // Salida: "El parametro recibido es: 10" y "Este es otro metodo."
+
+        // Eliminar un metodo del delegado
+        miDelegado -= MetodoEjemplo;
+
+        // Invocacion del delegado una ultima vez
+        miDelegado(15); // Salida: "Este es otro metodo."
+    }
+
+    static void MetodoEjemplo(int parametro)
+    {
+        Console.WriteLine("El parametro recibido es: " + parametro);
+    }
+
+    static void MetodoAdicional(int parametro)
+    {
+        Console.WriteLine("Este es otro metodo.");
+    }
+}    
+\end{lstlisting}
+
+En este ejemplo, se define un delegado llamado MiDelegado que acepta un parámetro entero y no devuelve nada (void). Luego, se crea una instancia de este delegado y se le asigna el método MetodoEjemplo. Al invocar el delegado, se ejecuta el método asignado (MetodoEjemplo) con el parámetro indicado.
+
+Posteriormente, se añade otro método al delegado (MetodoAdicional) y se invoca el delegado nuevamente, lo que hace que se ejecuten ambos métodos en orden. Luego, se elimina el método MetodoEjemplo del delegado y se invoca el delegado una última vez, lo que hace que solo se ejecute el método restante (MetodoAdicional).
+
+\subsection{Metodos anonimos}
+
+Los métodos anónimos son bloques de código que se pueden utilizar como parámetros de delegados. A diferencia de los métodos regulares, los métodos anónimos no tienen un nombre y se definen en línea. Estos métodos son útiles en situaciones donde se necesita pasar un pequeño bloque de código como parámetro a otro método o función.
+
+Un ejemplo de esto es la siguiente definición de un delegado que acepta un método anónimo como parámetro:
+
+\begin{lstlisting}
+delegate void MiDelegado(int x, int y);
+
+class Program
+{
+static void Main(string[] args)
+    {
+    // Definir un delegado con un metodo anonimo como parametro
+    MiDelegado miDelegado = delegate (int x, int y) {
+        Console.WriteLine($"La suma de {x} y {y} es: {x + y}"); \\$
+        };
+    // Llamar al delegado
+    miDelegado(2, 3);
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, se define un delegado llamado \texttt{MiDelegado} que acepta dos parámetros enteros y no devuelve ningún valor. A continuación, se crea una instancia del delegado y se define un método anónimo dentro de él que toma los dos parámetros y los suma. Luego, se llama al delegado y se le pasan los valores 2 y 3 como argumentos.
+
+Cabe destacar que los métodos anónimos también pueden ser utilizados en otros contextos, como en la definición de eventos o en la implementación de LINQ (Language Integrated Query).
+
+\subsection*{Tipos dinamicos}
+
+Los tipos dinámicos son un tipo de datos que se introdujo en C\# 4.0 que permiten omitir la comprobación de tipos estáticos en tiempo de compilación y posponerla hasta tiempo de ejecución. Esto significa que los objetos de tipos dinámicos pueden contener cualquier tipo de objeto, y se puede llamar a cualquier método o propiedad en tiempo de ejecución sin generar un error de compilación.
+
+Para definir un objeto dinámico, se utiliza la palabra clave "dynamic". Por ejemplo:
+
+\begin{lstlisting}
+dynamic miObjeto = "Hola mundo";
+Console.WriteLine(miObjeto.GetType()); // Imprime "System.String"
+miObjeto = 123;
+Console.WriteLine(miObjeto.GetType()); // Imprime "System.Int32"
+\end{lstlisting}
+
+En el ejemplo anterior, se crea un objeto dinámico "miObjeto" y se le asigna primero un valor de cadena y luego un valor entero. En tiempo de ejecución, se llama al método "GetType()" para imprimir el tipo de objeto que contiene en ese momento.
+
+Es importante tener en cuenta que el uso excesivo de tipos dinámicos puede hacer que el código sea más difícil de entender y depurar. Por lo tanto, se recomienda utilizarlos con moderación y solo cuando sea necesario.
+
+\subsection{Enumerados}
+
+Un enumerado es un tipo de valor que tiene un conjunto de constantes con nombre. Cada constante enum tiene un valor asignado implícitamente y es del tipo del enumerado.
+
+Un ejemplo de enumerado es el siguiente:
+
+\begin{lstlisting}
+enum Direccion {
+Norte,
+Sur,
+Este,
+Oeste
+}
+\end{lstlisting}
+
+En este ejemplo, definimos un tipo de enumerado llamado \enquote*{Direccion} con cuatro constantes enumeradas: \enquote*{Norte}, \enquote*{Sur}, \enquote*{Este} y \enquote*{Oeste}.
+
+Podemos usar un enumerado de la siguiente manera:
+
+\begin{lstlisting}
+Direccion dir = Direccion.Norte;
+if (dir == Direccion.Norte) {
+Console.WriteLine("Voy hacia el norte");
+}
+\end{lstlisting}
+
+También podemos iterar sobre todos los valores de un enumerado utilizando el método estático \enquote*{GetValues} de la clase \enquote*{Enum}:
+
+\begin{lstlisting}
+foreach (Direccion d in Enum.GetValues(typeof(Direccion))) {
+Console.WriteLine(d);
+}
+\end{lstlisting}
+
+Este código imprimirá lo siguiente:
+
+\begin{lstlisting}
+Norte
+Sur
+Este
+Oeste
+\end{lstlisting}
+
+\subsection{Espacios de nombres}
+
+Los espacios de nombres en C\# son una forma de agrupar y organizar clases, estructuras, interfaces, enumeraciones y otros tipos en grupos lógicos y coherentes. Un espacio de nombres puede ser considerado como un contenedor para un conjunto de tipos relacionados.
+
+Para acceder a los miembros de un espacio de nombres en C\#, podemos utilizar la palabra reservada "using". Esto nos permite omitir la necesidad de especificar el espacio de nombres completo cada vez que queramos utilizar una clase dentro del mismo. Por ejemplo, si queremos utilizar la clase "StringBuilder" del espacio de nombres "System.Text", podemos incluir una directiva "using" al principio de nuestro archivo:
+
+\begin{lstlisting}
+using System.Text;
+
+// Ahora podemos utilizar la clase StringBuilder sin especificar el espacio de nombres completo
+StringBuilder sb = new StringBuilder();
+\end{lstlisting}
+
+También es posible utilizar un alias para un espacio de nombres si queremos hacer referencia a él de una manera más corta o clara. Por ejemplo, podemos crear un alias para el espacio de nombres "System.Text" de la siguiente manera:
+
+\begin{lstlisting}
+using txt = System.Text;
+
+// Ahora podemos utilizar el alias "txt" en lugar del espacio de nombres completo "System.Text"
+txt.StringBuilder sb = new txt.StringBuilder();
+\end{lstlisting}
+
+Un buen uso de los espacios de nombres nos ayuda a organizar nuestro código y a evitar conflictos de nombres entre diferentes clases y librerías.
+
+\subsection{Tuplas}
+
+Las tuplas son un tipo de dato que permite agrupar múltiples elementos de diferentes tipos en un solo objeto. Las tuplas también pueden contener métodos y se pueden iterar usando un foreach. Sin embargo, es importante tener en cuenta que las tuplas tienen algunos límites. Por ejemplo, no se pueden agregar ni eliminar elementos de una tupla después de su creación, y las tuplas con más de siete elementos no se pueden utilizar con ciertas características de C\# como el parámetro "out" en métodos.
+
+En cuanto a si son más optimas que otros tipos de datos, depende del caso de uso específico. Las tuplas son útiles para agrupar elementos de diferentes tipos en una sola estructura, lo que puede mejorar la legibilidad del código. Pero en términos de rendimiento, puede haber casos en los que otros tipos de datos sean más eficientes.
+
+Un ejemplo de uso de tuplas en C\# es el siguiente:
+
+\begin{lstlisting}
+// Crear una tupla
+var miTupla = (1, "Hola", true);
+
+// Acceder a los elementos de la tupla
+Console.WriteLine(miTupla.Item1); // salida: 1
+Console.WriteLine(miTupla.Item2); // salida: Hola
+Console.WriteLine(miTupla.Item3); // salida: True
+
+// Declarar tuplas con nombres de elementos
+var otraTupla = (edad: 30, nombre: "Juan", ciudad: "Bogota");
+
+// Acceder a los elementos de la tupla por nombre
+Console.WriteLine(otraTupla.edad); // salida: 30
+Console.WriteLine(otraTupla.nombre); // salida: Juan
+Console.WriteLine(otraTupla.ciudad); // salida: Bogota
+
+// Tuplas como parametros y retorno de metodo
+(int, int) Calcular(int a, int b) {
+int suma = a + b;
+int producto = a * b;
+return (suma, producto);
+}
+
+// Llamar al metodo y desempaquetar los valores de la tupla resultante
+var resultado = Calcular(2, 3);
+Console.WriteLine(resultado.Item1); // salida: 5
+Console.WriteLine(resultado.Item2); // salida: 6
+\end{lstlisting}
+
+En este ejemplo, se muestra cómo crear y acceder a los elementos de tuplas, cómo declarar tuplas con nombres de elementos, cómo usar tuplas como parámetros y retorno de métodos, y cómo desempaquetar los valores de la tupla resultante.
+
+\subsection{Diccionarios}
+
+Un diccionario en C\# es una colección de pares clave-valor. Cada clave debe ser única en la colección y se utiliza para buscar su valor correspondiente. Los valores pueden ser de cualquier tipo de datos, incluyendo tipos de referencia y tipos de valor. Los diccionarios son útiles para almacenar y recuperar rápidamente información en función de una clave, y son una herramienta poderosa para la manipulación de datos en C\#.
+\begin{itemize}
+    \item Los diccionarios son una colección de pares de clave-valor.
+    \item Se pueden agregar, eliminar y modificar elementos en un diccionario.
+    \item Los métodos comunes en los diccionarios incluyen \texttt{Add()}, \texttt{ContainsKey()}, \texttt{ContainsValue()}, \texttt{Remove()}, \texttt{Clear()}.
+    \item Se puede iterar sobre un diccionario usando un \texttt{foreach} loop.
+    \item Los diccionarios son útiles para almacenar y buscar datos por una clave específica.
+\end{itemize}
+
+Ejemplo de creación y uso de un diccionario en C\#:
+\begin{lstlisting}
+Dictionary<string, int> diccionario = new Dictionary<string, int>();
+diccionario.Add("uno", 1);
+diccionario.Add("dos", 2);
+diccionario.Add("tres", 3);
+
+foreach (KeyValuePair<string, int> kvp in diccionario)
+{
+Console.WriteLine("Clave: {0}, Valor: {1}", kvp.Key, kvp.Value);
+}
+
+if (diccionario.ContainsKey("dos"))
+{
+int valor = diccionario["dos"];
+Console.WriteLine("El valor para la clave 'dos' es {0}", valor);
+}
+
+diccionario.Remove("tres");
+
+Console.WriteLine("Numero de elementos en el diccionario: {0}", diccionario.Count);
+\end{lstlisting}
+
+En este ejemplo, se crea un diccionario que asocia cadenas con enteros. Se agregan tres elementos al diccionario usando el método \texttt{Add()}. Luego, se itera sobre el diccionario usando un \texttt{foreach} loop, mostrando la clave y el valor de cada elemento. Se verifica si el diccionario contiene una clave específica usando el método \texttt{ContainsKey()} y se accede al valor correspondiente usando la clave como índice. Se elimina un elemento del diccionario usando el método \texttt{Remove()}. Finalmente, se muestra el número de elementos restantes en el diccionario usando la propiedad \texttt{Count}.
+
+\subsection*{Boxing y unboxing}
+
+El boxing y el unboxing son dos conceptos importantes en C\# que se utilizan para convertir tipos de datos de valor en objetos de referencia y viceversa.
+
+Boxing se refiere al proceso de convertir un tipo de valor (como int, double, etc.) en un objeto de referencia (como object), mientras que unboxing se refiere al proceso inverso, es decir, convertir un objeto de referencia en su tipo de valor original.
+
+Conceptos clave:
+\begin{itemize}
+\item Boxing: Conversión de un valor de tipo valor a un objeto de tipo objeto.
+\item Unboxing: Conversión de un objeto de tipo objeto a un valor de tipo valor.
+\item Overhead de Boxing y Unboxing.
+\end{itemize}
+
+Cuando se trabaja con tipos de valor en C\#, a veces es necesario convertirlos en objetos de tipo object para trabajar con ellos en un contexto que requiera un objeto. A esto se le llama "boxing". Por ejemplo, si se quiere almacenar un valor de tipo int en una colección de objetos, es necesario convertir el valor int en un objeto. Esto se puede hacer con la palabra clave box.
+
+Por otro lado, cuando se tiene un objeto de tipo object que se sabe que es de un tipo de valor, es necesario extraer el valor de ese objeto para trabajar con él como un valor de tipo valor. A esto se le llama "unboxing". Esto se puede hacer con la palabra clave unbox.
+
+El proceso de boxing y unboxing puede tener un costo alto de rendimiento, por lo que se debe tener cuidado al utilizarlo en situaciones críticas de rendimiento.
+
+A continuación se presenta un ejemplo de boxing y unboxing:
+
+\begin{lstlisting}
+int x = 10;
+object o = x; // boxing
+int y = (int)o; // unboxing
+\end{lstlisting}
+
+\subsection*{Genericos}
+
+Los genéricos son un mecanismo que permite definir clases, estructuras, interfaces y métodos que puedan trabajar con diferentes tipos de datos sin especificarlos previamente. Se utilizan para crear componentes reutilizables que pueden funcionar con diferentes tipos de datos.
+
+El parámetro de tipo es la variable de tipo que se define al crear una clase o un método genérico. Se utiliza para indicar qué tipo de datos se va a utilizar en el momento de la creación de la instancia de la clase o llamada al método.
+
+La sintaxis para definir un parámetro de tipo es la siguiente:
+
+\begin{lstlisting}
+class MiClase<T>
+{
+//...
+}
+
+void MiMetodo<T>(T parametro)
+{
+//...
+}
+\end{lstlisting}
+
+En el ejemplo anterior, se define un parámetro de tipo T en la clase \texttt{MiClase} y en el método \texttt{MiMetodo}. Este parámetro puede ser cualquier tipo de dato, y se especifica en el momento de la creación de la instancia o llamada al método.
+
+La utilización de genéricos permite escribir código más limpio y seguro, ya que se evitan conversiones innecesarias y se garantiza la compatibilidad de tipos en tiempo de compilación. Además, los genéricos son más eficientes en términos de rendimiento que la utilización de objetos de tipo \texttt{Object}, ya que no requieren boxing y unboxing.
+
+\subsection{Serialización JSON}
+
+
+La serialización es el proceso de convertir un objeto en una secuencia de bytes para almacenarlo o transmitirlo. En el contexto de la programación, la serialización se utiliza para compartir datos entre diferentes aplicaciones o para almacenar datos en un formato que se pueda leer y escribir fácilmente.
+
+JSON (JavaScript Object Notation) es un formato de intercambio de datos ligero y fácil de leer y escribir. La serialización de objetos a JSON se utiliza comúnmente en la comunicación entre aplicaciones web y en el almacenamiento de datos en sistemas de bases de datos NoSQL.
+
+En C\#, la serialización de objetos a JSON se realiza utilizando la clase JsonSerializer que se encuentra en el espacio de nombres System.Text.Json. Esta clase proporciona una forma fácil de serializar y deserializar objetos a JSON.
+
+La serialización de un objeto a JSON es tan sencillo como llamar al método Serialize de la clase JsonSerializer y pasarle el objeto a serializar como parámetro. El resultado de la serialización es una cadena JSON.
+
+Aquí hay un ejemplo que serializa un objeto de tipo Persona a JSON:
+
+\begin{lstlisting}
+using System;
+using System.Text.Json;
+
+class Persona {
+public string Nombre { get; set; }
+public int Edad { get; set; }
+}
+
+class Program {
+static void Main(string[] args) {
+Persona p = new Persona { Nombre = "Juan", Edad = 30 };
+string json = JsonSerializer.Serialize(p);
+Console.WriteLine(json);
+}
+}
+\end{lstlisting}
+
+La salida de este ejemplo será la siguiente:
+
+\begin{lstlisting}
+{"Nombre":"Juan","Edad":30}
+\end{lstlisting}
+
+La deserialización de un objeto JSON a un objeto C\# se realiza utilizando el método Deserialize de la clase JsonSerializer. El método toma dos parámetros: la cadena JSON a deserializar y el tipo de objeto C\# al que se debe deserializar.
+
+Aquí hay un ejemplo que deserializa un objeto JSON en un objeto de tipo Persona:
+
+\begin{lstlisting}
+using System;
+using System.Text.Json;
+
+class Persona {
+public string Nombre { get; set; }
+public int Edad { get; set; }
+}
+
+class Program {
+static void Main(string[] args) {
+string json = "{"Nombre":"Juan","Edad":30}";
+Persona p = JsonSerializer.Deserialize<Persona>(json);
+Console.WriteLine(p.Nombre);
+Console.WriteLine(p.Edad);
+}
+}
+\end{lstlisting}
+
+La salida de este ejemplo será la siguiente:
+
+\begin{lstlisting}[language=python]
+Juan
+30
+\end{lstlisting}
+
+\subsection{Eventos}
+
+Los eventos son un mecanismo que permite a un objeto comunicar a otros objetos cuando cierto evento ocurre. Los eventos son muy utilizados en el patrón de diseño "Observer" o "Observable" donde un objeto "observable" notifica a los "observadores" cuando ocurre un cambio. En C\#, los eventos son definidos como miembros de una clase, y están compuestos por un delegado y una lista de métodos suscritos. Los métodos suscritos son llamados cuando el evento es disparado.
+
+La declaración de un evento es similar a la de un delegado, con la adición de la palabra clave event. Por ejemplo:
+
+\begin{lstlisting}
+public class EventExample {
+public delegate void MyEventHandler(object sender, EventArgs e);
+public event MyEventHandler MyEvent;
+public void DoSomething() {
+    // Algo de codigo aqui
+    // ...
+
+    // Disparar el evento
+    MyEvent?.Invoke(this, EventArgs.Empty);
+}
+}
+\end{lstlisting}
+
+En el ejemplo anterior, la clase EventExample tiene un evento MyEvent del tipo MyEventHandler. La clase también tiene un método DoSomething() que dispara el evento usando el operador ?.Invoke(). Los métodos suscritos al evento serán llamados cuando el evento sea disparado.
+
+Para suscribir un método a un evento, se usa el operador +=. Por ejemplo:
+
+\begin{lstlisting}[language={[Sharp]C}]
+public class EventSubscriber {
+public void OnMyEvent(object sender, EventArgs e) {
+Console.WriteLine("MyEvent was fired!");
+}
+}
+
+var obj = new EventExample();
+var sub = new EventSubscriber();
+obj.MyEvent += sub.OnMyEvent;
+
+// ...
+
+obj.DoSomething(); // Imprime "MyEvent was fired!"
+\end{lstlisting}
+
+En el ejemplo anterior, se crea una instancia de EventSubscriber y se suscribe su método OnMyEvent al evento MyEvent de la instancia EventExample. Cuando DoSomething() es llamado, el evento es disparado y el método OnMyEvent() es llamado.
+
+\subsection*{depuración}
+
+Para depurar un programa en Visual Studio, se pueden utilizar diferentes técnicas, una de las más comunes es el uso de puntos de interrupción. Un punto de interrupción es una instrucción que se inserta en el código fuente del programa, que le indica al depurador que detenga la ejecución del programa en ese punto y permita inspeccionar el estado del programa en ese momento.
+
+Otra técnica común es el uso de accesos del teclado en Visual Studio, que permiten activar y desactivar puntos de interrupción, avanzar paso a paso en la ejecución del programa, inspeccionar variables y expresiones, entre otras acciones.
+
+En general, la depuración es un proceso importante en el desarrollo de software, que permite identificar y corregir errores en el código, lo que puede ahorrar tiempo en el largo plazo.
+
+\subsection{Tratamiento de excepciones}
+
+En C\#, las excepciones son errores que ocurren durante la ejecución de un programa y que interrumpen el flujo normal de ejecución. Los errores que ocurren durante la ejecución del programa son llamados excepciones.
+
+Existen diferentes tipos de excepciones predefinidas en C\#, tales como la excepción de división por cero, excepción de índice fuera de rango, excepción de referencia nula, etc. Además, también se pueden crear excepciones personalizadas definidas por el usuario.
+
+Para crear una excepción personalizada, se debe heredar de la clase Exception y crear un constructor que reciba una cadena de texto que describa el error. Por ejemplo:
+
+\begin{lstlisting}
+class MyException : Exception
+{
+    public MyException(string message) : base(message)
+    {}
+}
+\end{lstlisting}
+
+Para lanzar una excepción, se utiliza la palabra clave throw seguida de una instancia de la excepción que se va a lanzar. Por ejemplo:
+
+\begin{lstlisting}
+if (x == 0)
+{
+    throw new MyException("Error: x no puede ser cero");
+}
+\end{lstlisting}
+
+Para capturar una excepción, se utiliza el bloque try-catch. El bloque try contiene el código que se va a ejecutar y que puede lanzar una excepción. El bloque catch captura la excepción y maneja el error. Por ejemplo:
+
+\begin{lstlisting}
+try
+{
+    int x = 0;
+    int y = 10 / x;
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine("Error: division por cero");
+}
+catch (MyException ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+    catch (Exception ex)
+{
+    Console.WriteLine("Error general: " + ex.Message);
+}
+\end{lstlisting}
+
+En este ejemplo, si se intenta dividir por cero, se lanzará una excepción de tipo DivideByZeroException. Si se lanza una excepción de tipo MyException, se mostrará el mensaje de error que se pasó al constructor de la excepción. Si se lanza cualquier otra excepción, se mostrará un mensaje genérico de error.
+
+Es importante capturar las excepciones de manera adecuada para evitar que el programa se bloquee y proporcionar una respuesta adecuada al usuario en caso de que ocurra un error.
+
+\subsection{Trabajar con archivos y Streams}
+
+El manejo de archivos y streams es una parte importante de la programación y en C\# contamos con la librería System.IO para facilitar el acceso a los mismos.
+
+En esta sección hablaremos de algunas herramientas y conceptos importantes para trabajar con archivos y streams en C\#.
+
+\subsubsection*{MemoryStream}
+MemoryStream es una clase que nos permite trabajar con datos en memoria. Podemos escribir y leer datos de un objeto MemoryStream como si estuviéramos trabajando con un archivo.
+
+Para trabajar con un objeto MemoryStream primero debemos instanciarlo:
+
+\begin{lstlisting}
+MemoryStream ms = new MemoryStream();
+\end{lstlisting}
+
+Una vez que tenemos nuestro objeto MemoryStream podemos escribir datos en él utilizando el método Write:
+
+\begin{lstlisting}
+ms.Write(buffer, 0, buffer.Length);
+\end{lstlisting}
+
+Donde buffer es un arreglo de bytes que contiene los datos que queremos escribir.
+
+Para leer datos de un MemoryStream podemos utilizar el método Read:
+
+\begin{lstlisting}
+ms.Read(buffer, 0, buffer.Length);
+\end{lstlisting}
+
+Donde buffer es un arreglo de bytes que contendrá los datos leídos del MemoryStream.
+
+También es posible posicionar el cursor en un MemoryStream utilizando el método Seek:
+
+\begin{lstlisting}
+ms.Seek(0, SeekOrigin.Begin);
+\end{lstlisting}
+
+Este ejemplo posiciona el cursor al inicio del MemoryStream.
+
+\subsubsection*{Archivos}
+Para trabajar con archivos podemos utilizar las clases File y FileInfo de la librería System.IO.
+
+La clase File nos permite leer y escribir datos en archivos de forma sencilla:
+
+\begin{lstlisting}
+File.WriteAllText("archivo.txt", "contenido del archivo");
+string contenido = File.ReadAllText("archivo.txt");
+\end{lstlisting}
+
+El primer ejemplo escribe el contenido \enquote*{contenido del archivo} en el archivo \enquote*{archivo.txt}. El segundo ejemplo lee el contenido del archivo \enquote*{archivo.txt} y lo almacena en la variable contenido.
+
+La clase FileInfo nos permite obtener información sobre un archivo específico:
+
+\begin{lstlisting}
+FileInfo fileInfo = new FileInfo("archivo.txt");
+long size = fileInfo.Length;
+DateTime creationTime = fileInfo.CreationTime;
+\end{lstlisting}
+
+Este ejemplo obtiene el tamaño y la fecha de creación del archivo "archivo.txt".
+
+\subsubsection*{Streams}
+Un stream es una secuencia de bytes que puede ser leída o escrita. En C\# existen varios tipos de streams, como FileStream, MemoryStream y NetworkStream, entre otros.
+
+Para trabajar con streams podemos utilizar las clases Stream y StreamReader/StreamWriter de la librería System.IO.
+
+La clase Stream es la clase base para todos los streams en C\#. Podemos utilizarla para leer y escribir datos en un stream:
+
+\begin{lstlisting}
+Stream stream = new MemoryStream();
+byte[] buffer = new byte[1024];
+int bytesRead = stream.Read(buffer, 0, buffer.Length);
+stream.Write(buffer, 0, bytesRead);
+\end{lstlisting}
+
+Este ejemplo lee datos de un MemoryStream y los escribe en el mismo stream.
+
+También podemos utilizar las clases StreamReader y StreamWriter para leer y escribir texto en un stream:
+
+\begin{lstlisting}
+StreamWriter sw = new StreamWriter("archivo.txt");
+sw.Write("contenido del archivo");
+sw.Close();
+
+StreamReader sr = new StreamReader("archivo.txt");
+string contenido = sr.ReadToEnd();
+sr.Close();
+\end{lstlisting}
+
+Aquí hay un ejemplo de cómo leer el contenido de un archivo usando la clase StreamReader:
+\begin{lstlisting}
+try
+{
+    using (StreamReader sr = new StreamReader("archivo.txt"))
+    {
+        string linea;
+        while ((linea = sr.ReadLine()) != null)
+        {
+            Console.WriteLine(linea);
+        }
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error: " + ex.Message);
+}
+\end{lstlisting}
+
+En este ejemplo, se usa un bloque try-catch para manejar cualquier excepción que pueda ocurrir mientras se lee el archivo. Primero, se crea una instancia de la clase StreamReader pasando el nombre del archivo como argumento. Luego, se utiliza un bucle while para leer cada línea del archivo y escribirla en la consola. Finalmente, se cierra el StreamReader utilizando la declaración using, lo que asegura que se libere correctamente cualquier recurso utilizado por la clase.
+
+Además de la clase StreamReader, la biblioteca System.IO proporciona una variedad de clases y métodos para trabajar con archivos y streams en C\#. Estos incluyen la clase FileStream para leer y escribir datos en archivos, la clase BinaryReader y BinaryWriter para leer y escribir datos binarios, y la clase Directory para manipular directorios en el sistema de archivos.
+
+\subsection{Programación asíncrona}
+
+Para trabajar con programación asíncrona en C\#, se utiliza la palabra clave \enquote*{async} junto con \enquote*{await}. Esto permite que el código se ejecute en un hilo diferente al hilo principal, lo que puede mejorar el rendimiento de la aplicación. Además, esto permite realizar varias tareas al mismo tiempo y esperar a que todas se completen antes de continuar con la siguiente instrucción.
+
+Por ejemplo, supongamos que tenemos un método \enquote*{DescargarArchivoAsync} que descarga un archivo de Internet. Podríamos usar el siguiente código para llamar a este método de forma asíncrona:
+
+\begin{lstlisting}
+public async void DescargarAsync()
+{
+    await DescargarArchivoAsync();
+    Console.WriteLine("Archivo descargado exitosamente");
+}
+\end{lstlisting}
+
+Aquí, usamos la palabra clave \enquote*{async} en el método \enquote*{DescargarAsync} y \enquote*{await} en la llamada a \enquote*{DescargarArchivoAsync}. Esto indica que estamos esperando a que el método \enquote*{DescargarArchivoAsync} se complete antes de continuar con la siguiente instrucción, que en este caso es imprimir un mensaje en la consola.
+
+Además, podemos iniciar varias tareas simultáneamente y esperar a que todas se completen antes de continuar con la siguiente instrucción. Por ejemplo, si tenemos dos métodos \enquote*{DescargarArchivo1Async} y \enquote*{DescargarArchivo2Async}, podemos usar el siguiente código para iniciar ambas tareas al mismo tiempo y esperar a que ambas se completen antes de continuar con la siguiente instrucción:
+
+\begin{lstlisting}
+public async void DescargarArchivosAsync()
+{
+    Task tarea1 = DescargarArchivo1Async();
+    Task tarea2 = DescargarArchivo2Async();
+    
+    await Task.WhenAll(tarea1, tarea2);
+    
+    Console.WriteLine("Archivos descargados exitosamente");
+}   
+\end{lstlisting}
+
+En este caso, usamos la clase \enquote*{Task} para iniciar las tareas \enquote*{DescargarArchivo1Async} y \enquote*{DescargarArchivo2Async} al mismo tiempo. Luego, usamos el método \enquote*{Task.WhenAll} para esperar a que ambas tareas se completen antes de continuar con la siguiente instrucción, que en este caso es imprimir un mensaje en la consola.
+
+La programación asíncrona también permite la composición de tareas. Por ejemplo, si tenemos un método \enquote*{ProcesarArchivoAsync} que procesa un archivo después de descargarlo, podemos usar el siguiente código para llamar a este método de forma asíncrona después de descargar el archivo:
+
+\begin{lstlisting}
+public async void DescargarYProcesarAsync()
+{
+    await DescargarArchivoAsync();
+    await ProcesarArchivoAsync();
+    Console.WriteLine("Archivo procesado exitosamente");
+}
+\end{lstlisting}
+
+Aquí, usamos la palabra clave \enquote*{async} y \enquote*{await} para llamar a los métodos \enquote*{DescargarArchivoAsync} y \enquote*{ProcesarArchivoAsync} de forma asíncrona. Esto nos permite descargar el archivo y procesarlo al mismo tiempo sin bloquear el hilo principal.
+
+Finalmente, también podemos esperar a la finalización de una tarea antes de continuar con la siguiente instrucción. Por ejemplo, si tenemos un método \enquote*{EsperarAsync} que espera 5 segundos antes de continuar, podemos usar el siguiente código para esperar a que el método se complete antes de continuar con la siguiente instrucción:
+
+\begin{lstlisting}
+public async void EsperarYContinuarAsync()
+{
+    await EsperarAsync();
+    Console.WriteLine("Espera completada");
+}    
+\end{lstlisting}
+
+En este caso, usamos la palabra clave \enquote*{async} y \enquote*{await} para llamar al método \enquote*{Esperar}. La palabra clave \enquote*{async} le dice al compilador que este método puede contener operaciones asincrónicas, mientras que \enquote*{await} se utiliza para esperar la finalización de una tarea asincrónica antes de continuar con la ejecución del código.
+
+El ejemplo anterior también muestra cómo iniciar tareas simultáneas con la clase Task. Podemos usar el método Task.WhenAll para esperar a que todas las tareas finalicen antes de continuar con la ejecución del código.
+
+La programación asíncrona es especialmente útil cuando trabajamos con operaciones que pueden tardar mucho tiempo en completarse, como operaciones de entrada/salida o de red. En lugar de bloquear el subproceso principal mientras esperamos a que se complete una tarea, podemos permitir que el subproceso principal continúe ejecutando otras tareas.
+
+Además, la programación asíncrona nos permite componer tareas de forma más eficiente. Podemos iniciar varias tareas simultáneamente y esperar a que todas finalicen antes de continuar con la ejecución del código.
+
+\newpage
+\section{LINQ}
+
+LINQ es una tecnología de Microsoft que permite realizar consultas sobre datos en diversos orígenes de datos, incluyendo bases de datos, colecciones en memoria y servicios web, utilizando una sintaxis unificada y orientada a objetos. LINQ significa \enquote*{Language Integrated Query}, y está integrado en el lenguaje de programación C\# y otros lenguajes de .NET Framework. Con LINQ, se puede escribir consultas de una manera más fácil, eficiente y segura en comparación con otras técnicas de consulta de datos.
+
+\subsection*{lambdas}
+
+En LINQ, las lambdas son funciones anónimas que se utilizan para representar una expresión o un bloque de código que se ejecutará en el contexto de una consulta LINQ.
+
+Las lambdas se usan para definir las condiciones de filtrado, las operaciones de proyección y otras operaciones que se aplican a los datos en una consulta LINQ.
+
+Por ejemplo, en la siguiente consulta LINQ, se utiliza una lambda para definir la condición de filtrado:
+
+\begin{lstlisting}
+var productos = from p in listaDeProductos
+                where p.Precio > 50
+                select p;
+\end{lstlisting}
+
+En este caso, la lambda se utiliza para definir la condición de filtrado p.Precio > 50. La variable p representa cada objeto en la lista de productos, y la expresión p.Precio > 50 devuelve verdadero o falso para cada objeto según si su precio es mayor a 50 o no.
+
+Las lambdas también se pueden utilizar para definir las operaciones de proyección, que son las que se aplican a los datos para transformarlos en otra forma. Por ejemplo:
+
+\begin{lstlisting}
+var nombresDeProductos = listaDeProductos.Select(p => p.Nombre);
+\end{lstlisting}
+
+En este caso, la lambda p => p.Nombre se utiliza para definir la operación de proyección que devuelve el nombre de cada producto en la lista. La variable p representa cada objeto en la lista de productos, y la expresión p.Nombre devuelve el nombre del producto.
+
+En resumen, las lambdas son una herramienta fundamental en LINQ, ya que permiten definir de manera concisa y clara las operaciones de filtrado y proyección que se aplican a los datos en una consulta LINQ.
+
+\subsection{Sentencias from, join, let, where, order by, select, group by}
+
+En LINQ, las consultas se construyen utilizando una combinación de cláusulas. Estas cláusulas se pueden utilizar en cierto orden y se encadenan para construir una consulta más compleja. A continuación, se describen algunas de las cláusulas más comunes:
+
+\begin{itemize}
+    \item from: especifica la fuente de los datos en la consulta. Por lo general, es una colección o una fuente de datos que implementa la interfaz IQueryable.
+    \item join: se utiliza para combinar dos o más fuentes de datos en una única fuente. Es similar a la cláusula SQL \enquote*{JOIN}.
+    \item let: permite declarar variables locales dentro de la consulta que se pueden utilizar en cláusulas posteriores.
+    \item where: se utiliza para filtrar los datos en función de una condición especificada.order by: se utiliza para ordenar los resultados de la consulta en orden ascendente o descendente en función de una propiedad específica.
+    \item select: se utiliza para seleccionar una propiedad o un conjunto de propiedades de los objetos en la fuente de datos.
+    \item group by: se utiliza para agrupar los resultados de la consulta en función de una propiedad específica.
+\end{itemize}
+
+Cada una de estas cláusulas se puede encadenar para construir una consulta más compleja. Por ejemplo, una consulta LINQ puede tener el siguiente aspecto:
+\begin{lstlisting}
+var query = from p in db.Personas
+            join d in db.Direcciones on p.Id equals d.PersonaId
+            where p.Edad > 18
+            orderby p.Nombre ascending
+            select new {
+                Nombre = p.Nombre,
+                Direccion = d.Direccion
+            };    
+\end{lstlisting}
+
+Esta consulta selecciona todas las personas mayores de 18 años de la tabla \enquote*{Personas} y las combina con sus respectivas direcciones de la tabla \enquote*{Direcciones}. Luego, filtra los resultados para incluir solo aquellos cuyo nombre empieza por una letra específica y los ordena alfabéticamente por nombre. Finalmente, selecciona el nombre de la persona y su dirección, y devuelve los resultados como una lista de objetos anónimos.
+
+\subsection*{Operadores}
+
+En LINQ, los operadores son métodos que se utilizan para realizar operaciones específicas en los objetos de consulta. Estos operadores se dividen en dos categorías: operadores de consulta y operadores de método.
+
+Los operadores de consulta son palabras clave que se utilizan para definir una consulta LINQ, como from, where, select, orderby, etc. Estos operadores tienen una sintaxis similar a la de una cláusula de SQL.
+
+Por otro lado, los operadores de método son métodos estáticos que se definen en la clase Enumerable y que se utilizan para ejecutar operaciones en los objetos de consulta. Algunos de los operadores de método más comunes son Where, Select, OrderBy, Join, etc.
+
+Ambos tipos de operadores son muy útiles en LINQ para realizar consultas y operaciones complejas de manera fácil y eficiente.
+
+Por ejemplo, el operador Where se utiliza para filtrar los elementos de una secuencia según un predicado determinado. El siguiente código muestra un ejemplo de cómo utilizar este operador para obtener todos los números pares de una secuencia de números:
+
+\begin{lstlisting}
+int[] numeros = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+var numerosPares = numeros.Where(n => n % 2 == 0);
+
+foreach (var numero in numerosPares)
+{
+    Console.WriteLine(numero);
+}
+\end{lstlisting}
+
+En este caso, la expresión lambda n => n \% 2 == 0 se utiliza como predicado para el operador Where. Esta expresión se evalúa para cada elemento de la secuencia numeros, devolviendo solo aquellos elementos que cumplen la condición de ser divisibles por 2, es decir, los números pares.
+
+\subsection*{proveedores}
+
+Los proveedores de LINQ son las bibliotecas que implementan el motor de consulta LINQ para un origen de datos específico. Proporcionan el acceso a los datos, el procesamiento de consultas y la devolución de resultados a través de LINQ. Algunos de los proveedores más comunes son:
+\begin{enumerate}
+    \item LINQ to Objects: permite realizar consultas en colecciones en memoria.
+    \item LINQ to SQL: proporciona acceso a datos en bases de datos relacionales utilizando SQL Server.
+    \item LINQ to Entities: proporciona acceso a datos en bases de datos relacionales a través del Entity Framework.
+    \item LINQ to XML: proporciona acceso a datos XML.
+\end{enumerate}
+Cada proveedor tiene su propia implementación de los métodos de extensión de LINQ para admitir el procesamiento de consultas en su origen de datos específico.
+
+\subsection{Ejemplos}
+
+Aquí hay algunos ejemplos de consultas LINQ usando las diferentes cláusulas y operadores mencionados:
+
+\begin{enumerate}
+    \item Ejemplo usando la cláusula from y where para filtrar una lista de estudiantes según su edad:
+\begin{lstlisting}
+List<Student> students = GetStudents(); // Obtener lista de estudiantes
+
+var filteredStudents = from s in students
+                        where s.Age > 18
+                        select s;    
+\end{lstlisting}
+    \item Ejemplo usando la cláusula join para unir dos listas de estudiantes y departamentos según su identificador:
+\begin{lstlisting}
+List<Student> students = GetStudents(); // Obtener lista de estudiantes
+List<Department> departments = GetDepartments(); // Obtener lista de departamentos
+
+var joinedData = from s in students
+                    join d in departments on s.DepartmentId equals d.Id
+                    select new { StudentName = s.Name, DepartmentName = d.Name };
+
+\end{lstlisting}
+    \item Ejemplo usando la cláusula let para crear una variable intermedia y utilizarla en una expresión posterior:
+\begin{lstlisting}
+List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+
+var result = from n in numbers
+             let squared = n * n
+             where squared > 10
+             select squared;
+
+\end{lstlisting}
+    \item Ejemplo usando la cláusula order by para ordenar una lista de estudiantes por su nombre de forma ascendente:
+\begin{lstlisting}
+List<Student> students = GetStudents(); // Obtener lista de estudiantes
+
+var sortedStudents = from s in students
+                     orderby s.Name ascending
+                     select s;
+
+\end{lstlisting}
+    \item Ejemplo usando la cláusula group by para agrupar una lista de estudiantes por su departamento:
+\begin{lstlisting}
+List<Student> students = GetStudents(); // Obtener lista de estudiantes
+
+var groupedStudents = from s in students
+                        group s by s.DepartmentId into g
+                        select new { DepartmentId = g.Key, Students = g.ToList() };
+\end{lstlisting}
+\end{enumerate}
 
 \end{document}
