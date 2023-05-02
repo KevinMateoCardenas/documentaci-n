@@ -9,12 +9,13 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\usepackage[left=1.00cm, right=1.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\usepackage[left=1.50cm, right=1.50cm]{geometry}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usetikzlibrary{positioning}
 \setlength{\parindent}{0.5in}
 \usepackage{setspace}
+\usepackage{amssymb}
 \doublespacing
 
 \lstset{
@@ -96,11 +97,11 @@
 \begin{titlepage}
     \begin{center}
         {\Huge \textbf{Definiciones Inductivas y Coinductivas}}
-        \\[9cm]
+        \\[8cm]
         
         \large\emph{Autor:}\\
         Kevin Cárdenas.
-        \\[9cm]
+        \\[6cm]
         \large\emph{Ascesor:}
         Juan Carlos Agudelo.\\
         Trabajo de grado en modalidad de monografía para el titulo como matemático.\\
@@ -111,26 +112,84 @@
 \newpage
 \tableofcontents
 \newpage
-\section{Definiciones Inductivas y Coinductivas}
+
+\section{Definiciones inductivas}
+
+Informalmente usualmente se da la definición inductiva a partir de un conjunto de reglas para generar los elementos de dicho conjunto, te muestro algunos ejemplos.
+
+\begin{ejemplo} \textbf{El conjunto de los números Naturales}\\
+El conjunto de los números naturales es el menor conjunto tal que:
+\begin{enumerate}
+    \item $0 \in \mathbf{N}$
+    \item se $n \in \mathbf{N}$, entonces $s(n )\in \mathbf{N}$
+\end{enumerate}
+O el conjunto de los números naturales es el conjunto definido por las siguientes reglas:
+\begin{enumerate}
+    \item $0 \in \mathbf{N}$
+    \item si $n \in \mathbf{N}$, entonces $s(n )\in \mathbf{N}$
+\end{enumerate}
+Los elementos en $\mathbf{N}$ son solo los producidos por las reglas 1) y 2).
+
+Es importante destacar que la definición inductiva de los números naturales no especifica cómo se representan los números, sino que se enfoca en cómo se construyen. Por lo tanto, la representación de los números naturales puede variar dependiendo del contexto. Además, la definición inductiva establece que el conjunto de los números naturales es único, y que cualquier otro conjunto que cumpla las mismas dos reglas también será igual al conjunto de los números naturales. Esta definición es fundamental en matemáticas y es utilizada como base para muchas otras construcciones y teoremas.
+\end{ejemplo}
+
+\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica}\\
+    Dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, el conjunto $\mathbf{Form}$ de formulas de la lógica es el menor conjunto tal que:
+    \begin{enumerate}
+        \item $V \subseteq \mathbf{Form}$
+        \item si $A, B \in \mathbf{Form}$, entonces $\neg A, A \lor B, A \land B, A \rightarrow B, A \leftrightarrow B \in \mathbf{Form}$
+    \end{enumerate}
+En ese sentido tenemos una forma de hacer \enquote*{inducción estructural} sobre este conjunto, pues en cada paso podemos mirar de donde proviene una formula.
+\end{ejemplo}
+
+\begin{ejemplo}\textbf{El conjunto de listas finitas de un conjunto A}\\
+    Dado un conjunto $A$, el conjunto $\mathbf{Finlist(A)}$
+    \begin{enumerate}
+        \item $nill \in \mathbf{Finlist(A)}$
+        \item si $S \in \mathbf{Finlist(A)}$ y $a \in A$ , entonces $<a>\cdot S\in \mathbf{Finlist(A)}$
+    \end{enumerate}
+El operador $\cdot$ funciona como un metodo para concatenar un elemento en una lista ya existente, entonces todos los terminos en $\mathbf{Finlist(A)}$ son de la forma $<a_n>\cdot<a_{n-1}>\cdot<a_{n-2}>\cdot\ldots\cdot<a_{0}>\cdot nill$.
+\end{ejemplo}
+
 \subsection{¿Qué es una definición inductiva?}
 \begin{defi}
 \textbf{Regla, $\phi-$cerrado, Conjunto inductivamente definido}
 \begin{enumerate}
 \item Una regla es un par $(A,x)$, donde $A$ es un conjunto, llamado \textbf{el conjunto de premisas}, y $x$ es la conclusión.
-\item Si $\phi$ es un conjunto de reglas, entonces un conjunto $A$ es $\phi - \textbf{cerrado}$ si cada regla de $\phi$ tiene sus premisas en $A$.
+\item Si $\phi$ es un conjunto de reglas, entonces un conjunto $A$ es $\phi - \textbf{cerrado}$ si el hecho de que cada regla de $\phi$ tiene sus premisas en $A$, implica que su conclusión está en $A$.
 \item Dado $\phi$ un conjunto de reglas, definimos $I(\phi)$ como el conjunto inductivamente definido por $\phi$, que se define como:
 $$L(\phi) = \bigcap\{A \, : A\,\, \phi-cerrado\}$$
 \end{enumerate}
 \end{defi}
-Esta definición establece que una regla es un par que consiste en un conjunto de premisas y una conclusión. Un conjunto $A$ es $\phi - \textbf{cerrado}$ si cada regla de $\phi$ tiene sus premisas en $A$. Finalmente, se define el conjunto inductivamente definido por $\phi$ como el menor conjunto que contiene todos los elementos del conjunto de premisas de $\phi$ y que es cerrado bajo $\phi$. Este conjunto se define como la intersección de todos los conjuntos $\phi-$cerrados.
+
+Volvamos a los ejemplos anteriores.
 
 \begin{ejemplo}\textbf{$\mathbf{N}$ Como conjunto inductivamente definido}\\
-Desde la definición que hemos dado, podemos definir los números naturales $\mathrm{N}$ como un conjunto inductivamente definido. Para ello, definimos $\phi$ como un conjunto de reglas que contienen las siguientes dos reglas:
+Volviendo al ejemplo 1.1, desde la definición que hemos dado, podemos ver los números naturales $\mathrm{N}$ como el conjunto inductivamente definido del siguiente conjunto de reglas, definimos $\phi$ como un conjunto de reglas que contienen las siguientes dos reglas:
 \begin{enumerate}
-\item $(\emptyset,0)$, donde $0$ es un número natural.
+\item $(\emptyset,0)$
 \item $({n},s(n))$, donde $n$ es un número natural y $s(n)$ es el sucesor de $n$.
 \end{enumerate}
-De ahí, es claro ver que $\mathrm{N} = I(\phi)$, pues $\mathrm{N}$ es el menor conjunto que contiene a $0$ y es cerrado bajo la operación sucesor.
+\end{ejemplo}
+
+\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica como conjunto inductivamente definido}\\
+Volviendo al ejemplo 1.2, dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, el conjunto $\mathbf{Form}$ de formulas de la lógica puede ser definido inductivamente a partir del siguiente conjunto de reglas. 
+    \begin{enumerate}
+        \item $(\emptyset, p_i)$ para $p_i \in V$
+        \item $(\{A\}, \neg A)$
+        \item $(\{A, B\}, A \lor B)$
+        \item $(\{A, B\}, A \land B)$
+        \item $(\{A, B\}, A \rightarrow B)$
+        \item $(\{A, B\}, A \leftrightarrow B)$
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}\textbf{El conjunto de listas finitas de un conjunto A como conjunto inductivamente definido}\\
+Volviendo al ejemplo 1.3, dado un conjunto $A$, el conjunto $\mathbf{Finlist(A)}$ de listas finitas en A
+    \begin{enumerate}
+        \item $(\emptyset, nill)$
+        \item $(\{S\},<a>\cdot S)$ 
+    \end{enumerate}
 \end{ejemplo}
 
 \begin{defi}
@@ -142,14 +201,14 @@ $a_1, a_2, \ldots, a_n$ es una $\phi-$prueba de $b$ si
 \end{enumerate}
 Si $x$ tiene una $\phi-$prueba, entonces decimos que $x$ es $\phi-$demostrable.
 \end{defi}
-En general, una prueba matemática es una secuencia de afirmaciones, llamadas pasos de la prueba, que conducen a la conclusión deseada. Con esta definición, una demostración de una fórmula $b$ en un conjunto de reglas $\phi$ es una secuencia de fórmulas $a_1, a_2, \ldots, a_n$ tal que $a_n=b$ y para cada $a_i$, si $i \leq n$, entonces existe un subconjunto finito $X$ de ${a_1, a_2, \ldots, a_{i-1}}$ tal que $\phi(X)=a_i$. Es decir, cada fórmula en la secuencia es obtenida a partir de las fórmulas previas mediante la aplicación de alguna regla de $\phi$ cuyas premisas son un subconjunto finito de las fórmulas previas.
 
 \begin{propo}.\\
 Para $\phi$ un conjunto de reglas finito:
-$$I(\phi) = \{b \quad: b\,\, tiene\,\, una\,\, prueba\}$$
+$$I(\phi) = \{b \,\,|b\,\, {tiene}\,\, {una}\,\, \phi -{prueba} \}$$
+De la definición es claro que, primero $\{b \quad: b\,\, tiene\,\, una\,\, \phi-prueba\}$ es $\phi$-cerrado, y además para cada $x \in I(\phi)$ $x$ es $\phi$-demostrable. (La demostración se encuentra en la pagina $743$ del libro de Aczel Introduction to Inductive Definitions.)
 \end{propo}
 
-\subsection{La parte bien fundamentada de una relación}
+\subsection*{La parte bien fundamentada de una relación}
 Sea $A$ un conjunto, $<$ una relación de orden parcial en $A$, definimos \textbf{la parte bien fundamentada de $<$} como 
 
 $$W(<) = \{a\in A\,\, : \forall \{a_i\}\subseteq A (a_0 = a, a_{i+1}<a_i\rightarrow |\{a_i\}|<\infty)\}$$
@@ -165,7 +224,7 @@ Decimos que $<$ es bien fundamentada, si $w(<) = A$
 \end{propo}
 
 \begin{propo}\textbf{Otra interpretación de un conjunto definido inductivamente}
-    $$W(<) = I(\phi_<) = \{b \quad: b\,\, tiene\,\, una\,\, prueba\}$$
+    $$W(<) = I(\phi_<) = \{b \quad: b\,\, {tiene}\,\, {una}\,\, \phi-{prueba}\}$$
     Es decir El conjunto inductivamente definido por el conjunto de reglas definido por una relación de orden parcial es la parte bien fundamentada de $<$ y a su vez el conjunto de los elementos $\varphi_<$-demostrables.
 \end{propo}
 
@@ -204,6 +263,9 @@ Ahora bien, sea $\phi$ determinista y $A$ un conjunto de conclusiones de reglas 
     $$I(\phi)=I(\phi_<)$$
 \end{propo}
 La proposición establece que si $\phi$ es determinista, entonces el conjunto de fórmulas demostrables mediante $\phi$ es igual al conjunto de fórmulas demostrables mediante $\phi_<$, es decir, $I(\phi) = I(\phi_<)$.
+\begin{ejemplo}\textbf{$\mathbf{N},\,\, \mathbf{Form}\,\, { y } \,\, \mathbf{Finlist(A)}$ tienen una relación de orden bien fundamentada }\\
+    Mostramos que si $\phi$ es un conjunto de reglas deterministas entonces $\phi_<$ es una relación bien fundamentada sobre $I(\phi)$, revisando los ejemplos de los naturales, el conjunto de formulas proposicionales de la lógica clásica y el conjunto de listas finitas sobre un conjunto $A$ son deterministas y por tanto tienen una relación de orden bien fundamentada sobre si mismo.
+\end{ejemplo}
 
 \subsection{Puntos fijos en un lattice completo}
 \begin{defi}\textbf{Poset}\\
@@ -270,7 +332,7 @@ A continuación algunos ejemplos:
     Es facil ver que no es un monomorfismo.
 \end{ejemplo}
 
-\begin{defi}\textbf{enrejado (lattice) completo}\\
+\begin{defi}\textbf{Reticulo (lattice) completo}\\
     Un lattice completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjunto no vacío tiene supremo.
 \end{defi}
 Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del infimo en todo conjunto. Esto por la definición. Es decir en un lattice completo todo subconjunto no vacío posee infimo. También tenemos que los lattices completos son acotados, es decir poseen maximo y minimo.
@@ -278,17 +340,17 @@ Note que basta con exigir la existencia del supremo en todo conjunto para tener 
 \begin{teo}\textbf{Teorema del punto fijo}\\
     En un lattice completo $L$, una endofunción monotona $F:L\rightarrow L$ tiene un lattice completo de puntos fijos. En particlar el punto fijo más pequeño de la funcíon es el infimo de los puntos pre-fijos, el más grande es el supremo de los puntos postfijos. Más aún por la condición de sobreyectividad estos son el minimo y el máximo del lattice. 
 \end{teo}
-Sea $A \subseteq L$ el conjunto de puntos fijos, y sea $B \subseteq A$, como $L$ es lattice completo, existe $s\in L$ tal que $s = sup(B)$ veamos que $\in A$, para esto basta ver que $F(s) = s$\\ 
-Tomemos $Y=\{y\in L| F(y)\leq y \land \forall_{x\in B}(x\leq y)\} \subseteq L$, sea $i = inf (Y) \in L$, por lo tanto $s = i$, $F(s)\leq s$ 
+La demostración de este teorema se encuentra en el libro Introduction to bisimulation and coinduccion.
+\subsection*{Conjuntos definidos inductiva y coinductivamente}
 
-\subsection{Conjuntos definidos inductiva y coinductivamente}
-
-\begin{defi}\textbf{Conjuntos definidos inductiva y coinductivamente} \\
+\begin{defi}\textbf{Conjuntos definidos inductiva y coinductivamente como puntos fijos de operadores} \\
     Sea L un lattice completo cuyos puntos son conjuntos, (Podriamos decir $L\subseteq Pow(A)$, para algún conjunto $A$), ordenado bajo la relación de ordén de inclusión, y $F:L\rightarrow L$ una enfofunción en $L$, Los conjuntos:
     $$F_{ind} = \bigcap \{x|F(x)\subseteq x\}$$
-    $$F_{coind} = \bigcap \{x|x\subseteq F(x)\}$$
+    $$F_{coind} = \bigcup \{x|x\subseteq F(x)\}$$
     (El meet de de los puntos pre-fijos, y el join de los puntos post-fijos) son, respectivamente el conjunto definido inductiva por $F$ y definido coinductivamente por $F$.
 \end{defi}
+
+En el libro An Introduction to Inductive Definitions de Aczel, está la demostración de que tomanmdo el conjunto de reglas, para $\A\subseteq L$, $(A,y)\in\phi$ para $y\in F(A)$, tenemos que $I(\phi) = F_{ind}$, por lo que este es otro punto de vista para los conjuntos definidos inductivamente.  
 
 \begin{propo}\textbf{Principio de inducción y coinduccion}\\
     para una endofinción monotona $F:L\rightarrow L$ sobre un lattices tenemos
@@ -298,95 +360,35 @@ Tomemos $Y=\{y\in L| F(y)\leq y \land \forall_{x\in B}(x\leq y)\} \subseteq L$, 
     \end{center}
 \end{propo}
 
-\begin{ejemplo}
-    Consideremos las reglas para listas:\\
-    Sea $A$ un conjunto. El conjunto de listas finitas con elementos de $A$ es el conjunto $\mathbf{L}_A$ inductivamente generado por las siguentes teglas:
-    \begin{enumerate}
-        \item $(\emptyset,nill \in \mathbf{L}_A)$ esta representa la lista vacía.
-        \item $(s \in \mathbf{L}_A\,\,\land\,\, a\in A, <a>\cdot s \in \mathbf{L}_A)$, esta regla representa que si concatenamos a izquierda un elemento de $A$ en una lista de $\mathbf{L}_A$, esto genera una nueva lista.
-    \end{enumerate}
-    Por otra parte, tomemos:\\ 
+Podemos volver a los ejemplos que estamos tratando. 
+
+\begin{ejemplo} \textbf{El conjunto de los números Naturales, Como conjunto definidos inductivamente}\\
+Sea $\varphi:Pow(\mathbf{X})\longrightarrow Pow(\mathbf{X})$,con $\mathbf{X}$ un conjunto donce $0\in \mathbf{X}$ y $\mathbf{X}$ es cerrado para la operación sucesor, definimos:
+$$\varphi(X)=\{0\} \cup \{s(x)\,\,|\,\,x\in X\}$$
+Luego los naturales se ven definidos como $\mathbf{N}=\bigcap \{X \mid X\subseteq\varphi(X)\}$, el conjunto inductivamente definido. Por otra parte el conjunto coinductivamente definido es $\mathbf{X}$.
+\end{ejemplo}
+    
+\begin{ejemplo}\textbf{El conjunto de listas finitas de un conjunto A, Como conjunto definidos inductivamente}\\
+Tomemos:\\ 
     $X$ como el conjunto de todos los strings finitos o infinitos con elementos del alfabeto $A\cup\{nill, \cdot, <, >\}$, el funcional correspondiente $\varphi_{\mathbf{L}_A}$ es:
     $$\varphi_{\mathbf{L}_A}(T) = \{nill\} \cup \{<a>\cdot s \mid a\in A \land s \in T \}$$
+Tenemos que el conjunto de listas finitas con elementos en $A$ es el conjunto inductivamente definido por el operador $\varphi_{\mathbf{L}_A}$ y el conjunto de listas infinitas es el coinductivamente definido por este operador.
+\end{ejemplo}
+
+En el siguiente ejemplo podemos ver un patrón de cómo entender la equivalencia entre conjuntos inductivamente definidos a partir de reglas y a partir de puntos fijos en un reticulo completo.
+
+\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica, Como conjunto definidos inductivamente}\\
+    Dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, $X$ como el conjunto de todos los strings finitos o infinitos con elementos del alfabeto $V\cup\{\lor, \lnot, \land, \rightarrow, \leftrightarrow, (, )\}$, el funcional correspondiente $\varphi$ es:
+    $$\varphi(T) = V \cup \{(A) \times (B) \mid A , B\in T \land \times\in \{\lor, \land, \rightarrow, \leftrightarrow\}\}\cup T \cup \{\lnot A|A\in T\}$$
     Que es un operador monotono sobre un latice completo.\\
-    Tenemos finalmente que $\mathbf{L}_A = \bigcap \{T \mid \varphi_{\mathbf{L}_A}(T)\subseteq T\}$, es el conjunto inductivamente definido por este operador, y los elementos aquó son justamente los de la forma:\\
-    $$<a_1>\cdot<a_2>\cdot<a_3>\cdot<a_4>\cdot<a_5>\cdot\,\cdots\,\cdot <a_n> \cdot nill\:\: para\,\, a_i \in A$$
-    Además, El conjunto coinductivamente definido $\mathbf{{I}}_A = \bigcup \{T \mid T\subseteq\varphi_{\mathbf{L}_A}(T)\}$, coincide con el conjunto de las listas finitas o infinitas de elementos en $A$.
+    Tenemos finalmente que $\mathbf{Form} = \varphi_{ind}$, es el conjunto inductivamente definido por este operador, y los elementos aquó son justamente formulas.\\    
+    Además, El conjunto coinductivamente definido $\mathbf{{C}} = \bigcup \{T \mid T\subseteq\varphi(T)\}$, coincide con el conjunto de las formulas fintitas, y las generadas infinitamente a partir de estas reglas.
 \end{ejemplo}
 
 
-\subsection{Definiciones inductivas como operadores}
-Sea $\varphi:Pow(A)\rightarrow Pow(A)$, donde $Pow(A)=\{X:X\subseteq A\}$. El operador $\phi$ es \textbf{monotono} si $X\subseteq Y \subseteq A$ implica que $\varphi(X)\subseteq \varphi(Y) \subseteq A$.\\ 
-Dado $\varphi:Pow(A)\rightarrow Pow(A)$ sea $\phi_{\varphi}$ el conjunto de reglas $X\rightarrow x$ tal que $X\subseteq A$ y $x \in \varphi(X)$. Para $\phi$ monotona, $X \subseteq A$ es $\phi_{\varphi}$-cerrado justo en el caso $\varphi(X) \subseteq X$. Asi $I(\phi_{\varphi})=\bigcap\{X \subseteq A: \varphi(X) \subseteq X\}$. Además, es natural extender la terminología concerniente a definiciones inductivas a operadores monotonos $\varphi$ y escribimos $I(\varphi)=\bigcap\{X \subseteq A: \varphi(X) \subseteq X\}$ y lo llamaremos el \textbf{conjunto intuctivamente definido por $\varphi$.} Todas las definiciones inductivas pueden ser obtenidas usando operadores monotonos. Para $\phi$ un conjunto de reglas en $A$ ($X\cup\{x\}\subseteq A$ cuando $\phi:X\rightarrow x$) Podemos definir un operador monotono mediante $\varphi:Pow(A)\rightarrow Pow(A)$ por:
-$$\varphi(Y)=\{x\in A:\exists X\subseteq Y (\phi:X\rightarrow x)\}$$
-Entonces $Y\subseteq A$ es $\phi$-cerrado cuando $\phi(Y)\subseteq Y$, así $I(\varphi)=I(\phi)$.\\
-
-Sea $\varphi : Pow(A) \rightarrow Pow(A)$ un operador monotono, entonces se define $\varphi^\lambda\subseteq A$
-$$\varphi^\lambda = \bigcup_{\mu<\lambda}\varphi^{\mu}\cup(\bigcup_{\mu<\lambda}\varphi^{\mu}) $$
-Entonces $\varphi^{\infty}=\bigcup_{\lambda}\varphi^{\lambda}$
-\begin{propo}
-    Para $\phi:Pow(A)\rightarrow Pow(A)$ monotono:
-    \begin{enumerate}
-        \item $I(\varphi)=\varphi^{\infty}$
-        \item $I(\varphi)$ es el punto fijo más pequeño de $\varphi$
-    \end{enumerate}
-
-\end{propo}
-\subsection*{Concepto de prueba para inducción monotona}
-Un cardinal regular es un cardinal $\kappa$ tal que para cualquier colección de conjuntos $\{A_i\}_{i\in I}$, si $\vert A_i \vert < \kappa$ para todo $i\in I$, entonces $\left\vert \bigcup_{i\in I} A_i \right\vert < \kappa$.
-
-\begin{defi}
-    Sea $\varphi$ un operador monotono en $A$. Una secuencia transfinita $\{a_{\mu}\}_{\mu\leq\lambda}$ es una $\varphi$-prueba de $b$ con longitud $\lambda$ si 
-    \begin{enumerate}
-        \item $a_{\lambda} =b$
-        \item $a_{\nu}\in\varphi\{a_{\mu}\,\,:\mu<\nu\}$ para todo $\nu\leq\lambda$
-    \end{enumerate}
-\end{defi}
-La definición de $\varphi$-prueba establece una condición para demostrar que un elemento $b\in A$ pertenece a $\varphi^\lambda$ para alguna $\lambda$. Es decir, una $\varphi$-prueba de $b$ es una secuencia de elementos en $A$ que cumple ciertas condiciones.
-
-La primera condición de la definición es que el último elemento de la secuencia es precisamente $b$. La segunda condición es que cada elemento en la secuencia puede ser obtenido aplicando el operador $\varphi$ a la colección de elementos previos de la secuencia.\\
-
-Por otra parte definimos $\varphi^{<\lambda}$ recursivamente por:
-$$\varphi^{<0} = \emptyset, \,\,\,\,\,\, \varphi^{<\lambda + 1} = \varphi^{<\lambda} \cup \varphi(\varphi^{<\lambda})$$
-\begin{center}
-    $\varphi^{<\lambda} = \bigcup_{\mu<\lambda} \varphi^{<\mu}$ para un limite $\lambda$
-\end{center}
-
-\begin{propo}
-    \begin{enumerate}
-        \item Para cualquier cardinal regular $\kappa$\\
-        $\varphi^{<\kappa}=\{a\in A \,\,\,; \exists_{\{a_{mu}\}_{\nu<\kappa}}(a_{\kappa} =b \land \forall_{\nu\leq\kappa}a_{\nu}\in\varphi\{a_{\mu}\,\,:\mu<\nu\}\}$ Es decir $a$ tiene una $\varphi$-prueba de longitud $\kappa$.
-        \item $I(\varphi)=\{\{a\in A \,\,\,; \exists_{\kappa}\exists_{\{a_{mu}\}_{\nu<\kappa}}(a_{\kappa} = b \land \forall_{\nu\leq\kappa}a_{\nu}\in\varphi\{a_{\mu}\,\,:\mu<\nu\}\}\}$ es decir que $I(\varphi)$ es el conjunto de formulas $\varphi$-probables.
-    \end{enumerate}
-\end{propo}
-La proposición establece que el conjunto $I(\varphi)$ de puntos fijos de $\varphi$ es precisamente el conjunto de elementos en $A$ que tienen una $\varphi$-prueba de longitud $\kappa$ para cualquier cardinal regular $\kappa$. En otras palabras, un elemento $a\in A$ pertenece a $I(\varphi)$ si y solo si existe una $\varphi$-prueba infinita que comienza con $a$ y cumple con las condiciones de la definición. De esta manera, $I(\varphi)$ se puede entender como el conjunto de elementos en $A$ que son $\varphi$-probables bajo el operador, ya que tienen una prueba infinita que los justifica.
-
-\begin{defi}\textbf{Un arbol bien fundamentado}\\
-    Un arbol bien fundamentado $T$ es un conjunto de secuencias finitas de longitud mayor que $0$ tal que
-    \begin{enumerate}
-        \item Hay exactamente una sequencia de longitud $1$ en $T$, es llamada la raíz $(a_{T})$ del arbol.
-        \item si $(a_1,\ldots,a_{n+1})\in T$, entonces $(a_1,\ldots,a_{n})\in T$
-        \item $T$ es bien fundamentado en el sentido de que no hay sequencias infinitas $a_1,\ldots,a_n,\ldots$ tal que $(a_1,\ldots,a_{n})\in T$ para cada $n>0$.\\
-        Alternativamente $<_T$ es bien fundamentada, cuando:
-        $$(a_1,\ldots,a_{m}) = (b_1,\ldots,b_{n}) \,\,\,\ leftrightarrow \,\,\,\ n = m+1$$
-        y $a_i = b_i$ para $i\in\{1,\ldots, m\}$
-    \end{enumerate}
-\end{defi}
-Un árbol bien fundamentado es un conjunto de secuencias finitas que cumple ciertas condiciones. La primera condición es que hay una única secuencia de longitud 1, que es la raíz del árbol. La segunda condición es que si una secuencia $(a_1,\ldots,a_{n+1})$ está en el árbol, entonces su prefijo $(a_1,\ldots,a_n)$ también debe estar en el árbol. La tercera condición es que el árbol es "bien fundamentado", lo que significa que no hay secuencias infinitas en el árbol.
-
-\begin{defi}
-    Si $\phi$ es un conjunto de regla, un arbol $T$ es una $\phi$-prueba de un $a = a_T$ y $\phi: T_{(a_1,\ldots,a_{n})}\rightarrow a_n$, siempre que $(a_1,\ldots,a_{n})\in T$, donde:
-    $$T_{(a_1,\ldots,a_{n})} = \{a \,\, : (a_1,\ldots,a_{n},a) \in T\}$$
-\end{defi}
-\begin{propo}
-    \begin{enumerate}
-        \item $I(\phi) = \{a\,\,:\exists_{T}(T\rightarrow a)\}$ el conjunto de elementos tal que tienen un arbol que lo $\phi$-prueban.
-        \item si $\phi$ es un conjunto de reglas en $A$ con su correspondiente operador monotono $\varphi:Pow(A)\rightarrow Pow(A)$, entonces para todo ordinal $\lambda$,
-        $$\varphi^{\lambda} = \{a\,\,:\exists_{T}(|T|\leq\lambda\,\,\land\,\,\,T\rightarrow a)\}$$
-    \end{enumerate}
-\end{propo}
 
 \newpage
+\section{Referencias}
 \begin{thebibliography}{9}
     \bibitem{Aczel}
     Aczel, P. (1997). 
