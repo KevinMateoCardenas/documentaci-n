@@ -859,29 +859,39 @@ Es importante tener en cuenta que al utilizar una Hashtable, las claves deben se
 
 La programación orientada a objetos (POO) es un paradigma de programación que se basa en la utilización de objetos para representar y manipular los datos y su comportamiento en un programa. En POO, los objetos son instancias de una clase, que es una plantilla que define las características y el comportamiento de los objetos.
 
-El enfoque en objetos permite la modularidad y el encapsulamiento, lo que hace que el código sea más fácil de mantener y extender. Además, la POO hace uso de conceptos como la herencia, la polimorfismo y el encapsulamiento, que permiten una mayor flexibilidad y reutilización de código.
+El enfoque en objetos permite la modularidad y el encapsulamiento, lo que hace que el código sea más fácil de mantener y extender, el encapsulamiento permite modelar ideas de seguridad y niveles de acceso entre clases. Además, la POO hace uso de conceptos como la herencia y el polimorfismo, que permiten una mayor flexibilidad y reutilización de código.
+
+Los pilares de la programación orientada a objetos son:
+
+\begin{enumerate}
+    \item Abstracción: este pilar se refiere a la capacidad de representar objetos del mundo real de manera simplificada, enfocándonos en las características importantes y dejando de lado lo que no es relevante para nuestro objetivo. En POO, una clase es una abstracción de un objeto.
+    \item Encapsulamiento: este pilar se refiere a la capacidad de ocultar ciertos datos y comportamientos de un objeto, de manera que sólo se puedan acceder a ellos mediante una interfaz definida. En POO, esto se logra utilizando modificadores de acceso (public, private, protected) para controlar la visibilidad de los miembros de una clase.
+    \item Herencia: este pilar se refiere a la capacidad de crear nuevas clases a partir de clases existentes, heredando sus características y comportamientos. En POO, una clase hija hereda los miembros de la clase padre y puede añadir o sobrescribir miembros según sus necesidades.
+    \item Polimorfismo: este pilar se refiere a que diferentes objetos pueden responder al \enquote*{mismo} metodo de diferentes maneras. Es usual que hayan clases que tengan el metodo \enquote*{Get}, que se encarga de mostrar los atributos de la clase en cuestiónm, Es inmediato entonces entender que dos objetos podrán responder \enquote*{al mismo metodo} de distintas formas. 
+\end{enumerate}
 
 \subsection{Clases y objetos}
 
-En programación orientada a objetos, una clase es una plantilla o modelo que describe las propiedades y métodos que tendrán los objetos creados a partir de ella. Por lo tanto, una clase es un concepto abstracto que define la estructura y comportamiento de los objetos.
+En programación orientada a objetos, una clase es una plantilla o modelo que describe las propiedades y métodos que tendrán los objetos que son instancia de ella. Por lo tanto, una clase es un concepto abstracto que define la estructura y comportamiento de los objetos.
 
 Por otro lado, un objeto es una instancia concreta de una clase. En otras palabras, es una representación tangible de la clase. Cuando se crea un objeto, se pueden establecer sus propias propiedades y métodos, aunque hereda las características definidas por la clase.
 
 Veamos un ejemplo de cómo se declara una clase en C\#:
 \begin{lstlisting}[language={[Sharp]C}]
-public class Persona {
-    // propiedades
-    public string nombre;
-    public int edad;
-    // metodo constructor
-    public Persona(string nombre, int edad){
-        this.nombre = nombre;
-        this.edad = edad;
+public class Person {
+    // atributos encapsulados
+    private string name;
+    private int age;
+
+    // metodo constructor (luego veremos con detalle este concepto)
+    public Person(string name, int age){
+        this.name = name;
+        this.age = age;
     }
 
     // metodo
-    public void Saludar(){
-        Console.WriteLine("Hola, mi nombre es " + nombre + " y tengo " + edad + " a~nos.");
+    public void greet(){
+        Console.WriteLine("Hi, my name is " + name + " and I'm " + age + " years old.");
     }
 }
 \end{lstlisting}
@@ -890,7 +900,7 @@ En este ejemplo, se ha creado una clase llamada Persona con dos propiedades (nom
 Para crear un objeto de la clase Persona, se puede hacer lo siguiente:
 
 \begin{lstlisting}[language={[Sharp]C}]
-Persona persona1 = new Persona("Juan", 30);
+Person person1 = new Person("Juan", 30);
 \end{lstlisting}
 
 En este caso, se está creando un objeto llamado persona1 de la clase Persona, y se están pasando como argumentos al método constructor los valores \enquote*{Juan} y 30 para las propiedades nombre y edad, respectivamente.
@@ -898,10 +908,10 @@ En este caso, se está creando un objeto llamado persona1 de la clase Persona, y
 Una vez creado el objeto, se puede llamar a su método Saludar de la siguiente manera:
 
 \begin{lstlisting}[language={[Sharp]C}]
-persona1.Saludar();
+persona1.greet();
 \end{lstlisting}
 
-Este código imprimirá en la consola el mensaje \enquote*{Hola, mi nombre es Juan y tengo 30 años.}, utilizando los valores de las propiedades del objeto creado.
+Este código imprimirá en la consola el mensaje \enquote*{Hi, my name is  Juan and I'm 30 years old.}, utilizando los valores de las propiedades del objeto creado.
 
 \subsection{Herencia}
 
@@ -1280,7 +1290,7 @@ En este ejemplo, la clase Figura es una clase virtual que define un método virt
 
 En C\#, las clases selladas y estáticas son dos conceptos que se utilizan para restringir la herencia y la creación de objetos, respectivamente.
 
-\subsubsection*{Clases selladas}
+\subsubsection{Clases selladas}
 
 Las clases selladas son aquellas que no se pueden heredar. Es decir, una vez definida una clase sellada, no se pueden crear subclases a partir de ella. Para declarar una clase sellada, se utiliza la palabra clave sealed. Por ejemplo:
 
@@ -1294,7 +1304,7 @@ En este caso, la clase MiClaseSellada es sellada y no se puede heredar de ella.
 
 Las clases selladas son útiles cuando queremos evitar que se modifique el comportamiento de una clase en subclases o cuando queremos garantizar que una clase se mantendrá inmutable.
 
-\subsubsection*{Clases estáticas}
+\subsubsection{Clases estáticas}
 
 Las clases estáticas son aquellas que no se pueden instanciar. Es decir, no se pueden crear objetos a partir de ellas. En lugar de eso, los miembros de una clase estática se acceden utilizando el nombre de la clase. Para declarar una clase estática, se utiliza la palabra clave static. Por ejemplo:
 
@@ -1424,6 +1434,54 @@ public Persona(string nombre, int edad) => (Nombre, Edad) = (nombre, edad);
 \end{lstlisting}
 
 En este ejemplo, el constructor utiliza el cuerpo de expresión para inicializar las propiedades \enquote*{Nombre} y \enquote*{Edad} en una sola línea de código. El destructor utiliza el cuerpo de expresión para escribir un mensaje de despedida en la consola.
+
+\subsection{Sobrecarga de métodos}
+
+La sobrecarga de métodos (en inglés, method overloading) es una técnica de programación en la que se definen varios métodos con el mismo nombre en una misma clase, pero con diferentes parámetros. En otras palabras, la sobrecarga de métodos permite tener varios métodos con el mismo nombre, pero que aceptan diferentes tipos de datos como argumentos.
+
+Un ejemplo de sobrecarga de métodos sería una clase "Calculadora" que tenga varios métodos con el nombre "Sumar", pero que acepten diferentes tipos de argumentos. Por ejemplo, podría tener los siguientes métodos:
+
+\begin{lstlisting}
+public int Sumar(int a, int b)
+{
+    return a + b;
+}
+
+public float Sumar(float a, float b)
+{
+    return a + b;
+}
+
+public double Sumar(double a, double b)
+{
+    return a + b;
+}
+\end{lstlisting}
+
+\subsection{Sobrecarga de métodos}
+
+La sobrecarga de métodos (en inglés, method overloading) es una técnica de programación en la que se definen varios métodos con el mismo nombre en una misma clase, pero con diferentes parámetros. En otras palabras, la sobrecarga de métodos permite tener varios métodos con el mismo nombre, pero que aceptan diferentes tipos de datos como argumentos.
+
+Un ejemplo de sobrecarga de métodos sería una clase \enquote*{Calculadora} que tenga varios métodos con el nombre \enquote*{Sumar}, pero que acepten diferentes tipos de argumentos. Por ejemplo, podría tener los siguientes métodos:
+
+\begin{lstlisting}
+public int Sumar(int a, int b)
+{
+    return a + b;
+}
+
+public float Sumar(float a, float b)
+{
+    return a + b;
+}
+
+public double Sumar(double a, double b)
+{
+    return a + b;
+}
+\end{lstlisting}
+
+En este ejemplo, la clase \enquote*{Calculadora} tiene tres métodos diferentes llamados \enquote*{Sumar}, pero cada uno acepta un tipo de datos diferente: enteros, números en coma flotante y números de doble precisión. Esto permite que el usuario pueda llamar al método "Sumar" con diferentes tipos de datos y obtener el resultado esperado.
 
 \subsection{Interfaces}
 
