@@ -79,7 +79,8 @@
 \newcommand{\I}{\mathcal{I}}
 \newcommand{\J}{\mathcal{J}}
 \newcommand{\R}{\mathds{R}}
-\newcommand{\N}{\mathds{N}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\fu}{f:D\longrightarrow \mathds{R}}
 \newcommand{\fun}{f:[a,b]\longrightarrow \mathds{R}}
 \newcommand{\E}{\mathcal{E}}
@@ -87,7 +88,6 @@
 \newcommand{\op}{``}
 \newcommand{\cl}{''}
 \newcommand{\po}{^}
-\newcommand{\X}{\mathbf{X}}
 \newcommand{\Q}{\matbbb{Q}}
 
 \title{Definiciones inductivas}
@@ -102,7 +102,7 @@
         \large\emph{Autor:}\\
         Kevin Cárdenas.
         \\[6cm]
-        \large\emph{Ascesor:}
+        \large\emph{Asesor:}
         Juan Carlos Agudelo.\\
         Trabajo de grado en modalidad de monografía para el titulo como matemático.\\
         2023
@@ -115,81 +115,79 @@
 
 \section{Definiciones inductivas}
 
-Informalmente usualmente se da la definición inductiva a partir de un conjunto de reglas para generar los elementos de dicho conjunto, te muestro algunos ejemplos.
+Se conoce como inducción matemática al método de demostración que sirve para demostrar afirmaciones que son verdaderas para todos los números naturales. Se basa en la idea de que si se demuestra que una afirmación es verdadera para el número natural \emph{base} ($\phi(0)$), y luego se muestra que si es verdadera para cualquier número natural $n$, entonces también lo es para el siguiente número natural $n+1$, se concluye que la afirmación es verdadera para todos los números naturales mayores a ese punto base.
 
-\begin{ejemplo} \textbf{El conjunto de los números Naturales}\\
-El conjunto de los números naturales es el menor conjunto tal que:
+Los conjuntos definidos inductivamente se presentan, de manera informal, a partir de una definición inicial, para unos puntos base en el conjunto, y unas reglas que definen como añadir elementos a este. El conjunto en cuestión sería el más pequeño que cumple estas reglas y contienen estos puntos iniciales. Se presenta el ejemplo por excelencia de un conjunto inductivamente definido.
+\begin{ejemplo} \textbf{El conjunto de los números Naturales $\N$}\\
+El conjunto de los números naturales es el \emph{menor conjunto} tal que:
 \begin{enumerate}
-    \item $0 \in \mathbf{N}$
-    \item se $n \in \mathbf{N}$, entonces $s(n )\in \mathbf{N}$
+    \item $0 \in \N$
+    \item Si $n \in \N$, entonces $s(n )\in \N$
 \end{enumerate}
-O el conjunto de los números naturales es el conjunto definido por las siguientes reglas:
-\begin{enumerate}
-    \item $0 \in \mathbf{N}$
-    \item si $n \in \mathbf{N}$, entonces $s(n )\in \mathbf{N}$
-\end{enumerate}
-Los elementos en $\mathbf{N}$ son solo los producidos por las reglas 1) y 2).
+Los elementos en $\N$ son solo los producidos por las reglas 1) y 2).
 
-Es importante destacar que la definición inductiva de los números naturales no especifica cómo se representan los números, sino que se enfoca en cómo se construyen. Por lo tanto, la representación de los números naturales puede variar dependiendo del contexto. Además, la definición inductiva establece que el conjunto de los números naturales es único, y que cualquier otro conjunto que cumpla las mismas dos reglas también será igual al conjunto de los números naturales. Esta definición es fundamental en matemáticas y es utilizada como base para muchas otras construcciones y teoremas.
+Resaltando que la definición se basa solo en generar un conjunto con cierta estructura, es posible encontrar diferentes formas de definir cada conjunto. Por ejemplo, se puede definir explicitamente la función sucesor como $S(n) = n + 1$.
 \end{ejemplo}
 
-\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica}\\
-    Dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, el conjunto $\mathbf{Form}$ de formulas de la lógica es el menor conjunto tal que:
+\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica (CPL)}\\
+    Dado un conjunto $V = \{p_1, p_2,...\}$ de \emph{variables proposicionales}, el conjunto $Form(CPL)$ de \emph{formulas de la lógica proposicional clásica} es el menor conjunto tal que:
     \begin{enumerate}
-        \item $V \subseteq \mathbf{Form}$
-        \item si $A, B \in \mathbf{Form}$, entonces $\neg A, A \lor B, A \land B, A \rightarrow B, A \leftrightarrow B \in \mathbf{Form}$
+        \item $V \subseteq Form(CPL)$
+        \item Si $A, B \in Form(CPL)$, entonces $\neg A, (A \lor B), (A \land B), (A \rightarrow B), (A \leftrightarrow B) \in Form(CPL)$
     \end{enumerate}
-En ese sentido tenemos una forma de hacer \enquote*{inducción estructural} sobre este conjunto, pues en cada paso podemos mirar de donde proviene una formula.
+    Se hace enfasis en \emph{Cómo} se generan los elementos del conjunto y cuáles son los elementos iniciales.
 \end{ejemplo}
 
+Otro ejemplo que será de útilidad es el conjunto de listas sobe un conjunto dado.
 \begin{ejemplo}\textbf{El conjunto de listas finitas de un conjunto A}\\
-    Dado un conjunto $A$, el conjunto $\mathbf{Finlist(A)}$
+    Dado un conjunto $A$, el conjunto $Finlist(A)$
     \begin{enumerate}
-        \item $nill \in \mathbf{Finlist(A)}$
-        \item si $S \in \mathbf{Finlist(A)}$ y $a \in A$ , entonces $<a>\cdot S\in \mathbf{Finlist(A)}$
+        \item $nill \in Finlist(A)$
+        \item si $S \in Finlist(A)$ y $a \in A$ , entonces $\langle a \rangle\cdot S\in Finlist(A)$
     \end{enumerate}
-El operador $\cdot$ funciona como un metodo para concatenar un elemento en una lista ya existente, entonces todos los terminos en $\mathbf{Finlist(A)}$ son de la forma $<a_n>\cdot<a_{n-1}>\cdot<a_{n-2}>\cdot\ldots\cdot<a_{0}>\cdot nill$.
+El operador $\cdot$ funciona como un metodo para concatenar un elemento en una lista ya existente, entonces todos los terminos en $Finlist(A)$ son de la forma $\rangle a_n\langle \cdot\rangle a_{n-1} \langle\cdot\rangle a_{n-2}langle\cdot\ldots\cdot\rangle a_{0}langle\cdot nill$.
 \end{ejemplo}
 
-\subsection{¿Qué es una definición inductiva?}
+\subsection{Conjuntos Inductivamente Definidos a partir de un conjunto de reglas}
 \begin{defi}
-\textbf{Regla, $\phi-$cerrado, Conjunto inductivamente definido}
+\textbf{Reglas, Conjunto $\phi-$cerrado y Conjunto inductivamente definido}
 \begin{enumerate}
 \item Una regla es un par $(A,x)$, donde $A$ es un conjunto, llamado \textbf{el conjunto de premisas}, y $x$ es la conclusión.
-\item Si $\phi$ es un conjunto de reglas, entonces un conjunto $A$ es $\phi - \textbf{cerrado}$ si el hecho de que cada regla de $\phi$ tiene sus premisas en $A$, implica que su conclusión está en $A$.
-\item Dado $\phi$ un conjunto de reglas, definimos $I(\phi)$ como el conjunto inductivamente definido por $\phi$, que se define como:
-$$L(\phi) = \bigcap\{A \, : A\,\, \phi-cerrado\}$$
+\item Si $\phi$ es un conjunto de reglas, entonces un conjunto $A$ es $\phi - \textbf{cerrado}$ si para toda regla $(X,x) \in \phi$ si $X \subseteq A$ entonces $x \in A$.
+\item Dado $\phi$ un conjunto de reglas, definimos $I(\phi)$ como el conjunto inductivamente definido por $\phi$, dado por:
+$$I(\phi) = \bigcap \{A : A \,\,\phi{-cerrado}\}$$
 \end{enumerate}
 \end{defi}
 
-Volvamos a los ejemplos anteriores.
-
-\begin{ejemplo}\textbf{$\mathbf{N}$ Como conjunto inductivamente definido}\\
-Volviendo al ejemplo 1.1, desde la definición que hemos dado, podemos ver los números naturales $\mathrm{N}$ como el conjunto inductivamente definido del siguiente conjunto de reglas, definimos $\phi$ como un conjunto de reglas que contienen las siguientes dos reglas:
+\begin{ejemplo}\textbf{$\N$ Como conjunto inductivamente definido a partir de un conjunto de reglas}\\
+Definimos $\N = I(\phi)$, donde $\phi$ es el conjunto que contienen las siguientes dos reglas:
 \begin{enumerate}
 \item $(\emptyset,0)$
-\item $({n},s(n))$, donde $n$ es un número natural y $s(n)$ es el sucesor de $n$.
+\item $(\{n\},s(n))$
 \end{enumerate}
+Note que, claramente $\N$ es $\phi$-cerrado y además si $A$ es $\phi$-cerrado, entonces $A \subseteq \N$
 \end{ejemplo}
 
-\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica como conjunto inductivamente definido}\\
-Volviendo al ejemplo 1.2, dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, el conjunto $\mathbf{Form}$ de formulas de la lógica puede ser definido inductivamente a partir del siguiente conjunto de reglas. 
-    \begin{enumerate}
-        \item $(\emptyset, p_i)$ para $p_i \in V$
-        \item $(\{A\}, \neg A)$
-        \item $(\{A, B\}, A \lor B)$
-        \item $(\{A, B\}, A \land B)$
-        \item $(\{A, B\}, A \rightarrow B)$
-        \item $(\{A, B\}, A \leftrightarrow B)$
-    \end{enumerate}
+\begin{ejemplo}\textbf{$Form(CPL)$ Como conjunto inductivamente definido a partir de un conjunto de reglas}\\
+Sea $\phi$ el conjunto con las siguientes reglas:
+\begin{enumerate}
+    \item $(\emptyset, p_i)$ para cada $p_i \in V$
+    \item $(\{A\}, \neg A)$
+    \item $(\{A, B\}, A \lor B)$
+    \item $(\{A, B\}, A \land B)$
+    \item $(\{A, B\}, A \rightarrow B)$
+    \item $(\{A, B\}, A \leftrightarrow B)$
+\end{enumerate}
+Obteniendo que $Form(CPL) = I(\phi)$.
 \end{ejemplo}
 
-\begin{ejemplo}\textbf{El conjunto de listas finitas de un conjunto A como conjunto inductivamente definido}\\
-Volviendo al ejemplo 1.3, dado un conjunto $A$, el conjunto $\mathbf{Finlist(A)}$ de listas finitas en A
-    \begin{enumerate}
-        \item $(\emptyset, nill)$
-        \item $(\{S\},<a>\cdot S)$ 
-    \end{enumerate}
+\begin{ejemplo}\textbf{$Finlist(A)$ Como conjunto inductivamente definido a partir de un conjunto de reglas}\\
+Dado un conjunto $A$, y $\phi$ el conjunto que contiene las siguientes reglas:
+\begin{enumerate}
+    \item $(\emptyset, nill)$
+    \item $(\{S\},\langle a \rangle\cdot S)$ 
+\end{enumerate}
+Se tiene que $Finlist(A) = I(\phi)$
 \end{ejemplo}
 
 \begin{defi}
@@ -197,86 +195,27 @@ Volviendo al ejemplo 1.3, dado un conjunto $A$, el conjunto $\mathbf{Finlist(A)}
 $a_1, a_2, \ldots, a_n$ es una $\phi-$prueba de $b$ si
 \begin{enumerate}
 \item $a_n = b$
-\item si $m \leq n$, entonces existe $X\subseteq \{a_i\}_{i<m}$ tal que $\phi : X \rightarrow a_m$
+\item si $m \leq n$, entonces existe $X\subseteq \{a_i\}_{i\geq m}$ tal que $\phi : X \rightarrow a_m$
 \end{enumerate}
-Si $x$ tiene una $\phi-$prueba, entonces decimos que $x$ es $\phi-$demostrable.
+Si $x$ tiene una $\phi-$prueba, entonces decimos que $x$ es $\phi$-demostrable.
 \end{defi}
 
 \begin{propo}.\\
 Para $\phi$ un conjunto de reglas finito:
-$$I(\phi) = \{b \,\,|b\,\, {tiene}\,\, {una}\,\, \phi -{prueba} \}$$
-De la definición es claro que, primero $\{b \quad: b\,\, tiene\,\, una\,\, \phi-prueba\}$ es $\phi$-cerrado, y además para cada $x \in I(\phi)$ $x$ es $\phi$-demostrable. (La demostración se encuentra en la pagina $743$ del libro de Aczel Introduction to Inductive Definitions.)
+$$I(\phi) = \{b \,\,:b\,\, {tiene}\,\, {una}\,\, \phi {-prueba} \}$$
+De la definición es claro que, primero $\{b \,\,: b\,\, tiene\,\, una\,\, \phi{-prueba}\}$ es $\phi$-cerrado, y además para cada $x \in I(\phi)$ $x$ es $\phi$-demostrable. (La demostración se encuentra en la pagina $743$ del libro de Aczel Introduction to Inductive Definitions.)
 \end{propo}
 
-\subsection*{La parte bien fundamentada de una relación}
-Sea $A$ un conjunto, $<$ una relación de orden parcial en $A$, definimos \textbf{la parte bien fundamentada de $<$} como 
-
-$$W(<) = \{a\in A\,\, : \forall \{a_i\}\subseteq A (a_0 = a, a_{i+1}<a_i\rightarrow |\{a_i\}|<\infty)\}$$
-
-Es decir el conjunto de los elementos sin secuencias infinitas de descendientes.\\ 
-Decimos que $<$ es bien fundamentada, si $w(<) = A$
-
-\begin{propo}\textbf{$w(<)$ definido inductivamente}\\
-    $w(<)$ puede ser definido inductivamente del conjunto de reglas definido por:
-    \begin{itemize}
-        \item $((<a),a) \in\phi_<$ para $a\in A$, donde $(<a) = \{x\in A: x<a\}$    
-    \end{itemize} 
-\end{propo}
-
-\begin{propo}\textbf{Otra interpretación de un conjunto definido inductivamente}
-    $$W(<) = I(\phi_<) = \{b \quad: b\,\, {tiene}\,\, {una}\,\, \phi-{prueba}\}$$
-    Es decir El conjunto inductivamente definido por el conjunto de reglas definido por una relación de orden parcial es la parte bien fundamentada de $<$ y a su vez el conjunto de los elementos $\varphi_<$-demostrables.
-\end{propo}
-
-\begin{defi}\textbf{Conjuntos de reglas deterministas}\\
-    El conjunto de reglas $\phi$ es llamado \textbf{determinista} si $\phi:X_1\rightarrow x$ y $\phi:X_2\rightarrow x$ implica que $X_1=X_2$
-\end{defi}
-\begin{ejemplo}
-Veamos un par de ejemplos interesantes:
-    \begin{itemize}
-        \item $\phi_<$ Siempre es determinista.\\
-        $\phi_< $ es determinista porque para dos subconjuntos $X_1$ y $X_2$ tales que $\phi_< : X_1\rightarrow x$ y $\phi_< : X_2\rightarrow x$, si $X_1 \neq X_2$ entonces existe un elemento $a \in X_1\Delta X_2$ que es el mínimo elemento en $X_1\Delta X_2$, donde $\Delta$ denota la diferencia simétrica entre conjuntos. Entonces, sin pérdida de generalidad, podemos suponer que $a\in X_1$ y $a\notin X_2$, lo que significa que para cualquier $b \in X_2$ se tiene $a<b$, y por lo tanto $\phi_<(X_2) \subseteq (<a)$, lo que contradice el hecho de que $\phi_<(X_2) = x$. Por lo tanto, $X_1 = X_2$ y $\phi_<$ es determinista.
-        \item El conjunto de reglas que define los terminos y formulas de la lógica de primer orden no es determinista.\\
-        El conjunto de reglas para la lógica de primer orden consiste en:
-        \begin{enumerate}
-            \item El conjunto $\mathcal{V}$ de variables.
-            \item Un conjunto $\mathcal{C}$ de constantes.
-            \item Para cada $n$ un conjunto $\mathcal{F}_n$ de símbolos de función de aridad $n$.
-            \item Para cada $n$ un conjunto $\mathcal{R}_n$ de símbolos de relación de aridad $n$.
-            \item Un conjunto $\mathcal{L}$ de símbolos lógicos, que incluye al menos a $\neg$, $\vee$, $\wedge$, $\rightarrow$, $\leftrightarrow$, $\forall$, y $\exists$.
-        \end{enumerate}
-        A partir de estos conjuntos, podemos construir los términos y fórmulas de la lógica de primer orden mediante las siguientes reglas:
-        \begin{itemize}
-            \item Todo elemento de $\mathcal{V} \cup \mathcal{C}$ es un término.
-            \item Si $f \in \mathcal{F}_n$ y $t_1,\ldots,t_n$ son términos, entonces $f(t_1,\ldots,t_n)$ es un término.
-            \item Si $R \in \mathcal{R}_n$ y $t_1,\ldots,t_n$ son términos, entonces $R(t_1,\ldots,t_n)$ es una fórmula atómica.
-            \item Si $A$ y $B$ son fórmulas, entonces $\neg A$, $(A \vee B)$, $(A \wedge B)$, $(A \rightarrow B)$, y $(A \leftrightarrow B)$ son fórmulas.
-            \item Si $A$ es una fórmula y $x \in \mathcal{V}$, entonces $\forall x,A$ y $\exists x,A$ son fórmulas.
-        \end{itemize}
-        Este conjunto de reglas no es determinista, ya que, por ejemplo, podemos tener dos símbolos de función distintos que tengan el mismo nombre pero aridades diferentes, lo que llevaría a una ambigüedad en la interpretación de las fórmulas que los usan.
-    \end{itemize}
-\end{ejemplo}
-
-Ahora bien, sea $\phi$ determinista y $A$ un conjunto de conclusiones de reglas en $\phi$. para $x,y\in A$ sea $x<y$ si $\phi: X\rightarrow y$ para algun conjunto $X$ tal que $x\in X$ y $X\subseteq A$. Entonces $\phi_<$ es el conjunto de reglas $X\rightarrow x$ en $\phi$ tal que $X\subseteq A$. Además tenemos:
-\begin{propo}
-    Si $\phi$ es determinista:
-    $$I(\phi)=I(\phi_<)$$
-\end{propo}
-La proposición establece que si $\phi$ es determinista, entonces el conjunto de fórmulas demostrables mediante $\phi$ es igual al conjunto de fórmulas demostrables mediante $\phi_<$, es decir, $I(\phi) = I(\phi_<)$.
-\begin{ejemplo}\textbf{$\mathbf{N},\,\, \mathbf{Form}\,\, { y } \,\, \mathbf{Finlist(A)}$ tienen una relación de orden bien fundamentada }\\
-    Mostramos que si $\phi$ es un conjunto de reglas deterministas entonces $\phi_<$ es una relación bien fundamentada sobre $I(\phi)$, revisando los ejemplos de los naturales, el conjunto de formulas proposicionales de la lógica clásica y el conjunto de listas finitas sobre un conjunto $A$ son deterministas y por tanto tienen una relación de orden bien fundamentada sobre si mismo.
-\end{ejemplo}
-
-\subsection{Puntos fijos en un lattice completo}
-\begin{defi}\textbf{Poset}\\
-    Un conjunto parcialmente ordenado o poset, es un conjunto no vacío equipado con una relación de orden parcial, es decir \textbf{reflexiva, antisimetrica y transitiva}, usualmente lo denotamos como $(A,<)$, donde $A$ es el conjunto y $<$ es la relación de orden parcial
+\subsection{Conjuntos inductivamente definidos como puntos fijos en un reticulo completo}
+\begin{defi}\textbf{Conjunto parcialmente ordenado}\\
+    Un conjunto parcialmente ordenado (CPO), es un conjunto no vacío equipado con una relación de orden parcial, es decir \textbf{reflexiva, antisimetrica y transitiva}, lo denotamos como $(A,\geq)$, donde $A$ es el conjunto y $\geq$ es la relación de orden parcial
 \end{defi}
 A continuación algunos ejemplos:
 \begin{ejemplo}\textbf{Conjuintos ordenados}
     \begin{enumerate} 
-        \item El conjunto de los números enteros $\mathbf{Z}$, junto con la relación de orden parcial $<$. Es decir, para $a, b \in \mathbf{Z}$, $a < b$ si y solo si $a$ es menor o igual que $b$.
+        \item El conjunto de los números enteros $\Z$, junto con la relación de orden usual $\geq$.
         \item El conjunto de los subconjuntos de un conjunto dado $X$, junto con la relación de orden parcial "$\subset$". Es decir, para $A, B \subset X$, $A \subset B$ si y solo si todos los elementos de $A$ también están en $B$.
-        \item El conjunto de los productos cartesianos $A \times B$ de dos conjuntos $A$ y $B$, junto con la relación de orden parcial $<_{\times}$ llamado \textbf{orden lexicográfico}. Es decir, para $(a_1,b_1),(a_2,b_2) \in A \times B$, $(a_1,b_1) <_{\times} (a_2,b_2)$ si y solo si $a_1 < a_2$ o ($a_1 = a_2$ y $b_1 < b_2$).
+        \item El conjunto de los productos cartesianos $A \times B$ de dos CPOs $(A,\geq_A)$ y $(B,\geq_B)$, junto con la relación de orden parcial $\geq_{\times}$ llamado \textbf{orden lexicográfico}. Es decir, para $(a_1,b_1),(a_2,b_2) \in A \times B$, $(a_1,b_1) \geq_{\times} (a_2,b_2)$ si y solo si $a_1 \geq_A a_2$ o ($a_1 = a_2$ y $b_1 \geq_B b_2$).
     \end{enumerate}
 \end{ejemplo}
 \begin{ejemplo}\textbf{Preorden}\\
@@ -286,15 +225,15 @@ A continuación algunos ejemplos:
 \end{ejemplo}
 
 \begin{defi}\textbf{Infimo y supremo}\\
-    Sea $\mathbf{R}$ un poset, definimos:
+    Sea $R$ un CPO, definimos:
 \begin{itemize}
-    \item \textbf{infimo (meet):} Dado un conjunto $A \subseteq \mathbf{R}$, $m \in \mathbf{R}$ se llama infimo de $A$ si se cumple que:
+    \item \textbf{infimo (meet):} Dado un conjunto $A \subseteq R$, $m \in R$ se llama infimo de $A$ si se cumple que:
     \begin{enumerate}
         \item $m$ es cota inferior de $A$, es decir, $m \leq a$ para todo $a \in A$.
         \item Cualquier otra cota inferior de $A$ es mayor o igual que $m$, es decir, si $m' \leq a$ para todo $a \in A$, entonces $m' \geq m$.
     \end{enumerate}
     El infimo de $A$ se denota como $\inf(A)=met(A)$.
-    \item \textbf{supremo (join):}  Dado un conjunto $A \subseteq \mathbf{R}$, $M \in \mathbf{R}$ se llama supremo de $A$ si se cumple que:
+    \item \textbf{supremo (join):}  Dado un conjunto $A \subseteq R$, $M \in R$ se llama supremo de $A$ si se cumple que:
     \begin{enumerate}
         \item $M$ es cota superior de $A$, es decir, $M \geq a$ para todo $a \in A$.
         \item Cualquier otra cota superior de $A$ es menor o igual que $M$, es decir, si $M' \geq a$ para todo $a \in A$, entonces $M' \leq M$.
@@ -303,16 +242,16 @@ A continuación algunos ejemplos:
 \end{itemize}    
 \end{defi}
 
-\begin{ejemplo}\textbf{Dual de un poset}\\
-    Dado un poset $(A,<)$, su dual o inverso $(A^{op},>)$ es el poset que se obtiene al invertir la relación de orden, es decir, $a>b$ en el dual si y solo si $b>a$ en el poset original. Formalmente, $(A{op},>)$ es un poset con $A$ como conjunto y la relación de orden $>$ definida como:
-    $$a > b \,\,en\,\,A^{op} \quad si\,\, y\,\, solo\,\, si \quad b < a\,\,en\,\,A \quad para\,\, todo \quad a,b \in A$$
-    El dual de un poset conserva las propiedades de reflexividad, antisimetría y transitividad.
+\begin{ejemplo}\textbf{Dual de un CPO}\\
+    Dado un CPO $(A,\geq)$, su dual o inverso $(A^{op},>)$ es el CPO que se obtiene al invertir la relación de orden, es decir, $a>b$ en el dual si y solo si $b>a$ en el CPO original. Formalmente, $(A{op},>)$ es un CPO con $A$ como conjunto y la relación de orden $>$ definida como:
+    $$a > b \,\,en\,\,A^{op} \quad si\,\, y\,\, solo\,\, si \quad b \geq a\,\,en\,\,A \quad para\,\, todo \quad a,b \in A$$
+    El dual de un CPO conserva las propiedades de reflexividad, antisimetría y transitividad.
 
-    si $(A, <)$ es un poset y $B \subseteq A$ tiene un ínfimo $m$ en $(A, <)$, entonces $m$ es el supremo de $B$ en $(A^{op}, >)$. Por otro lado, si $B$ tiene un supremo $M$ en $(A, <)$, entonces $M$ es el ínfimo de $B$ en $(A^{op}, >)$.
+    si $(A, \geq)$ es un CPO y $B \subseteq A$ tiene un ínfimo $m$ en $(A, \geq)$, entonces $m$ es el supremo de $B$ en $(A^{op}, >)$. Por otro lado, si $B$ tiene un supremo $M$ en $(A, \geq)$, entonces $M$ es el ínfimo de $B$ en $(A^{op}, >)$.
 \end{ejemplo}
 
 \begin{defi}
-    Dado un poset $(L, \leq)$ y una endofunción $F: L \rightarrow L$, definimos:
+    Dado un CPO $(L, \leq)$ y una endofunción $F: L \rightarrow L$, definimos:
     \begin{itemize}
         \item $F$ es \textbf{monótono} si preserva el orden parcial, es decir, para todo $x, y \in L$, si $x \leq y$, entonces $f(x) \leq f(y)$.
         \item Los \textbf{puntos pre-fijos} de una endofunción $f: L \rightarrow L$ son los elementos $x \in L$ tales que $f(x) \leq x$. De manera similar, los \textbf{puntos post-fijos} son los elementos $x \in L$ tales que $x \leq f(x)$.\\ 
@@ -321,30 +260,19 @@ A continuación algunos ejemplos:
     \end{itemize} 
 \end{defi}
 
-\begin{ejemplo}\textbf{El algoritmo de la división como una endofunción}\\
-    Consideremos el conjunto $A = \mathbf{N}^2$ con el orden lexicográfico definido como $(a,b) < (c,d)$ si $a < c$ o si $a = c$ y $b < d$. Sea $f: A \rightarrow A$ el endofunción definido por el algoritmo de la división, es decir, $f(x,y) = (m,r)$ si $0 < y$, $x = ym + r$, donde $0 \leq r < y$, y si $y=0$, $f(x,0) = (0,x)$ 
-
-    \begin{itemize}
-        \item Un punto prefijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) \leq (x,y)$ en el orden lexicográfico. En este caso, podemos ver que si $(x,y)\leq(m,r)$ si $x < m$ o si $x = m$ y $y \leq r$, vemos que en todo momento $x \geq m$, por lo que $x = m$ y $y \leq r$, por lo tanto $y = 0$, y por tanto $x = 0$, y vemos que es también el unico punto fijo
-        \item Un punto postfijo de $f$ es un elemento $(x,y) \in A$ tal que $(x,y) \leq f(x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(x,y)\geq(m,r)$ es un punto postfijo si $m < x$ o si $x = m$ y $r \leq y$, entonces, si $x \geq y$ o $y = 0$
-        \item Un punto fijo de $f$ es un elemento $(x,y) \in A$ tal que $f(x,y) = (x,y)$ en el orden lexicográfico. En este caso, podemos observar que $(0,0)$ es el único punto fijo de $f$, ya que $f(0,0) = (0,0)$ y no hay otro elemento $(x,y)$ que sea igual a $(0,0)$ en el orden lexicográfico.
-    \end{itemize}
-    Es facil ver que no es un monomorfismo.
-\end{ejemplo}
-
-\begin{defi}\textbf{Reticulo (lattice) completo}\\
-    Un lattice completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjunto no vacío tiene supremo.
+\begin{defi}\textbf{Reticulo completo}\\
+    Un reticulo completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjunto tiene supremo.
 \end{defi}
-Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del infimo en todo conjunto. Esto por la definición. Es decir en un lattice completo todo subconjunto no vacío posee infimo. También tenemos que los lattices completos son acotados, es decir poseen maximo y minimo.
+Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del infimo en todo conjunto. Esto por la definición. Es decir en un reticulo completo todo subconjunto no vacío posee infimo. También tenemos que los reticulos completos son acotados, es decir poseen maximo y minimo.
 
 \begin{teo}\textbf{Teorema del punto fijo}\\
-    En un lattice completo $L$, una endofunción monotona $F:L\rightarrow L$ tiene un lattice completo de puntos fijos. En particlar el punto fijo más pequeño de la funcíon es el infimo de los puntos pre-fijos, el más grande es el supremo de los puntos postfijos. Más aún por la condición de sobreyectividad estos son el minimo y el máximo del lattice. 
+    En un reticulo completo $L$, una endofunción monotona $F:L\rightarrow L$ tiene un reticulo completo de puntos fijos. En particlar el punto fijo más pequeño de la funcíon es el infimo de los puntos pre-fijos, el más grande es el supremo de los puntos postfijos. Más aún, si se da la sobreyectividad estos son el minimo y el máximo del reticulo de puntos fijos. 
 \end{teo}
-La demostración de este teorema se encuentra en el libro Introduction to bisimulation and coinduccion.
+La demostración de este teorema se encuentra, como ejercicio, en el libro Introduction to bisimulation and coinduccion.
 \subsection*{Conjuntos definidos inductiva y coinductivamente}
 
 \begin{defi}\textbf{Conjuntos definidos inductiva y coinductivamente como puntos fijos de operadores} \\
-    Sea L un lattice completo cuyos puntos son conjuntos, (Podriamos decir $L\subseteq Pow(A)$, para algún conjunto $A$), ordenado bajo la relación de ordén de inclusión, y $F:L\rightarrow L$ una enfofunción en $L$, Los conjuntos:
+    Sea L un reticulo completo cuyos puntos son conjuntos, (Podriamos decir $L\subseteq Pow(A)$, para algún conjunto $A$), ordenado bajo la relación de ordén de inclusión, y $F:L\rightarrow L$ una enfofunción en $L$, Los conjuntos:
     $$F_{ind} = \bigcap \{x|F(x)\subseteq x\}$$
     $$F_{coind} = \bigcup \{x|x\subseteq F(x)\}$$
     (El meet de de los puntos pre-fijos, y el join de los puntos post-fijos) son, respectivamente el conjunto definido inductiva por $F$ y definido coinductivamente por $F$.
@@ -353,7 +281,7 @@ La demostración de este teorema se encuentra en el libro Introduction to bisimu
 En el libro An Introduction to Inductive Definitions de Aczel, está la demostración de que tomanmdo el conjunto de reglas, para $\A\subseteq L$, $(A,y)\in\phi$ para $y\in F(A)$, tenemos que $I(\phi) = F_{ind}$, por lo que este es otro punto de vista para los conjuntos definidos inductivamente.  
 
 \begin{propo}\textbf{Principio de inducción y coinduccion}\\
-    para una endofinción monotona $F:L\rightarrow L$ sobre un lattices tenemos
+    para una endofinción monotona $F:L\rightarrow L$ sobre un reticulos tenemos
     \begin{center}
         $F(x)\leq x \rightarrow F_{ind}\leq x$ (Principio de inducción)\\
         $F(x)\geq x \rightarrow F_{coind}\geq x$ (Principio de coinducción)
@@ -363,26 +291,26 @@ En el libro An Introduction to Inductive Definitions de Aczel, está la demostra
 Podemos volver a los ejemplos que estamos tratando. 
 
 \begin{ejemplo} \textbf{El conjunto de los números Naturales, Como conjunto definidos inductivamente}\\
-Sea $\varphi:Pow(\mathbf{X})\longrightarrow Pow(\mathbf{X})$,con $\mathbf{X}$ un conjunto donce $0\in \mathbf{X}$ y $\mathbf{X}$ es cerrado para la operación sucesor, definimos:
+Sea $\varphi:Pow(X)\longrightarrow Pow(X)$,con $X$ un conjunto donce $0\in X$ y $X$ es cerrado para la operación sucesor, definimos:
 $$\varphi(X)=\{0\} \cup \{s(x)\,\,|\,\,x\in X\}$$
-Luego los naturales se ven definidos como $\mathbf{N}=\bigcap \{X \mid X\subseteq\varphi(X)\}$, el conjunto inductivamente definido. Por otra parte el conjunto coinductivamente definido es $\mathbf{X}$.
+Luego los naturales se ven definidos como $\N=\bigcap \{X \mid X\subseteq\varphi(X)\}$, el conjunto inductivamente definido. Por otra parte el conjunto coinductivamente definido es $X$.
 \end{ejemplo}
     
 \begin{ejemplo}\textbf{El conjunto de listas finitas de un conjunto A, Como conjunto definidos inductivamente}\\
 Tomemos:\\ 
-    $X$ como el conjunto de todos los strings finitos o infinitos con elementos del alfabeto $A\cup\{nill, \cdot, <, >\}$, el funcional correspondiente $\varphi_{\mathbf{L}_A}$ es:
-    $$\varphi_{\mathbf{L}_A}(T) = \{nill\} \cup \{<a>\cdot s \mid a\in A \land s \in T \}$$
-Tenemos que el conjunto de listas finitas con elementos en $A$ es el conjunto inductivamente definido por el operador $\varphi_{\mathbf{L}_A}$ y el conjunto de listas infinitas es el coinductivamente definido por este operador.
+    $X$ como el conjunto de todos los strings finitos o infinitos con elementos del alfabeto $A\cup\{nill, \cdot, \rangle, \langle\}$, el funcional correspondiente $\varphi_{L_A}$ es:
+    $$\varphi_{L_A}(T) = \{ nill\} \cup \{\langle a\rangle \cdot s \mid a\in A \land s \in T \}$$
+Tenemos que el conjunto de listas finitas con elementos en $A$ es el conjunto inductivamente definido por el operador $\varphi_{L_A}$ y el conjunto de listas infinitas es el coinductivamente definido por este operador.
 \end{ejemplo}
 
 En el siguiente ejemplo podemos ver un patrón de cómo entender la equivalencia entre conjuntos inductivamente definidos a partir de reglas y a partir de puntos fijos en un reticulo completo.
 
-\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica, Como conjunto definidos inductivamente}\\
+\begin{ejemplo}\textbf{El conjunto de formulas de la lógica proposicional clásica $Form(CPL)$, Como conjunto definidos inductivamente}\\
     Dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, $X$ como el conjunto de todos los strings finitos o infinitos con elementos del alfabeto $V\cup\{\lor, \lnot, \land, \rightarrow, \leftrightarrow, (, )\}$, el funcional correspondiente $\varphi$ es:
-    $$\varphi(T) = V \cup \{(A) \times (B) \mid A , B\in T \land \times\in \{\lor, \land, \rightarrow, \leftrightarrow\}\}\cup T \cup \{\lnot A|A\in T\}$$
+    $$\varphi(T) = V \cup \{(A) \# (B) \mid A , B\in T \,\,{y}\,\, \#\in \{\lor, \land, \rightarrow, \leftrightarrow\}\}\cup T \cup \{\lnot A|A\in T\}$$
     Que es un operador monotono sobre un latice completo.\\
-    Tenemos finalmente que $\mathbf{Form} = \varphi_{ind}$, es el conjunto inductivamente definido por este operador, y los elementos aquó son justamente formulas.\\    
-    Además, El conjunto coinductivamente definido $\mathbf{{C}} = \bigcup \{T \mid T\subseteq\varphi(T)\}$, coincide con el conjunto de las formulas fintitas, y las generadas infinitamente a partir de estas reglas.
+    Tenemos finalmente que $Form(CPL) = \varphi_{ind}$, es el conjunto inductivamente definido por este operador, y los elementos aquó son justamente formulas.\\    
+    Además, El conjunto coinductivamente definido ${C} = \bigcup \{T \mid T\subseteq\varphi(T)\}$, coincide con el conjunto de las formulas fintitas, y las generadas infinitamente a partir de estas reglas.
 \end{ejemplo}
 
 

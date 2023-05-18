@@ -1439,29 +1439,6 @@ En este ejemplo, el constructor utiliza el cuerpo de expresión para inicializar
 
 La sobrecarga de métodos (en inglés, method overloading) es una técnica de programación en la que se definen varios métodos con el mismo nombre en una misma clase, pero con diferentes parámetros. En otras palabras, la sobrecarga de métodos permite tener varios métodos con el mismo nombre, pero que aceptan diferentes tipos de datos como argumentos.
 
-Un ejemplo de sobrecarga de métodos sería una clase "Calculadora" que tenga varios métodos con el nombre "Sumar", pero que acepten diferentes tipos de argumentos. Por ejemplo, podría tener los siguientes métodos:
-
-\begin{lstlisting}
-public int Sumar(int a, int b)
-{
-    return a + b;
-}
-
-public float Sumar(float a, float b)
-{
-    return a + b;
-}
-
-public double Sumar(double a, double b)
-{
-    return a + b;
-}
-\end{lstlisting}
-
-\subsection{Sobrecarga de métodos}
-
-La sobrecarga de métodos (en inglés, method overloading) es una técnica de programación en la que se definen varios métodos con el mismo nombre en una misma clase, pero con diferentes parámetros. En otras palabras, la sobrecarga de métodos permite tener varios métodos con el mismo nombre, pero que aceptan diferentes tipos de datos como argumentos.
-
 Un ejemplo de sobrecarga de métodos sería una clase \enquote*{Calculadora} que tenga varios métodos con el nombre \enquote*{Sumar}, pero que acepten diferentes tipos de argumentos. Por ejemplo, podría tener los siguientes métodos:
 
 \begin{lstlisting}
@@ -2571,12 +2548,12 @@ En el contexto de la arquitectura de software, las entidades son objetos que rep
 
 Aquí tienes algunas características y puntos clave sobre las entidades:
 \begin{enumerate}
-    \item Representación de conceptos del dominio: Las entidades representan objetos del mundo real o abstracto que son relevantes para el dominio de la aplicación. Por ejemplo, en una aplicación de gestión de usuarios, podría haber una entidad "Usuario" que contiene los atributos como nombre, dirección de correo electrónico, contraseña, etc.
+    \item Representación de conceptos del dominio: Las entidades representan objetos del mundo real o abstracto que son relevantes para el dominio de la aplicación. Por ejemplo, en una aplicación de gestión de usuarios, podría haber una entidad \enquote*{Usuario} que contiene los atributos como nombre, dirección de correo electrónico, contraseña, etc.
     \item Encapsulación de datos: Las entidades encapsulan los datos relacionados a un concepto específico. Estos datos se almacenan en propiedades o atributos de la entidad y pueden ser de diferentes tipos, como cadenas de texto, números, fechas, listas u otros objetos relacionados.
-    \item Lógica de negocio: Las entidades pueden contener lógica de negocio relacionada a su comportamiento y reglas de validación. Por ejemplo, la entidad "Usuario" podría tener métodos para verificar la validez de una contraseña o para calcular información basada en sus atributos.
+    \item Lógica de negocio: Las entidades pueden contener lógica de negocio relacionada a su comportamiento y reglas de validación. Por ejemplo, la entidad \enquote*{Usuario} podría tener métodos para verificar la validez de una contraseña o para calcular información basada en sus atributos.
     \item Identidad única: Cada entidad generalmente tiene una identidad única que la distingue de otras entidades del mismo tipo. Esta identidad puede ser representada por un identificador único, como un número o una cadena de caracteres.
     \item Persistencia y almacenamiento: Las entidades pueden ser utilizadas para representar datos que se almacenan en una base de datos o en algún otro medio de almacenamiento. En estos casos, se utilizan técnicas de mapeo objeto-relacional (ORM) u otras técnicas para persistir y recuperar las entidades en el almacenamiento.
-    \item Relaciones entre entidades: Las entidades pueden tener relaciones entre sí, formando una estructura de datos más compleja. Por ejemplo, en un sistema de gestión de pedidos, podría haber una entidad "Pedido" que tiene una relación con una entidad "Cliente".
+    \item Relaciones entre entidades: Las entidades pueden tener relaciones entre sí, formando una estructura de datos más compleja. Por ejemplo, en un sistema de gestión de pedidos, podría haber una entidad \enquote*{Pedido} que tiene una relación con una entidad \enquote*{Cliente}.
 \end{enumerate}
 
 En la arquitectura hexagonal, las entidades suelen pertenecer a la capa de dominio, representando conceptos fundamentales del negocio. Estas entidades son independientes de las capas externas y no contienen dependencias de infraestructura o detalles de implementación.
@@ -2617,7 +2594,7 @@ public class ServicioEmail : IServicioEmail
     public void EnviarCorreo(string destinatario, string asunto, string contenido)
     {
         // Implementacion para enviar el correo
-        Console.WriteLine("Enviando correo a " + destinatario + ": " + asunto " - " contenido");
+        Console.WriteLine("Enviando correo a " + destinatario + ": " + asunto " - " contenido);
     }
 }
 
@@ -2630,29 +2607,46 @@ public class Cliente
         _servicioEmail = servicioEmail;
     }
 
-    public void EnviarMensaje(string destinatario, string mensaje)
+    public void MetodoEjemplo()
     {
-        // Utilizar el servicio de correo para enviar el mensaje
-        _servicioEmail.EnviarCorreo(destinatario, "Nuevo mensaje", mensaje);
+        // Utiliza _servicioEmail para enviar un email
+        _servicioEmail.EnviarEmail("destinatario@example.com", "Hola, esto es un ejemplo de email");
     }
 }
+
 \end{lstlisting}
 
 En este ejemplo, la clase Cliente tiene una dependencia en la interfaz IServicioEmail, que representa la capacidad de enviar correos electrónicos. En el constructor de la clase Cliente, se espera una instancia de IServicioEmail para ser inyectada. Esto permite que el cliente sea independiente de la implementación concreta de IServicioEmail.
 
-Luego, puedes configurar la inyección de dependencias en algún lugar de tu aplicación, utilizando un contenedor de IoC o manualmente. Aquí hay un ejemplo manual de cómo podrías crear una instancia de Cliente e inyectar una implementación concreta de IServicioEmail:
 
 \begin{lstlisting}
-IServicioEmail servicioEmail = new ServicioEmail();
-
-Cliente cliente = new Cliente(servicioEmail);
-cliente.EnviarMensaje("destinatario@example.com", "Hola, este es un ejemplo.");    
+services.AddTransient<IServicioEmail, ServicioEmail>();
 \end{lstlisting}
 
-En este caso, se crea una instancia de ServicioEmail y se pasa como argumento al constructor de Cliente, cumpliendo así con la inyección de dependencias.
+En cualquier lugar donde necesites utilizar IServicioEmail, puedes hacerlo a través de la inyección de dependencia.
 
 Con este enfoque, puedes cambiar fácilmente la implementación de IServicioEmail sin modificar la clase Cliente. Por ejemplo, podrías tener una implementación de IServicioEmail específica para pruebas unitarias que no envíe correos electrónicos reales, sino que los simule.
 
-Es importante tener en cuenta que en aplicaciones más grandes y complejas, es común utilizar contenedores de IoC como Autofac, Unity o Ninject para gestionar automáticamente la inyección de dependencias y evitar la necesidad de configurar manualmente las instancias de los objetos.
+Recuerda que el alcance transitorio (AddTransient) crea una nueva instancia cada vez que se resuelve, lo cual puede ser adecuado para servicios livianos y sin estado. Si necesitas un comportamiento diferente, como un alcance de instancia única o un alcance por solicitud, puedes utilizar AddSingleton o AddScoped respectivamente en lugar de AddTransient en la configuración de inyección de dependencia.
+
+\subsection*{Tipos de inyección de dependencias}
+
+
+Las siguientes son configuraciones de inyección de dependencia en ASP.NET Core:
+
+\begin{enumerate}
+    \item \textbf{Singleto}n: Con AddSingleton, se registra una instancia única de una clase en el contenedor de inyección de dependencia. Esto significa que se crea una única instancia de la clase y se reutiliza cada vez que se resuelve esa dependencia. Es adecuado para objetos que deben compartirse en toda la aplicación. Aquí tienes un ejemplo:
+    \begin{lstlisting}
+services.AddSingleton<IServicioEmail, ServicioEmail>();
+\end{lstlisting}
+    \item \textbf{Scoped}: Con AddScoped, se registra una instancia por solicitud en el contenedor de inyección de dependencia. Esto significa que se crea una nueva instancia de la clase para cada solicitud HTTP entrante y se reutiliza en el ámbito de esa solicitud. Es útil cuando deseas que una instancia se mantenga durante la duración de una solicitud, pero no necesariamente en toda la aplicación. Aquí tienes un ejemplo:
+    \begin{lstlisting}
+services.AddScoped<IServicioEmail, ServicioEmail>();
+\end{lstlisting}
+    \item \textbf{Transitorio}: Con AddTransient, se registra una nueva instancia de la clase en cada solicitud de resolución en el contenedor de inyección de dependencia. Esto significa que se crea una nueva instancia cada vez que se resuelve la dependencia. Es útil cuando deseas una nueva instancia de la clase cada vez que se solicita. Aquí tienes un ejemplo:
+    \begin{lstlisting}
+services.AddTransient<IServicioEmail, ServicioEmail>();
+\end{lstlisting}
+\end{enumerate}
 
 \end{document}
