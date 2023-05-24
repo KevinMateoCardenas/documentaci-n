@@ -2631,7 +2631,6 @@ Recuerda que el alcance transitorio (AddTransient) crea una nueva instancia cada
 
 \subsection*{Tipos de inyección de dependencias}
 
-
 Las siguientes son configuraciones de inyección de dependencia en ASP.NET Core:
 
 \begin{enumerate}
@@ -2648,5 +2647,369 @@ services.AddScoped<IServicioEmail, ServicioEmail>();
 services.AddTransient<IServicioEmail, ServicioEmail>();
 \end{lstlisting}
 \end{enumerate}
+
+\section{Unit Test}
+Las pruebas unitarias son una práctica esencial en el desarrollo de software que consiste en probar de manera automatizada las unidades más pequeñas de código, como métodos y clases, de forma aislada. El objetivo principal de las pruebas unitarias es verificar que cada unidad de código funcione correctamente de manera individual, asegurando que cumplan con los requisitos y evitando la introducción de errores.
+
+Al aplicar pruebas unitarias, se obtienen diversos beneficios, entre ellos:
+\begin{enumerate}
+    \item \textbf{Detección temprana de errores:} Las pruebas unitarias permiten identificar problemas y defectos en el código de manera temprana, lo que facilita su corrección antes de que se propaguen a otras partes del sistema.
+    \item \textbf{Mantenimiento y refactorización:} Las pruebas unitarias brindan confianza al realizar cambios en el código, ya que proporcionan una forma de verificar rápidamente que las funcionalidades previamente implementadas sigan siendo válidas después de los cambios.
+    \item \textbf{Documentación de uso:} Las pruebas unitarias sirven como una documentación ejecutable de cómo se debe utilizar una unidad de código. Al leer las pruebas, los desarrolladores pueden comprender rápidamente cómo utilizar y cómo debería comportarse el código.
+    \item \textbf{Facilita el trabajo en equipo:} Las pruebas unitarias promueven la colaboración entre desarrolladores al proporcionar un conjunto de casos de prueba compartidos que definen el comportamiento esperado de las unidades de código.
+\end{enumerate}
+
+Veamos un ejemplo. Supongamos que tenemos una clase llamada MathUtils que contiene varios métodos estáticos para realizar operaciones matemáticas simples. Vamos a escribir una prueba unitaria utilizando NUnit para el método Multiply, que calcula la multiplicación de dos números enteros.
+
+Aquí está la implementación de la clase MathUtils:
+\begin{lstlisting}
+public class MathUtils
+{
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    public static int Multiply(int a, int b)
+    {
+        return a * b;
+    }
+
+    public static int Divide(int dividend, int divisor)
+    {
+        if (divisor == 0)
+        {
+            throw new DivideByZeroException("Cannot divide by zero.");
+        }
+
+        return dividend / divisor;
+    }
+}
+\end{lstlisting}
+
+Y ahora vamos a escribir la prueba unitaria utilizando NUnit:
+\begin{lstlisting}
+using NUnit.Framework;
+
+[TestFixture]
+public class MathUtilsTests
+{
+    [Test]
+    public void Multiply_WhenCalledWithTwoNumbers_ReturnsProduct()
+    {
+        // Arrange
+        int number1 = 5;
+        int number2 = 10;
+
+        // Act
+        int result = MathUtils.Multiply(number1, number2);
+
+        // Assert
+        Assert.AreEqual(50, result);
+    }
+
+    [Test]
+    public void Multiply_WhenCalledWithZero_ReturnsZero()
+    {
+        // Arrange
+        int number1 = 5;
+        int number2 = 0;
+
+        // Act
+        int result = MathUtils.Multiply(number1, number2);
+
+        // Assert
+        Assert.AreEqual(0, result);
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, hemos escrito dos pruebas unitarias para el método Multiply de la clase MathUtils. La primera prueba verifica que el método devuelva el producto correcto cuando se le pasan dos números enteros. La segunda prueba verifica que el método devuelva cero cuando uno de los números es cero.
+
+Al ejecutar estas pruebas utilizando NUnit, se verificará si los resultados obtenidos coinciden con los valores esperados. Si todos los resultados son correctos, las pruebas pasarán sin errores. De lo contrario, si alguna aserción falla, se generará una excepción y la prueba se considerará fallida.
+
+\subsection{Patron AAA}
+El patrón AAA (Arrange-Act-Assert) es una convención comúnmente utilizada en las pruebas unitarias para estructurar las pruebas de manera clara y legible. Este patrón divide la prueba en tres partes distintas: Arrange, Act y Assert.
+
+\begin{itemize}
+    \item \textbf{Arrange (Preparación):} En esta etapa, se prepara el entorno necesario para la prueba. Se configuran las condiciones iniciales, se crean objetos y se establecen las dependencias necesarias. Aquí se definen los datos de entrada y se configuran los valores esperados.
+    \item \textbf{Act (Acción):} En esta etapa, se realiza la acción o el comportamiento que se quiere probar. Se invoca el método o se lleva a cabo la operación que se desea evaluar. Aquí se obtiene el resultado de la acción realizada.
+    \item \textbf{Assert (Verificación):} En esta etapa, se verifica si el resultado obtenido de la acción realizada es el esperado. Se utilizan aserciones (assertions) para comparar el resultado actual con el valor esperado. Si la aserción es verdadera, la prueba pasa; de lo contrario, la prueba falla y se muestra un mensaje de error.
+\end{itemize}
+El uso del patrón AAA facilita la comprensión de la intención de la prueba y mejora su mantenibilidad, ya que separa claramente las diferentes etapas de la misma. A continuación, se muestra un ejemplo de cómo se aplicaría el patrón AAA en una prueba unitaria utilizando el framework NUnit:    
+
+\begin{lstlisting}
+[TestClass]
+public class MyMathTests
+{
+    [TestMethod]
+    public void Add_WhenCalledWithTwoNumbers_ReturnsSum()
+    {
+        // Arrange
+        int number1 = 5;
+        int number2 = 10;
+        int expectedSum = 15;
+        
+        MyMath myMath = new MyMath();
+        
+        // Act
+        int result = myMath.Add(number1, number2);
+        
+        // Assert
+        Assert.AreEqual(expectedSum, result);
+    }
+}
+
+\end{lstlisting}
+
+\subsection{TDD (Desarrollo Dirigido por Pruebas)}
+
+El Desarrollo Dirigido por Pruebas (Test-Driven Development o TDD) es una metodología de desarrollo de software que se basa en escribir las pruebas unitarias antes de implementar el código de producción. Es un enfoque iterativo e incremental en el cual el ciclo de desarrollo consiste en tres pasos: Escribir una prueba, hacerla pasar y refactorizar.
+
+El proceso de TDD sigue los siguientes pasos, iterando al agregar una nueva funcionalidad:
+
+\begin{enumerate}
+\item \textbf{Escribir una prueba (Write a test):} En esta etapa, se escribe una prueba unitaria que defina el comportamiento deseado del código a implementar. La prueba inicialmente fallará, ya que el código aún no existe. Este paso es llamado el paso rojo (red).
+\item \textbf{Hacer pasar la prueba (Make the test pass):} En esta etapa, se implementa la funcionalidad mínima necesaria en el código para que la prueba pase. No se busca una implementación completa en esta etapa, solo lo suficiente para satisfacer la prueba. Este paso es llamado el paso verde (green).
+\item \textbf{Refactorizar (Refactor):} Una vez que la prueba pasa, se realiza la refactorización del código para mejorar su calidad, eliminar duplicaciones y aplicar buenas prácticas de programación. Se asegura de que las pruebas sigan pasando después de cada refactorización.
+\end{enumerate}
+
+El TDD se centra en el desarrollo incremental y en la retroalimentación constante proporcionada por las pruebas unitarias. Al seguir esta metodología, se obtienen diversos beneficios, como un código más limpio y modular, mayor confianza en la calidad del código y una cobertura de pruebas más completa. También promueve un enfoque más centrado en el diseño y la arquitectura del código, ya que las pruebas ayudan a definir las interfaces y los requisitos antes de la implementación.
+
+Por ejemplo: Supongamos que queremos desarrollar una clase estatica que tenga algunos metodos de la teoría de números, \enquote*{Residuo modular} y \enquote*{factorial}.
+
+Empezamos escribiendo las pruebas unitarias para estos metodos:
+\begin{lstlisting}
+using Pruebas.metodos;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace TeoriaDeNumerosTests
+{
+    [TestClass]
+    public class TeoriaDeNumerosTest
+    {
+        [TestMethod]
+        public void TestResuduo()
+        {
+            int divisor = 2;
+            int dividendo = 5;
+
+            int resultado = TeoriaDeNumeros.Resuduo(dividendo, divisor);
+
+            Assert.AreEqual(1, resultado);
+        }
+        [TestMethod]
+        public void TestFactorial()
+        {
+            int numero = 5;
+
+            int resultado = TeoriaDeNumeros.Factorial(numero);
+
+            Assert.AreEqual(120, resultado);
+        }
+    }
+}
+\end{lstlisting}
+
+Procedemos a escribir el codigo necesario para que estas pruebas pasen:
+\begin{lstlisting}
+namespace Pruebas.metodos
+{
+    public static class TeoriaDeNumeros
+    {
+        public static int Resuduo(int dividendo, int divisor)
+        {
+            int cociente = 0;
+            int residuo = new int();
+            do{ 
+                residuo = dividendo -  divisor * cociente;
+                cociente++;
+            }
+            while (residuo >= 2) ;
+            
+            return residuo;
+        }
+        public static int Factorial(int numero)
+        {
+            if (numero == 0) return 1;
+            else return numero * Factorial(numero - 1);
+        }
+    }
+}
+\end{lstlisting}
+Y luego lo refactorizamos, de ser necesario.
+
+\subsection{Moq}
+Moq es un popular framework de moqueo para el lenguaje de programación C\#. Permite crear objetos simulados y configurar su comportamiento durante las pruebas unitarias. A continuación, se presentan algunos conceptos y características clave de Moq:
+
+\begin{itemize}
+\item \textbf{Instalación}: Moq se puede instalar a través del administrador de paquetes NuGet en Visual Studio. El paquete se llama \enquote*{Moq} y está disponible en la galería de paquetes de NuGet.
+
+\item \textbf{Creación de objetos simulados}: Moq permite crear objetos simulados utilizando el método estático \lstinline{Mock.Of<T>()}, donde T representa el tipo de la interfaz o clase que se desea simular. También se puede utilizar el constructor de la clase Mock<T>() para crear el objeto simulado.
+
+\item \textbf{Configuración de comportamiento}: Una vez creado el objeto simulado, se puede configurar su comportamiento utilizando el método \lstinline{Setup()} de Moq. Por ejemplo, se puede especificar el valor de retorno de un método simulado, lanzar una excepción, establecer el comportamiento de propiedades, etc.
+
+\item \textbf{Verificación de llamadas}: Moq proporciona métodos para verificar si se realizaron llamadas a métodos específicos en el objeto simulado. Por ejemplo, se puede utilizar el método \lstinline{Verify()} para comprobar si se llamó a un método en particular con los parámetros esperados.
+
+\item \textbf{ArgumentMatchers}: Moq ofrece soporte para ArgumentMatchers, que permiten definir reglas más flexibles al configurar el comportamiento de un método. Por ejemplo, se puede utilizar \lstinline{It.IsAny<T>()} para aceptar cualquier valor de un tipo determinado como argumento.
+
+\item \textbf{Callback}: Moq permite utilizar el método \lstinline{Callback()} para realizar acciones personalizadas cuando se llama a un método simulado. Esto puede ser útil para realizar verificaciones adicionales o ejecutar código adicional durante las pruebas.
+
+\item \textbf{Propiedades}: Moq permite configurar el comportamiento de propiedades en objetos simulados. Esto incluye establecer valores, permitir o evitar la lectura o escritura, y más.
+
+\item \textbf{Inyección de dependencias}: Moq se puede utilizar en combinación con patrones de inyección de dependencias para simular dependencias externas en las pruebas unitarias. Al utilizar Moq junto con un contenedor de inyección de dependencias, se pueden proporcionar objetos simulados en lugar de las implementaciones reales durante las pruebas.
+
+\end{itemize}
+
+Proporciona una sintaxis fácil de usar para configurar objetos simulados y verificar su comportamiento durante las pruebas unitarias. A continuación, profundizaremos en algunas de las características clave de Moq y brindaremos un ejemplo para ilustrar su uso.
+
+Una de las características principales de Moq es la capacidad de configurar el comportamiento de los métodos simulados. Puedes especificar valores de retorno, lanzar excepciones y realizar otras acciones personalizadas. Veamos un ejemplo:
+
+Supongamos que tenemos una interfaz ICalculadora que define un método Sumar para sumar dos números enteros:
+
+\begin{lstlisting}
+public interface ICalculadora
+{
+    int Sumar(int a, int b);
+}
+\end{lstlisting}
+
+Ahora, queremos escribir una prueba unitaria para verificar si la clase CalculadoraServicio utiliza correctamente el método Sumar de ICalculadora. Usaremos Moq para simular ICalculadora en nuestra prueba.
+
+Aquí está el ejemplo completo:
+
+\begin{lstlisting}
+using Moq;
+    
+[TestClass]
+public class CalculadoraServicioTests
+{
+    [TestMethod]
+    public void CalcularSuma_UtilizaMetodoSumarDeCalculadora()
+    {
+        // Arrange
+        var calculadoraMock = new Mock<ICalculadora>();
+        calculadoraMock.Setup(calculadora => calculadora.Sumar(2, 3)).Returns(5); // Configuracion del metodo Sumar
+
+        var servicio = new CalculadoraServicio(calculadoraMock.Object);
+
+        // Act
+        int resultado = servicio.CalcularSuma(2, 3);
+
+        // Assert
+        Assert.AreEqual(5, resultado);
+
+        calculadoraMock.Verify(calculadora => calculadora.Sumar(2, 3), Times.Once); // Verificacion de llamada al metodo Sumar
+    }
+}
+\end{lstlisting}
+
+Moq es un framework de moqueo altamente flexible y poderoso para C\#. Proporciona una sintaxis fácil de usar para configurar objetos simulados y verificar su comportamiento durante las pruebas unitarias. A continuación, profundizaremos en algunas de las características clave de Moq y brindaremos un ejemplo para ilustrar su uso.
+
+Una de las características principales de Moq es la capacidad de configurar el comportamiento de los métodos simulados. Puedes especificar valores de retorno, lanzar excepciones y realizar otras acciones personalizadas. Veamos un ejemplo:
+
+Supongamos que tenemos una interfaz ICalculadora que define un método Sumar para sumar dos números enteros:
+
+\begin{lstlisting}
+public interface ICalculadora
+{
+    int Sumar(int a, int b);
+}
+\end{lstlisting}
+Ahora, queremos escribir una prueba unitaria para verificar si la clase CalculadoraServicio utiliza correctamente el método Sumar de ICalculadora. Usaremos Moq para simular ICalculadora en nuestra prueba.
+
+Aquí está el ejemplo completo:
+\begin{lstlisting}
+[TestClass]
+public class CalculadoraServicioTests
+{
+    [TestMethod]
+    public void CalcularSuma_UtilizaMetodoSumarDeCalculadora()
+    {
+        // Arrange
+        var calculadoraMock = new Mock<ICalculadora>();
+        calculadoraMock.Setup(calculadora => calculadora.Sumar(2, 3)).Returns(5); // Configuracion del metodo Sumar
+
+        var servicio = new CalculadoraServicio(calculadoraMock.Object);
+
+        // Act
+        int resultado = servicio.CalcularSuma(2, 3);
+
+        // Assert
+        Assert.AreEqual(5, resultado);
+
+        calculadoraMock.Verify(calculadora => calculadora.Sumar(2, 3), Times.Once); // Verificacion de llamada al metodo Sumar
+    }
+}
+\end{lstlisting}
+En este ejemplo, creamos un objeto simulado de ICalculadora utilizando Mock<ICalculadora>. Luego, utilizamos el método Setup para configurar el comportamiento del método Sumar cuando se llame con los argumentos especificados (2 y 3). En este caso, configuramos que el método Sumar debe retornar 5.
+
+Después, creamos una instancia de CalculadoraServicio y la pasamos el objeto simulado ICalculadora mediante calculadoraMock.Object. Luego, llamamos al método CalcularSuma en el servicio y verificamos que el resultado sea 5 utilizando Assert.AreEqual.
+
+Finalmente, utilizamos Verify para verificar que el método Sumar de ICalculadora haya sido llamado exactamente una vez con los argumentos 2 y 3.
+
+Este ejemplo ilustra cómo Moq nos permite configurar el comportamiento de los objetos simulados y verificar su uso durante las pruebas unitarias. Con Moq, podemos simular fácilmente dependencias y definir su comportamiento de manera controlada para asegurarnos de que nuestras clases se comporten correctamente en diferentes escenarios.
+
+\subsubsection*{Simular un Repositorio con Moq}
+
+Veamos un ejemplo de cómo simular un repositorio utilizando Moq.
+
+Supongamos que tenemos una interfaz IRepositorio<T> que define las operaciones básicas de un repositorio genérico, como agregar, obtener por ID y eliminar elementos:
+
+\begin{lstlisting}
+public interface IRepositorio<T>
+{
+    void Agregar(T entidad);
+    T ObtenerPorId(int id);
+    void Eliminar(T entidad);
+}    
+
+public class Servicio<T>
+{
+    private readonly IRepositorio<T> repositorio;
+
+    public Servicio(IRepositorio<T> repositorio)
+    {
+        this.repositorio = repositorio;
+    }
+
+    public void Agregar(T entidad)
+    {
+        repositorio.Agregar(entidad);
+    }
+}
+
+\end{lstlisting}
+
+Queremos probar la clase Servicio<T> que depende de un repositorio y realiza operaciones utilizando ese repositorio. Utilizaremos Moq para simular el repositorio en nuestra prueba.
+
+Aquí está el ejemplo completo:
+
+\begin{lstlisting}
+[TestClass]
+public class ServicioTests
+{
+    [TestMethod]
+    public void Agregar_Entidad_LlamaMetodoAgregarDelRepositorio()
+    {
+        // Arrange
+        var repositorioMock = new Mock<IRepositorio<Entidad>>();
+
+        var servicio = new Servicio<Entidad>(repositorioMock.Object);
+
+        var entidad = new Entidad();
+
+        // Act
+        servicio.Agregar(entidad);
+
+        // Assert
+        repositorioMock.Verify(repositorio => repositorio.Agregar(entidad), Times.Once);
+    }
+}
+\end{lstlisting}
+
+\lstinline{Mock<IRepositorio<Entidad>>}. Luego, creamos una instancia de \lstinline{Servicio<Entidad>} y le pasamos el objeto simulado del repositorio mediante \lstinline{repositorioMock.Object}.
+
+Después, creamos una entidad y llamamos al método Agregar en el servicio. Luego utilizamos Verify para verificar que el método Agregar del repositorio haya sido llamado exactamente una vez con la entidad especificada.
 
 \end{document}
