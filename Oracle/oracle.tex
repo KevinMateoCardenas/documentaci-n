@@ -17,26 +17,23 @@
 \usepackage{setspace}
 \doublespacing
 
-\lstset{
-    inputencoding=utf8,
-    language=SQL,
-    basicstyle=\ttfamily,
-    columns=fullflexible
-}
-
 % Define colores para el código
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
+\definecolor{mycolor}{RGB}{0,0,255}
 % Configuración de lstlisting
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
+\lstset{
+    inputencoding=utf8,
+    language=SQL,
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    backgroundcolor=\color{backcolour},     
     commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
+    keywordstyle=\color{blue},
     numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
+    stringstyle=\color{cyan!60!black},
     basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,         
     breaklines=true,                 
@@ -47,7 +44,16 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=2
+    tabsize=2,
+    morekeywords={DECLARE,
+                    BEGIN,
+                    END,
+                    PACKAGE,
+                    IS,
+                    BODY,
+                    FUNCTION,
+                    PROCEDURE,
+                    RETURN},
 }
 
 % Configuración del paquete hyperref
@@ -57,8 +63,6 @@
     filecolor=magenta,      
     urlcolor=gray,
 }
-
-\lstset{style=mystyle}
 
 \title{PLSQL}
 \author{Kevin Cárdenas}
@@ -98,20 +102,20 @@ A continuación, se muestra un ejemplo de un bloque de PL/SQL anónimo:
 
 \begin{lstlisting}
 DECLARE
-nombre VARCHAR2(50) := 'Juan';
-edad NUMBER := 30;
+    nombre VARCHAR2(50) := 'Juan';
+    edad NUMBER := 30;
 BEGIN
--- Logic of program
-IF edad >= 18 THEN
-DBMS_OUTPUT.PUT_LINE(nombre || ' es mayor de edad');
-ELSE
-DBMS_OUTPUT.PUT_LINE(nombre || ' es menor de edad');
-END IF;
+    -- Logic of program
+    IF edad >= 18 THEN
+        DBMS_OUTPUT.PUT_LINE(nombre || ' es mayor de edad');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE(nombre || ' es menor de edad');
+    END IF;
 END;
 
 -- Sentencias SQL
 INSERT INTO empleados (nombre, salario)
-VALUES ('Ana', 5000);
+    VALUES ('Ana', 5000);
 
 COMMIT;
 END;
@@ -126,12 +130,12 @@ Por otro lado, los bloques de PL/SQL nombrados se almacenan en la base de datos 
 CREATE OR REPLACE PROCEDURE calcular_salario(p_empleado_id NUMBER) AS
 v_salario NUMBER;
 BEGIN
--- Logica para calcular el salario del empleado
-SELECT salario INTO v_salario
-FROM empleados
-WHERE empleado_id = p_empleado_id;
+    -- Logica para calcular el salario del empleado
+    SELECT salario INTO v_salario
+        FROM empleados
+        WHERE empleado_id = p_empleado_id;
 
-DBMS_OUTPUT.PUT_LINE('El salario del empleado ' || p_empleado_id || ' es: ' || v_salario);
+    DBMS_OUTPUT.PUT_LINE('El salario del empleado ' || p_empleado_id || ' es: ' || v_salario);
 END;
 /
 \end{lstlisting}
@@ -147,7 +151,7 @@ CREATE OR REPLACE TRIGGER insertar_empleado_trigger
 AFTER INSERT ON empleados
 FOR EACH ROW
 BEGIN
-DBMS_OUTPUT.PUT_LINE('Nuevo empleado insertado: ' || :NEW.nombre);
+    DBMS_OUTPUT.PUT_LINE('Nuevo empleado insertado: ' || :NEW.nombre);
 END;
 /
 \end{lstlisting}
