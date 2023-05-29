@@ -460,6 +460,68 @@ END;
 
 En este ejemplo, se evalúa la variable \texttt{edad} y se muestra un mensaje según el resultado.
 
+\subsubsection*{Condicional CASE}
+
+El condicional \texttt{CASE} en PL/SQL es una estructura de control que permite evaluar una expresión y tomar decisiones basadas en su valor. Proporciona una alternativa a la estructura \texttt{IF-THEN-ELSE} y es especialmente útil cuando se tienen múltiples condiciones a evaluar.
+
+La sintaxis básica del condicional \texttt{CASE} es la siguiente:
+
+\begin{lstlisting}
+CASE expresion
+   WHEN valor1 THEN
+      -- Codigo a ejecutar cuando la expresion es igual a valor1
+   WHEN valor2 THEN
+      -- Codigo a ejecutar cuando la expresion es igual a valor2
+   ...
+   ELSE
+      -- Codigo a ejecutar cuando la expresion no coincide con ninguno de los valores anteriores
+END CASE;
+\end{lstlisting}
+
+En este caso, \texttt{expresion} es la expresión que se evalúa y \texttt{valor1}, \texttt{valor2}, etc., son los valores posibles que se comparan con la expresión. El bloque de código correspondiente se ejecutará cuando la expresión coincida con uno de los valores especificados.
+
+A continuación, se muestra un ejemplo de uso del condicional \texttt{CASE} en PL/SQL:
+
+\begin{lstlisting}
+DECLARE
+   nota NUMBER := 80;
+BEGIN
+   CASE nota
+      WHEN 90 THEN
+         DBMS_OUTPUT.PUT_LINE('Excelente');
+      WHEN 80 THEN
+         DBMS_OUTPUT.PUT_LINE('Bueno');
+      WHEN 70 THEN
+         DBMS_OUTPUT.PUT_LINE('Aceptable');
+      ELSE
+         DBMS_OUTPUT.PUT_LINE('Reprobado');
+   END CASE;
+END;
+\end{lstlisting}
+
+En este ejemplo, la variable \texttt{nota} se evalúa y se ejecuta el código correspondiente según el valor de la nota. Si la nota es 90, se mostrará "Excelente"; si es 80, se mostrará "Bueno"; si es 70, se mostrará "Aceptable"; y en cualquier otro caso, se mostrará "Reprobado".
+
+El condicional \texttt{CASE} también permite el uso de condiciones adicionales utilizando la cláusula \texttt{WHEN-THEN}:
+
+\begin{lstlisting}
+DECLARE
+   nota NUMBER := 75;
+BEGIN
+   CASE
+      WHEN nota >= 90 THEN
+         DBMS_OUTPUT.PUT_LINE('Excelente');
+      WHEN nota >= 80 THEN
+         DBMS_OUTPUT.PUT_LINE('Bueno');
+      WHEN nota >= 70 THEN
+         DBMS_OUTPUT.PUT_LINE('Aceptable');
+      ELSE
+         DBMS_OUTPUT.PUT_LINE('Reprobado');
+   END CASE;
+END;
+\end{lstlisting}
+
+En este caso, no se especifica una expresión en el \texttt{CASE}, pero se utilizan condiciones para evaluar la variable \texttt{nota} y ejecutar el código correspondiente.
+
 \subsubsection*{Bucles}
 
 En PL/SQL, los bucles permiten repetir tareas y controlar el flujo de ejecución. Veamos algunos tipos de bucles comunes:
@@ -520,8 +582,6 @@ En este ejemplo, se utiliza un bucle \texttt{FOR} para sumar los números del 1 
 La principal diferencia entre los bucles LOOP y WHILE radica en cómo se controla la condición de finalización: en el caso del bucle LOOP, se controla internamente dentro del bucle, mientras que en el bucle WHILE, se evalúa antes de cada iteración. El bucle FOR se utiliza específicamente para iterar sobre colecciones de elementos, como cursores o conjuntos de registros.
 
 Es importante tener cuidado con los bucles que no paran. Si un bucle no tiene una instrucción de salida o una condición de finalización que se cumpla, se producirá lo que se conoce como un \enquote*{bucle infinito}. En ese caso, el bucle se ejecutará continuamente sin detenerse, lo que puede llevar a problemas como un uso excesivo de recursos del sistema y un bloqueo del programa. Los bucles infinitos son un error común en la programación y deben evitarse. Si accidentalmente creas un bucle infinito, es posible que debas detener la ejecución del programa manualmente o reiniciar el entorno de ejecución
-
-\subsection{Condicionales y bucles anidados}
 
 En PL/SQL, es posible anidar condicionales y bucles, lo que permite realizar estructuras de control más complejas y flexibles. A continuación, se presentan ejemplos prácticos de condicionales y bucles anidados:
 
@@ -591,19 +651,6 @@ BEGIN
 END;
 \end{lstlisting}
 
-\section{Procedimientos almacenados}
-Los procedimientos almacenados son una característica clave de PL/SQL. Son bloques de código con nombre que se almacenan en la base de datos y se utilizan para encapsular lógica de negocio compleja. Los procedimientos almacenados se pueden invocar desde otras partes del sistema, lo que permite una reutilización eficiente del código y mejora el rendimiento de las aplicaciones al reducir la necesidad de enviar múltiples consultas al servidor de base de datos.
+\subsection{Funciones}
 
-\subsection{Ejemplo de procedimiento almacenado:}
-\begin{lstlisting}
-CREATE OR REPLACE PROCEDURE calcular_salario(p_empleado_id NUMBER) AS
-v_salario NUMBER;
-BEGIN
-    -- Logica para calcular el salario del empleado
-    -- y asignarlo a la variable v_salario
-    -- ...
-
-    DBMS_OUTPUT.PUT_LINE('El salario del empleado ' || p_empleado_id || ' es: ' || v_salario);
-END;
-\end{lstlisting}
 \end{document}
