@@ -3012,4 +3012,63 @@ public class ServicioTests
 
 Después, creamos una entidad y llamamos al método Agregar en el servicio. Luego utilizamos Verify para verificar que el método Agregar del repositorio haya sido llamado exactamente una vez con la entidad especificada.
 
+\subsection{dotCover}
+
+dotCover es una herramienta de cobertura de código desarrollada por JetBrains que te permite analizar la cobertura de tus pruebas unitarias en proyectos .NET. Cuando desarrollas aplicaciones, las pruebas unitarias son fundamentales para garantizar la calidad y estabilidad del código. Sin embargo, es igualmente importante asegurarse de que tus pruebas cubran adecuadamente todo el código que has escrito.
+
+La cobertura de código es una medida que indica qué porcentaje de tu código ha sido ejecutado por tus pruebas unitarias. Con dotCover, puedes obtener información precisa sobre la cobertura de tus pruebas, identificar áreas no probadas y tomar decisiones informadas sobre cómo mejorar la calidad de tu código.
+
+\subsubsection*{Necesidad de dotCover en el trabajo con pruebas unitarias}
+
+A medida que tus proyectos se vuelven más complejos, mantener una cobertura de código adecuada se vuelve desafiante. Aquí es donde dotCover entra en juego y se convierte en una herramienta invaluable. Al utilizar dotCover en tu flujo de trabajo de pruebas unitarias, puedes obtener los siguientes beneficios:
+
+\begin{itemize}
+  \item \textbf{Identificación de áreas no probadas}: dotCover analiza tu código y te muestra qué partes no están siendo cubiertas por tus pruebas unitarias. Esto te ayuda a identificar áreas críticas que no están siendo evaluadas adecuadamente y te permite escribir pruebas adicionales para cubrir esas áreas.
+  \item \textbf{Mejora de la calidad del código}: Al conocer la cobertura de tus pruebas unitarias, puedes tomar decisiones informadas sobre qué áreas necesitan una mayor atención. Puedes enfocarte en mejorar la calidad del código en áreas críticas y reducir la probabilidad de errores.
+  \item \textbf{Refactorización segura}: Cuando realizas cambios en tu código, la cobertura de dotCover te proporciona una medida objetiva de qué tan bien cubiertos están esos cambios por tus pruebas existentes. Esto te permite realizar refactorizaciones de manera segura, sabiendo que tus pruebas unitarias seguirán validando la funcionalidad correctamente.
+\end{itemize}
+
+\subsubsection*{Instalación}
+
+Para instalar dotCover en Visual Studio, sigue estos pasos:
+
+\begin{enumerate}
+  \item Descarga e instala JetBrains dotCover desde el sitio web oficial de JetBrains.
+  \item Abre Visual Studio y asegúrate de tener el proyecto abierto en el que deseas analizar la cobertura.
+  \item Ve a la pestaña \enquote*{Extensiones} en la barra de menú superior y selecciona \enquote*{Gestor de extensiones} para abrir el Administrador de Extensiones de Visual Studio.
+  \item En el Administrador de Extensiones, busca \enquote*{dotCover} en el cuadro de búsqueda y haz clic en "Descargar" para instalar la extensión de dotCover.
+  \item Reinicia Visual Studio para completar la instalación.
+\end{enumerate}
+
+\subsubsection*{Uso}
+
+Una vez que tienes dotCover instalado, puedes utilizarlo en Visual Studio de la siguiente manera:
+
+\begin{enumerate}
+  \item Abre el proyecto en Visual Studio y asegúrate de que las pruebas unitarias estén escritas y configuradas correctamente.
+  \item En Visual Studio, ve al menú "Pruebas" y selecciona "Analizar cobertura de dotCover" para iniciar el análisis de cobertura de código.
+  \item Se abrirá una ventana de dotCover que muestra las opciones de análisis. Configura las opciones según tus necesidades, como el alcance del análisis, las pruebas unitarias a ejecutar, etc.
+  \item Haz clic en el botón "Iniciar" para comenzar el análisis de cobertura.
+  \item dotCover ejecutará las pruebas unitarias y recopilará información sobre la cobertura del código.
+  \item Después de finalizar el análisis, dotCover mostrará los resultados en una ventana especial. Aquí puedes ver métricas detalladas de cobertura, como el porcentaje de cobertura por línea, instrucción y rama.
+  \item Explora los informes de cobertura para identificar áreas no cubiertas por las pruebas y toma acciones para mejorar la cobertura.
+  \item Además, dotCover permite exportar los informes de cobertura en diferentes formatos, como HTML o XML, para compartirlos con otros miembros del equipo o integrarlos en tus procesos.
+\end{enumerate}
+
+\section{SonarQube}
+SonarQube es una plataforma de análisis estático de código que ayuda a medir y mejorar la calidad del software. Proporciona un conjunto de herramientas y características para evaluar la salud y el mantenimiento del código fuente, identificar problemas de calidad y seguridad, y ofrecer recomendaciones para su mejora.
+
+La principal función de SonarQube es realizar análisis estáticos en el código fuente para detectar problemas y violaciones de buenas prácticas de programación. Utiliza una variedad de reglas predefinidas y personalizables que abarcan aspectos como complejidad del código, duplicación, seguridad, mantenibilidad y cumplimiento de estándares de codificación. Estas reglas son aplicadas de manera automática al código fuente, y los resultados se presentan en un informe detallado y fácil de entender.
+
+\begin{enumerate}
+    \item \textbf{Integración continua}: SonarQube se puede integrar con herramientas de integración continua como Jenkins, Azure DevOps, GitLab CI/CD, entre otras. Esto permite realizar análisis de calidad de manera automática en cada etapa del ciclo de desarrollo de software.
+    \item \textbf{Control de deuda técnica}: SonarQube ayuda a identificar y medir la deuda técnica en el código. La deuda técnica se refiere a la acumulación de problemas y malas prácticas que aumentan la complejidad y dificultan el mantenimiento del software. SonarQube proporciona métricas y seguimiento de la deuda técnica, lo que ayuda a priorizar y planificar las actividades de mejora.
+    \item \textbf{Seguridad del código}: SonarQube incluye análisis de seguridad del código para identificar vulnerabilidades y riesgos potenciales en el software. Puede detectar problemas como inyecciones SQL, vulnerabilidades de seguridad conocidas, configuraciones inseguras y más. Esto permite a los equipos de desarrollo abordar los problemas de seguridad desde las etapas iniciales del desarrollo.
+    \item \textbf{Integración con IDE y control de versiones}: SonarQube proporciona plugins e integraciones con IDE populares como Visual Studio, Eclipse, IntelliJ IDEA, lo que permite realizar análisis de calidad directamente desde el entorno de desarrollo. También se integra con sistemas de control de versiones como Git, SVN, TFS, lo que facilita el seguimiento de la calidad del código a lo largo del tiempo.
+    \item \textbf{Gestión de portafolios}: SonarQube ofrece características para gestionar múltiples proyectos y aplicaciones dentro de un portafolio. Permite obtener una vista consolidada de la calidad del código en todos los proyectos, establecer métricas y objetivos comunes, y facilitar la gestión centralizada de la calidad del software.
+\end{enumerate}
+
+Para efectos de los que hablamos C\# seguiremos hablando acerca de SonartLint, que es el plugin en VisualStudio.
+
+\subsection*{}
 \end{document}

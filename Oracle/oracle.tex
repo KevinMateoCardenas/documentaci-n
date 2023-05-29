@@ -53,7 +53,21 @@
                     BODY,
                     FUNCTION,
                     PROCEDURE,
-                    RETURN},
+                    RETURN,
+                    LOOP,
+                    IF,
+                    FOR,
+                    WHILE,
+                    EXIT,
+                    SUBSTR,
+                    LENGTH,
+                    UPPER,
+                    LOWER,
+                    INSTR,
+                    REPLACE,
+                    TRIM,
+                    SERVEROUTPUT,
+                    },
 }
 
 % Configuración del paquete hyperref
@@ -64,7 +78,7 @@
     urlcolor=gray,
 }
 
-\title{PLSQL}
+\title{PL/SQL}
 \author{Kevin Cárdenas}
 
 \begin{document}
@@ -101,6 +115,8 @@ Los bloques anónimos se ejecutan de forma inmediata, mientras que los bloques n
 A continuación, se muestra un ejemplo de un bloque de PL/SQL anónimo:
 
 \begin{lstlisting}
+SET SERVEROUTPUT ON --Imprimir mensajes en consola
+
 DECLARE
     nombre VARCHAR2(50) := 'Juan';
     edad NUMBER := 30;
@@ -297,9 +313,267 @@ END;
 \end{lstlisting}
 \end{itemize}
 
-\subsection{Condicionales y bucles}
-PL/SQL proporciona estructuras de control de flujo, como condicionales y bucles, para tomar decisiones y repetir acciones. Los condicionales, como IF-THEN-ELSE, permiten ejecutar diferentes bloques de código según una condición específica. Los bucles, como FOR, WHILE y LOOP, permiten repetir un bloque de código hasta que se cumpla una condición o se alcance un criterio de finalización.
+\subsection{Strings}
 
+En PL/SQL, los strings se representan utilizando el tipo de dato \texttt{VARCHAR2} o \texttt{CHAR}. Los strings son utilizados para almacenar y manipular datos textuales. A continuación se presentan algunos métodos y operaciones comunes para trabajar con strings en PL/SQL:
+
+\paragraph{Declaración y asignación de strings}
+
+Se pueden declarar variables de tipo string utilizando el tipo de dato \texttt{VARCHAR2}. Luego, se pueden asignar valores utilizando el operador de asignación \texttt{:=}. Por ejemplo:
+
+\begin{lstlisting}
+DECLARE
+   nombre VARCHAR2(50);
+   direccion VARCHAR2(100);
+BEGIN
+   nombre := 'Juan';
+   direccion := 'Calle Principal';
+   -- Resto del codigo...
+END;
+\end{lstlisting}
+
+\paragraph{Concatenación de strings}
+
+La concatenación de strings se puede realizar utilizando el operador de concatenación \texttt{||}. Por ejemplo:
+
+\begin{lstlisting}
+DECLARE
+   nombre VARCHAR2(50) := 'Juan';
+   apellido VARCHAR2(50) := 'Perez';
+   nombre_completo VARCHAR2(100);
+BEGIN
+   nombre_completo := nombre || ' ' || apellido;
+   dbms_output.put_line('Nombre completo: ' || nombre_completo);
+   -- Resto del codigo...
+END;
+\end{lstlisting}
+
+\paragraph{Funciones y operadores de manipulación de strings}
+
+PL/SQL proporciona varias funciones y operadores para manipular strings. Aquí se presentan algunos ejemplos:
+
+\begin{itemize}
+    \item \texttt{SUBSTR(cadena, inicio, longitud)}: Retorna una subcadena de una cadena dada. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := 'Hello, World!';
+    subcadena VARCHAR2(20);
+BEGIN
+    subcadena := SUBSTR(cadena, 1, 5);
+    dbms_output.put_line('Subcadena: ' || subcadena);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+ 
+    \item \texttt{LENGTH(cadena)}: Retorna la longitud de una cadena. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := 'Hello, World!';
+    longitud NUMBER;
+BEGIN
+    longitud := LENGTH(cadena);
+    dbms_output.put_line('Longitud: ' || longitud);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+
+    \item \texttt{UPPER(cadena)}: Convierte una cadena a mayúsculas. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := 'Hello, World!';
+    cadena_mayusculas VARCHAR2(50);
+BEGIN
+    cadena_mayusculas := UPPER(cadena);
+    dbms_output.put_line('Cadena en mayusculas: ' || cadena_mayusculas);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+ 
+    \item \texttt{LOWER(cadena)}: Convierte una cadena a minúsculas. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := 'Hello, World!';
+    cadena_minusculas VARCHAR2(50);
+BEGIN
+    cadena_minusculas := LOWER(cadena);
+    dbms_output.put_line('Cadena en minusculas: ' || cadena_minusculas);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+ 
+    \item \texttt{INSTR(cadena, subcadena)}: Encuentra la posición de una subcadena dentro de una cadena. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := 'Hello, World!';
+    posicion NUMBER;
+BEGIN
+    posicion := INSTR(cadena, 'World');
+    dbms_output.put_line('Posicion de "World": ' || posicion);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+ 
+    \item \texttt{REPLACE(cadena, subcadena, nueva\_subcadena)}: Reemplaza todas las ocurrencias de una subcadena por otra en una cadena. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := 'Hello, World!';
+    nueva_cadena VARCHAR2(50);
+BEGIN
+    nueva_cadena := REPLACE(cadena, 'World', 'Mundo');
+    dbms_output.put_line('Cadena modificada: ' || nueva_cadena);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+ 
+    \item \texttt{TRIM(cadena)}, \texttt{LTRIM(cadena)}, \texttt{RTRIM(cadena)}: Estas funciones se utilizan para eliminar caracteres de una cadena, a la iquierda o derecha respectivamente. Ejemplo:
+\begin{lstlisting}
+DECLARE
+    cadena VARCHAR2(50) := '   Hola, Mundo!   ';
+    cadena_sin_espacios VARCHAR2(50);
+BEGIN
+    cadena_sin_espacios := TRIM(cadena);
+    dbms_output.put_line('Cadena sin espacios: ' || cadena_sin_espacios);
+    -- Resto del codigo...
+END;
+\end{lstlisting}
+ \end{itemize}
+
+\subsection{Condicionales y bucles}
+
+En PL/SQL, los condicionales y los bucles son fundamentales para controlar el flujo de ejecución de un programa. Permiten tomar decisiones y repetir tareas de manera eficiente.
+
+\subsubsection*{Condicionales}
+
+En PL/SQL, se utiliza la estructura \texttt{IF-THEN-ELSE} para evaluar una condición y ejecutar diferentes bloques de código según el resultado. A continuación se muestra un ejemplo:
+
+\begin{lstlisting}
+DECLARE
+   edad NUMBER := 18;
+BEGIN
+   IF edad >= 18 THEN
+      dbms_output.put_line('Eres mayor de edad');
+   ELSE
+      dbms_output.put_line('Eres menor de edad');
+   END IF;
+END;
+\end{lstlisting}
+
+En este ejemplo, se evalúa la variable \texttt{edad} y se muestra un mensaje según el resultado.
+
+\subsubsection*{Bucles}
+
+En PL/SQL, los bucles permiten repetir tareas y controlar el flujo de ejecución. Veamos algunos tipos de bucles comunes:
+
+\subsubsection*{Bucle LOOP}
+El bucle \texttt{LOOP} es un bucle infinito que se repite hasta que se encuentra una instrucción de salida. Puedes utilizar la instrucción \texttt{EXIT} para salir del bucle. Aquí tienes un ejemplo:
+
+\begin{lstlisting}
+DECLARE
+   contador NUMBER := 1;
+BEGIN
+   LOOP
+      dbms_output.put_line('Contador: ' || contador);
+      contador := contador + 1;
+      
+      IF contador > 5 THEN
+         EXIT; -- Sale del bucle
+      END IF;
+   END LOOP;
+END;
+\end{lstlisting}
+
+En este ejemplo, se utiliza un bucle \texttt{LOOP} para mostrar el valor del contador y se sale del bucle cuando el contador supera 5.
+
+\subsubsection*{Bucle WHILE}
+El bucle \texttt{WHILE} se repite mientras se cumpla una condición especificada. El bucle sigue ejecutándose siempre que la condición sea verdadera. Aquí tienes un ejemplo:
+
+\begin{lstlisting}
+DECLARE
+   contador NUMBER := 1;
+BEGIN
+   WHILE contador <= 5 LOOP
+      dbms_output.put_line('Contador: ' || contador);
+      contador := contador + 1;
+   END LOOP;
+END;
+\end{lstlisting}
+
+En este ejemplo, se utiliza un bucle \texttt{WHILE} para mostrar el valor del contador y se repite mientras el contador sea menor o igual a 5.
+
+\subsubsection*{Bucle FOR}
+El bucle \texttt{FOR} se utiliza para recorrer un conjunto de valores en un rango o una lista. Puedes especificar un rango de valores utilizando \texttt{INICIO..FIN} o proporcionar una lista separada por comas de valores. Aquí tienes un ejemplo:
+
+\begin{lstlisting}
+DECLARE
+   total NUMBER := 0;
+BEGIN
+   FOR i IN 1..5 LOOP
+      total := total + i;
+   END LOOP;
+   
+   dbms_output.put_line('Total: ' || total);
+END;
+\end{lstlisting}
+
+En este ejemplo, se utiliza un bucle \texttt{FOR} para sumar los números del 1 al 5 y se muestra el resultado final.
+
+La principal diferencia entre los bucles LOOP y WHILE radica en cómo se controla la condición de finalización: en el caso del bucle LOOP, se controla internamente dentro del bucle, mientras que en el bucle WHILE, se evalúa antes de cada iteración. El bucle FOR se utiliza específicamente para iterar sobre colecciones de elementos, como cursores o conjuntos de registros.
+
+Es importante tener cuidado con los bucles que no paran. Si un bucle no tiene una instrucción de salida o una condición de finalización que se cumpla, se producirá lo que se conoce como un \enquote*{bucle infinito}. En ese caso, el bucle se ejecutará continuamente sin detenerse, lo que puede llevar a problemas como un uso excesivo de recursos del sistema y un bloqueo del programa. Los bucles infinitos son un error común en la programación y deben evitarse. Si accidentalmente creas un bucle infinito, es posible que debas detener la ejecución del programa manualmente o reiniciar el entorno de ejecución
+
+\subsection{Condicionales y bucles anidados}
+
+En PL/SQL, es posible anidar condicionales y bucles, lo que permite realizar estructuras de control más complejas y flexibles. A continuación, se presentan ejemplos prácticos de condicionales y bucles anidados:
+
+\subsubsection*{Condicionales anidados}
+
+Los condicionales anidados permiten evaluar múltiples condiciones y ejecutar diferentes bloques de código en función de los resultados. Aquí tienes un ejemplo que determina la calificación de un estudiante en base a su nota:
+
+\begin{lstlisting}
+DECLARE
+   nota NUMBER := 85;
+BEGIN
+   IF nota >= 90 THEN
+      dbms_output.put_line('Calificacion: A');
+   ELSIF nota >= 80 THEN
+      dbms_output.put_line('Calificacion: B');
+   ELSIF nota >= 70 THEN
+      dbms_output.put_line('Calificacion: C');
+   ELSE
+      dbms_output.put_line('Calificacion: D');
+   END IF;
+   -- Resto del codigo...
+END;
+/
+\end{lstlisting}
+
+En este ejemplo, se evalúa la nota del estudiante y se imprime la calificación correspondiente utilizando condicionales anidados.
+
+\subsubsection*{Bucles anidados}
+
+Los bucles anidados permiten iterar sobre múltiples conjuntos de datos. Aquí tienes un ejemplo de un bucle \texttt{FOR} anidado que genera una tabla de multiplicación:
+
+\begin{lstlisting}
+DECLARE
+   limite_filas NUMBER := 5;
+   limite_columnas NUMBER := 5;
+BEGIN
+   FOR i IN 1..limite_filas LOOP
+      FOR j IN 1..limite_columnas LOOP
+         dbms_output.put(i*j || ' ');
+      END LOOP;
+      dbms_output.new_line;
+   END LOOP;
+   -- Resto del codigo...
+END;
+/
+\end{lstlisting}
+
+En este ejemplo, se utiliza un bucle \texttt{FOR} anidado para generar una tabla de multiplicación con el límite de filas y columnas especificado.
+
+Los condicionales y bucles anidados brindan flexibilidad para controlar el flujo de ejecución en situaciones más complejas. Puedes combinarlos y ajustarlos según tus necesidades para lograr la lógica deseada en tu programa.
+
+Recuerda que estos son solo ejemplos básicos, y puedes adaptarlos y expandirlos según tus requerimientos específicos.
 
 
 \subsection{Matrices}
