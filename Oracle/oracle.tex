@@ -635,22 +635,191 @@ Los condicionales y bucles anidados brindan flexibilidad para controlar el flujo
 
 Recuerda que estos son solo ejemplos básicos, y puedes adaptarlos y expandirlos según tus requerimientos específicos.
 
+\subsection{Matrices (Arrays)}
 
-\subsection{Matrices}
-Las matrices o arrays son estructuras de datos utilizadas para almacenar múltiples valores del mismo tipo en una sola variable. En PL/SQL, se pueden declarar y manipular matrices para procesar conjuntos de datos de manera eficiente. Las matrices se acceden mediante índices y se pueden utilizar en bucles y operaciones aritméticas.
+En PL/SQL, las matrices se pueden representar utilizando tipos de datos de matriz, como \texttt{VARRAY} (Variable Array). Una matriz, también conocida como vector, es una estructura de datos unidimensional que puede contener un conjunto de elementos del mismo tipo.
 
-\subsubsection{Ejemplo de declaración y uso de matrices:}
+\subsubsection*{Introducción a las matrices}
+
+Para declarar una matriz en PL/SQL, se utiliza la siguiente sintaxis:
+
 \begin{lstlisting}
 DECLARE
-    TYPE numeros_array IS VARRAY(5) OF NUMBER;
-    numeros numeros_array := numeros_array(1, 2, 3, 4, 5);
+   TYPE matriz_t IS VARRAY(n) OF tipo_dato;
+   matriz matriz_t := matriz_t(elemento1, elemento2, ..., elementon);
 BEGIN
+   -- Resto del codigo
+END;
+\end{lstlisting}
+
+Donde:
+\begin{itemize}
+   \item \texttt{matriz\_t}: es el tipo de dato de la matriz.
+   \item \texttt{n}: es el tamaño máximo de la matriz (número de elementos).
+   \item \texttt{tipo\_dato}: es el tipo de dato de los elementos de la matriz.
+   \item \texttt{matriz}: es el nombre de la matriz.
+   \item \texttt{elemento1, elemento2, ..., elementon}: son los elementos que se asignarán a la matriz durante la inicialización.
+\end{itemize}
+
+A continuación, se muestra un ejemplo de declaración e inicialización de una matriz de números en PL/SQL:
+
+\begin{lstlisting}
+DECLARE
+   TYPE matriz_numeros IS VARRAY(5) OF NUMBER;
+   numeros matriz_numeros := matriz_numeros(1, 2, 3, 4, 5);
+BEGIN
+   -- Resto del codigo
+END;
+\end{lstlisting}
+
+\subsubsection*{Acceso a una matriz}
+
+Los elementos de una matriz se pueden acceder utilizando el nombre de la matriz seguido de un índice entre paréntesis. El índice indica la posición del elemento en la matriz, comenzando desde 1.
+
+A continuación, se muestra un ejemplo de acceso a los elementos de una matriz en PL/SQL:
+
+\begin{lstlisting}
+DECLARE
+   TYPE matriz_numeros IS VARRAY(5) OF NUMBER;
+   numeros matriz_numeros := matriz_numeros(1, 2, 3, 4, 5);
+   elemento NUMBER;
+BEGIN
+   elemento := numeros(3); -- Acceso al elemento en la posicion 3
+   DBMS_OUTPUT.PUT_LINE('Elemento: ' || elemento);
+END;
+\end{lstlisting}
+
+\subsubsection*{Operaciones con matrices}
+
+En PL/SQL, se pueden realizar diversas operaciones con matrices, como actualización de elementos, obtención del tamaño de la matriz, iteración sobre los elementos y concatenación de matrices. A continuación, se presentan algunos ejemplos de estas operaciones:
+
+\begin{itemize}
+   \item \textbf{Actualización de elementos de una matriz}:
+
+\begin{lstlisting}
+DECLARE
+    TYPE matriz_numeros IS VARRAY(5) OF NUMBER;
+    numeros matriz_numeros := matriz_numeros(1, 2, 3, 4, 5);
+BEGIN
+    numeros(3) := 10; -- Actualizacion del elemento en la posicion 3
+    -- Resto del codigo
+END;
+\end{lstlisting}
+
+   \item \textbf{Obtención del tamaño de una matriz}:
+
+\begin{lstlisting}
+DECLARE
+    TYPE matriz_numeros IS VARRAY(5) OF NUMBER;
+    numeros matriz_numeros := matriz_numeros(1, 2, 3, 4, 5);
+    total_elementos INTEGER;
+BEGIN
+    total_elementos := numeros.COUNT; -- Obtener la cantidad de elementos en la matriz
+    DBMS_OUTPUT.PUT_LINE('Total de elementos: ' || total_elementos);
+END;
+\end{lstlisting}
+
+   \item \textbf{Iteración sobre los elementos de una matriz}:
+
+\begin{lstlisting}
+DECLARE
+    TYPE matriz_numeros IS VARRAY(5) OF NUMBER;
+    numeros matriz_numeros := matriz_numeros(1, 2, 3, 4, 5);
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Elementos de la matriz:');
     FOR i IN 1..numeros.COUNT LOOP
-        DBMS_OUTPUT.PUT_LINE('Numero en la posicion ' || i || ': ' || numeros(i));
+        DBMS_OUTPUT.PUT_LINE('Elemento ' || i || ': ' || numeros(i));
     END LOOP;
 END;
 \end{lstlisting}
 
+   \item \textbf{Concatenación de matrices}:
+
+\begin{lstlisting}
+DECLARE
+    TYPE matriz_numeros IS VARRAY(5) OF NUMBER;
+    numeros1 matriz_numeros := matriz_numeros(1, 2, 3);
+    numeros2 matriz_numeros := matriz_numeros(4, 5);
+    numeros_concat matriz_numeros;
+BEGIN
+    numeros_concat := numeros1 || numeros2; -- Concatenacion de las matrices numeros1 y numeros2
+    -- Resto del codigo
+END;
+\end{lstlisting}
+
+\end{itemize}
+
+Estos ejemplos muestran algunas de las operaciones más comunes que se pueden realizar con matrices en PL/SQL. Puedes adaptar y combinar estas operaciones según tus necesidades específicas.
+
+Recuerda que la sintaxis y las funciones específicas pueden variar dependiendo de la versión de Oracle y de las características soportadas.
+
 \subsection{Funciones}
+
+Las funciones en PL/SQL son subprogramas que realizan un cálculo o una operación y devuelven un valor. Pueden tener parámetros de entrada y/o de salida, lo que les permite aceptar valores proporcionados al llamar a la función y retornar un resultado al finalizar su ejecución.
+
+\subsubsection*{Parámetros de entrada}
+
+Los parámetros de entrada de una función son utilizados para pasar valores desde el código que llama a la función hacia el interior de la función. Estos valores son utilizados dentro de la función para realizar cálculos u operaciones. Los parámetros de entrada se definen en la declaración de la función y deben especificar su tipo de datos.
+
+A continuación, se muestra un ejemplo de una función con parámetros de entrada:
+
+\begin{lstlisting}
+CREATE OR REPLACE FUNCTION calcular_area_circulo(radio IN NUMBER) RETURN NUMBER IS
+   area NUMBER;
+BEGIN
+   area := 3.14159 * radio * radio;
+   RETURN area;
+END;
+/
+\end{lstlisting}
+
+En este ejemplo, la función \texttt{calcular\_area\_circulo} acepta un parámetro de entrada llamado \texttt{radio} de tipo \texttt{NUMBER}. Dentro de la función, se utiliza este parámetro para calcular el área de un círculo y se devuelve el resultado.
+
+\subsubsection*{Parámetros de salida}
+
+Los parámetros de salida de una función son utilizados para devolver valores desde la función hacia el código que la llama. Estos valores son definidos y asignados dentro de la función y luego son retornados al finalizar su ejecución. Los parámetros de salida se definen en la declaración de la función utilizando la cláusula \texttt{RETURN}.
+
+A continuación, se muestra un ejemplo de una función con parámetros de salida:
+
+\begin{lstlisting}
+CREATE OR REPLACE FUNCTION obtener_saludo(nombre IN VARCHAR2) RETURN VARCHAR2 IS
+   saludo VARCHAR2(50);
+BEGIN
+   saludo := 'Hola, ' || nombre || '!';
+   RETURN saludo;
+END;
+/
+\end{lstlisting}
+
+En este ejemplo, la función \texttt{obtener\_saludo} acepta un parámetro de entrada llamado \texttt{nombre} de tipo \texttt{VARCHAR2} y devuelve un saludo personalizado utilizando ese nombre.
+
+\subsubsection*{Ejemplos}
+
+A continuación, se presentan ejemplos de funciones que combinan parámetros de entrada y salida:
+
+\begin{lstlisting}
+CREATE OR REPLACE FUNCTION calcular_promedio(numeros IN matriz_numeros) RETURN NUMBER IS
+   suma NUMBER := 0;
+   promedio NUMBER;
+BEGIN
+   FOR i IN 1..numeros.COUNT LOOP
+      suma := suma + numeros(i);
+   END LOOP;
+   
+   promedio := suma / numeros.COUNT;
+   RETURN promedio;
+END;
+
+CREATE OR REPLACE FUNCTION obtener_persona(id IN NUMBER) RETURN persona IS
+   p persona;
+BEGIN
+   SELECT * INTO p FROM personas WHERE persona_id = id;
+   RETURN p;
+END;
+\end{lstlisting}
+
+En el primer ejemplo, la función \texttt{calcular\_promedio} recibe una matriz de números como parámetro de entrada y calcula el promedio de esos números. Devuelve el promedio como resultado.
+
+En el segundo ejemplo, la función \texttt{obtener\_persona} recibe un ID como parámetro de entrada y busca en una tabla de personas el registro correspondiente a ese ID. Retorna el registro de persona encontrado.
 
 \end{document}
