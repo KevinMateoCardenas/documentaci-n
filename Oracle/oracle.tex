@@ -98,7 +98,597 @@
 \tableofcontents
 \newpage
 
-\section{Introducción}
+\section{SQL}
+
+SQL (Structured Query Language) es un lenguaje de programación utilizado para administrar y manipular bases de datos relacionales. Es el estándar de facto para interactuar con sistemas de gestión de bases de datos (DBMS) y permite realizar diversas operaciones, como consultas, inserciones, actualizaciones y eliminaciones de datos.
+
+SQL proporciona un conjunto de comandos y sintaxis específicos que permiten interactuar con una base de datos relacional. Estos comandos se dividen en diferentes categorías, entre las que destacan:
+
+\begin{itemize}
+\item Consultas (Queries): Permite extraer información de la base de datos mediante la especificación de condiciones y criterios de búsqueda.
+\item Inserciones (Inserts): Permite agregar nuevos registros a una tabla de la base de datos.
+\item Actualizaciones (Updates): Permite modificar los valores de los registros existentes en una tabla.
+\item Eliminaciones (Deletes): Permite eliminar registros de una tabla.
+\item Uniones (Joins): Permite combinar datos de múltiples tablas basándose en una condición de unión.
+\item Agrupaciones (Group By): Permite agrupar los registros de una tabla según un criterio específico y realizar cálculos agregados.
+\item Ordenamiento (Order By): Permite ordenar los registros de una tabla según uno o más atributos.
+\end{itemize}
+
+Las consultas (queries) son una parte fundamental de SQL y se utilizan para recuperar información específica de una base de datos. Mediante las consultas, se pueden especificar condiciones de búsqueda, filtros y criterios de ordenamiento para obtener los datos deseados.
+
+\subsection{Keys}
+
+En el contexto de las bases de datos, una base de datos relacional es un conjunto de tablas que están interrelacionadas mediante keys (claves). Las keys desempeñan un papel fundamental en el diseño y la estructura de una base de datos relacional, ya que se utilizan para identificar y relacionar los registros almacenados en las tablas.
+
+Una base de datos relacional se organiza en tablas que contienen filas (registros) y columnas (atributos). Cada registro en una tabla se identifica de forma única mediante una key, que puede ser un atributo o un conjunto de atributos. Las keys permiten establecer relaciones entre las tablas y garantizan la integridad de los datos.
+
+En una base de datos relacional, las keys se utilizan para garantizar la unicidad de los registros y establecer relaciones entre las tablas. La clave primaria (Primary Key) es una key especial que identifica de forma única cada registro en una tabla y se utiliza como referencia para establecer relaciones con otras tablas. Otras keys importantes son las claves foráneas (Foreign Key), que hacen referencia a las claves primarias de otras tablas y establecen relaciones entre ellas.
+
+\subsubsection*{Primary Key}
+
+Una clave primaria (\textit{Primary Key}) es un atributo o conjunto de atributos que identifica de forma única cada registro en una tabla. Es utilizada para garantizar la integridad y unicidad de los datos. Cada tabla en una base de datos relacional debe tener una clave primaria.
+
+Ejemplo de declaración de una clave primaria en SQL:
+
+\begin{lstlisting}[language=SQL]
+CREATE TABLE empleados (
+empleado_id INT PRIMARY KEY,
+nombre VARCHAR(50),
+apellido VARCHAR(50),
+...
+);
+\end{lstlisting}
+
+En este ejemplo, la columna \texttt{empleado\_id} se declara como la clave primaria de la tabla \texttt{empleados}.
+
+\subsubsection*{Foreign Key}
+
+Una clave foránea (\textit{Foreign Key}) es un atributo o conjunto de atributos que establece una relación entre dos tablas en una base de datos relacional. La clave foránea hace referencia a la clave primaria de otra tabla y se utiliza para mantener la integridad referencial entre las tablas.
+
+Ejemplo de declaración de una clave foránea en SQL:
+
+\begin{lstlisting}[language=SQL]
+CREATE TABLE ventas (
+venta_id INT PRIMARY KEY,
+empleado_id INT,
+...
+FOREIGN KEY (empleado_id) REFERENCES empleados(empleado_id)
+);
+\end{lstlisting}
+
+En este ejemplo, la columna \texttt{empleado\_id} en la tabla \texttt{ventas} se declara como una clave foránea que hace referencia a la clave primaria \texttt{empleado\_id} en la tabla \texttt{empleados}.
+
+Demos más ejemplos:
+
+\subsubsection*{Primary Key}
+
+Ejemplo 1: Tabla de estudiantes con clave primaria compuesta:
+\begin{lstlisting}[language=SQL]
+CREATE TABLE estudiantes (
+estudiante_id INT,
+curso_id INT,
+nombre VARCHAR(50),
+PRIMARY KEY (estudiante_id, curso_id)
+);
+\end{lstlisting}
+
+Ejemplo 2: Tabla de productos con clave primaria autoincremental:
+\begin{lstlisting}[language=SQL]
+CREATE TABLE productos (
+producto_id INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(50),
+precio DECIMAL(10,2)
+);
+\end{lstlisting}
+
+\subsubsection*{Foreign Key}
+
+Ejemplo 1: Tabla de órdenes de compra con clave foránea:
+\begin{lstlisting}[language=SQL]
+CREATE TABLE ordenes (
+orden_id INT PRIMARY KEY,
+cliente_id INT,
+fecha DATE,
+FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
+);
+\end{lstlisting}
+
+Ejemplo 2: Tabla de empleados con clave foránea a sí misma (jerarquía de empleados):
+\begin{lstlisting}[language=SQL]
+CREATE TABLE empleados (
+empleado_id INT PRIMARY KEY,
+nombre VARCHAR(50),
+jefe_id INT,
+FOREIGN KEY (jefe_id) REFERENCES empleados(empleado_id)
+);
+\end{lstlisting}
+
+Estos son solo ejemplos ilustrativos de cómo se pueden utilizar las claves primarias y foráneas en SQL. La estructura y diseño de las tablas dependerá de los requerimientos específicos de tu aplicación y modelo de datos.
+
+\subsection{Tipo de Relaciones}
+
+En SQL, se pueden establecer diferentes tipos de relaciones entre tablas en una base de datos relacional. Algunos de los tipos de relaciones comunes son:
+
+\begin{itemize}
+\item Relación uno a uno (One-to-One): En esta relación, cada registro en la tabla A está asociado con un único registro en la tabla B, y viceversa. Esto significa que la clave primaria de una tabla se relaciona directamente con la clave primaria de otra tabla. Por ejemplo, en una base de datos de empleados, se puede tener una tabla \enquote*{Empleados} y una tabla \enquote*{DetallesEmpleados}, donde cada registro en la tabla \enquote*{Empleados} tiene una correspondencia única en la tabla \enquote*{DetallesEmpleados}.
+
+\item Relación uno a muchos (One-to-Many): En esta relación, cada registro en la tabla A puede estar asociado con varios registros en la tabla B, pero cada registro en la tabla B está asociado con un único registro en la tabla A. Esto se logra mediante el uso de una clave primaria en la tabla A que se convierte en una clave foránea en la tabla B. Por ejemplo, en una base de datos de clientes y pedidos, se puede tener una tabla \enquote*{Clientes} y una tabla \enquote*{Pedidos}, donde cada cliente puede realizar varios pedidos, pero cada pedido está asociado a un único cliente.
+
+\item Relación muchos a muchos (Many-to-Many): En esta relación, varios registros en la tabla A pueden estar asociados con varios registros en la tabla B mediante una tabla intermedia. Esta tabla intermedia contiene las claves primarias de ambas tablas como claves foráneas. Por ejemplo, en una base de datos de estudiantes y cursos, se puede tener una tabla \enquote*{Estudiantes}, una tabla \enquote*{Cursos} y una tabla intermedia \enquote*{Inscripciones}, donde varios estudiantes pueden estar inscritos en varios cursos.
+
+\end{itemize}
+
+Establecer y mantener estas relaciones es fundamental para mantener la integridad y coherencia de los datos en una base de datos relacional. Las claves primarias y foráneas se utilizan para establecer estas relaciones y asegurar que los registros estén correctamente relacionados entre sí.
+
+A continuación, se presentan ejemplos de tablas que ilustran los diferentes tipos de relaciones:
+
+\subsubsection*{Relación uno a uno (One-to-One)}
+Tabla \enquote*{Empleados}:
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{ID} & \textbf{Nombre} & \textbf{Apellido} \\
+    \hline
+    1 & John & Doe \\
+    \hline
+    2 & Jane & Smith \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+Tabla \enquote*{DetallesEmpleados}:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID} & \textbf{Salario} \\
+    \hline
+    1 & 5000 \\
+    \hline
+    2 & 6000 \\
+    \hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{Relación uno a muchos (One-to-Many)}
+Tabla \enquote*{Clientes}:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Apellido} \\
+    \hline
+    1 & John & Doe \\
+    \hline
+    2 & Jane & Smith \\
+    \hline
+\end{tabular}
+\end{center}
+
+Tabla \enquote*{Pedidos}:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{ClienteID} & \textbf{Producto} \\
+\hline
+1 & 1 & Laptop \\
+\hline
+2 & 1 & Teléfono \\
+\hline
+3 & 2 & Tablet \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{Relación muchos a muchos (Many-to-Many)}
+Tabla \enquote*{Estudiantes}:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Apellido} \\
+\hline
+1 & John & Doe \\
+\hline
+2 & Jane & Smith \\
+\hline
+\end{tabular}
+\end{center}
+
+Tabla \enquote*{Cursos}:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID} & \textbf{Nombre} \\
+\hline
+1 & Matemáticas \\
+\hline
+2 & Historia \\
+\hline
+\end{tabular}
+\end{center}
+
+Tabla \enquote*{Inscripciones}:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{EstudianteID} & \textbf{CursoID} & \textbf{FechaInscripción} \\
+\hline
+1 & 1 & 2022-01-01 \\
+\hline
+1 & 2 & 2022-02-01 \\
+\hline
+2 & 1 & 2022-03-01 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Normalización de una Base de Datos}
+
+La normalización es un proceso utilizado para organizar y diseñar estructuras de bases de datos relacionales de manera eficiente y sin redundancias innecesarias. Se basa en una serie de reglas (formas normales) que ayudan a eliminar la redundancia y mejorar la integridad de los datos.
+
+Algunas de las formas normales comunes son:
+
+\subsubsection*{Primera Forma Normal (1NF)}
+
+Requiere que los valores de cada columna en una tabla sean atómicos (indivisibles) y no se repitan. Esto implica dividir una tabla en múltiples tablas más pequeñas y relacionadas, donde cada tabla representa una entidad única. Por ejemplo, consideremos una tabla de empleados donde cada empleado tiene un único ID, nombre y apellido. La 1NF se aseguraría de que cada columna contenga información atómica y que no haya duplicados.
+
+Por ejemplo:
+
+Consideremos una tabla de empleados que contiene información sobre los empleados de una empresa:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Apellido} & \textbf{Departamento} \\
+\hline
+1 & John & Doe & Ventas \\
+\hline
+2 & Jane & Smith & Finanzas \\
+\hline
+3 & Mark & Johnson & Ventas \\
+\hline
+\end{tabular}
+\end{center}
+
+En este ejemplo, la tabla no cumple con la primera forma normal (1NF) porque la columna \enquote*{Departamento} contiene información repetida. Para aplicar la 1NF, podemos dividir la tabla en dos:
+
+\textbf{Tabla Empleados:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Nombre} & \textbf{Apellido} \\
+\hline
+1 & John & Doe \\
+\hline
+2 & Jane & Smith \\
+\hline
+3 & Mark & Johnson \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Tabla Departamentos:}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID} & \textbf{Departamento} \\
+\hline
+1 & Ventas \\
+\hline
+2 & Finanzas \\
+\hline
+\end{tabular}
+\end{center}
+
+Ahora, cada tabla contiene información única y no hay redundancia en los datos.
+
+\subsubsection*{Segunda Forma Normal (2NF)}
+
+Requiere que la tabla esté en 1NF y que todos los atributos no clave dependan completamente de la clave primaria. En otras palabras, no debe haber dependencias parciales. Esto implica dividir la tabla en múltiples tablas para evitar redundancias y asegurarse de que cada atributo dependa completamente de la clave primaria. Por ejemplo, si tenemos una tabla de ventas donde la clave primaria es una combinación de ID de venta y ID de producto, y tenemos atributos como nombre del producto y precio, la 2NF se aseguraría de que el nombre del producto y el precio dependan completamente de la clave primaria.
+
+Por ejemplo:
+
+Supongamos que tenemos una tabla de pedidos que registra los pedidos realizados por los clientes:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{ID Pedido} & \textbf{ID Cliente} & \textbf{Nombre Cliente} & \textbf{Dirección} \\
+\hline
+1 & 1001 & John Doe & Calle Principal 123 \\
+\hline
+2 & 1002 & Jane Smith & Calle Secundaria 456 \\
+\hline
+\end{tabular}
+\end{center}
+
+En este ejemplo, la tabla no cumple con la segunda forma normal (2NF) porque el nombre del cliente y la dirección dependen de la clave primaria \enquote*{ID Cliente} y no de la clave primaria \enquote*{ID Pedido}. Para aplicar la 2NF, podemos dividir la tabla en dos:
+
+\textbf{Tabla Pedidos:}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID Pedido} & \textbf{ID Cliente} \\
+\hline
+1 & 1001 \\
+\hline
+2 & 1002 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Tabla Clientes:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID Cliente} & \textbf{Nombre Cliente} & \textbf{Dirección} \\
+\hline
+1001 & John Doe & Calle Principal 123 \\
+\hline
+1002 & Jane Smith & Calle Secundaria 456 \\
+\hline
+\end{tabular}
+\end{center}
+
+Ahora, el nombre del cliente y la dirección dependen completamente del ID del cliente, evitando así la redundancia de datos.
+
+\subsubsection*{Tercera Forma Normal (3NF)}
+
+Requiere que la tabla esté en 2NF y que no haya dependencias transitivas, es decir, ningún atributo no clave depende de otro atributo no clave. Esto implica dividir la tabla en múltiples tablas para evitar dependencias transitivas y asegurarse de que cada atributo dependa únicamente de la clave primaria. Por ejemplo, si tenemos una tabla de pedidos donde la clave primaria es el ID del pedido y tenemos atributos como dirección de envío y ciudad, y además tenemos un atributo de código postal que depende de la ciudad, la 3NF se aseguraría de que el atributo de código postal se mueva a una tabla separada que solo contenga información relacionada con las ciudades.
+
+Por ejemplo:
+
+¡Claro! Aquí tienes un ejemplo para ilustrar la Tercera Forma Normal (3NF):
+
+Supongamos que tenemos una tabla de pedidos donde la clave primaria es el ID del pedido. Además, tenemos atributos como dirección de envío, ciudad y código postal. Para cumplir con la 3NF, debemos asegurarnos de que ningún atributo no clave dependa de otro atributo no clave. En este caso, el atributo de código postal depende de la ciudad, lo cual genera una dependencia transitiva. Para resolver esto, podemos dividir la tabla en dos:
+
+\textbf{Tabla Pedidos:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID Pedido} & \textbf{Dirección de envío} & \textbf{ID Ciudad} \\
+\hline
+1 & Calle Principal 123 & 1 \\
+\hline
+2 & Calle Secundaria 456 & 2 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Tabla Ciudades:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID Ciudad} & \textbf{Ciudad} & \textbf{Código Postal} \\
+\hline
+1 & Ciudad A & 12345 \\
+\hline
+2 & Ciudad B & 67890 \\
+\hline
+\end{tabular}
+\end{center}
+
+En este ejemplo, hemos separado el atributo de código postal en una tabla separada llamada \enquote*{Ciudades}. Ahora, la tabla de pedidos solo contiene información relacionada con los pedidos, mientras que la tabla de ciudades contiene información relacionada con las ciudades y sus códigos postales. Esto cumple con la Tercera Forma Normal (3NF) al eliminar la dependencia transitiva y asegurarnos de que cada atributo dependa únicamente de la clave primaria correspondiente.
+
+\subsubsection*{Cuarta Forma Normal (4NF)}
+
+La Cuarta Forma Normal (4NF) se refiere a una forma de normalización más avanzada que aborda la redundancia causada por dependencias multivaluadas en una base de datos relacional.
+
+En la 4NF, se busca eliminar las dependencias multivaluadas, es decir, las dependencias en las que un conjunto de atributos determina múltiples conjuntos de valores para otros atributos.
+
+Un ejemplo sencillo de la 4NF es el siguiente:
+
+Consideremos una tabla \enquote*{Productos} con los siguientes atributos:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID Producto} & \textbf{Nombre Producto} & \textbf{Categorías} \\
+\hline
+1 & Laptop & Electrónica, Informática \\
+\hline
+2 & Televisor & Electrónica, Hogar \\
+\hline
+\end{tabular}
+\end{center}
+
+En este ejemplo, la columna \enquote*{Categorías} es multivaluada, lo que significa que un producto puede tener múltiples categorías asociadas. Para aplicar la 4NF, podemos crear una nueva tabla \enquote*{Categorías} y utilizar una clave foránea para establecer la relación:
+
+\textbf{Tabla Productos:}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID Producto} & \textbf{Nombre Producto} \\
+\hline
+1 & Laptop \\
+\hline
+2 & Televisor \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Tabla Categorías:}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID Producto} & \textbf{Categoría} \\
+\hline
+1 & Electrónica \\
+\hline
+1 & Informática \\
+\hline
+2 & Electrónica \\
+\hline
+2 & Hogar \\
+\hline
+\end{tabular}
+\end{center}
+
+De esta manera, hemos eliminado la redundancia en la columna \enquote*{Categorías} y hemos establecido una relación adecuada entre los productos y sus categorías.
+
+\subsubsection*{Quinta Forma Normal (5NF)}
+
+La Quinta Forma Normal (5NF) es una forma de normalización aún más avanzada que aborda las dependencias de unión, también conocidas como dependencias de proyección y unión.
+
+En la 5NF, se busca eliminar las dependencias de unión al descomponer las relaciones en tablas más pequeñas y más especializadas.
+
+Un ejemplo de la 5NF es el siguiente:
+
+Consideremos una tabla \enquote*{Pedidos} con los siguientes atributos:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID Pedido} & \textbf{Productos} \\
+\hline
+1 & Laptop, Televisor \\
+\hline
+2 & Teléfono, Tablet \\
+\hline
+\end{tabular}
+\end{center}
+
+En este ejemplo, la columna \enquote*{Productos} tiene una dependencia de unión, ya que contiene múltiples valores separados por comas. Para aplicar la 5NF, podemos crear una nueva tabla \enquote*{ProductosPedidos} para representar las relaciones entre los productos y los pedidos:
+
+\textbf{Tabla Pedidos:}
+\begin{center}
+\begin{tabular}{|c|}
+\hline
+\textbf{ID Pedido} \\
+\hline
+1 \\
+\hline
+2 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Tabla ProductosPedidos:}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{ID Pedido} & \textbf{Producto} \\
+\hline
+1 & Laptop \\
+\hline
+1 & Televisor \\
+\hline
+2 & Teléfono \\
+\hline
+2 & Tablet \\
+\hline
+\end{tabular}
+\end{center}
+
+De esta manera, hemos eliminado la dependencia de unión en la columna \enquote*{Productos} y hemos descompuesto la relación en dos tablas más especializadas.
+
+La Cuarta Forma Normal (4NF) y la Quinta Forma Normal (5NF) son formas normales más avanzadas que se utilizan para abordar situaciones más complejas y garantizar una mayor eficiencia y estructura en las bases de datos relacionales.
+
+\subsection{Tipos de Operaciones en una Sentencia SQL}
+
+SQL admite una amplia gama de operaciones para interactuar con una base de datos. Algunas de las operaciones más comunes en SQL son:
+
+\begin{itemize}
+\item SELECT: Utilizado para recuperar datos de una o varias tablas.
+\item INSERT: Utilizado para insertar nuevos registros en una tabla.
+\item UPDATE: Utilizado para actualizar registros existentes en una tabla.
+\item DELETE: Utilizado para eliminar registros de una tabla.
+\item JOIN: Utilizado para combinar datos de dos o más tablas basándose en una condición de unión.
+\item GROUP BY: Utilizado para agrupar filas según un criterio y realizar cálculos agregados en los grupos resultantes.
+\item ORDER BY: Utilizado para ordenar los resultados de una consulta según uno o más atributos.
+\end{itemize}
+
+\subsubsection*{SELECT}
+
+La operación SELECT se utiliza para recuperar datos de una o varias tablas en una base de datos. Permite especificar qué columnas se desean seleccionar, así como aplicar condiciones y criterios de filtrado para obtener resultados más específicos.
+
+Un ejemplo de uso de la operación SELECT sería:
+
+\begin{lstlisting}[language=SQL]
+SELECT nombre, apellido FROM empleados WHERE edad > 30;
+\end{lstlisting}
+
+Esta consulta selecciona los nombres y apellidos de los empleados cuya edad es mayor a 30.
+
+\subsubsection*{INSERT}
+
+La operación INSERT se utiliza para insertar nuevos registros en una tabla. Permite especificar los valores a ser insertados en cada columna de la tabla.
+
+Un ejemplo de uso de la operación INSERT sería:
+
+\begin{lstlisting}[language=SQL]
+INSERT INTO clientes (nombre, apellido, correo) VALUES ('Juan', 'Perez', 'juan@example.com');
+\end{lstlisting}
+
+Esta consulta inserta un nuevo cliente en la tabla \enquote*{clientes} con los valores especificados para nombre, apellido y correo.
+
+\subsubsection*{UPDATE}
+
+La operación UPDATE se utiliza para actualizar registros existentes en una tabla. Permite modificar los valores de una o varias columnas en base a una condición.
+
+Un ejemplo de uso de la operación UPDATE sería:
+
+\begin{lstlisting}[language=SQL]
+UPDATE productos SET precio = 10.99 WHERE categoria = 'Electronica';
+\end{lstlisting}
+
+Esta consulta actualiza el precio de todos los productos de la categoría 'Electrónica' a 10.99.
+
+\subsubsection*{DELETE}
+
+La operación DELETE se utiliza para eliminar registros de una tabla. Permite especificar una condición para determinar qué registros deben ser eliminados.
+
+Un ejemplo de uso de la operación DELETE sería:
+
+\begin{lstlisting}[language=SQL]
+DELETE FROM pedidos WHERE fecha < '2022-01-01';
+\end{lstlisting}
+
+Esta consulta elimina todos los pedidos cuya fecha sea anterior al 1 de enero de 2022.
+
+\subsubsection*{JOIN}
+
+La operación JOIN se utiliza para combinar datos de dos o más tablas en base a una condición de unión. Permite obtener resultados que relacionen registros de diferentes tablas.
+
+Un ejemplo de uso de la operación JOIN sería:
+
+\begin{lstlisting}[language=SQL]
+SELECT empleados.nombre, departamentos.nombre
+FROM empleados
+JOIN departamentos ON empleados.departamento_id = departamentos.id;
+\end{lstlisting}
+
+Esta consulta combina los datos de las tablas \enquote*{empleados} y \enquote*{departamentos} utilizando la condición de unión \enquote*{empleados.departamento\_id = departamentos.id}, y selecciona los nombres de los empleados junto con los nombres de los departamentos a los que pertenecen.
+
+\subsubsection*{GROUP BY}
+
+La operación GROUP BY se utiliza para agrupar filas según un criterio y realizar cálculos agregados en los grupos resultantes. Permite obtener resultados resumidos y estadísticas sobre los datos de una tabla.
+
+Un ejemplo de uso de la operación GROUP BY sería:
+
+\begin{lstlisting}[language=SQL]
+SELECT categoria, COUNT(*) as total_productos
+FROM productos
+GROUP BY categoria;
+\end{lstlisting}
+
+Esta consulta agrupa los productos por categoría y cuenta cuántos productos hay en cada categoría, mostrando el resultado en la columna \enquote*{total\_productos}.
+
+\subsubsection*{ORDER BY}
+
+La operación ORDER BY se utiliza para ordenar los resultados de una consulta según uno o más atributos. Permite especificar el orden ascendente (ASC) o descendente (DESC) de los resultados.
+
+Un ejemplo de uso de la operación ORDER BY sería:
+
+\begin{lstlisting}[language=SQL]
+SELECT nombre, precio
+FROM productos
+ORDER BY precio DESC;
+\end{lstlisting}
+
+Esta consulta selecciona los nombres y precios de los productos y los ordena de forma descendente según el precio.
+
+\newpage
+
+\section{PL/SQL}
 PL/SQL (Procedural Language/Structured Query Language) es un lenguaje de programación procedural desarrollado por Oracle Corporation para su uso con el sistema de gestión de bases de datos Oracle. Fue creado en la década de 1990 como una extensión del lenguaje SQL estándar, con el objetivo de proporcionar capacidades avanzadas de programación y lógica empresarial en el contexto de una base de datos relacional.
 
 PL/SQL combina elementos de lenguajes de programación procedurales tradicionales, como variables, estructuras de control de flujo y subrutinas, con la potencia del lenguaje SQL para interactuar con la base de datos. Esto permite a los desarrolladores crear aplicaciones más complejas y sofisticadas que pueden aprovechar todas las capacidades de una base de datos relacional.
@@ -499,7 +1089,7 @@ BEGIN
 END;
 \end{lstlisting}
 
-En este ejemplo, la variable \texttt{nota} se evalúa y se ejecuta el código correspondiente según el valor de la nota. Si la nota es 90, se mostrará "Excelente"; si es 80, se mostrará "Bueno"; si es 70, se mostrará "Aceptable"; y en cualquier otro caso, se mostrará "Reprobado".
+En este ejemplo, la variable \texttt{nota} se evalúa y se ejecuta el código correspondiente según el valor de la nota. Si la nota es 90, se mostrará \enquote*{Excelente}; si es 80, se mostrará \enquote*{Bueno}; si es 70, se mostrará \enquote*{Aceptable}; y en cualquier otro caso, se mostrará \enquote*{Reprobado}.
 
 El condicional \texttt{CASE} también permite el uso de condiciones adicionales utilizando la cláusula \texttt{WHEN-THEN}:
 
@@ -822,4 +1412,5 @@ En el primer ejemplo, la función \texttt{calcular\_promedio} recibe una matriz 
 
 En el segundo ejemplo, la función \texttt{obtener\_persona} recibe un ID como parámetro de entrada y busca en una tabla de personas el registro correspondiente a ese ID. Retorna el registro de persona encontrado.
 
+\subsection{Procedimientos Almacenados}
 \end{document}
