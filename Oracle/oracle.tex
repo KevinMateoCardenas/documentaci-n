@@ -1553,5 +1553,57 @@ SELECT * FROM ClienteInformacion;
 
 En este ejemplo, se crea la tabla \texttt{ClienteInformacion} con las columnas requeridas. Luego, se define el procedimiento almacenado \texttt{insert\_cliente\_control}, que inserta un nuevo registro en la tabla \texttt{ClienteInformacion}. Después, se crea el trigger \texttt{tr\_insert\_cliente}, que invoca el procedimiento almacenado después de cada inserción en la tabla \texttt{Cliente}. Finalmente, se realiza una inserción en la tabla \texttt{Cliente} y se muestra el contenido de la tabla \texttt{ClienteInformacion} para verificar los resultados.
 
-Los triggers son una herramienta poderosa en SQL que permiten automatizar tareas y ejecutar lógica personalizada en respuesta a eventos en las tablas. Pueden ser utilizados para mantener la integridad de los datos, auditar cambios, aplicar reglas de negocio y mucho más. Es importante tener en cuenta las implicaciones de rendimiento y la correcta gestión de los eventos que desencadenan los triggers para asegurar un funcionamiento óptimo de la base de datos.
+Los triggers son una herramienta poderosa en PL/SQL que permiten automatizar tareas y ejecutar lógica personalizada en respuesta a eventos en las tablas. Pueden ser utilizados para mantener la integridad de los datos, auditar cambios, aplicar reglas de negocio y mucho más. Es importante tener en cuenta las implicaciones de rendimiento y la correcta gestión de los eventos que desencadenan los triggers para asegurar un funcionamiento óptimo de la base de datos.
+
+\subsubsection*{Eventos en Triggers}
+
+En el contexto de los triggers, un evento se refiere a una acción específica que ocurre en una tabla y que dispara la ejecución del trigger. Los eventos comunes en los que se pueden definir triggers son \textbf{INSERT} (inserción de datos), \textbf{UPDATE} (actualización de datos) y \textbf{DELETE} (eliminación de datos). Veamos más detalles sobre cada uno de estos eventos:
+
+\begin{enumerate}
+    \item \textbf{INSERT}: Ejemplo de trigger para el evento INSERT:
+    
+    \begin{lstlisting}
+    CREATE OR REPLACE TRIGGER tr_insert_empleado
+    AFTER INSERT ON Empleados
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO RegistroEventos (Evento, Fecha) VALUES ('Nuevo empleado insertado', SYSDATE);
+    END;
+    \end{lstlisting}
+    
+    En este ejemplo, se crea un trigger llamado "tr\_insert\_empleado" que se ejecutará después de cada inserción en la tabla "Empleados". El trigger inserta una nueva fila en la tabla "RegistroEventos" con información sobre el evento ocurrido (en este caso, la inserción de un nuevo empleado) y la fecha actual.
+    
+    \item \textbf{UPDATE}: Ejemplo de trigger para el evento UPDATE:
+    
+    \begin{lstlisting}
+    CREATE OR REPLACE TRIGGER tr_update_empleado
+    BEFORE UPDATE ON Empleados
+    FOR EACH ROW
+    BEGIN
+        :new.FechaActualizacion := SYSDATE;
+    END;
+    \end{lstlisting}
+    
+    En este ejemplo, se crea un trigger llamado "tr\_update\_empleado" que se ejecutará antes de cada actualización en la tabla "Empleados". El trigger asigna la fecha actual a la columna "FechaActualizacion" de la fila que se está actualizando.
+    
+    \item \textbf{DELETE}: Ejemplo de trigger para el evento DELETE:
+    
+    \begin{lstlisting}
+    CREATE OR REPLACE TRIGGER tr_delete_empleado
+    AFTER DELETE ON Empleados
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO RegistroEventos (Evento, Fecha) VALUES ('Empleado eliminado', SYSDATE);
+    END;
+    \end{lstlisting}
+    
+    En este ejemplo, se crea un trigger llamado "tr\_delete\_empleado" que se ejecutará después de cada eliminación en la tabla "Empleados". El trigger inserta una nueva fila en la tabla "RegistroEventos" con información sobre el evento ocurrido (en este caso, la eliminación de un empleado) y la fecha actual.
+\end{enumerate}
+
+Además de estos eventos básicos, algunos sistemas de gestión de bases de datos también admiten otros eventos específicos, como eventos de cambio de esquema (DDL triggers) que se disparan cuando se realizan cambios en la estructura de la base de datos, eventos de inicio y apagado del servidor, eventos de inicio y finalización de una transacción, entre otros.
+
+Es importante tener en cuenta que los triggers se pueden definir para ejecutarse antes (\textbf{BEFORE}) o después (\textbf{AFTER}) de los eventos. Los triggers \textbf{BEFORE} se ejecutan antes de que se realice la acción en la tabla, lo que les permite influir en los datos o validarlos antes de que se realice el cambio. Los triggers \textbf{AFTER} se ejecutan después de que se haya completado la acción en la tabla y se pueden utilizar para realizar tareas adicionales o registrar información relacionada con el evento.
+
+Es fundamental comprender los eventos que desencadenarán la ejecución del trigger y definir las acciones adecuadas que se deben realizar para garantizar la integridad de los datos y cumplir con los requisitos del sistema.
+
 \end{document}
