@@ -714,10 +714,9 @@ INSERT INTO empleados (nombre, salario)
 
 COMMIT;
 END;
-/
 \end{lstlisting}
 
-En este ejemplo, el bloque de PL/SQL anónimo comienza con la palabra clave \enquote*{BEGIN} y finaliza con \enquote*{/} para indicar el final del bloque. Dentro del bloque, se pueden realizar declaraciones como la declaración de variables y constantes. Además, se puede incluir lógica de programación como condicionales y sentencias SQL para manipular la base de datos.
+En este ejemplo, el bloque de PL/SQL anónimo comienza con la palabra clave \enquote*{BEGIN} y finaliza con \enquote*{END;} para indicar el final del bloque. Dentro del bloque, se pueden realizar declaraciones como la declaración de variables y constantes. Además, se puede incluir lógica de programación como condicionales y sentencias SQL para manipular la base de datos.
 
 Por otro lado, los bloques de PL/SQL nombrados se almacenan en la base de datos y se pueden invocar desde otras partes del sistema. A continuación se muestra un ejemplo de un procedimiento almacenado, que es un tipo de bloque de PL/SQL nombrado:
 
@@ -732,7 +731,6 @@ BEGIN
 
     DBMS_OUTPUT.PUT_LINE('El salario del empleado ' || p_empleado_id || ' es: ' || v_salario);
 END;
-/
 \end{lstlisting}
 
 En este ejemplo, se crea un procedimiento almacenado llamado \enquote*{calcular\_salario} que acepta un parámetro de empleado\_id. Dentro del procedimiento, se realiza una consulta para obtener el salario del empleado correspondiente al empleado\_id proporcionado. Luego, se muestra el salario utilizando la función DBMS\_OUTPUT.PUT\_LINE.
@@ -748,7 +746,6 @@ FOR EACH ROW
 BEGIN
     DBMS_OUTPUT.PUT_LINE('Nuevo empleado insertado: ' || :NEW.nombre);
 END;
-/
 \end{lstlisting}
 
 En este ejemplo, el disparador \enquote*{insertar\_empleado\_trigger} se ejecuta después de cada inserción en la tabla \enquote*{empleados}. El bloque de PL/SQL dentro del disparador muestra un mensaje que indica el nombre del nuevo empleado que se ha insertado.
