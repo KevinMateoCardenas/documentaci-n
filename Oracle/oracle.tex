@@ -68,7 +68,8 @@
                     TRIM,
                     SERVEROUTPUT,
                     AFTER,
-                    BEFORE},
+                    BEFORE,
+                    REFERENCES},
 }
 
 % Configuración del paquete hyperref
@@ -123,7 +124,7 @@ En el contexto de las bases de datos, una base de datos relacional es un conjunt
 
 Una base de datos relacional se organiza en tablas que contienen filas (registros) y columnas (atributos). Cada registro en una tabla se identifica de forma única mediante una key, que puede ser un atributo o un conjunto de atributos. Las keys permiten establecer relaciones entre las tablas y garantizan la integridad de los datos.
 
-En una base de datos relacional, las keys se utilizan para garantizar la unicidad de los registros y establecer relaciones entre las tablas. La clave primaria (Primary Key) es una key especial que identifica de forma única cada registro en una tabla y se utiliza como referencia para establecer relaciones con otras tablas. Otras keys importantes son las claves foráneas (Foreign Key), que hacen referencia a las claves primarias de otras tablas y establecen relaciones entre ellas.
+En una base de datos relacional, las keys se utilizan para garantizar la unicidad de los registros y establecer relaciones entre las tablas.
 
 \subsubsection*{Primary Key}
 
@@ -131,7 +132,7 @@ Una clave primaria (\textit{Primary Key}) es un atributo o conjunto de atributos
 
 Ejemplo de declaración de una clave primaria en SQL:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 CREATE TABLE empleados (
 empleado_id INT PRIMARY KEY,
 nombre VARCHAR(50),
@@ -148,7 +149,7 @@ Una clave foránea (\textit{Foreign Key}) es un atributo o conjunto de atributos
 
 Ejemplo de declaración de una clave foránea en SQL:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 CREATE TABLE ventas (
 venta_id INT PRIMARY KEY,
 empleado_id INT,
@@ -164,7 +165,7 @@ Demos más ejemplos:
 \subsubsection*{Primary Key}
 
 Ejemplo 1: Tabla de estudiantes con clave primaria compuesta:
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 CREATE TABLE estudiantes (
 estudiante_id INT,
 curso_id INT,
@@ -173,19 +174,10 @@ PRIMARY KEY (estudiante_id, curso_id)
 );
 \end{lstlisting}
 
-Ejemplo 2: Tabla de productos con clave primaria autoincremental:
-\begin{lstlisting}[language=SQL]
-CREATE TABLE productos (
-producto_id INT PRIMARY KEY AUTO_INCREMENT,
-nombre VARCHAR(50),
-precio DECIMAL(10,2)
-);
-\end{lstlisting}
-
 \subsubsection*{Foreign Key}
 
 Ejemplo 1: Tabla de órdenes de compra con clave foránea:
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 CREATE TABLE ordenes (
 orden_id INT PRIMARY KEY,
 cliente_id INT,
@@ -195,7 +187,7 @@ FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
 \end{lstlisting}
 
 Ejemplo 2: Tabla de empleados con clave foránea a sí misma (jerarquía de empleados):
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 CREATE TABLE empleados (
 empleado_id INT PRIMARY KEY,
 nombre VARCHAR(50),
@@ -599,7 +591,7 @@ La operación SELECT se utiliza para recuperar datos de una o varias tablas en u
 
 Un ejemplo de uso de la operación SELECT sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 SELECT nombre, apellido FROM empleados WHERE edad > 30;
 \end{lstlisting}
 
@@ -611,7 +603,7 @@ La operación INSERT se utiliza para insertar nuevos registros en una tabla. Per
 
 Un ejemplo de uso de la operación INSERT sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 INSERT INTO clientes (nombre, apellido, correo) VALUES ('Juan', 'Perez', 'juan@example.com');
 \end{lstlisting}
 
@@ -623,7 +615,7 @@ La operación UPDATE se utiliza para actualizar registros existentes en una tabl
 
 Un ejemplo de uso de la operación UPDATE sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 UPDATE productos SET precio = 10.99 WHERE categoria = 'Electronica';
 \end{lstlisting}
 
@@ -635,7 +627,7 @@ La operación DELETE se utiliza para eliminar registros de una tabla. Permite es
 
 Un ejemplo de uso de la operación DELETE sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 DELETE FROM pedidos WHERE fecha < '2022-01-01';
 \end{lstlisting}
 
@@ -647,7 +639,7 @@ La operación JOIN se utiliza para combinar datos de dos o más tablas en base a
 
 Un ejemplo de uso de la operación JOIN sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 SELECT empleados.nombre, departamentos.nombre
 FROM empleados
 JOIN departamentos ON empleados.departamento_id = departamentos.id;
@@ -661,7 +653,7 @@ La operación GROUP BY se utiliza para agrupar filas según un criterio y realiz
 
 Un ejemplo de uso de la operación GROUP BY sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 SELECT categoria, COUNT(*) as total_productos
 FROM productos
 GROUP BY categoria;
@@ -675,7 +667,7 @@ La operación ORDER BY se utiliza para ordenar los resultados de una consulta se
 
 Un ejemplo de uso de la operación ORDER BY sería:
 
-\begin{lstlisting}[language=SQL]
+\begin{lstlisting}
 SELECT nombre, precio
 FROM productos
 ORDER BY precio DESC;
