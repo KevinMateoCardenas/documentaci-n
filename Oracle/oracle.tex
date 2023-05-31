@@ -67,7 +67,8 @@
                     REPLACE,
                     TRIM,
                     SERVEROUTPUT,
-                    },
+                    AFTER,
+                    BEFORE},
 }
 
 % Configuración del paquete hyperref
@@ -202,8 +203,6 @@ jefe_id INT,
 FOREIGN KEY (jefe_id) REFERENCES empleados(empleado_id)
 );
 \end{lstlisting}
-
-Estos son solo ejemplos ilustrativos de cómo se pueden utilizar las claves primarias y foráneas en SQL. La estructura y diseño de las tablas dependerá de los requerimientos específicos de tu aplicación y modelo de datos.
 
 \subsection{Tipo de Relaciones}
 
@@ -434,9 +433,7 @@ Ahora, el nombre del cliente y la dirección dependen completamente del ID del c
 
 Requiere que la tabla esté en 2NF y que no haya dependencias transitivas, es decir, ningún atributo no clave depende de otro atributo no clave. Esto implica dividir la tabla en múltiples tablas para evitar dependencias transitivas y asegurarse de que cada atributo dependa únicamente de la clave primaria. Por ejemplo, si tenemos una tabla de pedidos donde la clave primaria es el ID del pedido y tenemos atributos como dirección de envío y ciudad, y además tenemos un atributo de código postal que depende de la ciudad, la 3NF se aseguraría de que el atributo de código postal se mueva a una tabla separada que solo contenga información relacionada con las ciudades.
 
-Por ejemplo:
-
-¡Claro! Aquí tienes un ejemplo para ilustrar la Tercera Forma Normal (3NF):
+Veamos un ejemplo para ilustrar la Tercera Forma Normal (3NF):
 
 Supongamos que tenemos una tabla de pedidos donde la clave primaria es el ID del pedido. Además, tenemos atributos como dirección de envío, ciudad y código postal. Para cumplir con la 3NF, debemos asegurarnos de que ningún atributo no clave dependa de otro atributo no clave. En este caso, el atributo de código postal depende de la ciudad, lo cual genera una dependencia transitiva. Para resolver esto, podemos dividir la tabla en dos:
 
@@ -466,7 +463,7 @@ Supongamos que tenemos una tabla de pedidos donde la clave primaria es el ID del
 \end{tabular}
 \end{center}
 
-En este ejemplo, hemos separado el atributo de código postal en una tabla separada llamada \enquote*{Ciudades}. Ahora, la tabla de pedidos solo contiene información relacionada con los pedidos, mientras que la tabla de ciudades contiene información relacionada con las ciudades y sus códigos postales. Esto cumple con la Tercera Forma Normal (3NF) al eliminar la dependencia transitiva y asegurarnos de que cada atributo dependa únicamente de la clave primaria correspondiente.
+En este ejemplo, hemos separado el atributo de código postal en una tabla separada llamada\enquote*{Ciudades}. Ahora, la tabla de pedidos solo contiene información relacionada con los pedidos, mientras que la tabla de ciudades contiene información relacionada con las ciudades y sus códigos postales. Esto cumple con la Tercera Forma Normal (3NF) al eliminar la dependencia transitiva y asegurarnos de que cada atributo dependa únicamente de la clave primaria correspondiente.
 
 \subsubsection*{Cuarta Forma Normal (4NF)}
 
@@ -1360,7 +1357,6 @@ BEGIN
    area := 3.14159 * radio * radio;
    RETURN area;
 END;
-/
 \end{lstlisting}
 
 En este ejemplo, la función \texttt{calcular\_area\_circulo} acepta un parámetro de entrada llamado \texttt{radio} de tipo \texttt{NUMBER}. Dentro de la función, se utiliza este parámetro para calcular el área de un círculo y se devuelve el resultado.
@@ -1378,7 +1374,6 @@ BEGIN
    saludo := 'Hola, ' || nombre || '!';
    RETURN saludo;
 END;
-/
 \end{lstlisting}
 
 En este ejemplo, la función \texttt{obtener\_saludo} acepta un parámetro de entrada llamado \texttt{nombre} de tipo \texttt{VARCHAR2} y devuelve un saludo personalizado utilizando ese nombre.
@@ -1412,5 +1407,166 @@ En el primer ejemplo, la función \texttt{calcular\_promedio} recibe una matriz 
 
 En el segundo ejemplo, la función \texttt{obtener\_persona} recibe un ID como parámetro de entrada y busca en una tabla de personas el registro correspondiente a ese ID. Retorna el registro de persona encontrado.
 
-\subsection{Procedimientos Almacenados}
+\subsection{Procedimientos Almacenados en SQL}
+
+Un procedimiento almacenado es una colección de instrucciones SQL que se guarda en el servidor de base de datos y se puede invocar para realizar operaciones específicas. Proporciona una forma conveniente de ejecutar tareas sin tener que volver a escribir el código SQL cada vez.
+
+La sintaxis básica para crear un procedimiento almacenado es la siguiente:
+
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE nombre_procedimiento (parametros)
+AS
+BEGIN
+-- Cuerpo del procedimiento (instrucciones SQL)
+END;
+\end{lstlisting}
+
+Los parámetros son valores opcionales que se pueden pasar al procedimiento para su procesamiento. Pueden ser de entrada, salida o ambos.
+
+A continuación, se presentan algunos ejemplos prácticos de procedimientos almacenados en SQL:
+
+\subsubsection*{Ejemplo 1: Procedimiento para insertar un nuevo registro}
+
+Supongamos que tenemos una tabla \enquote*{Empleados} con las siguientes columnas: ID, Nombre y Salario. Queremos crear un procedimiento almacenado para insertar un nuevo empleado en la tabla.
+
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE insertar_empleado(
+p_ID INT,
+p_Nombre VARCHAR(100),
+p_Salario DECIMAL(10,2))
+AS
+BEGIN
+INSERT INTO Empleados (ID, Nombre, Salario)
+VALUES (p_ID, p_Nombre, p_Salario);
+END;
+\end{lstlisting}
+
+En este ejemplo, el procedimiento almacenado \lstinline{insertar_empleado} toma tres parámetros de entrada: p\_ID, p\_Nombre y p\_Salario. Luego, ejecuta una instrucción \lstinline{INSERT} para agregar un nuevo empleado a la tabla \enquote*{Empleados} con los valores proporcionados.
+
+Para llamar a este procedimiento almacenado, se puede utilizar la siguiente sentencia:
+
+\begin{lstlisting}
+EXECUTE insertar_empleado(1, 'John Doe', 5000.00);
+\end{lstlisting}
+
+Esto insertará un nuevo registro en la tabla \enquote*{Empleados} con el ID 1, el nombre \enquote*{John Doe} y un salario de 5000.00.
+
+\subsubsection*{Ejemplo 2: Procedimiento para actualizar el salario de un empleado}
+
+Supongamos que queremos crear un procedimiento almacenado para actualizar el salario de un empleado en la tabla "Empleados" basado en su ID.
+
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE actualizar_salario_empleado(
+p_ID INT,
+p_NuevoSalario DECIMAL(10,2))
+AS
+BEGIN
+UPDATE Empleados
+SET Salario = p_NuevoSalario
+WHERE ID = p_ID;
+END;
+\end{lstlisting}
+
+En este ejemplo, el procedimiento almacenado \lstinline{actualizar_salario_empleado} toma dos parámetros de entrada: p\_ID y p\_NuevoSalario. Luego, ejecuta una instrucción \lstinline{UPDATE} para modificar el salario de un empleado en la tabla \enquote*{Empleados} con el ID correspondiente.
+
+Para llamar a este procedimiento almacenado, se puede utilizar la siguiente sentencia:
+
+\begin{lstlisting}
+EXECUTE actualizar_salario_empleado(1, 6000.00);
+\end{lstlisting}
+
+Esto actualizará el salario del empleado con ID 1 a 6000.00 en la tabla \enquote*{Empleados}.
+
+\subsubsection*{Ejemplo 3: Procedimiento para eliminar un empleado}
+
+Supongamos que queremos crear un procedimiento almacenado para eliminar un empleado de la tabla \enquote*{Empleados} basado en su ID.
+
+\begin{lstlisting}
+CREATE OR REPLACE PROCEDURE eliminar_empleado(
+p_ID INT)
+AS
+BEGIN
+DELETE FROM Empleados
+WHERE ID = p_ID;
+END;
+\end{lstlisting}
+
+En este ejemplo, el procedimiento almacenado \lstinline{"eliminar_empleado"} toma un parámetro de entrada: p\_ID. Luego, ejecuta una instrucción DELETE para eliminar un empleado de la tabla \enquote*{Empleados} con el ID correspondiente.
+
+Para llamar a este procedimiento almacenado, se puede utilizar la siguiente sentencia:
+
+\begin{lstlisting}
+EXECUTE eliminar_empleado(1);
+\end{lstlisting}
+
+Esto eliminará el empleado con ID 1 de la tabla "Empleados".
+
+Los procedimientos almacenados son útiles para encapsular lógica compleja de base de datos, mejorar el rendimiento, reutilizar código y mantener la integridad de los datos. Se pueden llamar desde aplicaciones o incluso desde otros procedimientos almacenados.
+
+\subsection{Triggers}
+
+Un trigger es un objeto de base de datos que se asocia con una tabla y se dispara automáticamente cuando ocurre un evento en la tabla, como una operación de inserción, actualización o eliminación. Los triggers permiten ejecutar acciones personalizadas antes o después de que ocurra un evento en la tabla.
+
+La sintaxis básica para crear un trigger es la siguiente:
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER nombre_trigger
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON nombre_tabla
+[FOR EACH ROW]
+BEGIN
+-- Cuerpo del trigger (instrucciones PL/SQL)
+END;
+\end{lstlisting}
+
+El disparador se puede configurar para ejecutarse antes o después de un evento (\lstinline{BEFORE o AFTER}), y se especifica qué tipo de evento desencadenará el trigger (\lstinline{INSERT, UPDATE o DELETE}). Además, se puede agregar la cláusula opcional \lstinline{FOR EACH ROW} para indicar que el trigger se ejecutará una vez por cada fila afectada por el evento.
+
+A continuación, se muestra un ejemplo de trigger que invoca el procedimiento almacenado \texttt{insert\_cliente\_control} después de cada inserción en la tabla \texttt{Cliente}:
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_insert_cliente
+AFTER INSERT ON Cliente
+FOR EACH ROW
+BEGIN
+insert_cliente_control(:new.strNumeroIdentificacion, :new.strNombre || ' ' || :new.strApellido);
+END;
+\end{lstlisting}
+
+En este ejemplo, el trigger \texttt{tr\_insert\_cliente} se ejecutará después de cada inserción en la tabla \texttt{Cliente}. Utiliza la pseudo-variable \texttt{:new} para acceder a los valores de la nueva fila insertada y los pasa como argumentos al procedimiento almacenado \texttt{insert\_cliente\_control}.
+
+\subsubsection*{Ejemplo de Uso}
+
+A continuación, se muestra un ejemplo completo que combina la creación de la tabla \texttt{ClienteInformacion}, el procedimiento almacenado \texttt{insert\_cliente\_control} y el trigger \texttt{tr\_insert\_cliente}:
+
+\begin{lstlisting}
+CREATE TABLE ClienteInformacion (
+Identificacion VARCHAR(20) PRIMARY KEY,
+NombreCompleto VARCHAR(100),
+FechaRegistro DATE,
+FechaUltimaActualizacion DATE
+);
+
+CREATE OR REPLACE PROCEDURE insert_cliente_control(
+Identificacion IN VARCHAR,
+NombreCompleto IN VARCHAR)
+AS
+BEGIN
+INSERT INTO ClienteInformacion VALUES (Identificacion, NombreCompleto, SYSDATE, SYSDATE);
+END;
+
+CREATE OR REPLACE TRIGGER tr_insert_cliente
+AFTER INSERT ON Cliente
+FOR EACH ROW
+BEGIN
+insert_cliente_control(:new.strNumeroIdentificacion, :new.strNombre || ' ' || :new.strApellido);
+END;
+
+INSERT INTO Cliente (strTipoIdentificacion, strNumeroIdentificacion, strNombre, strApellido, strEmail)
+VALUES ('cedula', '1111', 'El kakas', 'kakasNet', 'kakasNet@gmail.com');
+
+SELECT * FROM ClienteInformacion;
+\end{lstlisting}
+
+En este ejemplo, se crea la tabla \texttt{ClienteInformacion} con las columnas requeridas. Luego, se define el procedimiento almacenado \texttt{insert\_cliente\_control}, que inserta un nuevo registro en la tabla \texttt{ClienteInformacion}. Después, se crea el trigger \texttt{tr\_insert\_cliente}, que invoca el procedimiento almacenado después de cada inserción en la tabla \texttt{Cliente}. Finalmente, se realiza una inserción en la tabla \texttt{Cliente} y se muestra el contenido de la tabla \texttt{ClienteInformacion} para verificar los resultados.
+
+Los triggers son una herramienta poderosa en SQL que permiten automatizar tareas y ejecutar lógica personalizada en respuesta a eventos en las tablas. Pueden ser utilizados para mantener la integridad de los datos, auditar cambios, aplicar reglas de negocio y mucho más. Es importante tener en cuenta las implicaciones de rendimiento y la correcta gestión de los eventos que desencadenan los triggers para asegurar un funcionamiento óptimo de la base de datos.
 \end{document}
