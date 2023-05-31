@@ -1606,4 +1606,38 @@ Es importante tener en cuenta que los triggers se pueden definir para ejecutarse
 
 Es fundamental comprender los eventos que desencadenarán la ejecución del trigger y definir las acciones adecuadas que se deben realizar para garantizar la integridad de los datos y cumplir con los requisitos del sistema.
 
+\subsubsection*{Eventos Múltiples en Triggers}
+
+Los eventos múltiples en los triggers permiten combinar varios eventos en un único trigger, lo que significa que el trigger se activará y ejecutará su lógica cuando ocurra cualquiera de los eventos especificados. Esto brinda flexibilidad para definir comportamientos específicos en función de diferentes eventos que pueden ocurrir en una tabla.
+
+La sintaxis básica para crear un trigger con eventos múltiples es la siguiente:
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER nombre_trigger
+{BEFORE | AFTER} {eventos}
+ON nombre_tabla
+[FOR EACH ROW]
+BEGIN
+-- Cuerpo del trigger (instrucciones SQL)
+END;
+\end{lstlisting}
+
+Donde {eventos} es una lista de eventos separados por comas (,) que se desea combinar en el trigger. Estos eventos pueden ser INSERT, UPDATE o DELETE, y se especifica si el trigger se debe activar antes (BEFORE) o después (AFTER) de los eventos.
+
+A continuación, se muestra un ejemplo de un trigger que se activa tanto después de una inserción como después de una actualización en la tabla \enquote*{Clientes}:
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_eventos_multiples
+AFTER INSERT OR UPDATE ON Clientes
+FOR EACH ROW
+BEGIN
+-- Logica del trigger
+-- ...
+END;
+\end{lstlisting}
+
+En este ejemplo, el trigger \enquote*{tr\_eventos\_multiples} se activará tanto después de una inserción como después de una actualización en la tabla \enquote*{Clientes}. Puedes agregar la lógica personalizada dentro del bloque BEGIN-END para manejar los eventos según tus necesidades.
+
+Los eventos múltiples en los triggers permiten tener un mayor control sobre las acciones realizadas en la base de datos, ya que cada evento puede tener su propia lógica de manejo dentro del trigger. Esto facilita la implementación de reglas de negocio y la automatización de tareas relacionadas con diferentes eventos en una tabla.
+
 \end{document}
