@@ -1484,7 +1484,7 @@ Para llamar a este procedimiento almacenado, se puede utilizar la siguiente sent
 EXECUTE eliminar_empleado(1);
 \end{lstlisting}
 
-Esto eliminará el empleado con ID 1 de la tabla "Empleados".
+Esto eliminará el empleado con ID 1 de la tabla \enquote*{Empleados}.
 
 Los procedimientos almacenados son útiles para encapsular lógica compleja de base de datos, mejorar el rendimiento, reutilizar código y mantener la integridad de los datos. Se pueden llamar desde aplicaciones o incluso desde otros procedimientos almacenados.
 
@@ -1562,42 +1562,42 @@ En el contexto de los triggers, un evento se refiere a una acción específica q
 \begin{enumerate}
     \item \textbf{INSERT}: Ejemplo de trigger para el evento INSERT:
     
-    \begin{lstlisting}
-    CREATE OR REPLACE TRIGGER tr_insert_empleado
-    AFTER INSERT ON Empleados
-    FOR EACH ROW
-    BEGIN
-        INSERT INTO RegistroEventos (Evento, Fecha) VALUES ('Nuevo empleado insertado', SYSDATE);
-    END;
-    \end{lstlisting}
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_insert_empleado
+AFTER INSERT ON Empleados
+FOR EACH ROW
+BEGIN
+    INSERT INTO RegistroEventos (Evento, Fecha) VALUES ('Nuevo empleado insertado', SYSDATE);
+END;
+\end{lstlisting}
     
-    En este ejemplo, se crea un trigger llamado "tr\_insert\_empleado" que se ejecutará después de cada inserción en la tabla "Empleados". El trigger inserta una nueva fila en la tabla "RegistroEventos" con información sobre el evento ocurrido (en este caso, la inserción de un nuevo empleado) y la fecha actual.
+    En este ejemplo, se crea un trigger llamado \enquote*{tr\_insert\_empleado} que se ejecutará después de cada inserción en la tabla \enquote*{Empleados}. El trigger inserta una nueva fila en la tabla \enquote*{RegistroEventos} con información sobre el evento ocurrido (en este caso, la inserción de un nuevo empleado) y la fecha actual.
     
     \item \textbf{UPDATE}: Ejemplo de trigger para el evento UPDATE:
     
-    \begin{lstlisting}
-    CREATE OR REPLACE TRIGGER tr_update_empleado
-    BEFORE UPDATE ON Empleados
-    FOR EACH ROW
-    BEGIN
-        :new.FechaActualizacion := SYSDATE;
-    END;
-    \end{lstlisting}
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_update_empleado
+BEFORE UPDATE ON Empleados
+FOR EACH ROW
+BEGIN
+    :new.FechaActualizacion := SYSDATE;
+END;
+\end{lstlisting}
     
-    En este ejemplo, se crea un trigger llamado "tr\_update\_empleado" que se ejecutará antes de cada actualización en la tabla "Empleados". El trigger asigna la fecha actual a la columna "FechaActualizacion" de la fila que se está actualizando.
+    En este ejemplo, se crea un trigger llamado \enquote*{tr\_update\_empleado} que se ejecutará antes de cada actualización en la tabla \enquote*{Empleados}. El trigger asigna la fecha actual a la columna \enquote*{FechaActualizacion} de la fila que se está actualizando.
     
     \item \textbf{DELETE}: Ejemplo de trigger para el evento DELETE:
     
-    \begin{lstlisting}
-    CREATE OR REPLACE TRIGGER tr_delete_empleado
-    AFTER DELETE ON Empleados
-    FOR EACH ROW
-    BEGIN
-        INSERT INTO RegistroEventos (Evento, Fecha) VALUES ('Empleado eliminado', SYSDATE);
-    END;
-    \end{lstlisting}
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_delete_empleado
+AFTER DELETE ON Empleados
+FOR EACH ROW
+BEGIN
+    INSERT INTO RegistroEventos (Evento, Fecha) VALUES ('Empleado eliminado', SYSDATE);
+END;
+\end{lstlisting}
     
-    En este ejemplo, se crea un trigger llamado "tr\_delete\_empleado" que se ejecutará después de cada eliminación en la tabla "Empleados". El trigger inserta una nueva fila en la tabla "RegistroEventos" con información sobre el evento ocurrido (en este caso, la eliminación de un empleado) y la fecha actual.
+    En este ejemplo, se crea un trigger llamado \enquote*{tr\_delete\_empleado} que se ejecutará después de cada eliminación en la tabla \enquote*{Empleados}. El trigger inserta una nueva fila en la tabla \enquote*{RegistroEventos} con información sobre el evento ocurrido (en este caso, la eliminación de un empleado) y la fecha actual.
 \end{enumerate}
 
 Además de estos eventos básicos, algunos sistemas de gestión de bases de datos también admiten otros eventos específicos, como eventos de cambio de esquema (DDL triggers) que se disparan cuando se realizan cambios en la estructura de la base de datos, eventos de inicio y apagado del servidor, eventos de inicio y finalización de una transacción, entre otros.
