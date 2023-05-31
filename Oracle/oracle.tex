@@ -1390,7 +1390,7 @@ En el primer ejemplo, la función \texttt{calcular\_promedio} recibe una matriz 
 
 En el segundo ejemplo, la función \texttt{obtener\_persona} recibe un ID como parámetro de entrada y busca en una tabla de personas el registro correspondiente a ese ID. Retorna el registro de persona encontrado.
 
-\subsection{Procedimientos Almacenados en SQL}
+\subsection{Procedimientos Almacenados}
 
 Un procedimiento almacenado es una colección de instrucciones SQL que se guarda en el servidor de base de datos y se puede invocar para realizar operaciones específicas. Proporciona una forma conveniente de ejecutar tareas sin tener que volver a escribir el código SQL cada vez.
 
@@ -1400,7 +1400,7 @@ La sintaxis básica para crear un procedimiento almacenado es la siguiente:
 CREATE OR REPLACE PROCEDURE nombre_procedimiento (parametros)
 AS
 BEGIN
--- Cuerpo del procedimiento (instrucciones SQL)
+    -- Cuerpo del procedimiento (instrucciones SQL)
 END;
 \end{lstlisting}
 
@@ -1414,13 +1414,13 @@ Supongamos que tenemos una tabla \enquote*{Empleados} con las siguientes columna
 
 \begin{lstlisting}
 CREATE OR REPLACE PROCEDURE insertar_empleado(
-p_ID INT,
-p_Nombre VARCHAR(100),
-p_Salario DECIMAL(10,2))
+    p_ID INT,
+    p_Nombre VARCHAR(100),
+    p_Salario DECIMAL(10,2))
 AS
 BEGIN
-INSERT INTO Empleados (ID, Nombre, Salario)
-VALUES (p_ID, p_Nombre, p_Salario);
+    INSERT INTO Empleados (ID, Nombre, Salario)
+    VALUES (p_ID, p_Nombre, p_Salario);
 END;
 \end{lstlisting}
 
@@ -1440,13 +1440,13 @@ Supongamos que queremos crear un procedimiento almacenado para actualizar el sal
 
 \begin{lstlisting}
 CREATE OR REPLACE PROCEDURE actualizar_salario_empleado(
-p_ID INT,
-p_NuevoSalario DECIMAL(10,2))
+    p_ID INT,
+    p_NuevoSalario DECIMAL(10,2))
 AS
 BEGIN
-UPDATE Empleados
-SET Salario = p_NuevoSalario
-WHERE ID = p_ID;
+    UPDATE Empleados
+    SET Salario = p_NuevoSalario
+    WHERE ID = p_ID;
 END;
 \end{lstlisting}
 
@@ -1469,8 +1469,8 @@ CREATE OR REPLACE PROCEDURE eliminar_empleado(
 p_ID INT)
 AS
 BEGIN
-DELETE FROM Empleados
-WHERE ID = p_ID;
+    DELETE FROM Empleados
+    WHERE ID = p_ID;
 END;
 \end{lstlisting}
 
@@ -1497,7 +1497,7 @@ CREATE OR REPLACE TRIGGER nombre_trigger
 {BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON nombre_tabla
 [FOR EACH ROW]
 BEGIN
--- Cuerpo del trigger (instrucciones PL/SQL)
+    -- Cuerpo del trigger (instrucciones PL/SQL)
 END;
 \end{lstlisting}
 
@@ -1510,7 +1510,7 @@ CREATE OR REPLACE TRIGGER tr_insert_cliente
 AFTER INSERT ON Cliente
 FOR EACH ROW
 BEGIN
-insert_cliente_control(:new.strNumeroIdentificacion, :new.strNombre || ' ' || :new.strApellido);
+    insert_cliente_control(:new.strNumeroIdentificacion, :new.strNombre || ' ' || :new.strApellido);
 END;
 \end{lstlisting}
 
@@ -1533,14 +1533,14 @@ Identificacion IN VARCHAR,
 NombreCompleto IN VARCHAR)
 AS
 BEGIN
-INSERT INTO ClienteInformacion VALUES (Identificacion, NombreCompleto, SYSDATE, SYSDATE);
+    INSERT INTO ClienteInformacion VALUES (Identificacion, NombreCompleto, SYSDATE, SYSDATE);
 END;
 
 CREATE OR REPLACE TRIGGER tr_insert_cliente
 AFTER INSERT ON Cliente
 FOR EACH ROW
 BEGIN
-insert_cliente_control(:new.strNumeroIdentificacion, :new.strNombre || ' ' || :new.strApellido);
+    insert_cliente_control(:new.strNumeroIdentificacion, :new.strNombre || ' ' || :new.strApellido);
 END;
 
 INSERT INTO Cliente (strTipoIdentificacion, strNumeroIdentificacion, strNombre, strApellido, strEmail)
