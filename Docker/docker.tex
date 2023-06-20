@@ -42,7 +42,30 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=2
+    tabsize=2,
+    morekeywords={FROM,
+                    AS ,
+                    WORKDIR,
+                    COPY,
+                    RUN,
+                    ENTRYPOINT,
+                    EXPOSE,
+                    CMD,
+                    docker,
+                    build,
+                    run,
+                    logs,
+                    inspect,
+                    network,
+                    volume,
+                    compose,
+                    build,
+                    context,
+                    dockerfile,
+                    ports,
+                    environment,
+                    volumes,
+                    image,},
 }
 
 % Configuración del paquete hyperref
@@ -55,673 +78,520 @@
 
 \lstset{style=mystyle}
 
-\title{Informe sobre Docker}
+\title{Informe sobre Docker y Kubernetes}
 \author{Kevin Cárdenas}
 
 \begin{document}
 
 \begin{titlepage}
     \begin{center}
-        {\Huge \textbf{Docker}}
+        {\Huge \textbf{Docker y Kubernetes}\\
+        Con ejemplos en .Net}
         \\[18cm]
 
         \large\emph{Autor:}\\
         Kevin Cárdenas.
         \\[1cm]
-        {\large Febrero de 2023}
+        {\large 2023}
     \end{center}
 \end{titlepage}
 
 \newpage
 \tableofcontents
 \newpage
+\section{Docker}
+Una de las ventajas principales de Docker es su portabilidad. Los contenedores de Docker se pueden ejecutar en cualquier entorno donde Docker esté instalado, lo que facilita la creación y despliegue de aplicaciones de manera consistente en diferentes sistemas.
 
-\section{Introducción}
-Docker es una plataforma de software que permite la creación, distribución y ejecución de aplicaciones en contenedores. Estos contenedores son una forma de virtualización ligera que permite la ejecución de aplicaciones en entornos aislados y portables. Esto significa que las aplicaciones pueden ser empaquetadas junto con todas sus dependencias en un contenedor, y ser ejecutadas en cualquier máquina que tenga Docker instalado.
-\\
-\\
-La tecnología de contenedores es similar a la virtualización de máquinas, pero con una diferencia clave: en lugar de virtualizar todo el hardware de una máquina física, los contenedores virtualizan solo el sistema operativo y sus recursos, compartiendo el kernel del sistema operativo anfitrión. Esto hace que los contenedores sean mucho más ligeros que las máquinas virtuales, lo que permite una mayor eficiencia en el uso de recursos y una mayor portabilidad.
-\\
-\\
-En términos más simples, los contenedores son como paquetes que contienen todo lo necesario para que una aplicación funcione correctamente, y Docker es una plataforma que permite crear, almacenar, transportar y ejecutar estos paquetes de manera eficiente y aislada del sistema anfitrión.
+\subsection*{¿Qué es Docker?}
+Docker nos permite integrar todos los componentes de nuestra aplicación en un contenedor con las dependencias y librerías necesarias para que funcione en cualquier entorno. Una de las ventajas para los desarrolladores es la posibilidad de ejecutar diferentes aplicaciones sin que interfieran unas con otras ya que cada aplicación está dentro de su propio contenedor. Los contenedores Docker no tienen su propio sistema operativo sino que utilizan el del host. Arrancar un contenedor sólo lleva unos segundos.
 
-\subsection{¿Qué son los contenedores y para qué sirven?}
-Los contenedores son una tecnología de virtualización a nivel de sistema operativo que permite empaquetar una aplicación con todas sus dependencias en un único contenedor, lo que lo hace muy portable y fácil de distribuir. Un contenedor es una unidad de software que incluye todo lo necesario para que una aplicación se ejecute, como librerías, archivos de configuración, dependencias, etc.
-\\
-En comparación con las máquinas virtuales, los contenedores son más livianos y consumen menos recursos, ya que no necesitan un sistema operativo completo para funcionar. Además, los contenedores pueden ser implementados en cualquier sistema operativo que soporte la tecnología de contenedores, lo que los hace muy versátiles.
-\\
-Para entender la idea de los contenedores, se puede hacer la analogía de un contenedor de envío de carga. Un contenedor de envío de carga es un contenedor estándar que puede ser utilizado para transportar cualquier tipo de carga, ya sea ropa, alimentos, maquinaria, etc. El contenedor asegura que la carga se mantenga segura durante el viaje y se puede mover de un lugar a otro con facilidad. De manera similar, un contenedor de software encapsula todo lo necesario para que una aplicación se ejecute y lo hace portátil y fácil de mover de un lugar a otro.
-\\
-En resumen, los contenedores son una tecnología de virtualización de sistema operativo que permite empaquetar una aplicación con todas sus dependencias en un único contenedor. Los contenedores son más livianos y consumen menos recursos que las máquinas virtuales y son muy portables y versátiles. La analogía de un contenedor de envío de carga puede ayudar a entender cómo los contenedores encapsulan una aplicación y la hacen fácil de mover de un lugar a otro.
-\subsection{Arquitectura de Docker}
-\definecolor{veis}{HTML}{006064}
-\tikzstyle{block} = [rectangle, draw, fill=veis!20, text width=8em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-La arquitectura de Docker se basa en el modelo cliente-servidor, donde el cliente es la herramienta de línea de comandos de Docker y el servidor es el daemon de Docker. El daemon de Docker es responsable de realizar la mayoría de las tareas de Docker, como crear, ejecutar y administrar contenedores. A continuación, se describen los principales componentes de la arquitectura de Docker:
+\subsubsection*{Dockerfile}
+Un Dockerfile es un documento de texto que contiene una secuencia de comandos o instrucciones que se ejecutan para construir una imagen Docker. La estructura del Dockerfile típicamente comienza con el uso de una imagen base, haciendo algunas configuraciones a la imagen, y estableciendo los comandos necesarios para empaquetar o ejecutar la aplicación. Para construir una imagen utilizando un Dockerfile, utilizamos el comando \lstinline{docker build} y especificamos el nombre y la etiqueta del Dockerfile.
+
+\subsubsection*{¿Qué es una Imagen?}
+Una imagen de Docker es una plantilla de solo lectura que contiene todo lo necesario para ejecutar una aplicación, incluyendo el código, las bibliotecas, las dependencias y las variables de entorno. Las imágenes se utilizan como base para crear contenedores.
+
+\subsubsection*{Contenedor}
+Un contenedor de Docker es una instancia en ejecución de una imagen. Es un entorno aislado y ligero que contiene todo lo necesario para que una aplicación se ejecute de manera independiente. Los contenedores son portátiles y se pueden ejecutar en cualquier entorno que tenga Docker instalado.
+
+\subsubsection*{Volumen}
+Un volumen en Docker es un mecanismo para persistir y compartir datos entre contenedores y el host. Los volúmenes son directorios montados en el sistema de archivos del host, pero son administrados por Docker y pueden ser utilizados por uno o varios contenedores.
+
+\subsubsection*{Comandos de Docker}
+
+Veamos algunos comandos comunes de Docker:
+
+\begin{itemize}
+  \item \lstinline{docker pull <image>}: Descarga una imagen desde un registro de Docker.
+  
+  \item \lstinline{docker build -t <image:tag> <path>}: Construye una imagen a partir de un Dockerfile.
+  
+  \item \lstinline{docker run -d --name <container> <image:tag>}: Crea y ejecuta un contenedor a partir de una imagen.
+  
+  \item \lstinline{docker stop <container>}: Detiene un contenedor en ejecución.
+  
+  \item \lstinline{docker start <container>}: Inicia un contenedor detenido previamente.
+  
+  \item \lstinline{docker restart <container>}: Reinicia un contenedor.
+  
+  \item \lstinline{docker rm <container>}: Elimina un contenedor.
+  
+  \item \lstinline{docker rmi <image:tag>}: Elimina una imagen.
+  
+  \item \lstinline{docker images}: Muestra las imágenes disponibles en el sistema.
+  
+  \item \lstinline{docker exec -it <container> <command>}: Ejecuta un comando en un contenedor en ejecución.
+\end{itemize}
+
 \begin{center}
-      \begin{tikzpicture}[node distance = 2cm, auto]
-            \node [block] (docker-cli) {Docker CLI};
-            \node [block, above of=docker-cli, node distance=2cm] (docker-daemon) {Docker Daemon};
-            \node [block, left of=docker-daemon, node distance=3cm] (containerd) {containerd};
-            \node [block, right of=docker-daemon, node distance=3cm] (registries) {Registros};
-            \node [block, above of=docker-daemon, node distance=2cm] (images) {Imágenes};
-            \node [block, below of=docker-daemon, node distance=2cm] (containers) {Contenedores};
-        
-            \path [line] (docker-cli) -- (docker-daemon);
-            \path [line] (docker-daemon) -- (containerd);
-            \path [line] (docker-daemon) -- (registries);
-            \path [line] (docker-daemon) -- (images);
-            \path [line] (docker-daemon) -- (containers);
-        \end{tikzpicture}
+\begin{tabular}{|c|p{13cm}|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\
+\hline
+docker ps & Muestra una lista de los contenedores en ejecución.\\
+\hline
+docker ps -a & Muestra todos los contenedores en el sistema, incluso los que no están en ejecucuón. \\
+\hline
+docker logs \enquote{container\_name} & Muestra los registros de un contenedor específico. \\
+\hline
+docker inspect \enquote{container\_name} & Muestra información detallada sobre un contenedor. \\
+\hline
+docker network & Permite administrar las redes de Docker. \\
+\hline
+docker volume & Permite administrar los volúmenes de Docker. \\
+\hline
+docker-compose up & Levanta todos los servicios definidos en un archivo docker-compose.yml. \\
+\hline
+docker-compose down & Detiene y elimina todos los servicios definidos en un archivo docker-compose.yml. \\
+\hline
+\end{tabular}
 \end{center}
+
+\subsubsection*{SQL SERVER}
+SQL Server es un sistema de gestión de bases de datos relacional desarrollado por Microsoft. Permite almacenar, consultar y administrar grandes volúmenes de datos de manera eficiente. Para conectar, ver y administrar una instancia de SQL Server, podemos utilizar Azure Data Studio, una herramienta multiplataforma y gratuita proporcionada por Microsoft. Para ejecutar una instancia de SQL Server en un contenedor Docker, podemos utilizar el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=@udemy123" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
+\end{lstlisting}
+
+Donde:
+
 \begin{itemize}
-\item \textbf{Docker daemon}: es el servidor de Docker que se ejecuta en el sistema operativo host. Es responsable de crear, ejecutar y administrar contenedores, y se comunica con el cliente de Docker a través de una API REST.
-\item \textbf{Docker client}: es la herramienta de línea de comandos que se utiliza para interactuar con el daemon de Docker. El cliente de Docker envía solicitudes al daemon a través de la API REST, y el daemon realiza las tareas solicitadas.
-\item \textbf{Docker registries}: son repositorios de imágenes de Docker que se utilizan para almacenar y distribuir imágenes de contenedores. El registro público de Docker es el Docker Hub, pero también se pueden configurar registros privados.
-\item \textbf{Docker images}: son plantillas de solo lectura que se utilizan para crear contenedores. Las imágenes se almacenan en los registros de Docker y contienen todos los componentes necesarios para ejecutar una aplicación, como bibliotecas, dependencias y código fuente.
-\item \textbf{Docker containers}: son instancias en ejecución de una imagen de Docker. Los contenedores están aislados del sistema operativo host y de otros contenedores, pero comparten el mismo kernel del sistema operativo. Esto permite que los contenedores sean ligeros y portátiles.
+\item \lstinline{-e "ACCEPT_EULA=Y"}: Establece la variable de entorno \lstinline{ACCEPT_EULA} en \lstinline{Y} para aceptar el acuerdo de licencia de SQL Server.
+\item \lstinline{-e "MSSQL_SA_PASSWORD=@udemy123"}: Establece la variable de entorno \lstinline{MSSQL_SA_PASSWORD} con la contraseña que se utilizará para el usuario SA (administrador de SQL Server).
+\item \lstinline{-p 1433:1433}: Mapea el puerto \texttt{1433} del contenedor al puerto \lstinline{1433} del host, lo que permite la comunicación con SQL Server a través de ese puerto.
+\item \lstinline{-d}: Ejecuta el contenedor en segundo plano (modo \lstinline{detached}).
+\item \lstinline{mcr.microsoft.com/mssql/server:2022-latest}: Especifica la imagen de SQL Server utilizada para crear el contenedor. En este caso, se utiliza la imagen \lstinline{mcr.microsoft.com/mssql/server:2022-latest}, que corresponde a la última versión disponible en el momento de escribir esto (2022).
 \end{itemize}
 
-En resumen, Docker es una herramienta cliente-servidor que utiliza una arquitectura modular basada en contenedores para proporcionar un entorno de ejecución aislado y portátil para aplicaciones. El daemon de Docker es el componente clave de la arquitectura, ya que es el encargado de realizar las tareas de Docker, mientras que el cliente de Docker se utiliza para enviar solicitudes al daemon a través de una API REST. Los registros, imágenes y contenedores son otros componentes importantes de la arquitectura de Docker que se utilizan para almacenar, distribuir y ejecutar aplicaciones en contenedores.
+Una vez que el contenedor esté en ejecución, podremos utilizar Azure Data Studio para conectarnos a la instancia de SQL Server, ya sea en el mismo equipo o en un equipo remoto. Azure Data Studio nos permite realizar tareas como crear y administrar bases de datos, ejecutar consultas, administrar usuarios y permisos, y muchas otras actividades relacionadas con SQL Server.
 
-\newpage
+\subsubsection*{MONGO DB}
 
-\section{Fundamentos}
-Docker es una herramienta de virtualización de aplicaciones que permite a los desarrolladores crear, desplegar y ejecutar aplicaciones de forma eficiente y consistente en diferentes entornos. Fue creado por la empresa Docker Inc. en 2013 y se ha convertido en una herramienta muy popular en el mundo de la informática, especialmente en la industria del software.
-\\
-\\
-Antes de la llegada de Docker, la virtualización solía realizarse a través de máquinas virtuales. Las máquinas virtuales se crean a partir de un sistema operativo completo y separado, que se ejecuta en un hipervisor en la máquina anfitriona. Aunque esto proporciona una gran flexibilidad, también puede ser costoso en términos de recursos y tiempo de configuración.
-\\
-\\
-Docker, por otro lado, utiliza la virtualización a nivel de sistema operativo, lo que significa que puede ejecutar múltiples aplicaciones en un solo sistema operativo anfitrión sin la sobrecarga asociada con las máquinas virtuales. Además, Docker utiliza la tecnología de contenedores para encapsular las aplicaciones y sus dependencias en unidades lógicas, lo que facilita la gestión de aplicaciones y garantiza que se ejecuten de manera consistente en diferentes entornos.
-\\
-\\
-En resumen, Docker ofrece una solución flexible y rentable para la virtualización de aplicaciones, lo que la convierte en una herramienta imprescindible para los desarrolladores y profesionales de la informática.
+MongoDB es una base de datos NoSQL de alto rendimiento y orientada a documentos. Para utilizar MongoDB, se puede utilizar la imagen de Docker proporcionada por MongoDB llamada mongo:latest. Una imagen de Docker es un paquete ligero y autónomo que contiene todo lo necesario para ejecutar una pieza de software, incluido el sistema operativo, las bibliotecas y las dependencias.
 
-\subsection{Instalación}
+La imagen mongo:latest se puede utilizar para ejecutar un contenedor de MongoDB de la siguiente manera:
 
-Para instalar Docker, sigue estos pasos:
+\begin{lstlisting}[language=bash]
+docker run -d -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=@udemy123 -p 27017:27017 mongo:latest
+\end{lstlisting}
+
+En este comando, estamos ejecutando un contenedor en segundo plano (-d) utilizando la imagen mongo:latest. También hemos especificado las variables de entorno \lstinline{-e MONGO_INITDB_ROOT_USERNAME y MONGO_INITDB_ROOT_PASSWORD} para establecer el nombre de usuario y la contraseña del usuario root de MongoDB. Además, hemos asignado el puerto del contenedor 27017 al puerto del host 27017 mediante la opción -p. Esto permite que los clientes se conecten al contenedor MongoDB desde el host utilizando el puerto 27017. Una vez que el contenedor se está ejecutando, se puede utilizar una herramienta de administración de MongoDB, como Studio 3T, para conectarse, ver y administrar la base de datos. Studio 3T es una herramienta popular y fácil de usar que proporciona una interfaz gráfica para interactuar con MongoDB y realizar tareas de administración de bases de datos de manera eficiente.
+
+\subsubsection*{POSTGRESQL}
+PostgreSQL es un sistema de gestión de bases de datos relacional de código abierto y potente. Para utilizar PostgreSQL, podemos aprovechar la imagen de Docker proporcionada por la comunidad de PostgreSQL llamada postgres:latest. Una imagen de Docker es un paquete autónomo que incluye todo lo necesario para ejecutar una aplicación, incluido el sistema operativo, las bibliotecas y las dependencias. La imagen postgres:latest nos permite ejecutar un contenedor de PostgreSQL de manera sencilla. Podemos utilizar el siguiente comando de Docker para ejecutar un contenedor de PostgreSQL:
+
+\begin{lstlisting}[language=bash]
+docker run -d -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=password -p 5432:5432 postgres:latest
+\end{lstlisting}
+
+En este comando, estamos ejecutando un contenedor en segundo plano (-d) utilizando la imagen postgres:latest. También hemos especificado las variables de entorno \lstinline{-e POSTGRES_USER y POSTGRES_PASSWORD} para establecer el nombre de usuario y la contraseña del usuario administrador de PostgreSQL. Además, hemos asignado el puerto del contenedor 5432 al puerto del host 5432 mediante la opción -p. Esto permite que las aplicaciones y los clientes se conecten al servidor PostgreSQL dentro del contenedor desde el host utilizando el puerto 5432. Una vez que el contenedor se esté ejecutando, podemos utilizar herramientas de administración de bases de datos como pgAdmin o DBeaver para conectarnos, ver y administrar la base de datos PostgreSQL. Estas herramientas proporcionan interfaces gráficas intuitivas que facilitan la administración de la base de datos y la ejecución de consultas. En resumen, utilizando la imagen de Docker postgres:latest, podemos ejecutar un contenedor de PostgreSQL y utilizar herramientas como pgAdmin o DBeaver para administrar y trabajar con la base de datos PostgreSQL de manera eficiente y conveniente.
+
+\subsubsection*{Conectarse desde una aplicación .Net a Un contenedor postgres}
+Despues de tener un contenedor de una base de dartos corriendo y mapeado en un puerto puedes conectarte a él desde una aplicación como si tuvieras instalado el servidor de base de datos en cuestion. Esta es una gran herramienta que nos otorga Docker. Veamos un ejemplo.
+
+Para conectarse a un contenedor de PostgreSQL desde una aplicación .NET, sigue los siguientes pasos:
 
 \begin{enumerate}
-    \item Descarga e instala Docker Desktop desde la página oficial de Docker:\\ 
-    \url{https://www.docker.com/products/docker-desktop}.
-    \item Abre una terminal y verifica que Docker esté instalado correctamente ejecutando el siguiente comando:\\
-          \lstinline{docker version}
-    \item Si el comando anterior devuelve información sobre la versión de Docker instalada, entonces la instalación se ha completado correctamente.
+    \item Abre un contenedor de PostgreSQL utilizando el siguiente comando:
+  
+\begin{lstlisting}[language=bash]
+docker run -d -p 5432:5432 -e POSTGRES_USER=<username> -e POSTGRES_PASSWORD=<password> postgres
+\end{lstlisting}
+  
+  \item Debemos asegurarnos de tener instalado el paquete NuGet Npgsql en el proyecto .NET. Este paquete proporciona una biblioteca para interactuar con PostgreSQL desde aplicaciones .NET.
+  
+  \item En el código de la aplicación, debemos importar el espacio de nombres Npgsql y crea una cadena de conexión para establecer la conexión con el contenedor de PostgreSQL. La cadena de conexión debe incluir la dirección IP o el nombre de host del contenedor (en este caso, localhost), el puerto mapeado (por ejemplo, 5432), el nombre de la base de datos y las credenciales de autenticación. Por último Establece la conexión con PostgreSQL utilizando la cadena de conexión.
 \end{enumerate}
 
-\subsection{Primeros pasos: hola mundo}
-En una terminal vamos a ejecutar el comando \lstinline{docker run hello-world}\\
-Obtendremos como salida:
-\begin{lstlisting}[numbers=none]
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-2db29710123e: Pull complete 
-Digest: sha256:6e8b6f026e0b9c419ea0fd02d3905dd0952ad1feea67543f525c73a0a790fefb
-Status: Downloaded newer image for hello-world:latest
+Veamos un ejemplo de código para establecer la conexión:
 
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
+\begin{lstlisting}[language={[sharp]c}]
+using Npgsql;
 
-To generate this message, Docker took the following steps:
-      1. The Docker client contacted the Docker daemon.
-      2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-      (amd64)
-      3. The Docker daemon created a new container from that image which runs the
-      executable that produces the output you are currently reading.
-      4. The Docker daemon streamed that output to the Docker client, which sent it
-      to your terminal.
+string connectionString = "Host=localhost;Port=5432;Database=<database_name>;Username=<username>;Password=<password>";
 
-To try something more ambitious, you can run an Ubuntu container with:
-      $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
-      https://hub.docker.com/
-
-For more examples and ideas, visit:
-      https://docs.docker.com/get-started/      
+using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+{
+    connection.Open();
+    
+    // Realizar operaciones en la base de datos
+    
+    connection.Close();
+}
 \end{lstlisting}
-Docker está buscando la imagen \enquote*{hello-world} localmente en tu máquina, pero no la encuentra, por lo que intenta descargarla de Docker Hub, que es el registro público de imágenes de Docker. La descarga se muestra en el segundo y tercer paso de la salida. Una vez que la imagen se descarga, Docker crea un nuevo contenedor a partir de esa imagen y lo ejecuta para mostrar el mensaje \enquote*{Hello from Docker!} en tu terminal. El cuarto paso de la salida muestra cómo se transmitió la salida del contenedor al cliente de Docker y, por lo tanto, a tu terminal. Finalmente, se proporcionan algunos enlaces para obtener más información y recursos relacionados con Docker.
 
-\subsection{Comandos}
-A continuación te presento algunos de los comandos básicos más útiles en Docker:
+\subsection{Dockerfile}
+Un Dockerfile es un archivo de texto que contiene instrucciones para construir una imagen de Docker de manera automatizada. El Dockerfile define qué software se incluirá en la imagen, cómo se configurará y cómo se ejecutará la aplicación dentro del contenedor.
 
-\begin{itemize}
-\item \lstinline{docker info}: es utilizado para obtener información del sistema donde se está ejecutando Docker, como por ejemplo la versión de Docker instalada, el número de contenedores que se están ejecutando, la cantidad de imágenes descargadas, entre otras características del sistema.\\
-Al ejecutar el comando \enquote*{docker info} en una terminal, se muestra una salida con información detallada acerca de la configuración del sistema Docker. Esta información puede ser útil para solucionar problemas de configuración, entender el rendimiento del sistema y planificar la capacidad de almacenamiento.\\
-Algunos de los elementos que se pueden encontrar en la salida del comando \enquote*{docker info} incluyen:
-\begin{enumerate}
-      \item Nombre y versión del sistema operativo.
-      \item Versión de Docker instalada.
-      \item Tipo de driver de almacenamiento utilizado por Docker.
-      \item Información sobre el número de contenedores en ejecución y el número total de imágenes descargadas.
-      \item Configuración de red, como la dirección IP predeterminada para el demonio Docker.
-      \item Información sobre el hardware y recursos disponibles en el sistema, como la cantidad de CPU y memoria RAM disponibles.
-\end{enumerate}
-En resumen, el comando \enquote*{docker info} es útil para obtener una visión general del sistema Docker y de sus recursos.
+\subsubsection*{Comandos de Dockerfile}
+Veamos un ejemplo del Dockerfile para una aplicación de .NET:
+\begin{lstlisting}
+# Build Stage
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /app
+COPY . ./
 
-\item \lstinline{docker run}: se utiliza para crear y ejecutar contenedores. La sintaxis básica del comando es la siguiente:
-    \begin{lstlisting}[numbers=none]
-      docker run [OPTIONS] IMAGE [COMMAND] [ARG...]\end{lstlisting}
-      Donde:
-      \begin{itemize}
-      \item \textbf{OPTIONS}: Son las opciones que se pueden pasar al comando, como por ejemplo el puerto que se desea abrir en el contenedor, el nombre que se le quiere dar al contenedor, etc.
-      \item \textbf{IMAGE}: Es la imagen que se utilizará para crear el contenedor. Si la imagen no existe localmente, Docker la buscará en el registro de imágenes predeterminado (Docker Hub).
+RUN dotnet restore
+RUN dotnet publish -c release -o /app
 
-      \item \textbf{COMMAND} (opcional): Es el comando que se desea ejecutar dentro del contenedor.
+# Runtime Stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app .
 
-      \item \textbf{ARG} (opcional): Son los argumentos que se pasan al comando que se va a ejecutar dentro del contenedor.
-      \end{itemize}
+EXPOSE 80
 
-El comando docker run puede tomar muchas opciones diferentes para configurar el contenedor y su entorno de ejecución. Por ejemplo, se puede especificar qué puertos abrir en el contenedor, cómo conectar volúmenes, establecer variables de entorno, entre otras opciones.
-
-\item \lstinline{docker ps} es utilizado para listar todos los contenedores Docker que están en ejecución en tu sistema. Al ejecutar este comando, se mostrará una tabla con información sobre cada contenedor, como su ID, la imagen que se está utilizando, el comando que se está ejecutando dentro del contenedor, el estado actual del contenedor, los puertos que están siendo expuestos y el nombre del contenedor.\\
-      Además, el comando "docker ps" acepta varias opciones para personalizar su salida. Algunas de las opciones más comunes son:
-      \begin{itemize}
-            \item \lstinline{docker ps -a}: muestra todos los contenedores, no solo los que están en ejecución.
-            \item \lstinline{docker ps -q}: muestra solo los IDs de los contenedores en lugar de la información detallada.
-            \item \lstinline{docker ps -f}: permite filtrar los contenedores según ciertas características, como el estado o la imagen utilizada.
-      \end{itemize}
-      Por ejemplo cuando hacemos \lstinline{docker ps -a} la salida es:
-\begin{lstlisting}[numbers=none]
-CONTAINER ID  IMAGE        COMMAND    CREATED              STATUS                      PORTS   NAMES
-dcfaffa82f0e  hello-world  "/hello"   4 seconds ago        Exited (0) 3 seconds ago            dazzling_saha
-cc1505d68ad9  hello-world  "/hello"   About a minute ago   Exited (0) About a minute ago       magical_khorana
+ENTRYPOINT ["dotnet", "app.dll"]
 \end{lstlisting}
-Aqui podemos hacer \lstinline{docker inspect dcfaffa82f0e} que despliega la descripción del contenedor.
-Nos concentraremos en la columna \enquote*{NAMES}.
-Que nos sirve para referirnos al contenedor en vez del \enquote*{CONTAINER ID} \\
-En el comando \lstinline{docker run}, podemos colocar un nombre especifico, y \textbf{único} al contenedor por ejemplo:: \lstinline{docker run --name hello-bby hello-world} haremos que el nombre, que podemos usar para llamar en diferentes momentos al contenedor sea \enquote*{hello-bby}
-También podríamos renombrar un contenedor haciendo:\\ \lstinline{docker rename hello-bby hola-bb}
 
-\item \lstinline{docker build}: es utilizado para construir una imagen de Docker a partir de un Dockerfile. Un Dockerfile es un archivo de texto que contiene todas las instrucciones necesarias para construir una imagen de Docker.
+Ahora para crear la imagen y constuir un contenedor ejecutamos:
 
-El siguiente es un ejemplo básico de un Dockerfile que se utilizaría para construir una imagen de Docker para una aplicación de Python:
-\begin{lstlisting}[numbers=none]
-FROM python:3.8
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+\begin{lstlisting}[language=bash]
+# Construir la imagen
+docker build -t myapp .
+# Ejecutar un contenedor a partir de la imagen
+docker run -d -p 3000:3000 myapp
+\end{lstlisting}
+
+El primer comando (\lstinline{docker build}) se utiliza para construir la imagen utilizando el Dockerfile presente en el directorio actual (\lstinline{.}), y se le asigna el nombre \lstinline{myapp}. El segundo comando (\lstinline{docker run}) crea y ejecuta un contenedor a partir de la imagen \lstinline{myapp}, y realiza el mapeo del puerto 3000 del contenedor al puerto 3000 del host (\lstinline{-p 3000:3000}). Esto permite acceder a la aplicación desde el navegador utilizando \lstinline{localhost:3000}. Estos te permitirá construir y ejecutar el contenedor Docker para tu aplicación Node.js de forma efectiva. Veamos algunos comandos de Docker file.
+\begin{center}
+\begin{tabular}{|c|p{16cm}|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\
+\hline
+FROM & Especifica la imagen base a partir de la cual se construirá la nueva imagen. Es Obligatorio, pues define la imagen base \\
+\hline
+RUN & Ejecuta un comando en el sistema de archivos de la imagen durante el proceso de construcción. \\
+\hline
+COPY & Copia archivos o directorios desde el sistema de archivos local al sistema de archivos de la imagen. \\
+\hline
+ADD & Copia archivos o directorios desde el sistema de archivos local a la imagen, y también admite la descarga y extracción de archivos remotos. \\
+\hline
+WORKDIR & Establece el directorio de trabajo para cualquier comando \textbf{RUN}, \textbf{CMD}, \textbf{ENTRYPOINT}, \textbf{COPY} o \textbf{ADD} que se ejecute en la imagen. \\
+\hline
+ENV & Establece variables de entorno en la imagen. \\
+\hline
+EXPOSE & Indica los puertos en los que el contenedor escuchará en tiempo de ejecución. \\
+\hline
+CMD & Proporciona comandos predeterminados para ejecutar cuando se inicie un contenedor a partir de la imagen. \\
+\hline
+ENTRYPOINT & Especifica un comando que se ejecutará siempre cuando se inicie un contenedor a partir de la imagen, incluso si se proporcionan argumentos adicionales. \\
+\hline
+LABEL & Agrega metadatos a la imagen en forma de pares clave-valor. \\
+\hline
+ENV & Establece variables de entorno en la imagen. \\
+\hline
+CMD & Proporciona comandos predeterminados para ejecutar cuando se inicie un contenedor a partir de la imagen. \\
+\hline
+VOLUME & Crea un punto de montaje para compartir datos entre el sistema host y el contenedor. \\
+\hline
+\end{tabular}
+\end{center}
+
+Veamos un ejemplo más completo:
+
+\subsubsection{Ejemplo en .NET}
+A continuación se presenta un ejemplo de una aplicación .NET que imprime un contador en la consola.
+
+\subsubsection*{Archivo program.cs}
+El archivo \texttt{program.cs} contiene el código de la aplicación.
+
+\begin{lstlisting}[language={[Sharp]C}]
+using System;
+using System.Threading.Tasks;
+
+namespace DotNetExample
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var counter = 0;
+            var max = args.Length != 0 ? Convert.ToInt32(args[0]) : -1;
+            
+            while (max == -1 || counter < max)
+            {
+                Console.WriteLine($"Counter: {++counter}");
+                await Task.Delay(TimeSpan.FromMilliseconds(1000));
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection*{Compilación y ejecución}
+Para compilar y ejecutar la aplicación, sigue estos pasos:
+
+\begin{lstlisting}[language=bash]
+dotnet new console -o DotNetExample
+cd DotNetExample
+dotnet run
+\end{lstlisting}
+
+El resultado debería ser la impresión del contador en la consola:
+
+\begin{lstlisting}[language=bash]
+Counter: 1
+Counter: 2
+Counter: 3
+Counter: 4
+...
+\end{lstlisting}
+
+\subsubsection*{Publicación de la aplicación}
+Antes de agregar la aplicación .NET a la imagen de Docker, es recomendable publicarla para ejecutar la versión publicada en el contenedor. Para publicar la aplicación, ejecuta el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+dotnet publish -c Release -o publish
+\end{lstlisting}
+
+Esto generará una carpeta \texttt{publish} con los archivos de la aplicación publicada.
+
+\subsubsection*{Creación del archivo Dockerfile}
+El archivo Dockerfile se utiliza para crear una imagen de contenedor que incluya la aplicación .NET. A continuación se muestra un ejemplo de Dockerfile:
+
+\begin{lstlisting}
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /app
+
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/runtime:6.0
+WORKDIR /app
+COPY --from=build-env /app/out .
+
+ENTRYPOINT ["dotnet", "DotNetExample.dll"]
+\end{lstlisting}
+
+Este Dockerfile utiliza una imagen de SDK de .NET para compilar y publicar la aplicación, y luego utiliza una imagen de tiempo de ejecución para ejecutar la aplicación.
+
+\subsubsection*{Construcción de la imagen Docker}
+Para construir la imagen Docker que contiene la aplicación, ejecuta el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+docker build -t dotnet-example .
+\end{lstlisting}
+
+Esto construirá la imagen y la etiquetará como \texttt{dotnet-example}.
+
+Se puede usar la aplicación Docker DesKtop para visualizar y administrar con facilidad las imagenes o contenedores que estemos usando.
+
+\subsubsection*{Ejecución del contenedor Docker}
+Una vez construida la imagen, puedes ejecutar un contenedor Docker con la aplicación utilizando el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+docker run dotnet-example
+\end{lstlisting}
+
+Esto ejecutará la aplicación dentro del contenedor y mostrará la salida en la consola.
+
+\subsection{Creación y Ejecución de una Aplicación con una Red}
+
+Ya vimos cómo ejecutar una aplicación conectrandose a un contenedor de una base de datos. Es posible crear y ejecutar la aplicación y la base de datos PostgreSQL en contenedores individuales, conectándolos mediante una red personalizada en Docker.
+
+Primero, se debe crear una red utilizando el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+docker network create mi-red
+\end{lstlisting}
+
+Este comando crea una red de Docker con el nombre \enquote*{mi-red}, que se utilizará para conectar los contenedores de la aplicación y la base de datos.
+
+A continuación, se debe ejecutar el contenedor de la base de datos PostgreSQL utilizando el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+docker run -d --name mi-postgres --network mi-red -p 5433:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=Curso postgres
+\end{lstlisting}
+
+En este comando, se ejecuta un contenedor a partir de la imagen de PostgreSQL, se le asigna el nombre \enquote*{mi-postgres} y se conecta a la red \enquote*{mi-red}. Se realiza un mapeo de puertos para que el puerto 5432 del contenedor se exponga en el puerto 5433 del host. Además, se configuran variables de entorno para el usuario, la contraseña y la base de datos de PostgreSQL.
+
+Una vez que el contenedor de la base de datos está en ejecución, se puede construir y ejecutar el contenedor de la aplicación .NET utilizando el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+docker build -t mi-aplicacion .
+docker run -d --name mi-app --network mi-red -p 7263:80 -e Pgsql="Host=mi-postgres;Port=5432;Database=Curso;User Id=postgres;Password=password;" mi-aplicacion
+\end{lstlisting}
+
+En estos comandos, se construye la imagen de la aplicación .NET utilizando el Dockerfile presente en el directorio actual y se le asigna el nombre \enquote*{mi-aplicacion}. Luego, se ejecuta un contenedor a partir de esta imagen, se le asigna el nombre \enquote*{mi-app} y se conecta a la red \enquote*{mi-red}. Se realiza un mapeo de puertos para que el puerto 80 del contenedor se exponga en el puerto 7263 del host. Además, se configura la variable de entorno \enquote*{Pgsql} con la cadena de conexión necesaria para conectarse al servicio de PostgreSQL.
+
+Con estos pasos, la aplicación .NET y la base de datos PostgreSQL se ejecutan en contenedores separados, pero están conectados en la misma red personalizada \enquote*{mi-red}, lo que permite la comunicación entre ellos.
+
+Si deseas detener y eliminar los contenedores creados, puedes utilizar los siguientes comandos:
+
+\begin{lstlisting}[language=bash]
+docker stop mi-postgres
+docker stop mi-app
+docker rm mi-postgres
+docker rm mi-app
+\end{lstlisting}
+
+Estos comandos detienen y eliminan los contenedores, liberando los recursos utilizados.
+
+La creación y ejecución de la aplicación y la base de datos en contenedores individuales con una red personalizada es un enfoque útil cuando se desea mayor control y flexibilidad en la configuración y comunicación entre los servicios. Sin embargo, para gestionar y orquestar aplicaciones más complejas y con múltiples servicios, se recomienda utilizar Docker Compose. A continuación, veremos cómo hacerlo.
+
+\subsection{Docker Compose}
+
+Docker ofrece una potente funcionalidad de redes que permite la comunicación entre contenedores y con el host. Cada contenedor puede tener su propia interfaz de red y dirección IP dentro de una red virtual. Esto facilita la comunicación entre contenedores y permite aislar los servicios.
+
+Una red en Docker es una colección de contenedores conectados a la misma red virtual. Los contenedores pueden comunicarse entre sí utilizando nombres de host o direcciones IP. Docker proporciona diferentes tipos de redes, como la red predeterminada, redes puente y redes superpuestas, para adaptarse a diferentes escenarios y requisitos de comunicación.
+
+Docker Compose es una herramienta que simplifica aún más el manejo de aplicaciones multi-contenedor en Docker. Permite definir y gestionar servicios relacionados en un archivo YAML, lo que facilita la creación y el despliegue de aplicaciones que dependen de múltiples servicios. Con Docker Compose, puedes especificar la configuración de cada servicio, incluyendo imágenes base, variables de entorno, puertos expuestos y redes en las que deben conectarse.
+
+A continuación, se presenta un ejemplo completo utilizando Docker Compose para orquestar una aplicación que consta de un servicio de base de datos PostgreSQL y una aplicación web en .NET:
+
+\begin{lstlisting}
+version: '3.8'
+
+services:
+#Servicio de base de datos PostgreSQL
+    mi-postgres:
+        image: postgres
+        ports:
+         - '5433:5432' # Mapeo del puerto del host al puerto del contenedor
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=Curso
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+
+#Servicio de la aplicacion .NET
+    mi-aplicacion:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '7263:80' # Mapeo del puerto del host al puerto del contenedor
+        depends_on:
+            - mi-postgres # Dependencia del servicio mi-postgres
+        environment:
+            - Pgsql=Host=mi-postgres;Port=5432;Database=Curso;User Id=postgres;Password=password;
+
+volumes:
+    postgres-data: # Volumen para almacenar datos persistentes de PostgreSQL
+\end{lstlisting}
+
+A continuación, se muestra el Dockerfile utilizado en el ejemplo para construir la imagen de la aplicación .NET:
+
+\begin{lstlisting}
+Build Stage
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /source
 COPY . .
-CMD ["python", "app.py"]\end{lstlisting}
-      Para construir una imagen de Docker a partir de este Dockerfile, se utilizaría el siguiente comando:
+
+RUN dotnet restore
+RUN dotnet publish -c release -o /app
+
+Runtime Stage
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app .
+
+EXPOSE 80
+
+ENTRYPOINT ["dotnet", "EvsD.dll"]
+\end{lstlisting}
+
+En el ejemplo, se definen dos servicios: \lstinline{mi-postgres} y \lstinline{mi-aplicacion}. El servicio \lstinline{mi-postgres} utiliza la imagen base de PostgreSQL y expone el puerto 5432 del contenedor al puerto 5433 del host. Se especifican las variables de entorno para configurar el usuario, la contraseña y la base de datos de PostgreSQL. Además, se utiliza un volumen para almacenar los datos persistentes de PostgreSQL.
+
+El servicio \lstinline{mi-aplicacion} construye la imagen de la aplicación .NET utilizando el Dockerfile proporcionado. Se expone el puerto 80 del contenedor al puerto 7263 del host y se especifica la dependencia del servicio \lstinline{mi-postgres}. También se define la variable de entorno \lstinline{Pgsql} con la cadena de conexión para conectarse al servicio de PostgreSQL.
+
+Con Docker Compose, puedes ejecutar el siguiente comando para construir y ejecutar la aplicación:
+
 \begin{lstlisting}[language=bash]
-docker build -t my-python-app .\end{lstlisting}
-      El argumento -t se utiliza para establecer una etiqueta o nombre para la imagen, y el punto al final del comando indica que se debe buscar el Dockerfile en el directorio actual.\\
-      Una vez que se ha construido la imagen, se puede ejecutar un contenedor utilizando el comando docker run y especificando el nombre de la imagen:
-\begin{lstlisting}[language=bash]
-docker run -p 5000:5000 my-python-app\end{lstlisting}
-            Este comando ejecutará un contenedor utilizando la imagen my-python-app, y mapeará el puerto interno 5000 del contenedor al puerto 5000 del host para que la aplicación sea accesible desde el navegador web en http://localhost:5000.
+docker-compose up -d
+\end{lstlisting}
 
-\item \lstinline{docker container prune}: para eliminar todos los cotenedores que no se están utilizando.
+Este comando construye las imágenes necesarias, crea y ejecuta los contenedores de acuerdo con la configuración definida en el archivo Docker Compose.
 
-
-\item \lstinline{docker stop}: Este comando se utiliza para detener un contenedor en ejecución. Por ejemplo, si tienes un contenedor con el ID \lstinline{mycontainerid}, puedes detenerlo usando el siguiente comando:
-\begin{lstlisting}[language=bash] 
-docker stop mycontainerid\end{lstlisting}
-Este comando detendrá el contenedor con el ID \lstinline{mycontainerid}.
-
-    \item \lstinline{docker rm}: Este comando se utiliza para eliminar un contenedor. Por ejemplo, si tienes un contenedor con el ID \lstinline{mycontainerid}, puedes eliminarlo usando el siguiente comando:
-\begin{lstlisting}[language=bash]
-docker rm mycontainerid\end{lstlisting}
-          Este comando eliminará el contenedor con el ID \lstinline{mycontainerid}.
-
-    \item \lstinline{docker rmi}: Este comando se utiliza para eliminar una imagen de Docker. Por ejemplo, si tienes una imagen con el nombre \lstinline{myimage}, puedes eliminarla usando el siguiente comando:
-\begin{lstlisting}[language=bash]
-docker rmi myimage\end{lstlisting}
-          Este comando eliminará la imagen con el nombre \lstinline{myimage}.
-\end{itemize}
-
-Estos son solo algunos de los comandos básicos más útiles en Docker. Hay muchos otros comandos disponibles que puedes utilizar según tus necesidades. Para obtener más información sobre los comandos de Docker, te recomiendo consultar la documentación oficial de Docker.
-
-\subsubsection{Docker run: Modo interactivo}
-En la terminal corremos \lstinline{docker run ubuntu}. Pero está apagado, entonces debemos correr \lstinline{docker run -it ubuntu}, el cual lo \enquote*{enciende}, con resultado:
-\begin{lstlisting}[numbers=none]
-$ docker run -it ubuntu
-root@66a6b450b2ae:/# 
-\end{lstlisting}
-Estamos corriendo un \enquote*{Ubuntu}
-en efecto:
-\begin{lstlisting}[numbers=none]
-root@66a6b450b2ae:/# cat /etc/lsb-release 
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=22.04
-DISTRIB_CODENAME=jammy
-DISTRIB_DESCRIPTION="Ubuntu 22.04.1 LTS"      
-\end{lstlisting}
-y ahí tenemos la información del \enquote{Ubuntu} que estamos corriendo.\\
-Podemos Abrir otra terminal y hacer \lstinline{docker ps}, con resultado:
-\begin{lstlisting}[numbers=none]
-$ docker ps
-CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
-66a6b450b2ae   ubuntu    "/bin/bash"   9 minutes ago   Up 9 minutes             optimistic_leavitt
-\end{lstlisting}
-Y por último con \lstinline{docker ps -a}, vemos que el otro contenedor tambñien existe pero está \enquote*{apagado}:
-\begin{lstlisting}[numbers=none]
-$ docker ps -a
-CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS                      PORTS     NAMES
-66a6b450b2ae   ubuntu    "/bin/bash"   11 minutes ago   Up 11 minutes                         optimistic_leavitt
-527a7bf18557   ubuntu    "/bin/bash"   15 minutes ago   Exited (0) 15 minutes ago             ubuntu_docker
-\end{lstlisting}
-para salir solo hacemos 
-\begin{lstlisting}[numbers=none]
-root@66a6b450b2ae:/# exit
-exit
-\end{lstlisting}
-Un contenedor se \enquote*{apaga} cuando su proceso principal se \enquote*{apaga}.\\
-y si quiero volver a \enquote*{iniciar} basta hacer \lstinline{docker start <ID o nombre del contenedor>}, y podemos entrar a la terminal de este contenedor con \lstinline{docker exec -it ubuntu_docker bash}
-\begin{itemize}
-      \item \lstinline{docker exec}: el comando principal que permite ejecutar un comando dentro de un contenedor Docker.
-      \item \lstinline{-it}: dos opciones combinadas en una sola, donde \enquote*{-i} significa \enquote*{modo interactivo} y \enquote*{-t} significa \enquote*{terminal}, que se usan para que podamos interactuar con la terminal del contenedor como si estuviéramos trabajando en una sesión de terminal local.
-      \item \lstinline{ubuntu_docker}: el nombre o ID del contenedor donde se ejecutará el comando. En este ejemplo, el nombre del contenedor es \enquote*{ubuntu\_docker}.
-      \item \lstinline{bash}: el comando que se ejecutará dentro del contenedor. En este caso, se está ejecutando el shell \enquote*{bash} dentro del contenedor.
-\end{itemize}
-
-\subsection{¿Cómo exponer un contenedor?}
-Usaremos un servidor que se llama \textbf{nginx}, con el comando \lstinline{docker run -d --name proxy nginx}, Este comando ejecuta una instancia de un contenedor de la imagen \texttt{nginx} en segundo plano (\texttt{-d}) con el nombre de contenedor \texttt{proxy} (\texttt{--name proxy}). La imagen \texttt{nginx} es una imagen de un servidor web que se utiliza comúnmente como proxy inverso en arquitecturas de aplicaciones web. Una vez que se ejecuta este comando, el contenedor estará en ejecución en segundo plano y listo para servir solicitudes a través del puerto 80.\\
-Resultado:
-\begin{lstlisting}[numbers=none]
-$ docker run -d --name proxy nginx
-Unable to find image 'nginx:latest' locally
-latest: Pulling from library/nginx
-bb263680fed1: Pull complete 
-258f176fd226: Pull complete 
-a0bc35e70773: Pull complete 
-077b9569ff86: Pull complete 
-3082a16f3b61: Pull complete 
-7e9b29976cce: Pull complete 
-Digest: sha256:6650513efd1d27c1f8a5351cbd33edf85cc7e0d9d0fcb4ffb23d8fa89b601ba8
-Status: Downloaded newer image for nginx:latest
-a6a61e461a20cfa4c459520369ab574b633dfde0d57e438ab7fdeab2f9702080           
-\end{lstlisting}
-El resultado indica que Docker no encontró la imagen de Nginx en el sistema local y por lo tanto, comenzó a descargar la última versión de Nginx desde el repositorio de Docker Hub utilizando la etiqueta \enquote*{latest}. A continuación, se muestra la salida de Docker que indica que se están descargando los diferentes componentes de la imagen (\enquote*{Pull complete}) y una vez que se descargan todos los componentes, se muestra el hash SHA256 de la imagen descargada y el estado de la descarga (\enquote*{Downloaded newer image for nginx:latest}). Finalmente, se muestra el ID del contenedor en ejecución.
-Si hacemos \lstinline{docker ps}, tendremos:
-\begin{lstlisting}[numbers=none]
-CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS     NAMES
-c63e2d259bed   nginx     "/docker-entrypoint..."  6 seconds ago   Up 6 seconds   80/tcp    proxy      
-\end{lstlisting}
-La salida está organizada en una tabla con las siguientes columnas:
-\begin{itemize}
-      \item CONTAINER ID: El identificador único del contenedor.
-      \item IMAGE: La imagen Docker que se usó para crear el contenedor.
-      \item COMMAND: El comando que se está ejecutando dentro del contenedor.
-      \item CREATED: La fecha y hora en la que se creó el contenedor.
-      \item STATUS: El estado actual del contenedor (en este caso, "Up 6 seconds", lo que indica que el contenedor está en ejecución y lleva 6 segundos corriendo).
-      \item PORTS: Los puertos del contenedor que están expuestos al host.
-      \item NAMES: El nombre del contenedor, que puede ser asignado por el usuario o generado automáticamente por Docker.
-      En este caso, la salida indica que hay un solo contenedor en ejecución, con un ID de c63e2d259bed, creado a partir de la imagen nginx, que se está ejecutando un comando definido en docker-entrypoint.sh y lleva 6 segundos corriendo. Además, el contenedor expone el puerto 80 y se le asignó el nombre proxy.
-\end{itemize}
-pero para ver el contenedor en el puerto \enquote*{local}, debemos hacer \lstinline{docker run --name proxy -p 8080:80 nginx}
-y la salida en la terminal es:
-\begin{lstlisting}[numbers=none]
-$ docker run --name proxy -p 8080:80 nginx
-/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
-10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-/docker-entrypoint.sh: Configuration complete; ready for start up
-\end{lstlisting}
-y lo podemos ver en el puerto \href{http://localhost:8080/}{localhost:8080}, y revisando con \lstinline{docker ps}, vemos:
-\begin{lstlisting}[numbers=none]
-$ docker ps
-CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                   NAMES
-09cf0f92a8d0   nginx     "/docker-entrypoint..."  5 minutes ago    Up 5 minutes    0.0.0.0:8080->80/tcp, :::8080->80/tcp   proxy      
-\end{lstlisting}
-En este caso, hay un contenedor que fue creado a partir de la imagen de \enquote*{nginx} y se le asignó el nombre \enquote*{proxy}. Además, el contenedor se encuentra en ejecución y está exponiendo el puerto 80 del contenedor en el puerto 8080 del host.\\
-El comando \lstinline{docker logs --tail 10 -f proxy} permite visualizar los últimos 10 registros del log del contenedor \enquote*{proxy} en tiempo real.
-\begin{itemize}
-\item La opción \enquote*{--tail 10} especifica que solo se deben mostrar los últimos 10 registros del log.
-\item La opción \enquote*{-f} permite seguir el log en tiempo real (como un \enquote*{tail -f} en Linux).
-\item \enquote*{proxy} es el nombre del contenedor cuyo log queremos visualizar.
-\end{itemize}
-De esta manera, al ejecutar este comando en la terminal, se mostrarán en tiempo real los últimos 10 registros del log del contenedor \enquote*{proxy}. Si se quiere visualizar más registros, se puede cambiar el valor de \enquote*{--tail} por un número mayor.
+La utilización de volúmenes en Docker es fundamental para garantizar la persistencia y disponibilidad de los datos de tus aplicaciones. 
 
 \newpage
-\section{Ejemplo práctico}
-A continuación, se presentan un ejemplo práctico de cómo utilizar Docker.
-\subsection{Crear una imagen de Docker a partir de un Dockerfile}
-Te muestro un ejemplo básico de cómo crear una imagen de Docker a partir de un Dockerfile:
-\begin{enumerate}
-      \item Crea un directorio para el proyecto y entra en él:
-\begin{lstlisting}
-mkdir mi-proyecto
-cd mi-proyecto\end{lstlisting}
-      \item Crea un archivo llamado \enquote*{Dockerfile} en el directorio:
-\begin{lstlisting}
-touch Dockerfile
-\end{lstlisting}
-      \item Abre el archivo Dockerfile en tu editor de texto favorito y agrega el siguiente contenido:
-\begin{lstlisting}[numbers=none]
-FROM nginx:latest
+\section{Kubernetes}
 
-COPY index.html /usr/share/nginx/html
-\end{lstlisting}
-Este Dockerfile utiliza la imagen base de Nginx y luego copia el archivo \enquote*{index.html} desde el directorio actual al directorio predeterminado de Nginx para archivos HTML.
-      \item Crea el archivo \enquote*{index.html} en el mismo directorio que el \enquote*{Dockerfile} y agrega el siguiente contenido:
-\begin{lstlisting}[numbers=none]
-<!DOCTYPE html>
-<html>
-<head>
-      <title>Mi sitio web</title>
-</head>
-<body>
-      <h1>Bienvenido a mi sitio web!</h1>
-</body>
-</html>      
-\end{lstlisting}
-Este es el archivo HTML que se copiará al directorio de Nginx.
-      \item Ejecuta el siguiente comando para construir la imagen de Docker:
-\begin{lstlisting}
-docker build -t mi-sitio-web .
-\end{lstlisting}
-Este comando construirá la imagen de Docker utilizando el archivo \enquote*{Dockerfile} y la etiquetará con el nombre \enquote*{mi-sitio-web}.
-      \item Una vez que la imagen se haya construido, puedes ejecutar el siguiente comando para crear un contenedor a partir de la imagen:
-\begin{lstlisting}
-docker run -d -p 80:80 mi-sitio-web
-\end{lstlisting}
-Este comando crea un contenedor a partir de la imagen mi-\enquote*{sitio-web} y lo ejecuta en segundo plano (\enquote*{-d}). También mapea el puerto 80 del contenedor al puerto 80 del host (\enquote*{-p 80:80}).
-      \item Abre tu navegador y visita \href{http://localhost}{localhost} para ver el sitio web en acción.
-\end{enumerate}
-Ahora tienes una imagen de Docker que puede ser utilizada para ejecutar tu sitio web en cualquier servidor de Docker.
+Kubernetes es una plataforma portátil, extensible y de código abierto para administrar cargas de trabajo y servicios en contenedores, que facilita tanto la configuración declarativa como la automatización. Tiene un ecosistema grande y de rápido crecimiento. Los servicios, el soporte y las herramientas de Kubernetes están ampliamente disponibles.
 
-\newpage
-\section{Manejo de datos}
-En Docker, puedes manejar datos de varias maneras.
+\subsection{Arquitectura de Clúster}
 
-\subsection{Bind Mount}
+En Kubernetes, la arquitectura de clúster se compone de varios elementos que trabajan juntos para administrar las aplicaciones y los servicios. A continuación, exploraremos los componentes clave de la arquitectura de clúster de Kubernetes:
 
-En Docker, un \enquote*{bind mount} (montaje de unión) es un mecanismo para montar un directorio o archivo desde el sistema de archivos del host dentro de un contenedor Docker. De esta manera, los datos dentro del contenedor pueden persistir incluso si el contenedor se elimina, lo que hace que los bind mounts sean una forma de persistir datos en Docker.
-\\
-Cuando se crea un contenedor Docker, se pueden especificar uno o varios bind mounts mediante el uso de la opción \enquote*{-v} (o \enquote*{--mount}).\\ Por ejemplo, la siguiente opción de línea de comando crea un contenedor y especifica un bind mount para un directorio en el sistema de archivos del host:
-\begin{lstlisting}[numbers=none]
-      docker run -v /ruta/al/directorio/host:/ruta/dentro/del/contenedor imagen-de-docker
-\end{lstlisting}
-
-Vamos a una terminal en un directorio de trabajo y creemos un directorio nuevo con:\\
- \lstinline{mkdir docker_data} y nos movemos allí \lstinline{cd docker_data}.\\
- crearemos un directorio desde el cual vamos a copiar lo que pase dentro del contenedor, para eso haremos:
- \begin{lstlisting}
-      mkdir mongodata\end{lstlisting}
-Guardamos la ubicació de este así:
- \begin{lstlisting}
-     # pwd
-/home/quind/Documentos/Clases/Docker/Ejemplos/docker_data \end{lstlisting}
-Usaremos una base de datos llamada \textbf{MongoDB}, para eso correremos un contenedor de Mongo, con:\\
-\lstinline{docker run -d --name db mongo}, pero en este caso haremos:
-\begin{lstlisting}
-docker run -d --name db -v /home/quind/Documentos/Clases/Docker/Ejemplos/docker_data/mongodata:/data/db mongo
-\end{lstlisting}
-Este comando ejecuta un nuevo contenedor a partir de la imagen \enquote*{mongo} y lo nombra \enquote*{db}. La opción \enquote*{-d} indica que el contenedor se ejecutará en segundo plano (en modo detached), es decir, no bloqueará la terminal. La opción \enquote*{-v} crea un volumen llamado \enquote*{mongodata} en el host de la máquina y lo asigna al directorio \enquote*{/data/db} dentro del contenedor. Esto permite persistir los datos de MongoDB más allá del ciclo de vida del contenedor, ya que los datos se almacenan en el volumen del host. De esta manera, cuando se destruye el contenedor, los datos se mantienen en el host.\\
-Ahora ejecutamos el bash en este contenedor con: \lstinline{docker exec -it db bash},\\
-y procedemos a ejecutar el binario con: \lstinline{mongosh}. y podemos mirar que bases de datos tenemos con \lstinline{show dbs}:
-\begin{lstlisting}[numbers=none]
-test> show dbs
-admin   40.00 KiB
-config  60.00 KiB
-local   40.00 KiB        
-\end{lstlisting}
-A partir de ahí creamos una nueva base de datos con: \lstinline{use new_data}, la salida es: \lstinline{switched to db new_data}.\\
-Insertamos un dato con: 
-\begin{lstlisting}[numbers=none] 
-db.users.insert({"nombre": "Kevin"})\end{lstlisting}
-que agrega un nuevo usuario a la colección de usuarios en la base de datos, lo podemos ver con: \lstinline{db.users.find()}, la salida es:
-\begin{lstlisting}[numbers=none]
-new_data> db.users.find()
-[ { _id: ObjectId("63f3a86d68b0191ec379a63f"), nombre: 'Kevin' } ]
-\end{lstlisting}
-Y podemos ver en el directorio \textbf{mongodata} que hay unos archivos que representan lo que paso en el contenedor, aunque borremos el contenedor.
-Vamos a borrar el contenedor, primero revisamos los prosesos que tiene \enquote*{vivos} y los \enquote*{matamos}, eso haciendo: \lstinline{docker top db}, lo que muestra algo así:
-\begin{lstlisting}[numbers=none]
-UID       PID          PPID         C           STIME          TTY            TIME            CMD
-999       12582        12561        0           11:01          ?              00:00:19        mongod --bind_ip_all\end{lstlisting}
- ahora hacemos: \lstinline{sudo kill 12582}, luego: \lstinline{docker rm db}\\
-Y podemos construit un nuevo contenedor para utilizar estos datos, a esto se le llama \textbf{bind mounts}. 
-hacemos el comando:
-\begin{lstlisting}
-docker run -d --name db -v /home/quind/Documentos/Clases/Docker/Ejemplos/docker_data/mongodata:/data/db mongo\end{lstlisting}
-y entramos, con: \lstinline{docker exec -it db bash}.\\
-Si nos conectamos, con: \lstinline{mongosh} y hacemos: \lstinline{show dbs}, vemos:
-\begin{lstlisting}[numbers=none]
-test> show dbs
-admin     40.00 KiB
-config    60.00 KiB
-local     72.00 KiB
-new_data  40.00 KiB\end{lstlisting} 
-Vemos que tenemos la base de datos que creamos en el contenedor que anteriormente habíamos borrado.
-Tambien podemos ver estos datos, por ejemplo:
-\begin{lstlisting}[numbers=none]
-test> use new_data
-switched to db new_data
-new_data> db.users.find()
-[ { _id: ObjectId("63f3a86d68b0191ec379a63f"), nombre: 'Kevin' } ]           \end{lstlisting}
-Hay que tener cuidado con lo directorios que estamos usando, pues el contenedor tiene acceso a este directorio.
-
-\subsection{Volumenes}
-En Docker, los volúmenes son una forma de persistir datos en un contenedor y compartirlos con otros contenedores. Los volúmenes son una abstracción de la capa de almacenamiento que se encuentra debajo del contenedor, y permiten separar los datos de la aplicación de la infraestructura del contenedor.\\
-
-Un volumen en Docker es un directorio o archivo en el sistema de archivos del host que se monta en el sistema de archivos del contenedor. Los volúmenes pueden ser creados y administrados a través de la línea de comando de Docker o usando un archivo Docker Compose.\\
-
-Los volúmenes se pueden utilizar para persistir datos de la aplicación, como bases de datos, archivos de configuración, y registros. También pueden ser compartidos entre varios contenedores, lo que permite la creación de una arquitectura de microservicios en la que los contenedores se comunican entre sí y comparten datos a través de volúmenes.
-
-Con el comando \lstinline{docker volume ls} Podemos ver los volumenes creados, la salida es algo como esto:
-\begin{lstlisting}[numbers=none]
-$ docker volume ls
-DRIVER    VOLUME NAME
-local     3a9e5ae8100955d1c839ef4c22d9033dae8600eb77f6514022fae9c4a573e6e2
-local     4a2d845bd6a1cdebba7a89702c060efbc9d82bc2bf78c800be087d55ca6768b4
-local     6dd23903c51c0ad8dbb5e787ca03a134003f74bd95d56e30025b7edc299d61ac
-local     67ad0169d8a733154e7e09d24950a73c58e9187b537e66c150ee6cff0606ced9
-local     4956f1024f70ad123f577c6b8a2e865678e571471cc3200d915af340014e8288
-local     dbfa437e2081f6ae9e1d5dc1f0bd8e5e19645aa659e9a9d7e0cf477a8acc5115
-local     ef4cf5d5e84a098d1a1ddc1e45245d82a7a38a67213b43961ca5597bcd76b00f
-local     ffef37cbdb5f1e7c550525205af6ddcdb918da977c11657ac4081da6ecba257d   
-\end{lstlisting}
-
-El comando "docker volume ls" se utiliza para listar los volúmenes que existen en Docker. En la salida que has proporcionado, los volúmenes se encuentran en la columna \enquote*{VOLUME NAME} y están representados por una serie de números y letras aleatorios que corresponden a su identificador único. En este caso, los volúmenes son de tipo \enquote*{local}, lo que significa que se encuentran almacenados localmente en la máquina donde se ejecuta Docker. También podemos crear un volumen con el comando: \lstinline{docker volume create dbdata}
-
-Ahora que tenemos un volumen hagamos el mismo ejemplo anterior:
-\begin{enumerate}
-      \item hacemos el comando:
-      \begin{lstlisting}[numbers=none]
-docker run -d --name db --mount src=dbdata,dst=/data/db mongo \end{lstlisting}
-La opción \enquote*{--mount} se utiliza para crear un volumen de montaje en el contenedor. La sintaxis para la opción es \lstinline{--mount src=<origen>,dst=<destino>}. En este caso, src=dbdata especifica que se está utilizando un volumen llamado \enquote*{dbdata} y \lstinline{dst=/data/db} especifica la ruta en la que se va a montar el volumen dentro del contenedor.           
-\end{enumerate}
-Podemos borrar el contenedor y crear uno con el mismo comando: 
-\begin{lstlisting}[numbers=none]
-docker run -d --name db --mount src=dbdata,dst=/data/db mongo \end{lstlisting}
-Y ahí podemos encontrar los datos que construimos en el contenedor que borramos anteriormente, es decir que los datos persisten aunque el contenedor sea borrado.
-\subsection{Tmpfs mount}
-tmpfs es un sistema de archivos temporal en memoria que se puede usar para almacenar datos de manera temporal y efímera en sistemas Linux.
-
-En Docker, los \enquote*{tmpfs mounts} se pueden usar para crear un sistema de archivos temporal en memoria para un contenedor. La ventaja de usar tmpfs mounts es que los datos se almacenan en la memoria del host, lo que proporciona una alta velocidad de lectura y escritura, y se eliminan cuando se detiene o se borra el contenedor.\\
-\\
-Un ejemplo de uso de tmpfs mounts en Docker podría ser para almacenar archivos temporales del sistema de una aplicación que requiere un alto rendimiento en la lectura y escritura de archivos temporales. La sintaxis para crear un tmpfs mount en Docker es similar a la de los bind mounts y volumes, utilizando la opción --mount con el driver tmpfs y especificando la ruta de montaje y opciones adicionales si es necesario.\\
-\\
-Un ejemplo de comando de Docker para crear un contenedor que use un tmpfs mount sería el siguiente:
-\begin{lstlisting}[numbers=none]
-docker run -d --name mycontainer --mount type=tmpfs,destination=/app/tmpfs,readonly=false,size=100m myimage\end{lstlisting}
-En este ejemplo, se está creando un contenedor con el nombre mycontainer, que utiliza un tmpfs mount con un tamaño máximo de 100 MB. El directorio /app/tmpfs se monta en el tmpfs mount, que se usa para almacenar archivos temporales.
-
-\subsection{Insertar y extraer datos de un contenedor}
-Para insertar y extraer datos en un contenedor de Docker, puedes utilizar el siguiente comando:\\
-\lstinline{docker cp}: te permite copiar archivos o directorios desde o hacia un contenedor Docker en ejecución.\\
-Te muestro cómo:
-\begin{enumerate}
-      \item creemos un directorio de trabajo con \lstinline{mkdir Insertar-extraer}, nos movemos allí, \lstinline{cd Insertar-extraer} y creamos un archivo en este directorio con \lstinline{touch pruebas.txt}
-      \item Ahora creamos un contenedor por ejemplo \lstinline{docker run -d --name copytest ubuntu tail -f /dev/null}\\
-      Este comando crea un contenedor a partir de la imagen ubuntu, le asigna el nombre copytest y lo ejecuta en segundo plano (-d). El comando \enquote*{tail -f /dev/null} se utiliza para mantener el contenedor en ejecución sin realizar ninguna otra acción. En lugar de usar este comando, a veces se utiliza el comando \enquote*{sleep infinity}, que tiene el mismo efecto. Este comando es útil cuando se necesita un contenedor en ejecución, pero no es necesario que haga nada activamente, por ejemplo, como un contenedor temporal que se utiliza para copiar datos dentro o fuera del contenedor.
-      \item Accedemos al contenedor anterior en modo interactivo y abrimos un shell de bash, con \lstinline{docker exec -it copytest bash}
-      \item creamos una carpeta en el contendor con \lstinline{mkdir testing} y nos salimos de este simplemente con el comando \lstinline{exit}
-      \item \textbf{Insertamos el archivo} \enquote*{prueba.txt} en el contenedor con el comando \lstinline{docker cp prueba.txt copytest:/testing/test.txt}, que copia el archivo \enquote*{prueba.txt} desde la máquina host al contenedor de Docker copytest, en la ruta \enquote*{/testing/test.txt}. 
-      \item \textbf{Extraemos el directorio} \enquote*{testing} del contenedor con el comando \lstinline{docker cp copytest:/testing localtesting}, que copia un directorio desde el contenedor \enquote*{copytest} al host local y lo guarda en el directorio local, llamandolo \enquote*{localtesting}. En este caso, se está copiando directorio en el directorio \enquote*{/testing} del contenedor \enquote*{copytest}.
-\end{enumerate}
-
-\newpage
-
-\section{Imagenes}
-En Docker, una imagen es una plantilla o modelo a partir del cual se crea un contenedor. Es un paquete de software ligero, portátil y autónomo que contiene todo lo necesario para ejecutar una aplicación, incluyendo el código, las bibliotecas, las dependencias y las configuraciones.\\
-\\
-Las imágenes se construyen a partir de un archivo de configuración llamado Dockerfile, que contiene instrucciones para crear una imagen a partir de un sistema de archivos base. A medida que se ejecutan estas instrucciones, Docker crea capas de imágenes que se acumulan para formar la imagen final. Las imágenes se almacenan en un registro de imágenes de Docker, que puede ser local o remoto. Los registros de imágenes remotos incluyen Docker Hub, el registro de imágenes predeterminado de Docker, y otros registros de imágenes públicos y privados.\\
-\\
-Al utilizar imágenes de Docker, los desarrolladores pueden garantizar que sus aplicaciones se ejecuten de manera consistente en diferentes entornos y sistemas, lo que facilita la implementación y la administración de aplicaciones.\\
-
-\subsection{Construcción de una imagen}
-La construcción de una imagen en Docker se lleva a cabo mediante el uso de un archivo de configuración llamado Dockerfile. Un Dockerfile es un archivo de texto plano que contiene una serie de instrucciones que Docker utiliza para crear una imagen de contenedor.\\
-La construcción de una imagen implica seguir los siguientes pasos:
-\begin{enumerate}
-      \item Crear un archivo Dockerfile: se debe definir el sistema operativo base y las dependencias necesarias para el contenedor.
-      \item Ejecutar el comando docker build: una vez que se tiene el Dockerfile, se debe usar el comando \enquote*{docker build} para construir la imagen del contenedor. Este comando leerá el Dockerfile y creará una imagen de contenedor a partir de las instrucciones que contiene.
-      \item Enviar la imagen a un registro de contenedores (opcional): si se desea utilizar la imagen en diferentes máquinas, se puede enviar la imagen a un registro de contenedores como Docker Hub para que esté disponible para su descarga.
-\end{enumerate}
-En el proceso de construcción, Docker crea una serie de capas para la imagen de contenedor. Cada instrucción en el Dockerfile crea una nueva capa en la imagen. Cada capa se puede reutilizar en imágenes de contenedor futuras, lo que permite la creación de imágenes más pequeñas y rápidas.\\
-Te muestro como construir una imagen.
-\begin{enumerate}
-      \item Empecemos creando un nuevo directorio y moviendonos allí. \lstinline{mkdir imagenes} y \lstinline{cd imagenes/}
-      \item Creemos un nuevo \enquote*{Dockerfile}, con \lstinline{touch Dockerfile} y lo abrimos \enquote*{vs code}, con \lstinline{code .}
-      \item Lo que escribiremos en el Dockerfile será:
-      \begin{lstlisting}[numbers=none]
-FROM ubuntu:latest
-
-RUN touch /usr/src/hola-mundo.txt \end{lstlisting}
-      \begin{itemize}
-            \item La primera línea es una instrucción \enquote*{FROM} que indica que se utilizará la imagen \enquote*{ubuntu:latest} como la imagen base para construir la nueva imagen. La imagen base es la imagen en la que se basa la nueva imagen y sobre la cual se construirá.
-            \item La segunda línea es una instrucción \enquote*{RUN} que ejecutará el comando \enquote*{touch /usr/src/hola-mundo.txt} dentro del contenedor. La instrucción RUN se utiliza para ejecutar comandos durante el proceso de construcción de la imagen. En este caso, el comando crea un archivo llamado \enquote*{hola-mundo.txt} en la ruta \enquote*{/usr/src} dentro del contenedor.
-      \end{itemize}
-      \item Ahora vamos a una terminal en este directorio y ejecutamos 
-      \begin{lstlisting}[numbers=none]
-docker build -t ubuntu:mi_version . \end{lstlisting} 
-      que construye una nueva imagen Docker con la etiqueta \enquote*{mi\_version} a partir del archivo Dockerfile en el directorio actual (\enquote*{.}).\\
-      Si hacemos \lstinline{docker image ls}, vemos la imagen que acabamos de construir:
-      \begin{lstlisting}[numbers=none]
-$docker image ls
-REPOSITORY     TAG          IMAGE ID       CREATED          SIZE
-ubuntu         mi_version   0f7a46bfc059   18 minutes ago   77.8MB
-mi-sitio-web   latest       59155fb8a06a   22 hours ago     142MB
-nginx          latest       3f8a00f137a0   12 days ago      142MB
-mongo          latest       a440572ac3c1   2 weeks ago      639MB
-ubuntu         20.04        e40cf56b4be3   2 weeks ago      72.8MB
-ubuntu         latest       58db3edaf2be   3 weeks ago      77.8MB
-hello-world    latest       feb5d9fea6a5   17 months ago    13.3kB \end{lstlisting}
-
-\end{enumerate}
-Podemos correr un nuevo contenedor a partir de la imagen anterior:
-\begin{enumerate}
-      \item Hagamos \lstinline{docker run -it ubuntu:mi_version}, necesitamos sber si el archivo \enquote*{hola-mundo.txt} existe en el contenedor, para eso sólo hacemos \lstinline{ll /usr/src}, que nos da como respuesta:
-      \begin{lstlisting}[numbers=none]
-drwxr-xr-x 1 root root 4096 Feb 21 13:11 ./
-drwxr-xr-x 1 root root 4096 Jan 26 02:03 ../
--rw-r--r-- 1 root root    0 Feb 21 13:11 hola-mundo.txt \end{lstlisting}
-            efectivamente existe.
-\end{enumerate}
-Podemos publicar esta imagen con \lstinline{docker login}, logueandote con las credenciales en \href{https://hub.docker.com/}{docher hub},\\
-luego hacemos \lstinline{docker tag ubuntu:mi_version kevincardenas/ubuntu:mi_version}, \enquote*{kevincardenas} es mi nombre de usuario, debes usar el tuyo.\\ 
-Podemos ver con \lstinline{docker image ls}:
-\begin{lstlisting}[numbers=none]
-$ docker image ls
-REPOSITORY             TAG          IMAGE ID       CREATED             SIZE
-kevincardenas/ubuntu   mi_version   0f7a46bfc059   About an hour ago   77.8MB
-ubuntu                 mi_version   0f7a46bfc059   About an hour ago   77.8MB
-mi-sitio-web           latest       59155fb8a06a   23 hours ago        142MB
-nginx                  latest       3f8a00f137a0   12 days ago         142MB
-mongo                  latest       a440572ac3c1   2 weeks ago         639MB
-ubuntu                 20.04        e40cf56b4be3   2 weeks ago         72.8MB
-ubuntu                 latest       58db3edaf2be   3 weeks ago         77.8MB
-hello-world            latest       feb5d9fea6a5   17 months ago       13.3kB      \end{lstlisting}
-que hay una \enquote*{nueva} imagen, en realidad es solo un nuevo tag para poder publicarlo.\\
-Al final simplemente \lstinline{docker push kevincardenas/ubuntu:mi_version} con resultado:
-\begin{lstlisting}[numbers=none]
-$ docker push kevincardenas/ubuntu:mi_version
-The push refers to repository [docker.io/kevincardenas/ubuntu]
-3b68e1ecf7cd: Pushed 
-c5ff2d88f679: Mounted from library/mongo 
-mi_version: digest: sha256:25916b7347413f131f8d983f8b041795417e92b7526bd58cc1f6af4ec34752ab size: 736\end{lstlisting}
-Ten cuidado con las imagenes que publicas, y ten en cuenta que después de cierto  tiempo de no uso de una imagen, esta puede ser borrada automaticamente.
-\subsection{Dive}
-Dive es una herramienta de línea de comandos que permite analizar y explorar las capas de una imagen de Docker. Con Dive, se puede ver una vista previa de los cambios que se realizan en una imagen a medida que se construye, se modifican o se actualizan. La herramienta proporciona una interfaz de usuario interactiva que permite explorar las capas de la imagen y ver cómo se relacionan.\\
-
-Es muy útil para depurar problemas en las imágenes, identificar archivos innecesarios o redundantes que se agregan a la imagen, y para optimizar el tamaño de la imagen en general. También es útil para detectar posibles vulnerabilidades y problemas de seguridad en la imagen.\\
-
-Para usar Dive, primero debe instalar la herramienta en su sistema. Luego, puede ejecutar el comando \enquote*{dive} seguido del nombre de la imagen que desea analizar. La herramienta mostrará una vista previa de la imagen y se pueden explorar las diferentes capas y sus cambios\\
-
-También ofrece una variedad de opciones y argumentos de línea de comandos para personalizar su análisis de la imagen, como excluir archivos o directorios específicos de la imagen. En general, Dive es una herramienta muy útil para cualquier persona que trabaje con imágenes de Docker y quiera comprender mejor cómo se construyen y cómo se relacionan sus diferentes capas.\\
-
-Te muestro Cómo instalar esta herramienta en Linux:
-\begin{enumerate}
-      \item Agrega el repositorio de dive e instálalo:
-      \begin{lstlisting}[numbers=none]
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E04F0923
-sudo add-apt-repository "deb http://ppa.launchpad.net/nazunalika/dive/ubuntu bionic main"
-sudo apt update
-sudo apt install dive \end{lstlisting}
-      \item Agrega el repositorio de dive a tu sistema:
-            \begin{lstlisting}[numbers=none]
-sudo add-apt-repository "deb http://ppa.launchpad.net/nvbn-rm/ppa/ubuntu bionic main"           \end{lstlisting}
-      \item Actualiza la lista de paquetes e instala dive:
-\begin{lstlisting}[numbers=none]
-sudo apt update
-sudo apt install dive\end{lstlisting}
-\end{enumerate}
-
-Si los pasos anteriores no funcionan sigue estos pasos:
-\begin{enumerate}
-      \item Visite la página de releases de Dive en GitHub: \href{https://github.com/wagoodman/dive/releases}{github.com/wagoodman/dive/releases}
-      \item Descargue el paquete correspondiente a su arquitectura y sistema operativo. Si está en Ubuntu, es posible que desee buscar la versión para Debian o para Linux en general.
-      \item Una vez descargado, abra una terminal y navegue hasta el directorio donde se encuentra el archivo descargado.
-      \item Ejecute el siguiente comando para instalar Dive:
-      \begin{lstlisting}[numbers=none]
-sudo dpkg -i dive_<version>_<arch>.deb           \end{lstlisting}
-            Si instalamos la versión \enquote*{\lstinline{dive\_0.10.0\_linux\_amd64.deb}} el comando sería
-            \begin{lstlisting}[numbers=none]
-sudo dpkg -i dive_0.10.0_linux_amd64.deb         \end{lstlisting}
-\end{enumerate}
-\subsubsection{docker history}
-\enquote*{docker history} es un comando de Docker que te permite ver el historial de una imagen de Docker. Con este comando, puedes ver los distintos cambios que se han realizado en una imagen a lo largo de su desarrollo.\\
-Al ejecutar \enquote*{docker history}, se muestra una lista de todas las capas que componen la imagen, con información adicional para cada capa, como su ID, su tamaño, el comando utilizado para crearla y el autor de la capa. La salida se presenta en orden cronológico inverso, lo que significa que las capas más recientes aparecen primero en la lista.\\
-El comando \enquote*{docker history} es útil para entender cómo se construyó una imagen y cómo se crearon las diferentes capas que la componen. También es una herramienta útil para identificar posibles problemas en una imagen, como la inclusión de paquetes o archivos innecesarios, que pueden hacer que la imagen sea más grande de lo necesario. Con esta información, puedes optimizar la imagen y reducir su tamaño para que sea más fácil de transferir y almacenar.\\
-Por ejemplo:
-\begin{lstlisting}[numbers=none]
-$ docker history ubuntu:mi_version
-IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
-0f7a46bfc059   2 hours ago   RUN /bin/sh -c touch /usr/src/hola-mundo.txt... 0B        buildkit.dockerfile.v0
-<missing>      3 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B        
-<missing>      3 weeks ago   /bin/sh -c #(nop) ADD file:18e71f049606f6339... 77.8MB    
-<missing>      3 weeks ago   /bin/sh -c #(nop)  LABEL org.opencontainers...  0B        
-<missing>      3 weeks ago   /bin/sh -c #(nop)  LABEL org.opencontainers...  0B        
-<missing>      3 weeks ago   /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH...  0B        
-<missing>      3 weeks ago   /bin/sh -c #(nop)  ARG RELEASE...               0B     \end{lstlisting}
-Se muestra el historial de la imagen \enquote*{ubuntu:mi\_version}. La primera columna muestra el ID de la capa, la segunda columna muestra cuándo se creó la capa y la tercera columna muestra el comando que se utilizó para crear esa capa. En este caso, la imagen tiene seis capas. La capa superior, creada hace 2 horas, muestra que se agregó un archivo \enquote*{hola-mundo.txt} en el directorio \enquote*{/usr/src} utilizando el comando \enquote*{touch} en el archivo Dockerfile. La capa inferior no tiene ID y representa la capa base de la imagen, que contiene el sistema de archivos inicial de la imagen \enquote*{ubuntu:mi\_version}.
-
-\subsubsection{Hagamos lo mismo con dive}
-El comando dive \lstinline{ubuntu:mi_version} utiliza la herramienta \enquote*{dive} para analizar la capas de la imagen \enquote*{ubuntu:mi\_version} y proporcionar una visualización interactiva y detallada de su contenido.\\
-Por ejemplo:
-\begin{lstlisting}[numbers=none]
-$ dive ubuntu:mi_version
-Image Source: docker://ubuntu:mi_version
-Fetching image... (this can take a while for large images)
-Analyzing image...
-Building cache...      \end{lstlisting}
-
-\begin{lstlisting}[numbers=none]
-Cmp   Size  Command                                                          
-78 MB  FROM 7c1cd5e64627ede    
-0 B  RUN /bin/sh -c touch /usr/src/hola-mundo.txt # buildkit  
-\end{lstlisting}
-Dive es una herramienta de línea de comandos de código abierto que se utiliza para explorar y analizar imágenes de contenedores Docker. Permite a los usuarios examinar y explorar cada capa de la imagen y proporciona una descripción detallada de los cambios que se producen en cada capa. También proporciona una descripción detallada de las capas que se han agregado o eliminado en una nueva versión de la imagen.
-
-Al ejecutar el comando \lstinline{dive ubuntu:mi_version}, Dive analiza la imagen \enquote*{ubuntu:mi\_version} y muestra una visualización interactiva de las capas de la imagen, lo que permite al usuario navegar por cada capa y ver los cambios que se han producido en ella. Esta herramienta puede ser útil para optimizar y reducir el tamaño de una imagen de contenedor, ya que permite identificar archivos o capas que pueden eliminarse o comprimirse para reducir el tamaño final de la imagen.
-
-
-\newpage
-\section{Bibliografía}
-\begin{thebibliography}{9}
-
-      \bibitem{docker-page}
-      Docker. \textit{Página oficial de Docker}. Recuperado en febrero de 2023, de \url{https://www.docker.com/}.
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+      % Nodos
+      \node[draw, circle] (node1) at (0,0) {Nodo 1};
+      \node[draw, circle] (node2) at (2,0) {Nodo 2};
+      \node[draw, circle] (node3) at (4,0) {Nodo 3};
+      \node[draw, circle] (node4) at (6,0) {Nodo 4};
       
-      \bibitem{platzi-course}
-      Platzi. \textit{Curso de Docker}. Recuperado en febrero de 2023, de \url{https://platzi.com/cursos/docker/}.
+      % Nodo maestro
+      \node[rectangle, fill=black!30!white, font=\large] (master) at (3,2.7) {Nodo Maestro};
+      \draw (-0.5,3) -- (-0.5,1) -- (6,1) -- (6,3) -- cycle;
+      \node[rectangle, fill=black!30!white, font=\large] (yml) at (-2,2.25) {Linea de comandos};
+      \node[rectangle, fill=black!30!white, font=\large] (yml) at (-2,1.75) {/Interfaz de usuario};
+      % Plano de control
+      \node[draw, rectangle] (api) at (3,2) {API Server};
+      \node[draw, rectangle] (controller) at (1,1.5) {Control Manager};
+      \node[draw, rectangle] (scheduler) at (5,1.5){Scheduler};
       
-      \end{thebibliography}
+      % Conexiones
+      \draw (node1) -> (0.5,1);
+      \draw (node2) -> (2,1);
+      \draw (node3) -> (4,1);
+      \draw (node4) -> (5.5,1);
+      \draw (-2,2) -> (api);
+      \draw (controller) -> (api);
+      \draw (scheduler) -> (api);
+    \end{tikzpicture}
+    \caption{Arquitectura de un clúster de Kubernetes}
+  \end{figure}
+
+\subsubsection*{Nodos}
+
+Un nodo en Kubernetes es una máquina física o virtual donde se ejecutan los contenedores. Cada nodo tiene un agente llamado \textit{kubelet} que se comunica con el nodo maestro y gestiona los contenedores en el nodo. Los nodos también pueden tener otros componentes, como el \textit{kube-proxy} para la configuración de redes.
+
+\subsubsection*{Comunicación entre Nodos}
+
+Los nodos en un clúster de Kubernetes se comunican entre sí a través de una red. Utilizan el protocolo \textit{kubelet API} para reportar su estado al nodo maestro y recibir instrucciones. La comunicación entre nodos es esencial para la coordinación y el equilibrio de carga en el clúster.
+
+\subsubsection{Plano de Control}
+
+El plano de control de Kubernetes es el conjunto de componentes que supervisan y gestionan el clúster en su conjunto. Estos componentes incluyen el \textit{nodo maestro} y otros servicios centrales como el \textit{API Server}, el \textit{Control Manager} y el \textit{Scheduler}.
+
+El \textit{API Server} proporciona una interfaz para que los usuarios y los componentes internos interactúen con el clúster. El \textit{Control Manager} es responsable de mantener el estado deseado del clúster y realizar tareas de administración, como la gestión de réplicas y el control de acceso. El \textit{Scheduler} se encarga de asignar los pods a los nodos disponibles según las políticas de programación definidas.
+
+\subsubsection{Controladores}
+
+Los controladores en Kubernetes son componentes que se ejecutan en el plano de control y se encargan de gestionar aspectos específicos del clúster. Por ejemplo, el controlador de replicación se encarga de mantener el número deseado de réplicas de un pod, mientras que el controlador de servicios gestiona la conectividad de red y la carga equilibrada hacia los pods.
+
+Estos controladores supervisan constantemente el estado del clúster y toman acciones para garantizar que las aplicaciones se ejecuten de acuerdo con las políticas definidas.
+
+\subsubsection{Arrendamientos}
+
+Los arrendamientos en Kubernetes son mecanismos utilizados para la coordinación entre los componentes del clúster. Permiten que los componentes reclamen y mantengan derechos temporales sobre un recurso, como un IP o un nombre de servicio. Los arrendamientos se utilizan para evitar conflictos y asegurar una operación coherente en el clúster.
+
+En la arquitectura de clúster de Kubernetes, la interacción entre los nodos, el plano de control, los controladores y los arrendamientos es fundamental para garantizar la correcta administración y operación de las aplicaciones en el clúster.
+
 \end{document}

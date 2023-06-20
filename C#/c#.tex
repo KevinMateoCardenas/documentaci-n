@@ -2353,7 +2353,7 @@ El objetivo principal de la arquitectura hexagonal es crear una aplicación que 
 \begin{enumerate}
     \item Capa de Dominio:
     \begin{itemize}
-        \item Entidades: Representan los objetos del dominio, encapsulando tanto los datos como la lógica de negocio relacionada.
+        \item Modelos: Representan los objetos del dominio, encapsulando tanto los datos como la lógica de negocio relacionada.
         \item Interfaces de Repositorio: Definen los contratos para la persistencia y recuperación de las entidades.
         \item Servicios de dominio: Implementan la lógica de negocio más compleja que no se puede asignar directamente a una entidad específica.
     \end{itemize}
@@ -2366,6 +2366,7 @@ El objetivo principal de la arquitectura hexagonal es crear una aplicación que 
     \end{itemize}
     \item Capa de Infraestructura:
     \begin{itemize}
+        \item Entidades: Representan Las entidades de las bases de datos
         \item Implementaciones de Repositorio: Proporcionan la implementación concreta de los contratos de las interfaces de repositorio, realizando operaciones de persistencia y recuperación de datos.
         \item Adaptadores: Se encargan de adaptar los componentes de la aplicación a las interfaces de la infraestructura externa, como bases de datos, sistemas de archivos, servicios web, etc.
     \end{itemize}
@@ -2410,13 +2411,13 @@ Aquí  tienes un ejemplo sencillo de flujo de datos en la arquitectura hexagonal
     \end{itemize}
     \item Capa de dominio:
     \begin{itemize}
-        \item Entidad: Usuario.
+        \item Modelo: Usuario.
         \item Repositorio: Repositorio de usuarios.
         \item Regla de negocio: Validar que el usuario tenga un nombre único.
     \end{itemize}
     \item Capa de infraestructura:
     \begin{itemize}
-        \item Puerto de salida: Base de datos.
+        \item Puerto de salida: Base de datos. Hay que relacionar por medio de Dtos los Modelos y las entidades.
         \item Adaptador: Adaptador de base de datos.
     \end{itemize}
 \end{enumerate}
@@ -2428,7 +2429,7 @@ El flujo de datos sería el siguiente:
     \item El controlador de la interfaz de usuario recibe los datos y los pasa al servicio de gestión de usuarios de la capa de aplicación.
     \item El servicio de gestión de usuarios llama al repositorio de usuarios de la capa de dominio para crear un nuevo usuario.
     \item Antes de crear el usuario, la capa de dominio verifica si el nombre del usuario ya existe en el repositorio de usuarios.
-    \item Si el nombre del usuario no está duplicado, se crea un objeto de entidad de usuario y se guarda en el repositorio de usuarios.
+    \item Si el nombre del usuario no esstá duplicado, se crea un objeto de entidad de usuario y se guarda en el repositorio de usuarios.
     \item El adaptador de base de datos toma el objeto de entidad de usuario y lo guarda en la base de datos.
 \end{enumerate}
 En este ejemplo, los datos fluyen desde la interfaz de usuario hasta la capa de aplicación, luego a la capa de dominio y finalmente se almacenan en la base de datos a través de los adaptadores correspondientes. La arquitectura hexagonal permite que la lógica de negocio se mantenga independiente de los detalles de implementación técnica, lo que facilita la prueba, la reutilización y la evolución del sistema.

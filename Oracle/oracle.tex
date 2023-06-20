@@ -1640,4 +1640,64 @@ En este ejemplo, el trigger \enquote*{tr\_eventos\_multiples} se activará tanto
 
 Los eventos múltiples en los triggers permiten tener un mayor control sobre las acciones realizadas en la base de datos, ya que cada evento puede tener su propia lógica de manejo dentro del trigger. Esto facilita la implementación de reglas de negocio y la automatización de tareas relacionadas con diferentes eventos en una tabla.
 
+\subsubsection*{Pseudo-Variables :NEW y :OLD en un Trigger}
+
+En los triggers de bases de datos, las pseudo-variables \texttt{:NEW} y \texttt{:OLD} se utilizan para acceder a los valores de las filas afectadas por un evento en una tabla. Estas pseudo-variables son especialmente útiles en los triggers \texttt{AFTER INSERT}, \texttt{AFTER UPDATE} y \texttt{AFTER DELETE}, ya que permiten acceder a los valores antiguos y nuevos de una fila.
+
+\begin{itemize}
+\item \texttt{:NEW}: Esta pseudo-variable representa los nuevos valores de la fila después de una operación de inserción o actualización. Por ejemplo, si se inserta una nueva fila en una tabla, \texttt{:NEW} contendrá los valores de esa nueva fila. Si se actualiza una fila existente, \texttt{:NEW} contendrá los nuevos valores después de la actualización.
+Ejemplo de uso en un trigger AFTER INSERT:
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_insert_example
+AFTER INSERT ON mi_tabla
+FOR EACH ROW
+BEGIN
+    -- Acceder a los nuevos valores de la fila insertada
+    -- Utilizar :NEW.columna para acceder a una columna especifica
+    -- ...
+END;
+\end{lstlisting}
+
+\item \texttt{:OLD}: Esta pseudo-variable representa los valores antiguos de la fila antes de una operación de actualización o eliminación. Por ejemplo, si se actualiza una fila existente, \texttt{:OLD} contendrá los valores originales antes de la actualización. Si se elimina una fila, \texttt{:OLD} contendrá los valores de la fila eliminada.
+
+Ejemplo de uso en un trigger AFTER UPDATE:
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER tr_update_example
+AFTER UPDATE ON mi_tabla
+FOR EACH ROW
+BEGIN
+    -- Acceder a los valores antiguos y nuevos de la fila actualizada
+    -- Utilizar :OLD.columna y :NEW.columna para acceder a columnas especificas
+    -- ...
+END;
+\end{lstlisting}
+
+\end{itemize}
+
+Estas pseudo-variables se pueden utilizar dentro del cuerpo de un trigger para realizar acciones basadas en los valores antiguos y nuevos de una fila. Algunos ejemplos comunes de uso incluyen:
+
+\begin{itemize}
+\item Comparar los valores antiguos y nuevos para aplicar ciertas reglas de negocio:
+\begin{lstlisting}
+IF :OLD.estado = 'Pendiente' AND :NEW.estado = 'Completado' THEN
+-- Realizar alguna accion si el estado ha cambiado de "Pendiente" a "Completado"
+-- ...
+END IF;
+\end{lstlisting}
+
+\item Auditar los cambios realizados en la tabla:
+\begin{lstlisting}
+INSERT INTO tabla_auditoria (fecha, accion, columna_antigua, columna_nueva)
+VALUES (SYSDATE, 'UPDATE', :OLD.columna1, :NEW.columna1);
+\end{lstlisting}
+
+\item Realizar actualizaciones adicionales en otras tablas basadas en los cambios en la fila actualizada:
+\begin{lstlisting}
+UPDATE otra_tabla
+SET columna = :NEW.columna
+WHERE id = :OLD.id;
+\end{lstlisting}
+\end{itemize}
+
+El uso de \texttt{:NEW} y \texttt{:OLD} en los triggers proporciona una manera conveniente de acceder a los datos de las filas afectadas y realizar lógica adicional basada en esos valores. Esto permite la implementación de reglas de negocio más avanzadas, auditoría de cambios y acciones personalizadas en la base de datos.
 \end{document}
