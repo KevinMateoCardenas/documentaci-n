@@ -95,7 +95,7 @@
 \begin{document}
 \begin{titlepage}
     \begin{center}
-        {\Huge \textbf{C\# en .Net}}
+        {\Huge \textbf{C\# en .NET}}
         \\[19cm]
         
         \large\emph{Autor:}\\
@@ -855,6 +855,678 @@ En este ejemplo, se ha accedido al elemento cuya clave es \enquote*{Maria} y se 
 
 Es importante tener en cuenta que al utilizar una Hashtable, las claves deben ser únicas. Si se intenta agregar un elemento con una clave que ya existe en la Hashtable, se producirá una excepción.
 
+\section{Fundamentos de .NET}
+.NET es una plataforma de desarrollo de software desarrollada por Microsoft que ofrece un entorno de ejecución y una biblioteca de clases amplias para la creación de aplicaciones de todo tipo, desde aplicaciones de escritorio hasta aplicaciones web y móviles. En este artículo, exploraremos los fundamentos de .NET y cómo puedes comenzar a desarrollar aplicaciones utilizando esta plataforma.
+
+\subsection*{Casos de uso de .NET}
+.NET es ampliamente utilizado en una variedad de escenarios de desarrollo de software debido a sus numerosos beneficios y capacidades. A continuación, se presentan algunos casos de uso comunes y ventajas clave de .NET:
+
+\subsubsection*{Desarrollo de aplicaciones de escritorio}
+.NET es una excelente opción para el desarrollo de aplicaciones de escritorio en Windows. Proporciona una amplia gama de herramientas y bibliotecas de clases para crear interfaces de usuario robustas y funcionales. Los desarrolladores pueden utilizar el framework de Windows Presentation Foundation (WPF) para construir aplicaciones de escritorio con interfaces gráficas modernas y atractivas.
+
+\subsubsection*{Desarrollo de aplicaciones web}
+.NET ofrece un sólido soporte para el desarrollo de aplicaciones web. Los desarrolladores pueden utilizar ASP.NET, un framework de desarrollo web de .NET, para construir aplicaciones web dinámicas y escalables. ASP.NET proporciona una gran cantidad de características y herramientas para la creación de sitios web, servicios web y aplicaciones web en general.
+
+\subsubsection*{Desarrollo de servicios en la nube}
+Con la versión multiplataforma .NET Core, los desarrolladores pueden crear servicios en la nube que se ejecutan en entornos Windows, macOS y Linux. Esto permite un despliegue más flexible y escalable de aplicaciones en la nube. .NET Core es especialmente adecuado para el desarrollo de microservicios y aplicaciones de contenedorización utilizando herramientas como Docker y Kubernetes.
+
+\subsubsection*{Interoperabilidad y compatibilidad}
+Una de las ventajas clave de .NET es su capacidad para interoperar con otros sistemas y lenguajes de programación. Los desarrolladores pueden utilizar bibliotecas existentes de otros lenguajes, como C y C++, a través de interoperabilidad con código nativo. Además, .NET también es compatible con servicios web estándares, como SOAP y REST, lo que facilita la integración con otros sistemas.
+
+\subsubsection*{Productividad y herramientas de desarrollo}
+.NET proporciona un conjunto completo de herramientas de desarrollo, incluido el IDE Visual Studio, que agilizan el proceso de desarrollo. Visual Studio ofrece características avanzadas de depuración, refactorización de código, pruebas automatizadas y mucho más. Además, la amplia comunidad de desarrolladores de .NET ofrece numerosos recursos, tutoriales y librerías de código abierto que pueden acelerar el desarrollo de aplicaciones.
+
+\subsection{Ventajas de .NET}
+
+.NET ofrece una serie de ventajas significativas para los desarrolladores y las organizaciones que eligen utilizarlo como plataforma de desarrollo. A continuación, se presentan algunas de las principales ventajas de .NET:
+
+\subsubsection*{Amplio conjunto de bibliotecas y herramientas}
+.NET proporciona un amplio conjunto de bibliotecas de clases y herramientas que facilitan el desarrollo de aplicaciones. El entorno de .NET incluye bibliotecas para tareas comunes, como manipulación de archivos, acceso a bases de datos, creación de interfaces de usuario y comunicación en red. Además, Microsoft ofrece herramientas de desarrollo potentes y fáciles de usar, como Visual Studio, que mejoran la productividad de los desarrolladores.
+
+\subsubsection*{Lenguajes de programación versátiles}
+Con .NET, los desarrolladores tienen acceso a una variedad de lenguajes de programación, incluyendo C\#, Visual Basic .NET y F\#. Esto permite a los desarrolladores elegir el lenguaje que mejor se adapte a sus necesidades y preferencias. Además, los lenguajes de programación de .NET están diseñados para ser interoperables, lo que facilita la integración de código escrito en diferentes lenguajes.
+
+\subsubsection*{Seguridad y robustez}
+.NET ofrece características de seguridad integradas y sólidas. El Common Language Runtime (CLR) de .NET incluye un mecanismo de seguridad basado en el concepto de "confianza" (trust). El CLR aplica medidas de seguridad, como el aislamiento de procesos y la verificación de tipos, para garantizar que las aplicaciones .NET se ejecuten de manera segura y confiable.
+
+\subsubsection*{Escalabilidad y rendimiento}
+.NET está diseñado para ofrecer un alto rendimiento y escalabilidad. El CLR de .NET utiliza técnicas avanzadas, como la compilación en tiempo de ejecución (Just-In-Time Compilation, JIT), la recolección de basura (garbage collection) y la optimización de código, para maximizar la eficiencia de las aplicaciones. Además, .NET ofrece soporte para aplicaciones distribuidas y servicios en la nube, lo que permite escalar y desplegar aplicaciones de manera flexible.
+
+\subsubsection*{Interoperabilidad y compatibilidad}
+.NET ofrece una gran interoperabilidad y compatibilidad con otras tecnologías y plataformas. Los servicios web de .NET se basan en estándares como SOAP y REST, lo que facilita la integración con sistemas externos. Además, .NET admite la interoperabilidad con código nativo y bibliotecas existentes de otros lenguajes, lo que permite a los desarrolladores utilizar y extender funcionalidades existentes.
+
+Estas son solo algunas de las ventajas de .NET. La plataforma .NET tiene una amplia adopción y una comunidad de desarrolladores activa, lo que proporciona un soporte adicional y un ecosistema sólido para el desarrollo de aplicaciones. Al considerar una plataforma de desarrollo, las ventajas de .NET hacen que sea una elección sólida para crear aplicaciones modernas y confiables.
+
+\subsection{Common Language Runtime (CLR)}
+
+El Common Language Runtime (CLR) es un componente fundamental del entorno de .NET. Es el entorno de ejecución en el que se ejecutan las aplicaciones desarrolladas en lenguajes compatibles con .NET, como C\#, Visual Basic .NET y F\#. El CLR ofrece una serie de características y funcionalidades que mejoran la eficiencia, la seguridad y la capacidad de administración de las aplicaciones. A continuación, se presentan algunas de las características clave del CLR:
+
+\subsubsection*{Compilación y ejecución gestionada}
+El CLR realiza una compilación gestionada, lo que significa que el código fuente se compila en un formato intermedio llamado Microsoft Intermediate Language (MSIL) o código IL. Este código IL es independiente de la arquitectura de hardware y se puede ejecutar en cualquier plataforma compatible con .NET. Durante la ejecución, el CLR utiliza la Just-In-Time Compilation (JIT) para compilar el código IL en código nativo específico de la máquina en tiempo de ejecución, lo que mejora el rendimiento de la aplicación.
+
+\subsubsection*{Administración de memoria y recolección de basura}
+El CLR se encarga de administrar la memoria utilizada por las aplicaciones .NET y realiza la recolección de basura de manera automática. Utiliza un sistema de administración de memoria basado en la recolección de basura (garbage collection) para liberar automáticamente la memoria no utilizada y evitar fugas de memoria. Esto libera a los desarrolladores de la responsabilidad de administrar la memoria manualmente y mejora la seguridad y la estabilidad de las aplicaciones.
+
+\subsubsection*{Verificación de tipos y seguridad}
+El CLR realiza una verificación de tipos exhaustiva para garantizar la seguridad y la integridad de las aplicaciones. Antes de ejecutar el código, el CLR verifica que los tipos utilizados sean válidos y que no se realicen operaciones que violen la seguridad de la plataforma. Esto ayuda a prevenir errores de tiempo de ejecución y protege las aplicaciones de posibles amenazas de seguridad, como el acceso no autorizado a recursos del sistema.
+
+\subsubsection*{Manejo de excepciones y depuración}
+El CLR proporciona un sólido sistema de manejo de excepciones que permite a los desarrolladores capturar y controlar los errores durante la ejecución de las aplicaciones. Los desarrolladores pueden utilizar bloques try-catch para manejar las excepciones y tomar acciones apropiadas en caso de errores. Además, el CLR ofrece herramientas de depuración avanzadas que facilitan la identificación y corrección de errores durante el desarrollo de aplicaciones.
+
+\subsubsection*{Interoperabilidad y compatibilidad}
+El CLR proporciona un alto nivel de interoperabilidad y compatibilidad con otras tecnologías y plataformas. Permite la interoperabilidad entre diferentes lenguajes de programación compatibles con .NET, lo que facilita la integración de código escrito en diferentes lenguajes. Además, el CLR es compatible con bibliotecas existentes de otros lenguajes y ofrece mecanismos para interactuar con código nativo y servicios web estándares.
+
+El Common Language Runtime (CLR) es una parte esencial de .NET que proporciona una capa de abstracción entre el código .NET y el sistema operativo subyacente. Ofrece una serie de características que mejoran la eficiencia, la seguridad y la administración de las aplicaciones, permitiendo a los desarrolladores centrarse en la lógica de negocio y reducir la complejidad del desarrollo.
+
+\subsection{Compilador Roslyn}
+
+El compilador Roslyn es el compilador oficial de Microsoft para los lenguajes de programación C\# y VB.NET en el entorno .NET. A diferencia de los compiladores tradicionales, Roslyn no solo genera código compilado, sino que también proporciona una representación completa y detallada del código fuente mediante un modelo de árbol sintáctico y semántico.
+
+\subsubsection*{Características clave de Roslyn}
+
+\begin{itemize}
+  \item \textbf{Análisis sintáctico:} Roslyn analiza el código fuente y construye un modelo de árbol sintáctico que representa la estructura y las relaciones entre los elementos del código.
+
+  \item \textbf{Análisis semántico:} El compilador realiza un análisis semántico exhaustivo, que incluye la resolución de nombres, la verificación de tipos y la validación de reglas semánticas. Esto permite detectar errores de programación y proporcionar información de contexto valiosa para los desarrolladores.
+
+  \item \textbf{API de compilación:} Roslyn ofrece una API de compilación completa que permite a los desarrolladores interactuar con el compilador y realizar tareas como generar código, analizar y modificar el árbol sintáctico, realizar refactorizaciones y más. Esta API brinda un alto grado de flexibilidad y extensibilidad en el desarrollo de herramientas y complementos para el entorno de desarrollo.
+
+  \item \textbf{Intellisense y análisis en tiempo real:} Al utilizar Roslyn, los IDEs y editores de código pueden aprovechar las capacidades de análisis en tiempo real para ofrecer características como Intellisense, resaltado de errores en tiempo real, refactorización automática y sugerencias de código. Esto mejora significativamente la experiencia de desarrollo al proporcionar retroalimentación instantánea y facilitar la escritura de código correcto.
+
+  \item \textbf{Compilación incremental:} Roslyn es capaz de realizar compilaciones incrementales, lo que significa que solo se compilan las partes del código que han cambiado desde la compilación anterior. Esto reduce el tiempo de compilación en proyectos grandes y facilita el desarrollo iterativo.
+\end{itemize}
+
+\subsection{Interfaz de Línea de Comandos (CLI)}
+ 
+La Interfaz de Línea de Comandos (CLI) es una forma de interactuar con un programa o sistema operativo mediante comandos de texto ingresados en una terminal o consola. En el contexto de .NET, la CLI es una parte fundamental de la plataforma y proporciona un entorno de ejecución común para los programas .NET.
+
+\subsubsection*{Características de la CLI}
+
+\begin{itemize}
+  \item \textbf{Interpretación de comandos:} La CLI interpreta los comandos ingresados por el usuario y los ejecuta según las instrucciones proporcionadas.
+
+  \item \textbf{Acceso a funcionalidades:} A través de la CLI, los usuarios pueden acceder a diversas funcionalidades del sistema operativo o de los programas, como la ejecución de programas, la gestión de archivos y directorios, la configuración del entorno, entre otros.
+
+  \item \textbf{Automatización de tareas:} La CLI permite la automatización de tareas mediante la creación de scripts o secuencias de comandos que pueden ejecutarse de manera secuencial o en respuesta a eventos específicos.
+
+  \item \textbf{Flexibilidad y portabilidad:} La CLI es independiente del sistema operativo y, por lo tanto, los comandos pueden ejecutarse de manera similar en diferentes plataformas. Esto brinda flexibilidad y portabilidad a los usuarios y desarrolladores.
+
+  \item \textbf{Amplia gama de herramientas:} Existen numerosas herramientas de línea de comandos disponibles en el entorno .NET, que van desde compiladores y depuradores hasta herramientas de administración y análisis de rendimiento.
+
+  \item \textbf{Integración con .NET:} La CLI está estrechamente integrada con la plataforma .NET, lo que permite ejecutar programas y utilizar bibliotecas desarrolladas en lenguajes compatibles con .NET, como C\# y VB.NET.
+\end{itemize}
+
+\subsection{Creación una API en .NET}
+
+La creación de una API (Application Programming Interface) en .NET permite exponer servicios y funcionalidades de una aplicación de forma accesible para otros sistemas o aplicaciones. .NET proporciona un conjunto de herramientas y bibliotecas que facilitan el desarrollo de APIs robustas y escalables. A continuación, se presentan los pasos básicos para crear una API en .NET:
+
+Para crear y ejecutar una API en .NET, puedes utilizar el comando `dotnet new` junto con la plantilla `webapi`. A continuación, se muestran los pasos necesarios:
+
+\begin{enumerate}
+  \item Abre una terminal o línea de comandos en el directorio donde deseas crear el proyecto de la API.
+
+  \item Ejecuta el siguiente comando para crear un nuevo proyecto de API en .NET:
+
+  \begin{lstlisting}[language=bash]
+  dotnet new webapi -n MiProyectoAPI
+\end{lstlisting}
+
+  Este comando creará un nuevo proyecto de API en el directorio actual con el nombre "MiProyectoAPI". Puedes reemplazar "MiProyectoAPI" con el nombre deseado para tu proyecto.
+
+  \item Navega al directorio del proyecto recién creado:
+
+  \begin{lstlisting}[language=bash]
+  cd MiProyectoAPI
+\end{lstlisting}
+
+  \item Finalmente, ejecuta el siguiente comando para compilar y ejecutar el proyecto de la API:
+
+  \begin{lstlisting}[language=bash]
+  dotnet run
+\end{lstlisting}
+
+  Esto compilará y ejecutará el proyecto de la API en el servidor web incorporado de .NET.
+
+\end{enumerate}
+
+Al utilizar \enquote*{dotnet new} con la opción \enquote*{webapi}, se crea un proyecto de API básico en .NET con una configuración inicial que incluye un controlador predeterminado, rutas de ejemplo y una configuración básica del servidor web.
+
+Al utilizar el comando \texttt{dotnet new webapi}, se crea un proyecto de API básico en .NET con una estructura y configuración inicial. A continuación se muestra la salida del comando \texttt{ls} para el proyecto creado:
+
+\begin{lstlisting}[language=bash]
+MiProyectoAPI/
+    Controllers/
+        WeatherForecastController.cs
+    Program.cs
+    Startup.cs
+    appsettings.Development.json
+    appsettings.json
+    MiProyectoAPI.csproj
+    WeatherForecast.cs
+\end{lstlisting}
+
+A continuación, se explica cada archivo generado por el comando \texttt{dotnet new webapi}:
+
+\begin{itemize}
+  \item \textbf{Controllers/}: Directorio que contiene los controladores de la API. En el proyecto básico, se incluye el archivo \texttt{WeatherForecastController.cs}, que es el controlador predeterminado y contiene las acciones para gestionar los pronósticos del clima.
+
+  \item \textbf{Program.cs}: Archivo que contiene el punto de entrada de la aplicación. Aquí se configura y se ejecuta el servidor web incorporado.
+
+  \item \textbf{Startup.cs}: Archivo que configura el pipeline de solicitud y respuesta de la aplicación. Aquí se pueden agregar middlewares y configurar servicios adicionales.
+
+  \item \textbf{appsettings.Development.json}: Archivo de configuración específico para el entorno de desarrollo. Aquí se pueden establecer configuraciones adicionales como la cadena de conexión a la base de datos, entre otras.
+
+  \item \textbf{appsettings.json}: Archivo de configuración general para la aplicación. Aquí se pueden establecer configuraciones comunes para todos los entornos.
+
+  \item \textbf{MiProyectoAPI.csproj}: Archivo de proyecto de .NET que define las dependencias y la configuración del proyecto.
+
+  \item \textbf{WeatherForecast.cs}: Clase que define la estructura de datos para los pronósticos del clima utilizados en el controlador.
+
+\end{itemize}
+
+Recuerda que el proyecto de la API generado con \texttt{dotnet new webapi} es solo una base inicial y puedes modificarlo según tus necesidades específicas. Puedes agregar más controladores, definir modelos de datos, implementar autenticación y autorización, configurar middleware adicional y establecer la conexión con una base de datos, entre otras cosas.
+
+La API creada con \texttt{dotnet new webapi} ofrece un punto de partida sólido para desarrollar una API en .NET y es altamente personalizable para adaptarse a tus requerimientos.
+
+\subsubsection*{Estructura del program.cs de la API en .NET 6}
+
+El programa de la API en .NET 6 es la entrada principal del proyecto y es responsable de configurar y ejecutar la aplicación web. En este programa, se utiliza el enfoque simplificado sin necesidad de una clase `Main` explícita.
+
+\begin{lstlisting}[language={[Sharp]C}]
+using MiProyectoAPI;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configuracion y servicios adicionales
+// ...
+
+var app = builder.Build();
+
+// Configuracion del pipeline de solicitud
+// ...
+
+app.Run();
+\end{lstlisting}
+
+En este programa, se crea un \enquote*{WebApplicationBuilder} utilizando el método \enquote*{WebApplication.CreateBuilder(args)}. A continuación, se pueden realizar configuraciones adicionales y agregar servicios necesarios para la aplicación.
+
+Una vez que se ha configurado la aplicación, se llama al método \enquote*{Build()} en el \enquote*{WebApplicationBuilder} para construir la aplicación. Luego, se configura el pipeline de solicitud para manejar las diferentes rutas y operaciones HTTP.
+
+Finalmente, se llama al método \enquote*{Run()} para iniciar la ejecución de la aplicación y comenzar a escuchar las solicitudes entrantes.
+
+Este enfoque simplificado proporcionado por .NET 6 y C\# 9 permite una estructura más concisa y legible del programa, simplificando la configuración y ejecución de la aplicación web.
+
+\subsubsection{Estructura de un controlador en .NET}
+
+Un controlador en .NET es una clase que maneja las solicitudes HTTP y define las acciones que se pueden realizar en una API. A continuación, se muestra un ejemplo de la estructura básica de un controlador en .NET:
+
+\begin{lstlisting}[language={[Sharp]C}]
+using Microsoft.AspNetCore.Mvc;
+
+namespace MiProyectoAPI.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class EjemploController : ControllerBase
+    {
+        // GET: api/Ejemplo
+        [HttpGet]
+        public IActionResult Get()
+        {
+            // Logica para obtener los datos y retornarlos como respuesta
+            return Ok("Respuesta del metodo GET");
+        }
+
+        // GET: api/Ejemplo/{id}
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            // Logica para obtener un recurso especifico basado en el ID y retornarlo como respuesta
+            return Ok($"Respuesta del metodo GET con ID: {id}");
+        }
+
+        // POST: api/Ejemplo
+        [HttpPost]
+        public IActionResult Post([FromBody] MiModelo modelo)
+        {
+            // Logica para procesar y guardar los datos recibidos en el cuerpo de la solicitud
+            // utilizando el modelo proporcionado
+            return CreatedAtAction(nameof(GetById), new { id = 1 }, modelo);
+        }
+
+        // PUT: api/Ejemplo/{id}
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] MiModelo modelo)
+        {
+            // Logica para actualizar un recurso existente basado en el ID y los datos proporcionados
+            return NoContent();
+        }
+
+        // DELETE: api/Ejemplo/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            // Logica para eliminar un recurso existente basado en el ID
+            return NoContent();
+        }
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, se muestra la estructura de un controlador llamado \lstinline{EjemploController}. El controlador hereda de la clase \lstinline{ControllerBase} y se utilizan los atributos \lstinline{[ApiController]} y \lstinline{[Route]} para configurar la API y definir las rutas de los endpoints.
+
+Cada acción del controlador está decorada con un atributo HTTP (\lstinline{[HttpGet]}, \lstinline{[HttpPost]}, \lstinline{[HttpPut]}, \lstinline{[HttpDelete]}) para indicar el tipo de solicitud HTTP que maneja. En cada acción, se puede agregar la lógica necesaria para realizar operaciones y se retorna una respuesta utilizando métodos como \lstinline{Ok()}, \lstinline{CreatedAtAction()} o \lstinline{NoContent()}.
+
+\subsubsection{Estándar de respuesta en un controlador}
+
+En un controlador de una API en .NET, es importante seguir un estándar de respuesta consistente para cada método HTTP. Aquí se muestra un ejemplo del estándar de respuesta común en los diferentes métodos HTTP:
+
+\begin{itemize}
+\item \textbf{GET}: El método GET se utiliza para obtener recursos y retornarlos como respuesta. El estándar de respuesta puede ser:
+
+\begin{itemize}
+\item Código de estado 200 (OK) junto con el recurso solicitado en el cuerpo de la respuesta.
+\item Código de estado 404 (Not Found) si el recurso no existe.
+\item Código de estado 500 (Internal Server Error) si ocurre un error en el servidor.
+\end{itemize}
+
+\item \textbf{POST}: El método POST se utiliza para crear nuevos recursos. El estándar de respuesta puede ser:
+
+\begin{itemize}
+\item Código de estado 201 (Created) junto con la ubicación del nuevo recurso creado en la cabecera de la respuesta.
+\item Código de estado 400 (Bad Request) si la solicitud no es válida o faltan datos requeridos.
+\item Código de estado 500 (Internal Server Error) si ocurre un error en el servidor.
+\end{itemize}
+
+\item \textbf{PUT}: El método PUT se utiliza para actualizar recursos existentes. El estándar de respuesta puede ser:
+
+\begin{itemize}
+\item Código de estado 204 (No Content) si la actualización se realizó correctamente y no hay contenido adicional para enviar en la respuesta.
+\item Código de estado 404 (Not Found) si el recurso no existe.
+\item Código de estado 500 (Internal Server Error) si ocurre un error en el servidor.
+\end{itemize}
+
+\item \textbf{DELETE}: El método DELETE se utiliza para eliminar recursos existentes. El estándar de respuesta puede ser:
+
+\begin{itemize}
+\item Código de estado 204 (No Content) si la eliminación se realizó correctamente y no hay contenido adicional para enviar en la respuesta.
+\item Código de estado 404 (Not Found) si el recurso no existe.
+\item Código de estado 500 (Internal Server Error) si ocurre un error en el servidor.
+\end{itemize}
+
+\end{itemize}
+
+A continuación, se muestra una lista completa de los códigos de estado HTTP más comunes:
+
+\begin{itemize}
+    \item \textbf{100 (Continue)}: El servidor ha recibido los encabezados de solicitud y el cliente debe continuar con la solicitud.
+    
+    \item \textbf{101 (Switching Protocols)}: El servidor acepta cambiar el protocolo solicitado en la solicitud.
+    
+    \item \textbf{200 (OK)}: La solicitud ha sido exitosa y se devuelve un resultado esperado.
+    
+    \item \textbf{201 (Created)}: La solicitud ha tenido éxito y se ha creado un nuevo recurso como resultado.
+    
+    \item \textbf{202 (Accepted)}: La solicitud ha sido aceptada para procesamiento, pero el resultado aún no está disponible.
+    
+    \item \textbf{204 (No Content)}: La solicitud ha sido exitosa y no hay contenido adicional para enviar en la respuesta.
+    
+    \item \textbf{300 (Multiple Choices)}: Indica que la solicitud tiene múltiples opciones y el cliente debe elegir una.
+    
+    \item \textbf{301 (Moved Permanently)}: El recurso solicitado se ha movido permanentemente a una nueva ubicación.
+    
+    \item \textbf{302 (Found)}: El recurso solicitado se ha encontrado temporalmente en una ubicación diferente.
+    
+    \item \textbf{304 (Not Modified)}: El recurso solicitado no ha sido modificado desde la última vez que se accedió a él.
+    
+    \item \textbf{400 (Bad Request)}: La solicitud no se pudo entender o es incorrecta debido a datos no válidos o malformados.
+    
+    \item \textbf{401 (Unauthorized)}: La solicitud requiere autenticación y el cliente no ha proporcionado las credenciales válidas.
+    
+    \item \textbf{403 (Forbidden)}: El cliente no tiene permiso para acceder al recurso solicitado.
+    
+    \item \textbf{404 (Not Found)}: El recurso solicitado no se ha encontrado en el servidor.
+    
+    \item \textbf{405 (Method Not Allowed)}: El método HTTP utilizado en la solicitud no está permitido para el recurso solicitado.
+    
+    \item \textbf{500 (Internal Server Error)}: Se ha producido un error interno en el servidor.
+    
+    \item \textbf{502 (Bad Gateway)}: El servidor actuando como un proxy o puerta de enlace ha recibido una respuesta no válida del servidor ascendente.
+    
+    \item \textbf{503 (Service Unavailable)}: El servidor no está disponible actualmente debido a una sobrecarga temporal o mantenimiento programado.
+    
+    \item \textbf{504 (Gateway Timeout)}: El servidor ascendente no ha recibido una respuesta oportuna del servidor descendente mientras actuaba como un proxy o puerta de enlace.
+    
+    \end{itemize}
+
+Además, es importante considerar el formato de respuesta en el cuerpo de la respuesta. A continuación se muestran un ejemplo práctico de formatos de respuesta:
+
+\begin{itemize}
+  \item \textbf{JSON}: El formato JSON (JavaScript Object Notation) es ampliamente utilizado y fácilmente analizable. Un ejemplo de respuesta en formato JSON podría ser:
+
+  \begin{lstlisting}[language={[Sharp]C}]
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
+\end{lstlisting}
+\end{itemize}
+
+Y este podría ser el controlador que de esta respuesta:
+
+\begin{lstlisting}
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ExampleController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        // Codigo de implementacion para el metodo GET. Aqui puedes obtener los datos solicitados y construir la respuesta
+
+        var data = new
+        {
+            id = 1,
+            name = "John Doe",
+            email = "john.doe@example.com"
+        };
+
+        if (data != null)
+        {
+            return Ok(data); // Devuelve una respuesta 200 (OK) con los datos en formato JSON
+        }
+        else
+        {
+            return NotFound(); // Devuelve una respuesta 404 (Not Found) si el recurso no existe
+        }
+    }
+
+    [HttpPost]
+    public IActionResult Post()
+    {
+        // Codigo de implementacion para el metodo POST. Aqui puedes crear un nuevo recurso y construir la respuesta
+        var newResource = new
+        {
+            id = 2,
+            name = "Jane Smith",
+            email = "jane.smith@example.com"
+        };
+        // Supongamos que se crea correctamente el nuevo recurso
+        if (newResource != null)
+        {
+            return CreatedAtAction(nameof(Get), new { id = newResource.id }, newResource);
+            // Devuelve una respuesta 201 (Created) con la ubicacion del nuevo recurso creado y los datos en formato JSON
+        }
+        else
+        {
+            return BadRequest(); // Devuelve una respuesta 400 (Bad Request) si la solicitud no es valida
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Put(int id)
+    {
+        // Codigo de implementacion para el metodo PUT. Aqui puedes actualizar el recurso existente y construir la respuesta
+        // Supongamos que se actualiza el recurso con el ID proporcionado
+        var updatedResource = new
+        {
+            id = id,
+            name = "Updated Name",
+            email = "updated.email@example.com"
+        };
+        if (updatedResource != null)
+        {
+            return NoContent(); // Devuelve una respuesta 204 (No Content) sin contenido adicional
+        }
+        else
+        {
+            return NotFound(); // Devuelve una respuesta 404 (Not Found) si el recurso no existe
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        // Codigo de implementacion para el metodo DELETE. Aqui puedes eliminar el recurso con el ID proporcionado y construir la respuesta
+        // Supongamos que se ha eliminado el recurso con el ID proporcionado
+        var success = true;
+        if (success)
+        {
+            return NoContent(); // Devuelve una respuesta 204 (No Content) sin contenido adicional
+        }
+        else
+        {
+            return NotFound(); // Devuelve una respuesta 404 (Not Found) si el recurso no existe
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Implementación de Json Web Token en una API de .NET}
+
+La implementación de JSON Web Tokens (JWT) en una aplicación permite la autenticación y autorización segura de usuarios. A continuación se muestra un ejemplo de cómo implementar JWT en una api:
+
+\begin{enumerate}
+  \item Configuración en el archivo appsettings.json:
+
+  En el archivo appsettings.json, agregue la siguiente configuración para JWT:
+
+  \begin{lstlisting}
+  "Jwt": {
+    "Issuer": "https://example.com/",
+    "Audience": "https://example.com/",
+    "Key": "YourSecretKeyHere",
+    "TokenDurationSeconds": 3600
+  }
+\end{lstlisting}
+
+  Asegúrese de reemplazar \enquote*{YourSecretKeyHere} con su clave secreta personalizada.
+
+  \item Configuración en el código de la aplicación:
+
+  En el código de la aplicación, configure los servicios necesarios y la autenticación JWT:
+
+  \begin{lstlisting}
+  var builder = WebApplication.CreateBuilder(args);
+
+  // ...
+
+  builder.Services.AddAuthentication(options =>
+  {
+      options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+      options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+  }).AddJwtBearer(o =>
+  {
+      o.TokenValidationParameters = new TokenValidationParameters
+      {
+          ValidIssuer = builder.Configuration["Jwt:Issuer"],
+          ValidAudience = builder.Configuration["Jwt:Audience"],
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+          ValidateIssuer = true,
+          ValidateAudience = true,
+          ValidateLifetime = true,
+          ValidateIssuerSigningKey = true
+      };
+  });
+
+  builder.Services.AddAuthorization();
+
+  // ...
+
+  app.UseAuthorization();
+  app.UseHttpsRedirection();
+  app.MapControllers().RequireAuthorization();
+\end{lstlisting}
+
+  Asegúrese de ajustar el código según la estructura de su aplicación.
+
+  \item Cree una clase para el ingreso de usuarios:
+  \begin{lstlisting}
+namespace APIJWT.user{
+    public class User
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+}
+\end{lstlisting}
+  \item Generación y verificación de tokens:
+  
+  Despues de mapear los controladores coloque el siguiente controlador, y agregue \enquote*{.RequireAuthorization()} en el mapeo, así \enquote*{app.MapControllers().RequireAuthorization();}, 
+
+  \begin{lstlisting}
+  app.MapPost("/security/createToken", [AllowAnonymous] (UserEntidad user) =>
+  {
+      if (user.UserName == "user" && user.Password == "password")
+      {
+          var issuer = builder.Configuration["Jwt:Issuer"];
+          var audience = builder.Configuration["Jwt:Audience"];
+          var tokenDurationSeconds = builder.Configuration.GetValue<int>("Jwt:TokenDurationSeconds");
+          var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+          var tokenDescriptor = new SecurityTokenDescriptor
+          {
+              Subject = new ClaimsIdentity(new[]
+              {
+                  new Claim("Id", Guid.NewGuid().ToString()),
+                  new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                  new Claim(JwtRegisteredClaimNames.Email, user.UserName),
+                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+              }),
+              Expires = DateTime.UtcNow.AddSeconds(tokenDurationSeconds),
+              Issuer = issuer,
+              Audience = audience,
+              SigningCredentials = new SigningCredentials(
+                  new SymmetricSecurityKey(key),
+                  SecurityAlgorithms.HmacSha512Signature
+              )
+          };
+          var tokenHandler = new JwtSecurityTokenHandler();
+          var token = tokenHandler.CreateToken(tokenDescriptor);
+          var jwtToken = tokenHandler.WriteToken(token);
+          var stringToken = tokenHandler.WriteToken(token);
+          return Results.Ok(stringToken);
+      }
+      return Results.Unauthorized();
+  });
+\end{lstlisting}
+
+  El archivo program.cs quedaría así:
+  \begin{lstlisting}
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using APIJWT.user;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+});
+
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+app.UseAuthorization();
+app.UseHttpsRedirection();
+app.MapControllers().RequireAuthorization();
+app.MapGet("/security/getMessage", () => "Hello World!").RequireAuthorization();
+app.MapPost("/security/createToken",
+[AllowAnonymous] (User user) =>
+{
+    if (user.UserName == "user" && user.Password == "password")
+    {
+        var issuer = builder.Configuration["Jwt:Issuer"];
+        var audience = builder.Configuration["Jwt:Audience"];
+        var tokenDurationSeconds = builder.Configuration.GetValue<int>("Jwt:TokenDurationSeconds");
+        var key = Encoding.ASCII.GetBytes
+        (builder.Configuration["Jwt:Key"]);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim("Id", Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti,
+                Guid.NewGuid().ToString())
+             }),
+            Expires = DateTime.UtcNow.AddSeconds(tokenDurationSeconds),
+            Issuer = issuer,
+            Audience = audience,
+            SigningCredentials = new SigningCredentials
+            (new SymmetricSecurityKey(key),
+            SecurityAlgorithms.HmacSha512Signature)
+        };
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var jwtToken = tokenHandler.WriteToken(token);
+        var stringToken = tokenHandler.WriteToken(token);
+        return Results.Ok(stringToken);
+    }
+    return Results.Unauthorized();
+});
+
+app.Run();
+\end{lstlisting}
+
+\end{enumerate}
+
+Con esta implementación, su aplicación estará configurada para utilizar JWT como mecanismo de autenticación y autorización.
+
+Para consumir la aplicación debemos seguir estos pasos:
+
+\begin{enumerate}
+    \item Solicitud post al controlador \lstinline{/security/createToken} con el siguiente body:
+    \begin{lstlisting}
+{
+    "userName" : "user",
+    "password" : "password"
+}
+\end{lstlisting}
+La respuesta a esta solicitud obtiene el token y status 200, por ejemplo:
+\begin{lstlisting}
+    "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjA4ZWIwODc0LWRjNjctNDFhMS1YiI6InVzZXIiLCJlbWFpMTUtOWYxOC.0yMDVlMjhkYTdmMzMiLCJuYmYiOjE2ODkyMDEzOczovL2pveWRpcGthbmppbGFsLmNvbS8pcGthbmppbGFsLmNvbS8ifQ.PZrQGkqDWmu_zPm7m9gbyMDJ4_1zEic6_UPl7cHVUBdX8pon8NstYCXctAibL6rIClcVok4tXLwpzYuGoJAtlA"
+\end{lstlisting}
+\item Solicitud al controlador con el Token, en authorization, seleccionamos \enquote*{Bearer Token}, y ponemos el token. Si el token está mal o no está, la aplicación respondrá con un status 401.
+\end{enumerate}
+
 \section{Programación orientada a objetos}
 
 La programación orientada a objetos (POO) es un paradigma de programación que se basa en la utilización de objetos para representar y manipular los datos y su comportamiento en un programa. En POO, los objetos son instancias de una clase, que es una plantilla que define las características y el comportamiento de los objetos.
@@ -1193,7 +1865,7 @@ También hay dos métodos públicos adicionales, \enquote*{Ladrar} y \enquote*{C
 
 En general, el uso de métodos \enquote*{Get} y \enquote*{Set} públicos para acceder y modificar atributos privados se conoce como encapsulamiento. Esto ayuda a asegurar que los datos de la clase sean manejados de manera controlada y consistente, lo que puede ser importante para evitar errores y garantizar la integridad de los datos.
 
-\subsection{Niveles de acceso}
+\subsection{Niveles de acceso (Scope)}
 
 En la programación orientada a objetos, los niveles de acceso determinan la visibilidad de los miembros de una clase (atributos, métodos, propiedades) desde el exterior de la misma.
 
