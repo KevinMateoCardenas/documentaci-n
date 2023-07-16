@@ -1033,22 +1033,34 @@ La API creada con \texttt{dotnet new webapi} ofrece un punto de partida sólido 
 El programa de la API en .NET 6 es la entrada principal del proyecto y es responsable de configurar y ejecutar la aplicación web. En este programa, se utiliza el enfoque simplificado sin necesidad de una clase `Main` explícita.
 
 \begin{lstlisting}[language={[Sharp]C}]
-using MiProyectoAPI;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuracion y servicios adicionales
-// ...
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configuracion del pipeline de solicitud
-// ...
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.Run();
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();    
 \end{lstlisting}
 
-En este programa, se crea un \enquote*{WebApplicationBuilder} utilizando el método \enquote*{WebApplication.CreateBuilder(args)}. A continuación, se pueden realizar configuraciones adicionales y agregar servicios necesarios para la aplicación.
+Creamos un \enquote*{WebApplicationBuilder} con el metodo \enquote*{WebApplication.CreateBuilder(args)}. A continuación, se pueden realizar configuraciones adicionales y agregar servicios necesarios para la aplicación.
 
 Una vez que se ha configurado la aplicación, se llama al método \enquote*{Build()} en el \enquote*{WebApplicationBuilder} para construir la aplicación. Luego, se configura el pipeline de solicitud para manejar las diferentes rutas y operaciones HTTP.
 
@@ -1213,7 +1225,7 @@ Además, es importante considerar el formato de respuesta en el cuerpo de la res
 \end{lstlisting}
 \end{itemize}
 
-Y este podría ser el controlador que de esta respuesta:
+Y este podría ser el controlador que otorgue esta respuesta:
 
 \begin{lstlisting}
 using Microsoft.AspNetCore.Mvc;
@@ -1526,6 +1538,183 @@ La respuesta a esta solicitud obtiene el token y status 200, por ejemplo:
 \end{lstlisting}
 \item Solicitud al controlador con el Token, en authorization, seleccionamos \enquote*{Bearer Token}, y ponemos el token. Si el token está mal o no está, la aplicación respondrá con un status 401.
 \end{enumerate}
+
+\subsubsection{Implementación de Log4net}
+
+La implementación de Log4net en tu aplicación implica los siguientes pasos:
+
+\begin{enumerate}
+  \item \textbf{Instalación de paquetes NuGet:}
+  
+  Asegúrate de tener instalado el paquete NuGet de Log4net en tu proyecto. Esto se puede hacer mediante la administración de paquetes NuGet en Visual Studio.
+  
+  \item \textbf{Archivo de configuración log4net.config:}
+  
+  Crea un archivo llamado \texttt{log4net.config} en la raíz de tu proyecto y configúralo según tus necesidades. Aquí tienes un ejemplo de cómo podría verse el contenido del archivo:
+  
+  \begin{lstlisting}
+<log4net>
+<root>
+    <level value="ALL" />
+    <!-- Debug, Info, Warn, Error, Fatal -->
+    <appender-ref ref="file" />
+</root>
+
+<appender name="file" type="log4net.Appender.RollingFileAppender">
+    <file value="log_Banco.txt" />
+    <appendToFile value="true" />
+    <rollingStyle value="Date" />
+    <datePattern value="yyyyMMdd" />
+    <maxSizeRollBackups value="5" />
+    <maximumFileSize value="10MB" />
+    <!--<staticLogFileName value="true" />-->
+    <layout type="log4net.Layout.PatternLayout">
+    <conversionPattern value="%date [%thread] %level %logger - %message%newline" />
+    </layout>
+</appender>
+</log4net>
+\end{lstlisting}
+En este archivo de configuración, se utiliza un RollingFileAppender que genera archivos de registro con un nombre basado en la fecha actual \lstinline{log_Banco_YYYYMMDD.txt}. Se establece el nivel de registro en \enquote*{ALL}, lo que significa que se registrarán todos los niveles de registro, desde \enquote*{DEBUG} hasta \enquote*{FATAL}. Se especifica un tamaño máximo de archivo de 10MB y se mantendrán hasta 5 archivos de respaldo. El diseño de registro utiliza un patrón de conversión personalizado que muestra la fecha, el hilo, el nivel de registro, el nombre del registrador y el mensaje de registro.
+
+\item \textbf{Inicialización de Log4net en el código:}
+  
+  En el archivo \texttt{Program.cs} de tu proyecto, agrega el siguiente código para inicializar Log4net con la configuración del archivo \texttt{log4net.config}:
+  
+\begin{lstlisting}
+using log4net;
+using log4net.Config;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configurar Log4Net
+var logConfig = new FileInfo("log4net.config");
+XmlConfigurator.ConfigureAndWatch(logConfig);
+
+// Agregar servicios al contenedor
+builder.Services.AddControllers();
+
+// Crear la aplicacion
+var app = builder.Build();
+
+// Configurar el pipeline de solicitudes HTTP
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+app.Run(async context =>
+{
+    await context.Response.WriteAsync("Hello, World!");
+});    
+\end{lstlisting}
+  
+  \item \textbf{Uso de Log4net en los controladores:}
+  
+  En tus controladores, puedes utilizar Log4net para registrar mensajes de log en diferentes niveles, como DEBUG, INFO, WARN, ERROR y FATAL. Aquí tienes un ejemplo de cómo se podría usar en un controlador:
+  
+\begin{lstlisting}
+using log4net;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+
+namespace BancoQuind.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ClienteController : ControllerBase
+    {
+        private static readonly ILog log = LogManager.GetLogger(typeof(ClienteController));
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Get()
+        {
+            try
+            {
+                log.Info("Obteniendo lista de clientes");
+
+                // Resto del codigo para obtener la lista de clientes
+
+                log.Debug("Lista de clientes obtenida exitosamente");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error al obtener lista de clientes: " + ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        // Resto de acciones del controlador
+    }
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsubsection*{Tipos de Logs en log4net}
+
+log4net admite varios niveles de logs que se utilizan para clasificar la importancia de los mensajes de registro. Estos niveles de logs ayudan a filtrar y gestionar los mensajes según su relevancia. Los tipos de logs disponibles en log4net son los siguientes:
+
+\begin{itemize}
+  \item \textbf{DEBUG}: Este nivel de log se utiliza para mensajes de depuración y proporciona información detallada para fines de depuración. Los mensajes de depuración son útiles durante el desarrollo para rastrear el flujo de ejecución, verificar los valores de variables y detectar posibles errores. Sin embargo, en entornos de producción, los mensajes de depuración suelen desactivarse para evitar la sobrecarga del sistema y preservar la privacidad de los datos sensibles.
+
+  \item \textbf{INFO}: Este nivel de log se utiliza para mensajes informativos que indican el estado o el progreso del sistema. Los mensajes informativos son útiles para rastrear eventos importantes y proporcionar información general sobre el funcionamiento del sistema. Estos mensajes no son críticos y no requieren acción inmediata.
+
+  \item \textbf{WARN}: Este nivel de log se utiliza para mensajes de advertencia que indican situaciones potencialmente problemáticas. Los mensajes de advertencia suelen indicar condiciones anormales o eventos inesperados que no impiden el funcionamiento normal del sistema, pero que podrían requerir atención o corrección en el futuro. Estos mensajes proporcionan información útil para identificar y solucionar problemas potenciales.
+
+  \item \textbf{ERROR}: Este nivel de log se utiliza para mensajes de error que indican problemas o excepciones que impiden el funcionamiento normal del sistema. Los mensajes de error son críticos y requieren atención inmediata, ya que representan fallas o condiciones no deseadas. Estos mensajes ayudan a identificar y solucionar problemas para mantener la estabilidad y el rendimiento del sistema.
+
+  \item \textbf{FATAL}: Este nivel de log se utiliza para mensajes de error graves o críticos que indican una falla catastrófica del sistema. Los mensajes fatales suelen representar errores irreparables o condiciones que ponen en peligro la integridad de los datos o la continuidad del sistema. Estos mensajes requieren una acción inmediata para evitar daños mayores o interrupciones significativas.
+
+\end{itemize}
+
+Es importante elegir el nivel de log adecuado para cada mensaje, asegurándose de equilibrar la cantidad de información registrada con la sobrecarga del sistema y la seguridad de los datos. Configurar correctamente los niveles de logs permite filtrar y gestionar los mensajes de forma eficiente, lo que facilita la identificación y solución de problemas, así como el seguimiento del rendimiento y el comportamiento del sistema.
+
+Para incluir los niveles de logs en el código utilizando log4net, se debe importar la biblioteca de log4net y configurar el archivo de configuración correspondiente. A continuación se muestra un ejemplo de cómo se puede utilizar log4net para registrar mensajes de diferentes niveles:
+
+\begin{lstlisting}
+using log4net;
+
+public class MyClass
+{
+    private static readonly ILog log = LogManager.GetLogger(typeof(MyClass));
+
+    public void DoSomething()
+    {
+        log.Debug("Este es un mensaje de depuracion.");
+        log.Info("Este es un mensaje informativo.");
+        log.Warn("Este es un mensaje de advertencia.");
+        log.Error("Este es un mensaje de error.");
+        log.Fatal("Este es un mensaje fatal.");
+    }
+}
+\end{lstlisting}
+
+En este ejemplo, se utiliza la interfaz ILog de log4net para obtener una instancia del log asociada a la clase \texttt{MyClass}. Luego, se utilizan los métodos \texttt{Debug}, \texttt{Info}, \texttt{Warn}, \texttt{Error} y \texttt{Fatal} para registrar mensajes de diferentes niveles.
+
+\subsubsection*{Registro en el Archivo de Texto}
+
+Cuando los mensajes de log se registran en el archivo de texto, siguiendo la configuración establecida en el archivo \texttt{log4net.config}, tendrán el siguiente formato:
+
+\begin{verbatim}
+2022-01-01 10:30:00 [DEBUG] MyClass - Este es un mensaje de depuracion.
+2022-01-01 10:30:01 [INFO] MyClass - Este es un mensaje informativo.
+2022-01-01 10:30:02 [WARN] MyClass - Este es un mensaje de advertencia.
+2022-01-01 10:30:03 [ERROR] MyClass - Este es un mensaje de error.
+2022-01-01 10:30:04 [FATAL] MyClass - Este es un mensaje fatal.
+\end{verbatim}
+
+En cada línea, se muestra la fecha y hora del registro, seguida del nivel de log entre corchetes, el nombre de la clase que registró el mensaje y finalmente el contenido del mensaje en sí.
+
+Es importante tener en cuenta que la apariencia exacta de los registros en el archivo de texto puede variar según la configuración específica establecida en el archivo \texttt{log4net.config} y las opciones de formato definidas en el patrón de conversión.
 
 \section{Programación orientada a objetos}
 
