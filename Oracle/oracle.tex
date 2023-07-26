@@ -1700,4 +1700,96 @@ WHERE id = :OLD.id;
 \end{itemize}
 
 El uso de \texttt{:NEW} y \texttt{:OLD} en los triggers proporciona una manera conveniente de acceder a los datos de las filas afectadas y realizar lógica adicional basada en esos valores. Esto permite la implementación de reglas de negocio más avanzadas, auditoría de cambios y acciones personalizadas en la base de datos.
+
+\subsection{Schedulers}
+
+En Oracle, los Schedulers son componentes importantes que permiten la programación y automatización de tareas en la base de datos. Estos Schedulers son responsables de ejecutar trabajos de manera programada y periódica, lo que facilita la administración y gestión de la base de datos.
+
+Oracle ofrece diferentes tipos de Schedulers que se pueden utilizar según los requerimientos y necesidades del sistema. Algunos de los Schedulers más utilizados son:
+
+\begin{itemize}
+  \item \textbf{DBMS\_JOB}: Este Scheduler permite programar trabajos en forma de bloques PL/SQL. Los trabajos se pueden ejecutar en un momento específico o de manera recurrente según una programación establecida.
+  
+  \item \textbf{DBMS\_SCHEDULER}: Este Scheduler ofrece una funcionalidad más avanzada y flexible en comparación con DBMS\_JOB. Permite programar trabajos utilizando diferentes tipos de acciones, como bloques PL/SQL, procedimientos almacenados, scripts externos, entre otros. Además, brinda opciones de configuración detalladas para controlar la programación, repetición y parámetros de los trabajos.
+\end{itemize}
+
+En nuestro ejemplo anterior, utilizamos el Scheduler DBMS\_SCHEDULER para programar un trabajo diario que se ejecute a las 8 AM. A continuación se muestra el código utilizado:
+
+\begin{lstlisting}
+BEGIN
+    DBMS_SCHEDULER.CREATE_JOB(
+        job_name => 'my_job',
+        job_type => 'PLSQL_BLOCK',
+        job_action => 'BEGIN my_procedure; END;',
+        start_date => SYSTIMESTAMP,
+        repeat_interval => 'FREQ=DAILY; BYHOUR=8; BYMINUTE=0;',
+        enabled => TRUE
+    );
+END;
+\end{lstlisting}
+
+En este ejemplo, creamos un trabajo llamado \lstinline{my\_job} que ejecuta un bloque PL/SQL utilizando el procedimiento \lstinline{my\_procedure}. El trabajo está programado para ejecutarse diariamente a las 8 AM.
+
+Los Schedulers brindan una forma poderosa de automatizar tareas y mejorar la eficiencia en la administración de la base de datos. Permiten realizar acciones programadas de manera automática, lo que reduce la intervención manual y asegura la ejecución oportuna de las tareas planificadas.
+
+\subsubsection*{Ejemplo de uso de Schedulers en Oracle}
+
+A continuación, se presenta el código necesario para crear las tablas \enquote*{Clientes} y \enquote*{Productos} en Oracle:
+
+\begin{lstlisting}
+CREATE TABLE "Clientes" (
+    "NumeroIdentificacion" NVARCHAR2(450) NOT NULL,
+    "TipoIdentificacion" NVARCHAR2(2000) NOT NULL,
+    "Nombre" NVARCHAR2(2000) NOT NULL,
+    "Apellido" NVARCHAR2(2000) NOT NULL,
+    "FechaCreacion" NVARCHAR2(2000) NOT NULL,
+    "FechaModificacion" NVARCHAR2(2000) NOT NULL,
+    "CorreoElectronico" NVARCHAR2(2000) NOT NULL,
+    "FechaNacimiento" NVARCHAR2(2000) NOT NULL,
+    CONSTRAINT "PK_Clientes" PRIMARY KEY ("NumeroIdentificacion")
+);
+CREATE TABLE "Productos" (
+    "NumeroDeCuenta" NVARCHAR2(450) NOT NULL,
+    "ClienteId" NVARCHAR2(2000) NOT NULL,
+    "Tipo" NVARCHAR2(2000) NOT NULL,
+    "estado" NVARCHAR2(2000) NOT NULL,
+    "GMF" NVARCHAR2(2000) NOT NULL,
+    "saldo" NUMBER(18,2) NOT NULL,
+    CONSTRAINT "PK_Productos" PRIMARY KEY ("NumeroDeCuenta")
+);
+\end{lstlisting}
+
+A continuación, se muestra el procedimiento almacenado que se encarga de revisar y eliminar los clientes que no tienen productos asociados:
+
+\begin{lstlisting}
+create or replace PROCEDURE ELIMINAR_CLIENTES_SIN_PRODUCTOS AS
+BEGIN
+    DELETE FROM "C##USER"."Clientes"
+    WHERE "NumeroIdentificacion" NOT IN (SELECT "ClienteId" FROM "C##USER"."Productos");
+
+    COMMIT;
+END;
+\end{lstlisting}
+
+Finalmente, utilizaremos el Scheduler \lstinline{DBMS_SCHEDULER} para programar el trabajo que ejecutará el procedimiento cada 30 minutos:
+
+\begin{lstlisting}
+BEGIN
+DBMS_SCHEDULER.CREATE_JOB (
+    job_name        => 'ELIMINAR_CLIENTES',
+    job_type        => 'PLSQL_BLOCK',
+    job_action      => 'BEGIN ELIMINAR_CLIENTES_SIN_PRODUCTOS; END;',
+    start_date      => SYSTIMESTAMP,
+    repeat_interval => 'FREQ=MINUTELY; INTERVAL=30',
+    end_date        => NULL,
+    enabled         => TRUE,
+    comments        => 'Eliminar clientes sin productos asociados cada 30 minutos'
+);
+
+COMMIT;
+END;
+\end{lstlisting}
+
+En este ejemplo, creamos un trabajo llamado \lstinline{ELIMINAR_CLIENTES} que ejecuta el procedimiento almacenado \lstinline{ELIMINAR_CLIENTES_SIN_PRODUCTOS}. El trabajo está programado para ejecutarse cada 30 minutos a partir del momento de su creación.
+
 \end{document}

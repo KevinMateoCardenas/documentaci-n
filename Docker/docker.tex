@@ -550,7 +550,7 @@ En Kubernetes, la arquitectura de clúster se compone de varios elementos que tr
       \node[rectangle, fill=black!30!white, font=\large] (master) at (3,2.7) {Nodo Maestro};
       \draw (-0.5,3) -- (-0.5,1) -- (6,1) -- (6,3) -- cycle;
       \node[rectangle, fill=black!30!white, font=\large] (yml) at (-2,2.25) {Linea de comandos};
-      \node[rectangle, fill=black!30!white, font=\large] (yml) at (-2,1.75) {/Interfaz de usuario};
+      \node[rectangle, fill=black!30!white, font=\large] (yml) at (-2,1.75) {Interfaz de usuario};
       % Plano de control
       \node[draw, rectangle] (api) at (3,2) {API Server};
       \node[draw, rectangle] (controller) at (1,1.5) {Control Manager};
@@ -565,7 +565,6 @@ En Kubernetes, la arquitectura de clúster se compone de varios elementos que tr
       \draw (controller) -> (api);
       \draw (scheduler) -> (api);
     \end{tikzpicture}
-    \caption{Arquitectura de un clúster de Kubernetes}
   \end{figure}
 
 \subsubsection*{Nodos}
