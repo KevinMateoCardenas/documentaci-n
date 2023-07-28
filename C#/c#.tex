@@ -94,7 +94,7 @@
 
 \begin{document}
 \begin{titlepage}
-    \begin{center}
+   \begin{center}
         {\Huge \textbf{C\# en .NET}}
         \\[19cm]
         
@@ -226,11 +226,11 @@ En cuanto a los tipos de variables en  C\#, hay varios tipos numéricos (enteros
 
 \subsection{Operadores}
 
-En C\#, los operadores se utilizan para realizar operaciones matemáticas, lógicas, de comparación y de asignación. A continuación, se describen algunos de los operadores más comunes en C\#:
+En C\#, los operadores se utilizan para realizar operaciones matemáticas, lógicas, de comparación y de asignación. A continuación, veamos algunos de los operadores más comunes en C\#:
 
 \subsubsection*{Operadores aritméticos}
 
-Los operadores aritméticos se utilizan para realizar operaciones matemáticas básicas como la suma, la resta, la multiplicación y la división. A continuación, se muestran los operadores aritméticos en C\#:
+Los operadores aritméticos se utilizan para realizar operaciones matemáticas básicas como la suma, la resta, la multiplicación y la división. A continuación, veamosn los operadores aritméticos en C\#:
 
 \begin{itemize}
     \item \textbf{+}: Suma dos valores. Ejemplo: \emph{int resultado = 5 + 3;} // resultado es igual a 8.
@@ -242,7 +242,7 @@ Los operadores aritméticos se utilizan para realizar operaciones matemáticas b
 
 \subsubsection*{Operadores de asignación}
 
-Los operadores de asignación se utilizan para asignar un valor a una variable. A continuación, se muestran los operadores de asignación en C\#:
+Los operadores de asignación se utilizan para asignar un valor a una variable. A continuación, veamosn los operadores de asignación en C\#:
 
 \begin{itemize}
     \item \textbf{=}: Asigna un valor a una variable. Ejemplo: \emph{int edad = 25;}
@@ -291,7 +291,7 @@ En el cuarto ejemplo, se utiliza el operador \textbf{!=} para comprobar si las v
 
 \subsection{Bucles, Sentencias if y Switch}
 
-En C\#, existen varios tipos de bucles que permiten repetir un bloque de código un determinado número de veces o mientras se cumpla una condición. A continuación, se describen los principales tipos de bucles en C\#:
+En C\#, existen varios tipos de bucles que permiten repetir un bloque de código un determinado número de veces o mientras se cumpla una condición. A continuación, veamos los principales tipos de bucles en C\#:
 
 \subsubsection*{Bucle \emph{for}}
 
@@ -328,7 +328,7 @@ Donde \emph{tipoDeElemento} es el tipo de datos de cada elemento de la colecció
 El bucle foreach es una forma más sencilla y legible de iterar sobre los elementos de una colección o arreglo en comparación con el bucle for tradicional. Además, también evita errores comunes como desbordamientos de índice o intentos de acceder a elementos que no existen en la colección.
 
 Te doy un ejemplo:
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 List<string> nombres = new List<string>() { "Juan", "Pedro", "Maria", "Lucas" };
 
 foreach (string nombre in nombres){
@@ -503,13 +503,13 @@ Por otro lado, el uso de una serie de sentencias if-else puede ser más adecuado
 
 En C\#, un método es una acción que se puede realizar sobre un objeto o una instancia de una clase. Por otro lado, una función es una operación que se realiza y devuelve un valor.
 
-Existen diferentes tipos de funciones y métodos en C\#, a continuación, se describen algunos de ellos:
+Existen diferentes tipos de funciones y métodos en C\#, a continuación, veamos algunos de ellos:
 
 \subsubsection*{Funciones y métodos estáticos}
 
 Los métodos estáticos se definen en una clase y se pueden llamar sin necesidad de instanciar un objeto de dicha clase. Por lo tanto, se pueden usar en cualquier parte del código sin tener que crear un objeto primero. Por otro lado, una función estática es una función que no tiene acceso a las propiedades de un objeto y solo utiliza los parámetros que se le pasan.
 
-A continuación, se muestra un ejemplo de cómo se define un método estático en C\#:
+A continuación, veamos un ejemplo de cómo se define un método estático en C\#:
 
 \begin{lstlisting}
 public static int Sum(int a, int b){
@@ -523,7 +523,7 @@ En este ejemplo, el método \emph{Sum} se define como \emph{static}, lo que sign
 
 Los métodos de instancia son métodos que solo se pueden llamar en una instancia de una clase. Es decir, se tiene que crear un objeto primero antes de poder llamar al método.
 
-A continuación, se muestra un ejemplo de cómo se define un método de instancia en C\#:
+A continuación, veamos un ejemplo de cómo se define un método de instancia en C\#:
 
 \begin{lstlisting}
 public class Calculator{
@@ -539,7 +539,7 @@ En este ejemplo, se define una clase llamada \emph{Calculator} que contiene un m
 
 En C\#, se pueden definir métodos y funciones que tengan parámetros opcionales. Esto significa que se pueden llamar sin especificar todos los argumentos, y los argumentos que no se especifican utilizarán valores predeterminados.
 
-A continuación, se muestra un ejemplo de cómo se define un método con un parámetro opcional en C\#:
+A continuación, veamos un ejemplo de cómo se define un método con un parámetro opcional en C\#:
 
 \begin{lstlisting}
 public static void PrintName(string firstName, string lastName = ""){
@@ -556,7 +556,7 @@ En C\#, tanto los métodos como las funciones pueden tener un valor de retorno. 
 
 Para declarar una función con valor de retorno, se utiliza la palabra clave \textbf{return} seguida del valor que se desea devolver. Por ejemplo, la siguiente función recibe dos números enteros y devuelve la suma de ellos:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 int Sumar(int a, int b)
 {
 int resultado = a + b;
@@ -566,14 +566,14 @@ return resultado;
 
 Para llamar a la función anterior y obtener su resultado, se puede hacer lo siguiente:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 int resultado = Sumar(3, 4);
 Console.WriteLine(resultado); // Imprime 7
 \end{lstlisting}
 
 También se pueden declarar métodos con valor de retorno de la misma manera. Por ejemplo, el siguiente método estático de una clase llamada \textbf{Calculadora} recibe dos números enteros y devuelve su suma:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 public static int Sumar(int a, int b)
 {
 int resultado = a + b;
@@ -583,7 +583,7 @@ return resultado;
 
 Para llamar a este método desde otro lugar del código, se utiliza el nombre de la clase seguido del operador punto y el nombre del método:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 int resultado = Calculadora.Sumar(3, 4);
 Console.WriteLine(resultado); // Imprime 7
 \end{lstlisting}
@@ -617,7 +617,7 @@ string nombre = "Juan";
 string mensaje1 = saludo + " " + nombre + "!";
 string mensaje2 = string.Concat(saludo, " ", nombre, "!");
 \end{lstlisting}
-Ambos métodos producirán la misma salida: "Hola Juan!".
+Ambos métodos producirán la misma salida: \enquote*{Hola Juan!}.
 
 \subsubsection*{Métodos de formato}
 
@@ -648,14 +648,14 @@ C\# también proporciona métodos para buscar y reemplazar cadenas dentro de otr
 string texto = "La casa de Juan esta en la calle Mayor";
 int posicion = texto.IndexOf("Juan");    
 \end{lstlisting}
-El valor de posición será 12, que es la posición en la que empieza la palabra "Juan" dentro de la cadena.
+El valor de posición será 12, que es la posición en la que empieza la palabra \enquote*{Juan} dentro de la cadena.
 
 También se puede utilizar el método Replace para reemplazar una subcadena por otra:
 \begin{lstlisting}
 string texto = "La casa de Juan esta en la calle Mayor";
 string nuevoTexto = texto.Replace("Juan", "Pedro");
 \end{lstlisting}
-La variable nuevoTexto contendrá la cadena "La casa de Pedro está en la calle Mayor".
+La variable nuevoTexto contendrá la cadena \enquote*{La casa de Pedro está en la calle Mayor}.
 
 \subsubsection*{Métodos de conversión}
 
@@ -690,7 +690,7 @@ StringBuilder sb = new StringBuilder("Hola ");
 sb.Append("mundo!");
 Console.WriteLine(sb.ToString()); // Salida: "Hola mundo!"    
 \end{lstlisting}
-En este ejemplo, se crea un nuevo objeto StringBuilder con la cadena "Hola ". Luego, se utiliza el método Append para agregar la cadena \enquote*{mundo!} al final de la cadena existente. Finalmente, se utiliza el método ToString para obtener la cadena resultante y mostrarla por consola.
+En este ejemplo, se crea un nuevo objeto StringBuilder con la cadena \enquote*{Hola }. Luego, se utiliza el método Append para agregar la cadena \enquote*{mundo!} al final de la cadena existente. Finalmente, se utiliza el método ToString para obtener la cadena resultante y mostrarla por consola.
 
 \subsubsection*{El método ToString}
 
@@ -698,7 +698,7 @@ El método ToString es uno de los métodos más utilizados en C\#, ya que nos pe
 
 La sintaxis básica del método ToString es la siguiente:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 string texto = objeto.ToString();
 \end{lstlisting}
 
@@ -708,15 +708,15 @@ Es importante tener en cuenta que el método ToString se puede sobrescribir en u
 
 Veamos un ejemplo sencillo de cómo podemos utilizar el método ToString en C\#:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 int num = 123;
 string cadena = num.ToString();
 Console.WriteLine(cadena); // muestra "123" en la consola
 \end{lstlisting}
 
-En este ejemplo, el método ToString se utiliza para convertir el número entero \emph{num} a una cadena. La cadena resultante se almacena en la variable \emph{cadena} y se muestra en la consola utilizando el método WriteLine de la clase Console.
+En este ejemplo, el método ToString se utiliza para convertir el número entero \emph{num} a una cadena. La cadena resultante se almacena en la variable \emph{cadena} y veamos en la consola utilizando el método WriteLine de la clase Console.
 
-En resumen, el método ToString es una herramienta útil para convertir objetos a su representación en formato de cadena. Si se desea personalizar la forma en que se muestra un objeto, es posible sobrescribir este método en una clase personalizada.
+En resumen, el método ToString es una herramienta útil para convertir objetos a su representación en formato de cadena. Si se desea personalizar la forma en que veamos un objeto, es posible sobrescribir este método en una clase personalizada.
 
 \subsubsection*{Otros métodos útiles en cadenas}
 
@@ -769,7 +769,7 @@ La programación en C\# proporciona varios tipos de colecciones para almacenar y
 \subsubsection*{ArrayLists}
 Un ArrayList es una colección de objetos que se pueden agregar o eliminar dinámicamente en tiempo de ejecución. El tamaño de un ArrayList puede crecer o disminuir automáticamente según sea necesario. Los elementos en un ArrayList se almacenan en orden secuencial, lo que significa que cada elemento tiene un índice numérico que representa su posición en la lista.
 
-Para utilizar un ArrayList en C\#, es necesario importar el espacio de nombres System.Collections. A continuación, se muestra un ejemplo de cómo crear y usar un ArrayList:
+Para utilizar un ArrayList en C\#, es necesario importar el espacio de nombres System.Collections. A continuación, veamos un ejemplo de cómo crear y usar un ArrayList:
 
 \begin{lstlisting}
 using System.Collections;
@@ -834,7 +834,7 @@ Hashtable es una estructura de datos que permite almacenar una colección de par
 
 Para crear una Hashtable en C\#, se utiliza la clase Hashtable que se encuentra en el espacio de nombres System.Collections.
 
-A continuación, se muestra un ejemplo de cómo crear una Hashtable y agregar elementos a ella:
+A continuación, veamos un ejemplo de cómo crear una Hashtable y agregar elementos a ella:
 
 \begin{lstlisting}
 Hashtable ht = new Hashtable();
@@ -856,10 +856,10 @@ En este ejemplo, se ha accedido al elemento cuya clave es \enquote*{Maria} y se 
 Es importante tener en cuenta que al utilizar una Hashtable, las claves deben ser únicas. Si se intenta agregar un elemento con una clave que ya existe en la Hashtable, se producirá una excepción.
 
 \section{Fundamentos de .NET}
-.NET es una plataforma de desarrollo de software desarrollada por Microsoft que ofrece un entorno de ejecución y una biblioteca de clases amplias para la creación de aplicaciones de todo tipo, desde aplicaciones de escritorio hasta aplicaciones web y móviles. En este artículo, exploraremos los fundamentos de .NET y cómo puedes comenzar a desarrollar aplicaciones utilizando esta plataforma.
+.NET es una plataforma de desarrollo de software desarrollada por Microsoft que ofrece un entorno de ejecución y una biblioteca de clases amplias para la creación de aplicaciones de todo tipo, desde aplicaciones de escritorio hasta aplicaciones web y móviles. Veamos los fundamentos de .NET y cómo podemos comenzar a desarrollar aplicaciones utilizando esta plataforma.
 
 \subsection*{Casos de uso de .NET}
-.NET es ampliamente utilizado en una variedad de escenarios de desarrollo de software debido a sus numerosos beneficios y capacidades. A continuación, se presentan algunos casos de uso comunes y ventajas clave de .NET:
+.NET es ampliamente utilizado en una variedad de escenarios de desarrollo de software debido a sus numerosos beneficios y capacidades. A continuación, veamos algunos casos de uso comunes y ventajas clave de .NET:
 
 \subsubsection*{Desarrollo de aplicaciones de escritorio}
 .NET es una excelente opción para el desarrollo de aplicaciones de escritorio en Windows. Proporciona una amplia gama de herramientas y bibliotecas de clases para crear interfaces de usuario robustas y funcionales. Los desarrolladores pueden utilizar el framework de Windows Presentation Foundation (WPF) para construir aplicaciones de escritorio con interfaces gráficas modernas y atractivas.
@@ -878,7 +878,7 @@ Una de las ventajas clave de .NET es su capacidad para interoperar con otros sis
 
 \subsection{Ventajas de .NET}
 
-.NET ofrece una serie de ventajas significativas para los desarrolladores y las organizaciones que eligen utilizarlo como plataforma de desarrollo. A continuación, se presentan algunas de las principales ventajas de .NET:
+.NET ofrece una serie de ventajas significativas para los desarrolladores y las organizaciones que eligen utilizarlo como plataforma de desarrollo. A continuación, veamos algunas de las principales ventajas de .NET:
 
 \subsubsection*{Amplio conjunto de bibliotecas y herramientas}
 .NET proporciona un amplio conjunto de bibliotecas de clases y herramientas que facilitan el desarrollo de aplicaciones. El entorno de .NET incluye bibliotecas para tareas comunes, como manipulación de archivos, acceso a bases de datos, creación de interfaces de usuario y comunicación en red. Además, Microsoft ofrece herramientas de desarrollo potentes y fáciles de usar, como Visual Studio, que mejoran la productividad de los desarrolladores.
@@ -887,7 +887,7 @@ Una de las ventajas clave de .NET es su capacidad para interoperar con otros sis
 Con .NET, los desarrolladores tienen acceso a una variedad de lenguajes de programación, incluyendo C\#, Visual Basic .NET y F\#. Esto permite a los desarrolladores elegir el lenguaje que mejor se adapte a sus necesidades y preferencias. Además, los lenguajes de programación de .NET están diseñados para ser interoperables, lo que facilita la integración de código escrito en diferentes lenguajes.
 
 \subsubsection*{Seguridad y robustez}
-.NET ofrece características de seguridad integradas y sólidas. El Common Language Runtime (CLR) de .NET incluye un mecanismo de seguridad basado en el concepto de "confianza" (trust). El CLR aplica medidas de seguridad, como el aislamiento de procesos y la verificación de tipos, para garantizar que las aplicaciones .NET se ejecuten de manera segura y confiable.
+.NET ofrece características de seguridad integradas y sólidas. El Common Language Runtime (CLR) de .NET incluye un mecanismo de seguridad basado en el concepto de \enquote*{confianza} (trust). El CLR aplica medidas de seguridad, como el aislamiento de procesos y la verificación de tipos, para garantizar que las aplicaciones .NET se ejecuten de manera segura y confiable.
 
 \subsubsection*{Escalabilidad y rendimiento}
 .NET está diseñado para ofrecer un alto rendimiento y escalabilidad. El CLR de .NET utiliza técnicas avanzadas, como la compilación en tiempo de ejecución (Just-In-Time Compilation, JIT), la recolección de basura (garbage collection) y la optimización de código, para maximizar la eficiencia de las aplicaciones. Además, .NET ofrece soporte para aplicaciones distribuidas y servicios en la nube, lo que permite escalar y desplegar aplicaciones de manera flexible.
@@ -899,7 +899,7 @@ Estas son solo algunas de las ventajas de .NET. La plataforma .NET tiene una amp
 
 \subsection{Common Language Runtime (CLR)}
 
-El Common Language Runtime (CLR) es un componente fundamental del entorno de .NET. Es el entorno de ejecución en el que se ejecutan las aplicaciones desarrolladas en lenguajes compatibles con .NET, como C\#, Visual Basic .NET y F\#. El CLR ofrece una serie de características y funcionalidades que mejoran la eficiencia, la seguridad y la capacidad de administración de las aplicaciones. A continuación, se presentan algunas de las características clave del CLR:
+El Common Language Runtime (CLR) es un componente fundamental del entorno de .NET. Es el entorno de ejecución en el que se ejecutan las aplicaciones desarrolladas en lenguajes compatibles con .NET, como C\#, Visual Basic .NET y F\#. El CLR ofrece una serie de características y funcionalidades que mejoran la eficiencia, la seguridad y la capacidad de administración de las aplicaciones. A continuación, veamos algunas de las características clave del CLR:
 
 \subsubsection*{Compilación y ejecución gestionada}
 El CLR realiza una compilación gestionada, lo que significa que el código fuente se compila en un formato intermedio llamado Microsoft Intermediate Language (MSIL) o código IL. Este código IL es independiente de la arquitectura de hardware y se puede ejecutar en cualquier plataforma compatible con .NET. Durante la ejecución, el CLR utiliza la Just-In-Time Compilation (JIT) para compilar el código IL en código nativo específico de la máquina en tiempo de ejecución, lo que mejora el rendimiento de la aplicación.
@@ -958,30 +958,30 @@ La Interfaz de Línea de Comandos (CLI) es una forma de interactuar con un progr
 
 \subsection{Creación una API en .NET}
 
-La creación de una API (Application Programming Interface) en .NET permite exponer servicios y funcionalidades de una aplicación de forma accesible para otros sistemas o aplicaciones. .NET proporciona un conjunto de herramientas y bibliotecas que facilitan el desarrollo de APIs robustas y escalables. A continuación, se presentan los pasos básicos para crear una API en .NET:
+La creación de una API (Application Programming Interface) en .NET permite exponer servicios y funcionalidades de una aplicación de forma accesible para otros sistemas o aplicaciones. .NET proporciona un conjunto de herramientas y bibliotecas que facilitan el desarrollo de APIs robustas y escalables. A continuación, veamos los pasos básicos para crear una API en .NET:
 
-Para crear y ejecutar una API en .NET, puedes utilizar el comando `dotnet new` junto con la plantilla `webapi`. A continuación, se muestran los pasos necesarios:
+Para crear y ejecutar una API en .NET, podemos utilizar el comando \enquote*{dotnet new} junto con la plantilla \enquote*{webapi}. A continuación, veamosn los pasos necesarios:
 
 \begin{enumerate}
   \item Abre una terminal o línea de comandos en el directorio donde deseas crear el proyecto de la API.
 
   \item Ejecuta el siguiente comando para crear un nuevo proyecto de API en .NET:
 
-  \begin{lstlisting}[language=bash]
+ \begin{lstlisting}[language=bash]
   dotnet new webapi -n MiProyectoAPI
 \end{lstlisting}
 
-  Este comando creará un nuevo proyecto de API en el directorio actual con el nombre "MiProyectoAPI". Puedes reemplazar "MiProyectoAPI" con el nombre deseado para tu proyecto.
+  Este comando creará un nuevo proyecto de API en el directorio actual con el nombre \enquote*{MiProyectoAPI}. podemos reemplazar \enquote*{MiProyectoAPI} con el nombre deseado para tu proyecto.
 
   \item Navega al directorio del proyecto recién creado:
 
-  \begin{lstlisting}[language=bash]
+ \begin{lstlisting}[language=bash]
   cd MiProyectoAPI
 \end{lstlisting}
 
   \item Finalmente, ejecuta el siguiente comando para compilar y ejecutar el proyecto de la API:
 
-  \begin{lstlisting}[language=bash]
+ \begin{lstlisting}[language=bash]
   dotnet run
 \end{lstlisting}
 
@@ -991,7 +991,7 @@ Para crear y ejecutar una API en .NET, puedes utilizar el comando `dotnet new` j
 
 Al utilizar \enquote*{dotnet new} con la opción \enquote*{webapi}, se crea un proyecto de API básico en .NET con una configuración inicial que incluye un controlador predeterminado, rutas de ejemplo y una configuración básica del servidor web.
 
-Al utilizar el comando \emph{dotnet new webapi}, se crea un proyecto de API básico en .NET con una estructura y configuración inicial. A continuación se muestra la salida del comando \emph{ls} para el proyecto creado:
+Al utilizar el comando \emph{dotnet new webapi}, se crea un proyecto de API básico en .NET con una estructura y configuración inicial. A continuación veamos la salida del comando \emph{ls} para el proyecto creado:
 
 \begin{lstlisting}[language=bash]
 MiProyectoAPI/
@@ -1024,7 +1024,7 @@ A continuación, se explica cada archivo generado por el comando \emph{dotnet ne
 
 \end{itemize}
 
-Recuerda que el proyecto de la API generado con \emph{dotnet new webapi} es solo una base inicial y puedes modificarlo según tus necesidades específicas. Puedes agregar más controladores, definir modelos de datos, implementar autenticación y autorización, configurar middleware adicional y establecer la conexión con una base de datos, entre otras cosas.
+Recuerda que el proyecto de la API generado con \emph{dotnet new webapi} es solo una base inicial y podemos modificarlo según tus necesidades específicas. podemos agregar más controladores, definir modelos de datos, implementar autenticación y autorización, configurar middleware adicional y establecer la conexión con una base de datos, entre otras cosas.
 
 La API creada con \emph{dotnet new webapi} ofrece un punto de partida sólido para desarrollar una API en .NET y es altamente personalizable para adaptarse a tus requerimientos.
 
@@ -1032,7 +1032,7 @@ La API creada con \emph{dotnet new webapi} ofrece un punto de partida sólido pa
 
 El programa de la API en .NET 6 es la entrada principal del proyecto y es responsable de configurar y ejecutar la aplicación web. En este programa, se utiliza el enfoque simplificado sin necesidad de una clase `Main` explícita.
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -1070,9 +1070,9 @@ Este enfoque simplificado proporcionado por .NET 6 y C\# 9 permite una estructur
 
 \subsubsection{Estructura de un controlador en .NET}
 
-Un controlador en .NET es una clase que maneja las solicitudes HTTP y define las acciones que se pueden realizar en una API. A continuación, se muestra un ejemplo de la estructura básica de un controlador en .NET:
+Un controlador en .NET es una clase que maneja las solicitudes HTTP y define las acciones que se pueden realizar en una API. A continuación, veamos un ejemplo de la estructura básica de un controlador en .NET:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 using Microsoft.AspNetCore.Mvc;
 
 namespace MiProyectoAPI.Controllers
@@ -1125,13 +1125,13 @@ namespace MiProyectoAPI.Controllers
 }
 \end{lstlisting}
 
-En este ejemplo, se muestra la estructura de un controlador llamado \lstinline{EjemploController}. El controlador hereda de la clase \lstinline{ControllerBase} y se utilizan los atributos \lstinline{[ApiController]} y \lstinline{[Route]} para configurar la API y definir las rutas de los endpoints.
+En este ejemplo, veamos la estructura de un controlador llamado \lstinline{EjemploController}. El controlador hereda de la clase \lstinline{ControllerBase} y se utilizan los atributos \lstinline{[ApiController]} y \lstinline{[Route]} para configurar la API y definir las rutas de los endpoints.
 
 Cada acción del controlador está decorada con un atributo HTTP (\lstinline{[HttpGet]}, \lstinline{[HttpPost]}, \lstinline{[HttpPut]}, \lstinline{[HttpDelete]}) para indicar el tipo de solicitud HTTP que maneja. En cada acción, se puede agregar la lógica necesaria para realizar operaciones y se retorna una respuesta utilizando métodos como \lstinline{Ok()}, \lstinline{CreatedAtAction()} o \lstinline{NoContent()}.
 
 \subsubsection{Estándar de respuesta en un controlador}
 
-En un controlador de una API en .NET, es importante seguir un estándar de respuesta consistente para cada método HTTP. Aquí se muestra un ejemplo del estándar de respuesta común en los diferentes métodos HTTP:
+En un controlador de una API en .NET, es importante seguir un estándar de respuesta consistente para cada método HTTP. Aquí veamos un ejemplo del estándar de respuesta común en los diferentes métodos HTTP:
 
 \begin{itemize}
 \item \textbf{GET}: El método GET se utiliza para obtener recursos y retornarlos como respuesta. El estándar de respuesta puede ser:
@@ -1168,7 +1168,7 @@ En un controlador de una API en .NET, es importante seguir un estándar de respu
 
 \end{itemize}
 
-A continuación, se muestra una lista completa de los códigos de estado HTTP más comunes:
+A continuación, veamos una lista completa de los códigos de estado HTTP más comunes:
 
 \begin{itemize}
     \item \textbf{100 (Continue)}: El servidor ha recibido los encabezados de solicitud y el cliente debe continuar con la solicitud.
@@ -1211,12 +1211,12 @@ A continuación, se muestra una lista completa de los códigos de estado HTTP m�
     
     \end{itemize}
 
-Además, es importante considerar el formato de respuesta en el cuerpo de la respuesta. A continuación se muestran un ejemplo práctico de formatos de respuesta:
+Además, es importante considerar el formato de respuesta en el cuerpo de la respuesta. A continuación veamosn un ejemplo práctico de formatos de respuesta:
 
 \begin{itemize}
   \item \textbf{JSON}: El formato JSON (JavaScript Object Notation) es ampliamente utilizado y fácilmente analizable. Un ejemplo de respuesta en formato JSON podría ser:
 
-  \begin{lstlisting}[language={[Sharp]C}]
+ \begin{lstlisting}
 {
   "id": 1,
   "name": "John Doe",
@@ -1237,7 +1237,7 @@ public class ExampleController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        // Codigo de implementacion para el metodo GET. Aqui puedes obtener los datos solicitados y construir la respuesta
+        // Codigo de implementacion para el metodo GET. Aqui podemos obtener los datos solicitados y construir la respuesta
 
         var data = new
         {
@@ -1259,7 +1259,7 @@ public class ExampleController : ControllerBase
     [HttpPost]
     public IActionResult Post()
     {
-        // Codigo de implementacion para el metodo POST. Aqui puedes crear un nuevo recurso y construir la respuesta
+        // Codigo de implementacion para el metodo POST. Aqui podemos crear un nuevo recurso y construir la respuesta
         var newResource = new
         {
             id = 2,
@@ -1281,7 +1281,7 @@ public class ExampleController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult Put(int id)
     {
-        // Codigo de implementacion para el metodo PUT. Aqui puedes actualizar el recurso existente y construir la respuesta
+        // Codigo de implementacion para el metodo PUT. Aqui podemos actualizar el recurso existente y construir la respuesta
         // Supongamos que se actualiza el recurso con el ID proporcionado
         var updatedResource = new
         {
@@ -1302,7 +1302,7 @@ public class ExampleController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        // Codigo de implementacion para el metodo DELETE. Aqui puedes eliminar el recurso con el ID proporcionado y construir la respuesta
+        // Codigo de implementacion para el metodo DELETE. Aqui podemos eliminar el recurso con el ID proporcionado y construir la respuesta
         // Supongamos que se ha eliminado el recurso con el ID proporcionado
         var success = true;
         if (success)
@@ -1319,14 +1319,14 @@ public class ExampleController : ControllerBase
 
 \subsubsection{Implementación de Json Web Token en una API de .NET}
 
-La implementación de JSON Web Tokens (JWT) en una aplicación permite la autenticación y autorización segura de usuarios. A continuación se muestra un ejemplo de cómo implementar JWT en una api:
+La implementación de JSON Web Tokens (JWT) en una aplicación permite la autenticación y autorización segura de usuarios. A continuación veamos un ejemplo de cómo implementar JWT en una api:
 
 \begin{enumerate}
   \item Configuración en el archivo appsettings.json:
 
   En el archivo appsettings.json, agregue la siguiente configuración para JWT:
 
-  \begin{lstlisting}
+ \begin{lstlisting}
   "Jwt": {
     "Issuer": "https://example.com/",
     "Audience": "https://example.com/",
@@ -1341,7 +1341,7 @@ La implementación de JSON Web Tokens (JWT) en una aplicación permite la autent
 
   En el código de la aplicación, configure los servicios necesarios y la autenticación JWT:
 
-  \begin{lstlisting}
+ \begin{lstlisting}
   var builder = WebApplication.CreateBuilder(args);
 
   // ...
@@ -1377,7 +1377,7 @@ La implementación de JSON Web Tokens (JWT) en una aplicación permite la autent
   Asegúrese de ajustar el código según la estructura de su aplicación.
 
   \item Cree una clase para el ingreso de usuarios:
-  \begin{lstlisting}
+ \begin{lstlisting}
 namespace APIJWT.user{
     public class User
     {
@@ -1390,7 +1390,7 @@ namespace APIJWT.user{
   
   Despues de mapear los controladores coloque el siguiente controlador, y agregue \enquote*{.RequireAuthorization()} en el mapeo, así \enquote*{app.MapControllers().RequireAuthorization();}, 
 
-  \begin{lstlisting}
+ \begin{lstlisting}
   app.MapPost("/security/createToken", [AllowAnonymous] (UserEntidad user) =>
   {
       if (user.UserName == "user" && user.Password == "password")
@@ -1427,7 +1427,7 @@ namespace APIJWT.user{
 \end{lstlisting}
 
   El archivo program.cs quedaría así:
-  \begin{lstlisting}
+ \begin{lstlisting}
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -1526,7 +1526,7 @@ Para consumir la aplicación debemos seguir estos pasos:
 
 \begin{enumerate}
     \item Solicitud post al controlador \lstinline{/security/createToken} con el siguiente body:
-    \begin{lstlisting}
+   \begin{lstlisting}
 {
     "userName" : "user",
     "password" : "password"
@@ -1552,7 +1552,7 @@ La implementación de Log4net en tu aplicación implica los siguientes pasos:
   
   Crea un archivo llamado \emph{log4net.config} en la raíz de tu proyecto y configúralo según tus necesidades. Aquí tienes un ejemplo de cómo podría verse el contenido del archivo:
   
-  \begin{lstlisting}
+ \begin{lstlisting}
 <log4net>
 <root>
     <level value="ALL" />
@@ -1617,7 +1617,7 @@ app.Run(async context =>
   
   \item \textbf{Uso de Log4net en los controladores:}
   
-  En tus controladores, puedes utilizar Log4net para registrar mensajes de log en diferentes niveles, como DEBUG, INFO, WARN, ERROR y FATAL. Aquí tienes un ejemplo de cómo se podría usar en un controlador:
+  En tus controladores, podemos utilizar Log4net para registrar mensajes de log en diferentes niveles, como DEBUG, INFO, WARN, ERROR y FATAL. Aquí tienes un ejemplo de cómo se podría usar en un controlador:
   
 \begin{lstlisting}
 using log4net;
@@ -1678,7 +1678,7 @@ log4net admite varios niveles de logs que se utilizan para clasificar la importa
 
 Es importante elegir el nivel de log adecuado para cada mensaje, asegurándose de equilibrar la cantidad de información registrada con la sobrecarga del sistema y la seguridad de los datos. Configurar correctamente los niveles de logs permite filtrar y gestionar los mensajes de forma eficiente, lo que facilita la identificación y solución de problemas, así como el seguimiento del rendimiento y el comportamiento del sistema.
 
-Para incluir los niveles de logs en el código utilizando log4net, se debe importar la biblioteca de log4net y configurar el archivo de configuración correspondiente. A continuación se muestra un ejemplo de cómo se puede utilizar log4net para registrar mensajes de diferentes niveles:
+Para incluir los niveles de logs en el código utilizando log4net, se debe importar la biblioteca de log4net y configurar el archivo de configuración correspondiente. A continuación veamos un ejemplo de cómo se puede utilizar log4net para registrar mensajes de diferentes niveles:
 
 \begin{lstlisting}
 using log4net;
@@ -1712,7 +1712,7 @@ Cuando los mensajes de log se registran en el archivo de texto, siguiendo la con
 2022-01-01 10:30:04 [FATAL] MyClass - Este es un mensaje fatal.
 \end{verbatim}
 
-En cada línea, se muestra la fecha y hora del registro, seguida del nivel de log entre corchetes, el nombre de la clase que registró el mensaje y finalmente el contenido del mensaje en sí.
+En cada línea, veamos la fecha y hora del registro, seguida del nivel de log entre corchetes, el nombre de la clase que registró el mensaje y finalmente el contenido del mensaje en sí.
 
 Es importante tener en cuenta que la apariencia exacta de los registros en el archivo de texto puede variar según la configuración específica establecida en el archivo \emph{log4net.config} y las opciones de formato definidas en el patrón de conversión.
 
@@ -1738,7 +1738,7 @@ En programación orientada a objetos, una clase es una plantilla o modelo que de
 Por otro lado, un objeto es una instancia concreta de una clase. En otras palabras, es una representación tangible de la clase. Cuando se crea un objeto, se pueden establecer sus propias propiedades y métodos, aunque hereda las características definidas por la clase.
 
 Veamos un ejemplo de cómo se declara una clase en C\#:
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 public class Person {
     // atributos encapsulados
     private string name;
@@ -1760,7 +1760,7 @@ En este ejemplo, se ha creado una clase llamada Persona con dos propiedades (nom
 
 Para crear un objeto de la clase Persona, se puede hacer lo siguiente:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 Person person1 = new Person("Juan", 30);
 \end{lstlisting}
 
@@ -1768,7 +1768,7 @@ En este caso, se está creando un objeto llamado persona1 de la clase Persona, y
 
 Una vez creado el objeto, se puede llamar a su método Saludar de la siguiente manera:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 persona1.greet();
 \end{lstlisting}
 
@@ -2086,7 +2086,7 @@ Es importante destacar que el uso adecuado de los niveles de acceso contribuye a
 
 En la programación orientada a objetos, una clase abstracta es una clase que no puede ser instanciada y solo puede ser utilizada como una clase base para otras clases. Es decir, una clase abstracta solo puede ser heredada y sus métodos abstractos deben ser implementados en las clases derivadas. Por otro lado, una clase virtual es una clase que puede ser instanciada, pero sus métodos virtuales pueden ser reemplazados por las clases derivadas.
 
-A continuación, se muestra un ejemplo de una clase abstracta Animal con un método abstracto HacerSonido:
+A continuación, veamos un ejemplo de una clase abstracta Animal con un método abstracto HacerSonido:
 
 \begin{lstlisting}
 public abstract class Animal {
@@ -2108,7 +2108,7 @@ public class Gato : Animal {
 
 En este ejemplo, la clase Animal es una clase abstracta que define un método abstracto HacerSonido. Las clases Perro y Gato heredan de la clase Animal y deben implementar el método HacerSonido.
 
-Por otro lado, las clases virtuales permiten la creación de métodos virtuales que pueden ser reemplazados por las clases derivadas. A continuación, se muestra un ejemplo de una clase virtual Figura con un método virtual CalcularArea:
+Por otro lado, las clases virtuales permiten la creación de métodos virtuales que pueden ser reemplazados por las clases derivadas. A continuación, veamos un ejemplo de una clase virtual Figura con un método virtual CalcularArea:
 
 \begin{lstlisting}
 public class Figura {
@@ -2388,19 +2388,19 @@ La interfaz IVehiculo también se puede usar para realizar herencia múltiple de
 
 A medida que se avanza en el aprendizaje de la programación en C\#, se encuentran conceptos más avanzados que pueden mejorar la calidad y eficiencia de nuestro código. Estos conceptos incluyen delegados, métodos anónimos, tipos dinámicos, enumerados, espacios de nombres, tuplas, diccionarios, boxing y unboxing, serialización JSON, eventos, tratamiento de excepciones, trabajo con archivos y streams, y programación asíncrona.
 
-Cada uno de estos temas tiene su propia utilidad y aplicabilidad en diferentes escenarios y situaciones de programación. En esta sección, se explicará cada uno de ellos con ejemplos prácticos y claros para que puedas entender su funcionamiento y cómo puedes aplicarlos en tus proyectos de C\#.
+Cada uno de estos temas tiene su propia utilidad y aplicabilidad en diferentes escenarios y situaciones de programación. En esta sección, se explicará cada uno de ellos con ejemplos prácticos y claros para que puedas entender su funcionamiento y cómo podemos aplicarlos en tus proyectos de C\#.
 
 \subsection{Delegados}
 
 Los delegados son una característica importante de C\# que permiten la encapsulación de métodos en objetos y su uso como argumentos y valores de retorno de otros métodos. Un delegado es esencialmente un tipo de referencia que puede apuntar a un método con una firma determinada. Se puede pensar en un delegado como un puntero a un método en otros lenguajes de programación.
 
-Para crear un delegado, primero se debe definir un tipo de delegado que tenga la misma firma que el método al que se va a hacer referencia. Esto se hace mediante la definición de un delegado utilizando la palabra clave delegate y especificando los parámetros y el tipo de retorno del método al que se va a hacer referencia. A continuación se muestra un ejemplo:
+Para crear un delegado, primero se debe definir un tipo de delegado que tenga la misma firma que el método al que se va a hacer referencia. Esto se hace mediante la definición de un delegado utilizando la palabra clave delegate y especificando los parámetros y el tipo de retorno del método al que se va a hacer referencia. A continuación veamos un ejemplo:
 
 \begin{lstlisting}
 delegate int OperacionMatematica(int a, int b);
 \end{lstlisting}
 
-En este ejemplo, se define un delegado llamado OperacionMatematica que tiene dos parámetros enteros y devuelve un valor entero. Una vez que se ha definido el tipo de delegado, se puede crear una instancia del delegado y asignarle una referencia a un método que tenga la misma firma que el delegado. A continuación se muestra un ejemplo:
+En este ejemplo, se define un delegado llamado OperacionMatematica que tiene dos parámetros enteros y devuelve un valor entero. Una vez que se ha definido el tipo de delegado, se puede crear una instancia del delegado y asignarle una referencia a un método que tenga la misma firma que el delegado. A continuación veamos un ejemplo:
 
 \begin{lstlisting}
 int Suma(int a, int b) {
@@ -2412,7 +2412,7 @@ OperacionMatematica operacion = Suma;
 
 En este ejemplo, se define un método Suma que toma dos parámetros enteros y devuelve la suma de estos parámetros. A continuación, se crea una instancia del delegado OperacionMatematica y se le asigna una referencia al método Suma mediante el operador de asignación =.
 
-Los delegados también pueden utilizarse para añadir y eliminar métodos de un conjunto de métodos que se ejecutarán cuando se llame al delegado. Esto se hace mediante el operador += para añadir un método y -= para eliminar un método. A continuación se muestra un ejemplo:
+Los delegados también pueden utilizarse para añadir y eliminar métodos de un conjunto de métodos que se ejecutarán cuando se llame al delegado. Esto se hace mediante el operador += para añadir un método y -= para eliminar un método. A continuación veamos un ejemplo:
 
 \begin{lstlisting}
 OperacionMatematica operacion = Suma;
@@ -2623,7 +2623,7 @@ Console.WriteLine(resultado.Item1); // salida: 5
 Console.WriteLine(resultado.Item2); // salida: 6
 \end{lstlisting}
 
-En este ejemplo, se muestra cómo crear y acceder a los elementos de tuplas, cómo declarar tuplas con nombres de elementos, cómo usar tuplas como parámetros y retorno de métodos, y cómo desempaquetar los valores de la tupla resultante.
+En este ejemplo, veamos cómo crear y acceder a los elementos de tuplas, cómo declarar tuplas con nombres de elementos, cómo usar tuplas como parámetros y retorno de métodos, y cómo desempaquetar los valores de la tupla resultante.
 
 \subsection{Diccionarios}
 
@@ -2659,7 +2659,7 @@ diccionario.Remove("tres");
 Console.WriteLine("Numero de elementos en el diccionario: {0}", diccionario.Count);
 \end{lstlisting}
 
-En este ejemplo, se crea un diccionario que asocia cadenas con enteros. Se agregan tres elementos al diccionario usando el método \emph{Add()}. Luego, se itera sobre el diccionario usando un \emph{foreach} loop, mostrando la clave y el valor de cada elemento. Se verifica si el diccionario contiene una clave específica usando el método \emph{ContainsKey()} y se accede al valor correspondiente usando la clave como índice. Se elimina un elemento del diccionario usando el método \emph{Remove()}. Finalmente, se muestra el número de elementos restantes en el diccionario usando la propiedad \emph{Count}.
+En este ejemplo, se crea un diccionario que asocia cadenas con enteros. Se agregan tres elementos al diccionario usando el método \emph{Add()}. Luego, se itera sobre el diccionario usando un \emph{foreach} loop, mostrando la clave y el valor de cada elemento. Se verifica si el diccionario contiene una clave específica usando el método \emph{ContainsKey()} y se accede al valor correspondiente usando la clave como índice. Se elimina un elemento del diccionario usando el método \emph{Remove()}. Finalmente, veamos el número de elementos restantes en el diccionario usando la propiedad \emph{Count}.
 
 \subsection*{Boxing y unboxing}
 
@@ -2803,7 +2803,7 @@ En el ejemplo anterior, la clase EventExample tiene un evento MyEvent del tipo M
 
 Para suscribir un método a un evento, se usa el operador +=. Por ejemplo:
 
-\begin{lstlisting}[language={[Sharp]C}]
+\begin{lstlisting}
 public class EventSubscriber {
 public void OnMyEvent(object sender, EventArgs e) {
 Console.WriteLine("MyEvent was fired!");
@@ -3087,7 +3087,7 @@ En resumen, las lambdas son una herramienta fundamental en LINQ, ya que permiten
 
 \subsubsection*{Sentencias from, join, let, where, order by, select, group by}
 
-En LINQ, las consultas se construyen utilizando una combinación de cláusulas. Estas cláusulas se pueden utilizar en cierto orden y se encadenan para construir una consulta más compleja. A continuación, se describen algunas de las cláusulas más comunes:
+En LINQ, las consultas se construyen utilizando una combinación de cláusulas. Estas cláusulas se pueden utilizar en cierto orden y se encadenan para construir una consulta más compleja. A continuación, veamos algunas de las cláusulas más comunes:
 
 \begin{itemize}
     \item from: especifica la fuente de los datos en la consulta. Por lo general, es una colección o una fuente de datos que implementa la interfaz IQueryable.
@@ -3291,16 +3291,16 @@ Con esto, podemos comparar los tiempos de ejecución y apreciar cómo la ejecuci
 
 Los hilos de procesamiento son unidades de ejecución concurrente que permiten a una aplicación realizar múltiples tareas simultáneamente. En C\#, los hilos se gestionan utilizando la clase \emph{Thread} del espacio de nombres \emph{System.Threading}.
 
-Para entender mejor cómo funcionan los hilos de procesamiento, consideremos el siguiente ejemplo, donde utilizaremos la metáfora de cantineros que atienden pedidos. Imagina que tenemos dos cantineros, cada uno con la tarea de servir cierta cantidad de pedidos. Cada pedido toma un segundo en ser atendido.
+Para entender mejor cómo funcionan los hilos de procesamiento, consideremos el siguiente ejemplo, donde utilizaremos la metáfora de camareros que atienden pedidos. Imagina que tenemos dos camareros, cada uno con la tarea de servir cierta cantidad de pedidos. Cada pedido toma un segundo en ser atendido.
 
 Sin hilos de procesamiento haríamso algo así.
 
 \begin{lstlisting}
 var stopwatchTotal = System.Diagnostics.Stopwatch.StartNew();
 
-// Atender pedidos con un solo cantinero
-Cantinero1Atiende();
-Cantinero2Atiende();
+// Atender pedidos con un solo camarero
+camarero1Atiende();
+camarero2Atiende();
 
 stopwatchTotal.Stop();
 Console.WriteLine($"Tiempo total de ejecucion: {stopwatchTotal.ElapsedMilliseconds} ms");
@@ -3308,77 +3308,77 @@ Console.WriteLine("Finalizo la ejecucion sin el uso de hilos de procesamiento");
 Console.ReadLine();
     
 
-// Metodos de los cantineros
-static void Cantinero1Atiende()
+// Metodos de los camareros
+static void camarero1Atiende()
 {
     var stopwatchSync = System.Diagnostics.Stopwatch.StartNew();
     int cantidadPedidos = 5;
     for (int i = 0; i < cantidadPedidos; i++)
     {
         Thread.Sleep(1000); // Simulamos el tiempo de atencion de un pedido (1 segundo)
-        Console.WriteLine("Cantinero 1 sirvio el pedido: " + i);
+        Console.WriteLine("camarero 1 sirvio el pedido: " + i);
     }
     stopwatchSync.Stop();
-    Console.WriteLine($"Tiempo total de ejecucion (para el cantinero 1): {stopwatchSync.ElapsedMilliseconds} ms");
+    Console.WriteLine($"Tiempo total de ejecucion (para el camarero 1): {stopwatchSync.ElapsedMilliseconds} ms");
 }
 
-static void Cantinero2Atiende()
+static void camarero2Atiende()
 {
     var stopwatchSync = System.Diagnostics.Stopwatch.StartNew();
     int cantidadPedidos = 8;
     for (int i = 0; i < cantidadPedidos; i++)
     {
         Thread.Sleep(1000); // Simulamos el tiempo de atencion de un pedido (1 segundo)
-        Console.WriteLine("Cantinero 2 sirvio el pedido: " + i);
+        Console.WriteLine("camarero 2 sirvio el pedido: " + i);
     }
     stopwatchSync.Stop();
-    Console.WriteLine($"Tiempo total de ejecucion (para el cantinero 2): {stopwatchSync.ElapsedMilliseconds} ms");
+    Console.WriteLine($"Tiempo total de ejecucion (para el camarero 2): {stopwatchSync.ElapsedMilliseconds} ms");
 }
 \end{lstlisting}
 
 Con salida.
 
 \begin{verbatim}
-Cantinero 1 sirvio el pedido: 0
-Cantinero 1 sirvio el pedido: 1
-Cantinero 1 sirvio el pedido: 2
-Cantinero 1 sirvio el pedido: 3
-Cantinero 1 sirvio el pedido: 4
-Tiempo total de ejecucion (para el cantinero 1): 5068 ms
-Cantinero 2 sirvio el pedido: 0
-Cantinero 2 sirvio el pedido: 1
-Cantinero 2 sirvio el pedido: 2
-Cantinero 2 sirvio el pedido: 3
-Cantinero 2 sirvio el pedido: 4
-Cantinero 2 sirvio el pedido: 5
-Cantinero 2 sirvio el pedido: 6
-Cantinero 2 sirvio el pedido: 7
-Tiempo total de ejecucion (para el cantinero 2): 8084 ms
+camarero 1 sirvio el pedido: 0
+camarero 1 sirvio el pedido: 1
+camarero 1 sirvio el pedido: 2
+camarero 1 sirvio el pedido: 3
+camarero 1 sirvio el pedido: 4
+Tiempo total de ejecucion (para el camarero 1): 5068 ms
+camarero 2 sirvio el pedido: 0
+camarero 2 sirvio el pedido: 1
+camarero 2 sirvio el pedido: 2
+camarero 2 sirvio el pedido: 3
+camarero 2 sirvio el pedido: 4
+camarero 2 sirvio el pedido: 5
+camarero 2 sirvio el pedido: 6
+camarero 2 sirvio el pedido: 7
+Tiempo total de ejecucion (para el camarero 2): 8084 ms
 Tiempo total de ejecucion: 13162 ms
 Finalizo la ejecucion sin el uso de hilos de ejecucion
 \end{verbatim}
 
-Podemos notar que no es el comportamiento que buscamos, pues queremos que cada cantinero atienda de manera independente.
+Podemos notar que no es el comportamiento que buscamos, pues queremos que cada camarero atienda de manera independente.
 
 Si usamos dos hilos de procesamiento, tenemos.
 
 \begin{lstlisting}
 var stopwatchTotal = System.Diagnostics.Stopwatch.StartNew();
 
-// Crear los hilos para los cantineros
-Thread cantinero1 = new Thread(new ThreadStart(Cantinero1Atiende));
-Thread cantinero2 = new Thread(new ThreadStart(Cantinero2Atiende));
+// Crear los hilos para los camareros
+Thread camarero1 = new Thread(new ThreadStart(camarero1Atiende));
+Thread camarero2 = new Thread(new ThreadStart(camarero2Atiende));
 
 // Iniciar los hilos
-cantinero1.Start();
-cantinero2.Start();
+camarero1.Start();
+camarero2.Start();
 
 // El hilo principal continua ejecutandose
 Console.WriteLine("Inicio la ejecucion con el hilo principal, que es la clase Program");
 
 // Esperar a que los hilos finalicen
-cantinero1.Join();
-cantinero2.Join();
+camarero1.Join();
+camarero2.Join();
 
 stopwatchTotal.Stop();
 Console.WriteLine($"Tiempo total de ejecucion: {stopwatchTotal.ElapsedMilliseconds} ms");
@@ -3386,31 +3386,31 @@ Console.WriteLine("Finalizo la ejecucion de todos los hilos");
 Console.ReadLine();
 
 
-// Metodos de los cantineros
-static void Cantinero1Atiende()
+// Metodos de los camareros
+static void camarero1Atiende()
 {
     var stopwatchSync = System.Diagnostics.Stopwatch.StartNew();
     int cantidadPedidos = 5;
     for (int i = 0; i < cantidadPedidos; i++)
     {
         Thread.Sleep(1000); // Simulamos el tiempo de atencion de un pedido (1 segundo)
-        Console.WriteLine("Cantinero 1 sirvio el pedido: " + i);
+        Console.WriteLine("camarero 1 sirvio el pedido: " + i);
     }
     stopwatchSync.Stop();
-    Console.WriteLine($"Tiempo total de ejecucion (para el cantinero 1): {stopwatchSync.ElapsedMilliseconds} ms");
+    Console.WriteLine($"Tiempo total de ejecucion (para el camarero 1): {stopwatchSync.ElapsedMilliseconds} ms");
 }
 
-static void Cantinero2Atiende()
+static void camarero2Atiende()
 {
     var stopwatchSync = System.Diagnostics.Stopwatch.StartNew();
     int cantidadPedidos = 8;
     for (int i = 0; i < cantidadPedidos; i++)
     {
         Thread.Sleep(1000); // Simulamos el tiempo de atencion de un pedido (1 segundo)
-        Console.WriteLine("Cantinero 2 sirvio el pedido: " + i);
+        Console.WriteLine("camarero 2 sirvio el pedido: " + i);
     }
     stopwatchSync.Stop();
-    Console.WriteLine($"Tiempo total de ejecucion (para el cantinero 2): {stopwatchSync.ElapsedMilliseconds} ms");
+    Console.WriteLine($"Tiempo total de ejecucion (para el camarero 2): {stopwatchSync.ElapsedMilliseconds} ms");
 }    
 \end{lstlisting}
 
@@ -3418,28 +3418,202 @@ Con salida.
 
 \begin{verbatim}
 Inicio la ejecucion con el hilo principal, que es la clase Program
-Cantinero 1 sirvio el pedido: 0
-Cantinero 2 sirvio el pedido: 0
-Cantinero 1 sirvio el pedido: 1
-Cantinero 2 sirvio el pedido: 1
-Cantinero 1 sirvio el pedido: 2
-Cantinero 2 sirvio el pedido: 2
-Cantinero 1 sirvio el pedido: 3
-Cantinero 2 sirvio el pedido: 3
-Cantinero 1 sirvio el pedido: 4
-Cantinero 2 sirvio el pedido: 4
-Tiempo total de ejecucion (para el cantinero 1): 5046 ms
-Cantinero 2 sirvio el pedido: 5
-Cantinero 2 sirvio el pedido: 6
-Cantinero 2 sirvio el pedido: 7
-Tiempo total de ejecucion (para el cantinero 2): 8066 ms
+camarero 1 sirvio el pedido: 0
+camarero 2 sirvio el pedido: 0
+camarero 1 sirvio el pedido: 1
+camarero 2 sirvio el pedido: 1
+camarero 1 sirvio el pedido: 2
+camarero 2 sirvio el pedido: 2
+camarero 1 sirvio el pedido: 3
+camarero 2 sirvio el pedido: 3
+camarero 1 sirvio el pedido: 4
+camarero 2 sirvio el pedido: 4
+Tiempo total de ejecucion (para el camarero 1): 5046 ms
+camarero 2 sirvio el pedido: 5
+camarero 2 sirvio el pedido: 6
+camarero 2 sirvio el pedido: 7
+Tiempo total de ejecucion (para el camarero 2): 8066 ms
 Tiempo total de ejecucion: 8089 ms
 Finalizo la ejecucion de todos los hilos
 \end{verbatim}
 
-En este ejemplo, los cantineros representan los hilos de procesamiento. Cada cantinero atiende un conjunto de pedidos (tareas) de forma independiente, y cada pedido toma un segundo en ser procesado. El hilo principal, que es el inicio de la aplicación (\emph{Main}), crea y arranca los hilos de los cantineros utilizando \emph{Thread.Start()}. Luego, el hilo principal espera a que los hilos de los cantineros finalicen mediante \emph{Thread.Join()}, lo que asegura que el hilo principal no finalice hasta que todos los hilos hayan completado su trabajo, si quitamos esta sentencia (\emph{Thread.Join()}), el hilo principal finalizaría aunque los dos cantineros seguirían trabajando.
+En este ejemplo, los camareros representan los hilos de procesamiento. Cada camarero atiende un conjunto de pedidos (tareas) de forma independiente, y cada pedido toma un segundo en ser procesado. El hilo principal, que es el inicio de la aplicación (\emph{Main}), crea y arranca los hilos de los camareros utilizando \emph{Thread.Start()}. Luego, el hilo principal espera a que los hilos de los camareros finalicen mediante \emph{Thread.Join()}, lo que asegura que el hilo principal no finalice hasta que todos los hilos hayan completado su trabajo, si quitamos esta sentencia (\emph{Thread.Join()}), el hilo principal finalizaría aunque los dos camareros seguirían trabajando.
 
-La ventaja de utilizar hilos de procesamiento es que permite que nuestra aplicación realice tareas en paralelo, lo que puede mejorar significativamente la eficiencia y el rendimiento, especialmente en situaciones donde hay operaciones que requieren mucho tiempo de procesamiento o cuando deseamos mantener una interfaz de usuario (en aplicaciones con GUI) receptiva mientras se ejecutan tareas en segundo plano.
+La ventaja de utilizar hilos de procesamiento es que permite que nuestra aplicación realice tareas en paralelo, lo que puede mejorar significativamente la eficiencia y el rendimiento, especialmente en situaciones donde hay operaciones que requieren mucho tiempo de procesamiento o cuando deseamos mantener una interfaz de usuario receptiva mientras se ejecutan tareas en segundo plano.
+
+\subsection{Parallel.ForEach}
+
+En C\#, la clase \emph{Parallel} proporciona una forma conveniente de realizar operaciones en paralelo utilizando el método \emph{ForEach}. Este método permite procesar elementos de una colección en paralelo, lo que puede mejorar el rendimiento en sistemas con múltiples núcleos de CPU.
+
+El método \emph{Parallel.ForEach} se utiliza para realizar un bucle en paralelo en una colección de elementos. La sintaxis general es la siguiente:
+
+\begin{lstlisting}
+Parallel.ForEach(coleccion, (elemento) =>
+{
+    // Codigo para procesar cada elemento en paralelo
+});
+\end{lstlisting}
+
+Donde:
+\begin{itemize}
+    \item \emph{coleccion}: Es la colección de elementos que se recorrerá en paralelo.
+    \item \emph{elemento}: Es una variable que representa cada elemento de la colección en cada iteración del bucle.
+\end{itemize}
+
+A continuación, veamos un ejemplo utilizando \emph{Parallel.ForEach} para calcular el cuadrado de cada número en una lista de enteros:
+
+\begin{lstlisting}
+List<int> numeros = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+var stopwatchSync = System.Diagnostics.Stopwatch.StartNew();
+Parallel.ForEach(numeros, (numero) =>
+{
+    Thread.Sleep(1000);
+    int cuadrado = numero * numero;
+    Console.WriteLine($"El cuadrado de {numero} es: {cuadrado}");
+});
+Console.WriteLine("Procesamiento completado.");
+Console.WriteLine($"Tiempo total de ejecucion: {stopwatchSync.ElapsedMilliseconds} ms");
+Console.ReadLine();
+\end{lstlisting}
+
+Con salida.
+
+\begin{verbatim}
+El cuadrado de 4 es: 16
+El cuadrado de 8 es: 64
+El cuadrado de 7 es: 49
+El cuadrado de 3 es: 9
+El cuadrado de 9 es: 81
+El cuadrado de 6 es: 36
+El cuadrado de 2 es: 4
+El cuadrado de 1 es: 1
+El cuadrado de 5 es: 25
+El cuadrado de 10 es: 100
+Procesamiento completado.
+Tiempo total de ejecucion: 1744 ms
+\end{verbatim}
+
+En este ejemplo, cada número en la lista se procesa en paralelo, calculando su cuadrado y mostrándolo en la consola.
+
+Es importante tener en cuenta que no todas las operaciones son adecuadas para la ejecución en paralelo, y siempre es necesario realizar pruebas y evaluar el rendimiento en diferentes escenarios antes de utilizar \emph{Parallel.ForEach} en código de producción.
+
+La opción, sin usar \emph{Parallel.ForEach} es.
+
+\begin{lstlisting}
+List<int> numeros = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+var stopwatchSync = System.Diagnostics.Stopwatch.StartNew();
+foreach(int numero in numeros)
+{
+    Thread.Sleep(1000);
+    int cuadrado = numero * numero;
+    Console.WriteLine($"El cuadrado de {numero} es: {cuadrado}");
+};
+Console.WriteLine("Procesamiento completado.");
+Console.WriteLine($"Tiempo total de ejecucion: {stopwatchSync.ElapsedMilliseconds} ms");
+Console.ReadLine();
+\end{lstlisting}
+
+con salida.
+
+\begin{verbatim}
+El cuadrado de 1 es: 1
+El cuadrado de 2 es: 4
+El cuadrado de 3 es: 9
+El cuadrado de 4 es: 16
+El cuadrado de 5 es: 25
+El cuadrado de 6 es: 36
+El cuadrado de 7 es: 49
+El cuadrado de 8 es: 64
+El cuadrado de 9 es: 81
+El cuadrado de 10 es: 100
+Procesamiento completado.
+Tiempo total de ejecucion: 10137 ms
+\end{verbatim}
+
+Notemos que hay una gran diferencia en los tiempos de ejecución.
+
+Además de \emph{Parallel.ForEach} y \emph{Parallel.For}, la clase \emph{Parallel} en C\# proporciona otros métodos útiles para trabajar con tareas en paralelo. A continuación, veamos brevemente algunos de estos métodos:
+
+\begin{itemize}
+    \item \emph{Parallel.Invoke}: Permite invocar múltiples acciones en paralelo. Las acciones se ejecutan simultáneamente y el método espera hasta que todas las acciones hayan finalizado.
+    
+\begin{lstlisting}
+Parallel.Invoke(
+    () => Metodo1(),
+    () => Metodo2(),
+    () => Metodo3()
+);
+\end{lstlisting}
+
+    \item \emph{Parallel.ForAll}: Similar a \emph{Parallel.ForEach}, pero este método trabaja con arreglos. Permite realizar un bucle en paralelo sobre un arreglo y aplicar una operación a cada elemento.
+    
+\begin{lstlisting}
+int[] numeros = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+Parallel.ForAll(numeros, (numero) =>
+{
+    int cuadrado = numero * numero;
+    Console.WriteLine($"El cuadrado de {numero} es: {cuadrado}");
+});
+\end{lstlisting}
+
+    \item \emph{Parallel.ForEach<TSource, TLocal>}: Este método extiende \emph{Parallel.ForEach} y proporciona la capacidad de tener un estado local para cada hilo en el que se ejecuta. Puede ser útil cuando necesitas realizar cálculos parciales y luego combinar los resultados.
+    
+\begin{lstlisting}
+List<int> numeros = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+Parallel.ForEach(numeros,
+    () => new List<int>(),
+    (numero, estado, listaLocal) =>
+    {
+        listaLocal.Add(numero * 2);
+        return listaLocal;
+    },
+    (listaLocal) =>
+    {
+        Console.WriteLine($"Resultado combinado: {string.Join(", ", listaLocal)}");
+    }
+);
+\end{lstlisting}
+
+    \item \emph{Parallel.For}: Permite realizar un bucle \emph{for} en paralelo. Divide automáticamente el rango de iteración en partes y procesa cada iteración en hilos separados.
+    
+\begin{lstlisting}
+Parallel.For(1, 11, (i) =>
+{
+    Console.WriteLine(i);
+});
+\end{lstlisting}
+
+    \item \emph{Parallel.LoopResult}: Se utiliza con el método \emph{Parallel.For} para obtener información sobre el estado de ejecución del bucle en paralelo. Permite verificar si el bucle se ha completado correctamente o si se ha cancelado.
+    
+\begin{lstlisting}
+ParallelLoopResult result = Parallel.For(1, 11, (i, estado) =>
+{
+    if (i == 5)
+    {
+        estado.Stop();
+    }
+});
+if (!result.IsCompleted)
+{
+    Console.WriteLine("El bucle fue detenido antes de completarse.");
+}
+\end{lstlisting}
+
+    \item \emph{ParallelOptions}: Esta clase se utiliza para establecer opciones y configuraciones adicionales al trabajar con métodos paralelos, como el número máximo de hilos utilizados, el token de cancelación, etc.
+
+\begin{lstlisting}
+ParallelOptions options = new ParallelOptions();
+options.MaxDegreeOfParallelism = 4; // Limitar el numero maximo de hilos a 4
+
+Parallel.ForEach(numeros, options, (numero) =>
+{
+    // Operaciones en paralelo con restriccion de hilos
+});
+\end{lstlisting}
+
+\end{itemize}
 
 \subsection{Callbacks}
 
@@ -3448,8 +3622,15 @@ Los callbacks son una técnica fundamental en la programación asíncrona. Consi
 Supongamos que tenemos una clase llamada \emph{DataService}, que se encarga de descargar datos de un servidor remoto de manera asíncrona. A continuación, presentamos un ejemplo utilizando callbacks en C\#:
 
 \begin{lstlisting}
-using System;
-using System.Threading.Tasks;
+DataService dataService = new DataService();
+
+// Llamada a la funcion de descarga con un callback
+string url = "https://example.com/data";
+dataService.DownloadDataAsync(url, ProcessDownloadedData);
+
+// Continuamos con otras tareas mientras esperamos la descarga
+Console.WriteLine("Esperando la descarga...");
+Console.ReadLine();    
 
 public class DataService
 {
@@ -3466,21 +3647,6 @@ public class DataService
         callback(data);
     }
 }
-
-public class Program
-{
-    public static void Main()
-    {
-        DataService dataService = new DataService();
-
-        // Llamada a la funcion de descarga con un callback
-        string url = "https://example.com/data";
-        dataService.DownloadDataAsync(url, ProcessDownloadedData);
-
-        // Continuamos con otras tareas mientras esperamos la descarga
-        Console.WriteLine("Esperando la descarga...");
-        Console.ReadLine();
-    }
 
     // Funcion de callback para procesar los datos descargados
     public static void ProcessDownloadedData(string data)
@@ -3510,53 +3676,44 @@ En el contexto de C\#, podemos hacer uso de bibliotecas que implementan el conce
 A continuación, presentamos un ejemplo general utilizando \emph{Task} en C\# para ilustrar cómo funcionan las promesas:
 
 \begin{lstlisting}
-using System;
-using System.Threading.Tasks;
+Task<string> promise = DownloadDataAsync("https://example.com/data");
+// Continuamos con otras tareas mientras esperamos la descarga
+Console.WriteLine("Esperando la descarga...");
 
-public class Program
+// Cuando la promesa se resuelve, se ejecuta el codigo del then
+promise.ContinueWith(result =>
 {
-    public static void Main()
+    if (result.Status == TaskStatus.RanToCompletion)
     {
-        Task<string> promise = DownloadDataAsync("https://example.com/data");
-        // Continuamos con otras tareas mientras esperamos la descarga
-        Console.WriteLine("Esperando la descarga...");
-    
-        // Cuando la promesa se resuelve, se ejecuta el codigo del then
-        promise.ContinueWith(result =>
-        {
-            if (result.Status == TaskStatus.RanToCompletion)
-            {
-                string data = result.Result;
-                ProcessDownloadedData(data);
-            }
-            else if (result.Status == TaskStatus.Faulted)
-            {
-                Console.WriteLine("Error al descargar los datos: " + result.Exception.InnerException.Message);
-            }
-        });
-    
-        // Continuamos con otras tareas mientras se completa la promesa
-        Console.ReadLine();
+        string data = result.Result;
+        ProcessDownloadedData(data);
     }
-    
-    // Funcion de descarga asincrona utilizando Task<string>
-    public static async Task<string> DownloadDataAsync(string url)
+    else if (result.Status == TaskStatus.Faulted)
     {
-        // Simulamos una operacion de descarga que lleva tiempo
-        await Task.Delay(3000); // Simulamos una descarga de 3 segundos
-    
-        // Datos descargados
-        string data = "Datos descargados desde " + url;
-    
-        return data;
+        Console.WriteLine("Error al descargar los datos: " + result.Exception.InnerException.Message);
     }
-    
-    // Funcion para procesar los datos descargados
-    public static void ProcessDownloadedData(string data)
-    {
-        Console.WriteLine("Datos recibidos:");
-        Console.WriteLine(data);
-    }
+});
+
+// Continuamos con otras tareas mientras se completa la promesa
+Console.ReadLine();
+
+// Funcion de descarga asincrona utilizando Task<string>
+public static async Task<string> DownloadDataAsync(string url)
+{
+    // Simulamos una operacion de descarga que lleva tiempo
+    await Task.Delay(3000); // Simulamos una descarga de 3 segundos
+
+    // Datos descargados
+    string data = "Datos descargados desde " + url;
+
+    return data;
+}
+
+// Funcion para procesar los datos descargados
+public static void ProcessDownloadedData(string data)
+{
+    Console.WriteLine("Datos recibidos:");
+    Console.WriteLine(data);
 }
 \end{lstlisting}
 
@@ -3575,47 +3732,40 @@ La combinación de las palabras clave \emph{async} y \emph{await} en C\# (y en o
 A continuación, presentamos un ejemplo de cómo utilizar \emph{async} y \emph{await} en C\#:
 
 \begin{lstlisting}
-using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 
-public class Program
+string url = "https://api.example.com/data";
+// Llamada a una funcion asincrona con await
+try
 {
-    public static async Task Main()
+    string data = await DownloadDataAsync(url);
+    Console.WriteLine("Datos descargados: " + data);
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error al descargar los datos: " + ex.Message);
+}
+
+// Continuamos con otras tareas mientras se realiza la descarga
+Console.WriteLine("Continuando con otras tareas...");
+Console.ReadLine();
+
+// Funcion de descarga asincrona utilizando HttpClient
+public static async Task<string> DownloadDataAsync(string url)
+{
+    using (HttpClient httpClient = new HttpClient())
     {
-        string url = "https://api.example.com/data";
-        // Llamada a una funcion asincrona con await
-        try
-        {
-            string data = await DownloadDataAsync(url);
-            Console.WriteLine("Datos descargados: " + data);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error al descargar los datos: " + ex.Message);
-        }
-    
-        // Continuamos con otras tareas mientras se realiza la descarga
-        Console.WriteLine("Continuando con otras tareas...");
-        Console.ReadLine();
-    }
-    
-    // Funcion de descarga asincrona utilizando HttpClient
-    public static async Task<string> DownloadDataAsync(string url)
-    {
-        using (HttpClient httpClient = new HttpClient())
-        {
-            // Realizamos una peticion GET a la URL proporcionada
-            HttpResponseMessage response = await httpClient.GetAsync(url);
-    
-            // Verificamos si la respuesta es exitosa
-            response.EnsureSuccessStatusCode();
-    
-            // Leemos los datos de la respuesta y los devolvemos
-            return await response.Content.ReadAsStringAsync();
-        }
+        // Realizamos una peticion GET a la URL proporcionada
+        HttpResponseMessage response = await httpClient.GetAsync(url);
+
+        // Verificamos si la respuesta es exitosa
+        response.EnsureSuccessStatusCode();
+
+        // Leemos los datos de la respuesta y los devolvemos
+        return await response.Content.ReadAsStringAsync();
     }
 }
+
 \end{lstlisting}
 
 En este ejemplo, utilizamos \emph{async} y \emph{await} para trabajar con una función asíncrona llamada \emph{DownloadDataAsync}. Dentro de esta función, utilizamos la clase \emph{HttpClient} para realizar una petición GET a una URL y obtener los datos.
@@ -3623,88 +3773,6 @@ En este ejemplo, utilizamos \emph{async} y \emph{await} para trabajar con una fu
 En la función \emph{Main}, llamamos a \emph{DownloadDataAsync} utilizando \emph{await} para esperar la resolución de la promesa. Cuando la descarga se completa exitosamente, obtenemos los datos descargados y los mostramos en la consola. Si ocurre un error durante la descarga, capturamos la excepción en el bloque \emph{catch} y mostramos un mensaje de error.
 
 El uso de \emph{async} y \emph{await} nos permite escribir código asíncrono de manera más similar a un código síncrono, lo que facilita la lectura y comprensión del flujo de ejecución del programa.
-
-\subsection{Event Loop (Bucle de eventos)}
-
-El bucle de eventos es una parte crucial en el contexto de la programación asíncrona. Es responsable de gestionar las tareas asíncronas en el programa y asegurarse de que se ejecuten en el momento adecuado.
-
-En la programación asíncrona con C\#, la combinación de palabras clave \emph{async} y \emph{await} junto con el uso de \emph{Task} y \emph{Task<T>} permiten trabajar con operaciones asíncronas de manera más clara y estructurada, mientras el bucle de eventos maneja la ejecución concurrente de estas tareas asíncronas.
-
-\subsubsection*{Ejemplo de uso del Bucle de Eventos en C\#}
-
-A continuación, presentamos un ejemplo en C\# que utiliza \emph{async/await} para simular una operación de descarga de datos desde una API web de forma asíncrona:
-
-\begin{lstlisting}
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-public class Program
-{
-    public static async Task Main()
-    {
-        string url = "https://api.example.com/data";
-        // Llamada a una funcion asincrona con await
-        try
-        {
-            string data = await DownloadDataAsync(url);
-            Console.WriteLine("Datos descargados: " + data);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error al descargar los datos: " + ex.Message);
-        }
-    
-        // Continuamos con otras tareas mientras se realiza la descarga
-        Console.WriteLine("Continuando con otras tareas...");
-        Console.ReadLine();
-    }
-    
-    // Funcion de descarga asincrona utilizando HttpClient
-    public static async Task<string> DownloadDataAsync(string url)
-    {
-        using (HttpClient httpClient = new HttpClient())
-        {
-            // Realizamos una peticion GET a la URL proporcionada
-            HttpResponseMessage response = await httpClient.GetAsync(url);
-    
-            // Verificamos si la respuesta es exitosa
-            response.EnsureSuccessStatusCode();
-    
-            // Leemos los datos de la respuesta y los devolvemos
-            return await response.Content.ReadAsStringAsync();
-        }
-    }
-}
-\end{lstlisting}
-
-En este ejemplo, utilizamos \emph{async} y \emph{await} para trabajar con una función asíncrona llamada \emph{DownloadDataAsync}. Dentro de esta función, utilizamos la clase \emph{HttpClient} para realizar una petición GET a una URL y obtener los datos.
-
-En la función \emph{Main}, llamamos a \emph{DownloadDataAsync} utilizando \emph{await} para esperar la resolución de la promesa. Cuando la descarga se completa exitosamente, obtenemos los datos descargados y los mostramos en la consola. Si ocurre un error durante la descarga, capturamos la excepción en el bloque \emph{catch} y mostramos un mensaje de error.
-
-El uso de \emph{async} y \emph{await} en C\# nos permite escribir código asíncrono de manera más similar a un código síncrono, lo que facilita la lectura y comprensión del flujo de ejecución del programa.
-
-\subsection{Ejemplo de uso de Programación Asíncrona en C\#}
-
-A continuación, se muestra un ejemplo básico de cómo utilizar la programación asíncrona en C\# utilizando \emph{async} y \emph{await}:
-
-\begin{lstlisting}
-// Supongamos que tenemos una funcion que realiza una tarea asincrona.
-async Task<int> RealizarTareaAsincrona()
-{
-    await Task.Delay(2000); // Simulamos una tarea que toma 2 segundos.
-    return 42; // Retornamos un resultado.
-}
-
-// Luego, podemos usar esta funcion en otra funcion asincrona.
-async Task MostrarResultadoAsincrono()
-{
-    int resultado = await RealizarTareaAsincrona();
-    Console.WriteLine("El resultado es: " + resultado);
-}
-\end{lstlisting}
-
-En este ejemplo, la función \emph{RealizarTareaAsincrona} realiza una operación asíncrona utilizando \emph{await Task.Delay(2000)}, lo que simula una espera de 2 segundos. La función \emph{MostrarResultadoAsincrono} utiliza \emph{await} para esperar el resultado de \emph{RealizarTareaAsincrona} y luego muestra el resultado en la consola.
 
 \section{Arquitectura Hexagonal}
 
@@ -3718,26 +3786,28 @@ El objetivo principal de la arquitectura hexagonal es crear una aplicación que 
 
 \begin{enumerate}
     \item Capa de Dominio:
-    \begin{itemize}
+   \begin{itemize}
         \item Modelos: Representan los objetos del dominio, encapsulando tanto los datos como la lógica de negocio relacionada.
-        \item Interfaces de Repositorio: Definen los contratos para la persistencia y recuperación de las entidades.
-        \item Servicios de dominio: Implementan la lógica de negocio más compleja que no se puede asignar directamente a una entidad específica.
+        \item Interfaces de repositorio: Definen los contratos para la persistencia y recuperación de las entidades.
+        \item Interfaces de servicios: Definen los contratos para los servicios.
+        \item Servicios de dominio: Implementan la lógica de negocio más compleja que no se puede asignar directamente a un modelo específico.
     \end{itemize}
     \item Capa de Aplicación:
-    \begin{itemize}
-        \item Puertos de entrada: Son los puntos de entrada a la aplicación desde el exterior. Los puertos de entrada son interfaces que definen cómo se pueden recibir y procesar las solicitudes externas.
-        \item Puertos de salida: Son los puntos de salida de la aplicación hacia el exterior. Los puertos de salida son interfaces que definen cómo se pueden enviar respuestas o datos a sistemas externos.
-        \item Adaptadores de entrada: Son implementaciones concretas de los puertos de entrada. Los adaptadores de entrada se encargan de recibir las solicitudes externas y mapearlas a los comandos o consultas internas de la aplicación. Estos adaptadores también se encargan de la validación de entrada y la traducción de datos hacia el formato interno de la aplicación.
-        \item Adaptadores de salida: Son implementaciones concretas de los puertos de salida. Los adaptadores de salida se encargan de tomar los resultados o datos generados por la aplicación y enviarlos a sistemas externos.
+   \begin{itemize}
+        \item Puertos de entrada (Entidades de servicios de entrada): Son los puntos de entrada a la aplicación desde la infraestructura. Los puertos de entrada son interfaces que definen cómo se pueden recibir y procesar las solicitudes externas.
+        \item Puertos de salida (Entidades de servicios de entrada): Son los puntos de salida de la aplicación hacia la infraestructura. Los puertos de salida son interfaces que definen cómo se pueden enviar respuestas o datos a sistemas externos.
+        \item Adaptadores de entrada (Servicios de entrada): Son implementaciones concretas de los puertos de entrada. Los adaptadores de entrada se encargan de recibir las solicitudes externas y mapearlas a los comandos o consultas internas de la aplicación. Estos adaptadores también se encargan de la validación de entrada y la traducción de datos hacia el formato interno de la aplicación.
+        \item Adaptadores de salida (Servicios de salida): Son implementaciones concretas de los puertos de salida. Los adaptadores de salida se encargan de tomar los resultados o datos generados por la aplicación y enviarlos a sistemas externos.
     \end{itemize}
     \item Capa de Infraestructura:
-    \begin{itemize}
+   \begin{itemize}
         \item Entidades: Representan Las entidades de las bases de datos
         \item Implementaciones de Repositorio: Proporcionan la implementación concreta de los contratos de las interfaces de repositorio, realizando operaciones de persistencia y recuperación de datos.
         \item Adaptadores: Se encargan de adaptar los componentes de la aplicación a las interfaces de la infraestructura externa, como bases de datos, sistemas de archivos, servicios web, etc.
+        \item Controladores: De ser necesario, en esta capa estarán los controladores si la aplicación es una api.
     \end{itemize}
     \item Patrones y principios adicionales:
-    \begin{itemize}
+   \begin{itemize}
         \item DTOs (Data Transfer Objects): Utilizados para transferir datos entre los componentes de la aplicación.
         \item Modelos: Representan estructuras de datos utilizadas internamente en la aplicación, a menudo mapeadas desde las entidades o DTOs.
         \item Inversión de Dependencias (Dependency Inversion Principle): Se enfoca en invertir las dependencias para permitir una arquitectura más flexible y modular.
@@ -3745,7 +3815,7 @@ El objetivo principal de la arquitectura hexagonal es crear una aplicación que 
     \end{itemize}
 \end{enumerate}
 
-En una arquitectura hexagonal bien diseñada, los DTOs se utilizan para transferir datos entre los diferentes componentes de la aplicación, los modelos se utilizan internamente para representar estructuras de datos y las entidades se utilizan para modelar los objetos y la lógica de negocio del dominio. Los controladores en la capa de aplicación coordinan las interacciones entre los diferentes componentes, mientras que los adaptadores de infraestructura se encargan de adaptar la aplicación a las interfaces de la infraestructura externa.
+En una arquitectura hexagonal bien diseñada, los DTOs se utilizan para transferir datos entre los diferentes componentes de la aplicación, las entidades se utilizan internamente para representar estructuras de datos y los modelos se utilizan para modelar los objetos y la lógica de negocio del dominio. Los servicios en la capa de aplicación coordinan las interacciones entre las diferentes capas, mientras que los adaptadores de infraestructura se encargan de adaptar la aplicación a las interfaces de la infraestructura externa, sean bases de datos, apis, ets.
 
 Estos componentes y principios trabajan en conjunto para lograr una arquitectura flexible, mantenible y escalable, donde la lógica de negocio se mantiene independiente de las tecnologías y detalles de implementación, y donde los diferentes componentes son intercambiables y se pueden probar de forma aislada.
 
@@ -3756,49 +3826,11 @@ En la arquitectura hexagonal, el flujo de datos sigue un patrón conocido como "
 \begin{enumerate}
     \item Entrada de datos: Los datos ingresan a la aplicación a través de los puertos de entrada. Estos puertos pueden ser interfaces de usuario, servicios web, mensajes, archivos, entre otros. Los datos de entrada son recibidos por adaptadores específicos que se encargan de transformarlos en un formato adecuado para ser procesados por la aplicación.
     \item Capa de aplicación: Los datos procesados en los adaptadores son enviados a la capa de aplicación. Aquí se encuentra la lógica de negocio de la aplicación. Los adaptadores hacen uso de los servicios y objetos definidos en esta capa para realizar las operaciones necesarias.
-    \item Capa de dominio: La capa de dominio es el núcleo de la aplicación y contiene la lógica de negocio principal. Aquí se encuentran las entidades, los repositorios y los servicios relacionados con el dominio específico de la aplicación. Los objetos en esta capa pueden realizar operaciones en los datos recibidos y aplicar reglas de negocio.
+    \item Capa de dominio: La capa de dominio es el núcleo de la aplicación y contiene la lógica de negocio principal. Aquí se encuentran os modelos y los servicios relacionados con el dominio específico de la aplicación. Los objetos en esta capa pueden realizar operaciones en los datos recibidos y aplicar reglas de negocio.
     \item Capa de infraestructura: Una vez que la capa de dominio realiza las operaciones necesarias, los resultados son enviados de vuelta a los adaptadores a través de los puertos de salida. Los adaptadores se encargan de transformar los datos en un formato adecuado para su posterior envío o almacenamiento. Estos puertos de salida pueden ser interfaces de usuario, servicios web, bases de datos, sistemas de archivos, entre otros.
 \end{enumerate}
 
 El flujo de datos en la arquitectura hexagonal sigue un patrón en el cual los datos ingresan a través de los puertos de entrada, son procesados por la capa de aplicación y la capa de dominio, y finalmente se envían de vuelta a través de los puertos de salida. Esta arquitectura promueve la separación de la lógica de negocio de los detalles de implementación técnica, lo que facilita la modularidad, la prueba y la evolución de la aplicación.
-
-Aquí  tienes un ejemplo sencillo de flujo de datos en la arquitectura hexagonal para un sistema de gestión de usuarios:
-
-\begin{enumerate}
-    \item Entrada de datos:
-    \begin{itemize}
-        \item Puerto de entrada: Interfaz de usuario (por ejemplo, una página web).
-        \item Adaptador: Controlador de la interfaz de usuario.
-    \end{itemize}
-    \item Capa de aplicación:
-    \begin{itemize}
-        \item Objeto de la capa de aplicación: Servicio de gestión de usuarios.
-        \item Operación: Crear un nuevo usuario.
-    \end{itemize}
-    \item Capa de dominio:
-    \begin{itemize}
-        \item Modelo: Usuario.
-        \item Repositorio: Repositorio de usuarios.
-        \item Regla de negocio: Validar que el usuario tenga un nombre único.
-    \end{itemize}
-    \item Capa de infraestructura:
-    \begin{itemize}
-        \item Puerto de salida: Base de datos. Hay que relacionar por medio de Dtos los Modelos y las entidades.
-        \item Adaptador: Adaptador de base de datos.
-    \end{itemize}
-\end{enumerate}
-
-El flujo de datos sería el siguiente:
-
-\begin{enumerate}
-    \item Un usuario ingresa los datos (nombre, correo electrónico, contraseña, etc.) en el formulario de registro de la interfaz de usuario.
-    \item El controlador de la interfaz de usuario recibe los datos y los pasa al servicio de gestión de usuarios de la capa de aplicación.
-    \item El servicio de gestión de usuarios llama al repositorio de usuarios de la capa de dominio para crear un nuevo usuario.
-    \item Antes de crear el usuario, la capa de dominio verifica si el nombre del usuario ya existe en el repositorio de usuarios.
-    \item Si el nombre del usuario no esstá duplicado, se crea un objeto de entidad de usuario y se guarda en el repositorio de usuarios.
-    \item El adaptador de base de datos toma el objeto de entidad de usuario y lo guarda en la base de datos.
-\end{enumerate}
-En este ejemplo, los datos fluyen desde la interfaz de usuario hasta la capa de aplicación, luego a la capa de dominio y finalmente se almacenan en la base de datos a través de los adaptadores correspondientes. La arquitectura hexagonal permite que la lógica de negocio se mantenga independiente de los detalles de implementación técnica, lo que facilita la prueba, la reutilización y la evolución del sistema.
 
 Un puerto de entrada y un puerto de salida en la arquitectura hexagonal son interfaces que definen cómo se comunican los componentes externos con la aplicación y cómo la aplicación se comunica con los componentes externos, respectivamente. A nivel de diseño, un puerto de entrada y un puerto de salida se representan generalmente como interfaces en el lenguaje de programación utilizado.
 
@@ -3833,13 +3865,13 @@ Existen dos tipos de adaptadores comunes en la arquitectura hexagonal: adaptador
 \begin{enumerate}
     \item Adaptadores de entrada:
     Los adaptadores de entrada son responsables de recibir los datos provenientes de los puertos de entrada y convertirlos en una forma que la aplicación pueda entender. Algunos ejemplos de adaptadores de entrada pueden incluir:
-    \begin{itemize}
+   \begin{itemize}
         \item Controladores de interfaz de usuario: Estos adaptadores reciben las solicitudes del usuario a través de la interfaz de usuario, extraen los datos necesarios y los pasan a la capa de aplicación para su procesamiento.
         \item Adaptadores de servicios web: Estos adaptadores reciben las solicitudes HTTP de los clientes, interpretan los datos de la solicitud y los convierten en una forma que la aplicación pueda manejar.
     \end{itemize}
     \item Adaptadores de salida:
     Los adaptadores de salida son responsables de recibir los resultados de la aplicación y convertirlos en un formato adecuado para enviarlos a través de los puertos de salida. Algunos ejemplos de adaptadores de salida pueden incluir:
-    \begin{itemize}
+   \begin{itemize}
         \item Adaptadores de bases de datos: Estos adaptadores se encargan de interactuar con una base de datos específica y realizar operaciones de lectura o escritura de datos.
         \item Adaptadores de servicios web: Estos adaptadores toman los resultados de la aplicación y los envían a través de servicios web para ser consumidos por otros sistemas.
         \item Adaptadores de mensajes: Estos adaptadores se utilizan para enviar mensajes a través de sistemas de mensajería o colas, permitiendo la integración con otros componentes o sistemas.
@@ -3911,21 +3943,21 @@ Los DTOs son objetos simples utilizados para transferir datos entre componentes 
 
 \subsection{Entidades}
 
-En el contexto de la arquitectura de software, las entidades son objetos que representan conceptos del dominio de la aplicación. Las entidades encapsulan datos y comportamiento relacionados a un concepto específico y son fundamentales para modelar y manipular la información dentro de la aplicación.
+En el contexto de la arquitectura de software, las entidades suelen representar tablas de la base de datos, tales como clientes, usuarios, transacciones, etc. Las entidades encapsulan datos y son fundamentales para modelar y manipular la información dentro de la aplicación.
 
 Aquí tienes algunas características y puntos clave sobre las entidades:
 \begin{enumerate}
     \item Representación de conceptos del dominio: Las entidades representan objetos del mundo real o abstracto que son relevantes para el dominio de la aplicación. Por ejemplo, en una aplicación de gestión de usuarios, podría haber una entidad \enquote*{Usuario} que contiene los atributos como nombre, dirección de correo electrónico, contraseña, etc.
     \item Encapsulación de datos: Las entidades encapsulan los datos relacionados a un concepto específico. Estos datos se almacenan en propiedades o atributos de la entidad y pueden ser de diferentes tipos, como cadenas de texto, números, fechas, listas u otros objetos relacionados.
-    \item Lógica de negocio: Las entidades pueden contener lógica de negocio relacionada a su comportamiento y reglas de validación. Por ejemplo, la entidad \enquote*{Usuario} podría tener métodos para verificar la validez de una contraseña o para calcular información basada en sus atributos.
+    \item No contienen lógica de negocio: Las entidades no contienen lógica de negocio relacionada a su comportamiento y reglas de validación. Por ejemplo, la entidad \emph*{Usuario}, puede estar relacionada a un modelo y este a su vez podría tener métodos para verificar la validez de una contraseña o para calcular información basada en sus atributos, pero estas verificaciones se hacen en la capa de dominio.
     \item Identidad única: Cada entidad generalmente tiene una identidad única que la distingue de otras entidades del mismo tipo. Esta identidad puede ser representada por un identificador único, como un número o una cadena de caracteres.
-    \item Persistencia y almacenamiento: Las entidades pueden ser utilizadas para representar datos que se almacenan en una base de datos o en algún otro medio de almacenamiento. En estos casos, se utilizan técnicas de mapeo objeto-relacional (ORM) u otras técnicas para persistir y recuperar las entidades en el almacenamiento.
+    \item Persistencia y almacenamiento: Las entidades suelen ser utilizadas para representar datos que se almacenan en una base de datos o en algún otro medio de almacenamiento. En estos casos, se utilizan técnicas de mapeo objeto-relacional (ORM) u otras técnicas para persistir y recuperar las entidades en el almacenamiento.
     \item Relaciones entre entidades: Las entidades pueden tener relaciones entre sí, formando una estructura de datos más compleja. Por ejemplo, en un sistema de gestión de pedidos, podría haber una entidad \enquote*{Pedido} que tiene una relación con una entidad \enquote*{Cliente}.
 \end{enumerate}
 
-En la arquitectura hexagonal, las entidades suelen pertenecer a la capa de dominio, representando conceptos fundamentales del negocio. Estas entidades son independientes de las capas externas y no contienen dependencias de infraestructura o detalles de implementación.
+En la arquitectura hexagonal, las entidades suelen pertenecer a la capa de infraestructura, representando entidades fundamentales del negocio. Estas entidades son independientes de las capas externas y no contienen detalles de implementación.
 
-Las entidades desempeñan un papel central en la arquitectura, ya que representan la información clave y la lógica de negocio de la aplicación. Al mantener una separación clara entre las entidades y las capas externas, se logra un diseño más modular, flexible y mantenible.
+Las entidades desempeñan un papel central en la arquitectura, usualmente representan tablas de la base de datos. Mediante el uso de DTO's se puede conseguir relacionar las entidades con los modelos en el dominio.
 
 \subsection{Inyección de dependencias}
 
@@ -3985,16 +4017,15 @@ public class Cliente
 
 En este ejemplo, la clase Cliente tiene una dependencia en la interfaz IServicioEmail, que representa la capacidad de enviar correos electrónicos. En el constructor de la clase Cliente, se espera una instancia de IServicioEmail para ser inyectada. Esto permite que el cliente sea independiente de la implementación concreta de IServicioEmail.
 
-
 \begin{lstlisting}
 services.AddTransient<IServicioEmail, ServicioEmail>();
 \end{lstlisting}
 
-En cualquier lugar donde necesites utilizar IServicioEmail, puedes hacerlo a través de la inyección de dependencia.
+En cualquier lugar donde necesites utilizar IServicioEmail, podemos hacerlo a través de la inyección de dependencia.
 
-Con este enfoque, puedes cambiar fácilmente la implementación de IServicioEmail sin modificar la clase Cliente. Por ejemplo, podrías tener una implementación de IServicioEmail específica para pruebas unitarias que no envíe correos electrónicos reales, sino que los simule.
+Con este enfoque, podemos cambiar fácilmente la implementación de IServicioEmail sin modificar la clase Cliente. Por ejemplo, podrías tener una implementación de IServicioEmail específica para pruebas unitarias que no envíe correos electrónicos reales, sino que los simule.
 
-Recuerda que el alcance transitorio (AddTransient) crea una nueva instancia cada vez que se resuelve, lo cual puede ser adecuado para servicios livianos y sin estado. Si necesitas un comportamiento diferente, como un alcance de instancia única o un alcance por solicitud, puedes utilizar AddSingleton o AddScoped respectivamente en lugar de AddTransient en la configuración de inyección de dependencia.
+Recuerda que el alcance transitorio (AddTransient) crea una nueva instancia cada vez que se resuelve, lo cual puede ser adecuado para servicios livianos y sin estado. Si necesitas un comportamiento diferente, como un alcance de instancia única o un alcance por solicitud, podemos utilizar AddSingleton o AddScoped respectivamente en lugar de AddTransient en la configuración de inyección de dependencia.
 
 \subsection*{Tipos de inyección de dependencias}
 
@@ -4002,15 +4033,15 @@ Las siguientes son configuraciones de inyección de dependencia en ASP.NET Core:
 
 \begin{enumerate}
     \item \textbf{Singleto}n: Con AddSingleton, se registra una instancia única de una clase en el contenedor de inyección de dependencia. Esto significa que se crea una única instancia de la clase y se reutiliza cada vez que se resuelve esa dependencia. Es adecuado para objetos que deben compartirse en toda la aplicación. Aquí tienes un ejemplo:
-    \begin{lstlisting}
+   \begin{lstlisting}
 services.AddSingleton<IServicioEmail, ServicioEmail>();
 \end{lstlisting}
     \item \textbf{Scoped}: Con AddScoped, se registra una instancia por solicitud en el contenedor de inyección de dependencia. Esto significa que se crea una nueva instancia de la clase para cada solicitud HTTP entrante y se reutiliza en el ámbito de esa solicitud. Es útil cuando deseas que una instancia se mantenga durante la duración de una solicitud, pero no necesariamente en toda la aplicación. Aquí tienes un ejemplo:
-    \begin{lstlisting}
+   \begin{lstlisting}
 services.AddScoped<IServicioEmail, ServicioEmail>();
 \end{lstlisting}
     \item \textbf{Transitorio}: Con AddTransient, se registra una nueva instancia de la clase en cada solicitud de resolución en el contenedor de inyección de dependencia. Esto significa que se crea una nueva instancia cada vez que se resuelve la dependencia. Es útil cuando deseas una nueva instancia de la clase cada vez que se solicita. Aquí tienes un ejemplo:
-    \begin{lstlisting}
+   \begin{lstlisting}
 services.AddTransient<IServicioEmail, ServicioEmail>();
 \end{lstlisting}
 \end{enumerate}
@@ -4220,7 +4251,7 @@ El patrón AAA (Arrange-Act-Assert) es una convención comúnmente utilizada en 
 \begin{itemize}
     \item \textbf{Arrange (Preparación):} En esta etapa, se prepara el entorno necesario para la prueba. Se configuran las condiciones iniciales, se crean objetos y se establecen las dependencias necesarias. Aquí se definen los datos de entrada y se configuran los valores esperados.
     \item \textbf{Act (Acción):} En esta etapa, se realiza la acción o el comportamiento que se quiere probar. Se invoca el método o se lleva a cabo la operación que se desea evaluar. Aquí se obtiene el resultado de la acción realizada.
-    \item \textbf{Assert (Verificación):} En esta etapa, se verifica si el resultado obtenido de la acción realizada es el esperado. Se utilizan aserciones (assertions) para comparar el resultado actual con el valor esperado. Si la aserción es verdadera, la prueba pasa; de lo contrario, la prueba falla y se muestra un mensaje de error.
+    \item \textbf{Assert (Verificación):} En esta etapa, se verifica si el resultado obtenido de la acción realizada es el esperado. Se utilizan aserciones (assertions) para comparar el resultado actual con el valor esperado. Si la aserción es verdadera, la prueba pasa; de lo contrario, la prueba falla y veamos un mensaje de error.
 \end{itemize}
 El uso del patrón AAA facilita la comprensión de la intención de la prueba y mejora su mantenibilidad, ya que separa claramente las diferentes etapas de la misma. Podemos volver al ejemplo anterior, con una prueba de la clase \emph{ClienteTests}
 
@@ -4326,7 +4357,7 @@ public class Cliente
 Finalmente, hemos implementado el método \emph{EsCorreoElectronicoValido} de la clase \emph{Cliente}, y al ejecutar las pruebas, verificamos que la funcionalidad es correcta y se cumplen las condiciones esperadas.
 
 \subsection{Moq}
-Moq es un popular framework de moqueo para el lenguaje de programación C\#. Permite crear objetos simulados y configurar su comportamiento durante las pruebas unitarias. A continuación, se presentan algunos conceptos y características clave de Moq:
+Moq es un popular framework de moqueo para el lenguaje de programación C\#. Permite crear objetos simulados y configurar su comportamiento durante las pruebas unitarias. A continuación, veamos algunos conceptos y características clave de Moq:
 
 \begin{itemize}
     \item \textbf{Instalación}: Moq se puede instalar a través del administrador de paquetes NuGet en Visual Studio. El paquete se llama \emph{Moq} y está disponible en la galería de paquetes de NuGet.
@@ -4472,15 +4503,15 @@ Estas pruebas aseguran que el controlador \emph{ClienteController} funcione seg�
 
 dotCover es una herramienta de cobertura de código desarrollada por JetBrains que te permite analizar la cobertura de tus pruebas unitarias en proyectos .NET. Cuando desarrollas aplicaciones, las pruebas unitarias son fundamentales para garantizar la calidad y estabilidad del código. Sin embargo, es igualmente importante asegurarse de que tus pruebas cubran adecuadamente todo el código que has escrito.
 
-La cobertura de código es una medida que indica qué porcentaje de tu código ha sido ejecutado por tus pruebas unitarias. Con dotCover, puedes obtener información precisa sobre la cobertura de tus pruebas, identificar áreas no probadas y tomar decisiones informadas sobre cómo mejorar la calidad de tu código.
+La cobertura de código es una medida que indica qué porcentaje de tu código ha sido ejecutado por tus pruebas unitarias. Con dotCover, podemos obtener información precisa sobre la cobertura de tus pruebas, identificar áreas no probadas y tomar decisiones informadas sobre cómo mejorar la calidad de tu código.
 
 \subsubsection*{¿Por qué usar dotCover?}
 
-A medida que tus proyectos se vuelven más complejos, mantener una cobertura de código adecuada se vuelve desafiante. Aquí es donde dotCover entra en juego y se convierte en una herramienta invaluable. Al utilizar dotCover en tu flujo de trabajo de pruebas unitarias, puedes obtener los siguientes beneficios:
+A medida que tus proyectos se vuelven más complejos, mantener una cobertura de código adecuada se vuelve desafiante. Aquí es donde dotCover entra en juego y se convierte en una herramienta invaluable. Al utilizar dotCover en tu flujo de trabajo de pruebas unitarias, podemos obtener los siguientes beneficios:
 
 \begin{itemize}
   \item \textbf{Identificación de áreas no probadas}: dotCover analiza tu código y te muestra qué partes no están siendo cubiertas por tus pruebas unitarias. Esto te ayuda a identificar áreas críticas que no están siendo evaluadas adecuadamente y te permite escribir pruebas adicionales para cubrir esas áreas.
-  \item \textbf{Mejora de la calidad del código}: Al conocer la cobertura de tus pruebas unitarias, puedes tomar decisiones informadas sobre qué áreas necesitan una mayor atención. Puedes enfocarte en mejorar la calidad del código en áreas críticas y reducir la probabilidad de errores.
+  \item \textbf{Mejora de la calidad del código}: Al conocer la cobertura de tus pruebas unitarias, podemos tomar decisiones informadas sobre qué áreas necesitan una mayor atención. podemos enfocarte en mejorar la calidad del código en áreas críticas y reducir la probabilidad de errores.
   \item \textbf{Refactorización segura}: Cuando realizas cambios en tu código, la cobertura de dotCover te proporciona una medida objetiva de qué tan bien cubiertos están esos cambios por tus pruebas existentes. Esto te permite realizar refactorizaciones de manera segura, sabiendo que tus pruebas unitarias seguirán validando la funcionalidad correctamente.
 \end{itemize}
 
@@ -4498,7 +4529,7 @@ Para instalar dotCover en Visual Studio, sigue estos pasos:
 
 \subsubsection*{Uso}
 
-Una vez que tienes dotCover instalado, puedes utilizarlo en Visual Studio de la siguiente manera:
+Una vez que tienes dotCover instalado, podemos utilizarlo en Visual Studio de la siguiente manera:
 
 \begin{enumerate}
   \item Abre el proyecto en Visual Studio y asegúrate de que las pruebas unitarias estén escritas y configuradas correctamente.
@@ -4506,7 +4537,7 @@ Una vez que tienes dotCover instalado, puedes utilizarlo en Visual Studio de la 
   \item Se abrirá una ventana de dotCover que muestra las opciones de análisis. Configura las opciones según tus necesidades, como el alcance del análisis, las pruebas unitarias a ejecutar, etc.
   \item Haz clic en el botón \enquote*{Iniciar} para comenzar el análisis de cobertura.
   \item dotCover ejecutará las pruebas unitarias y recopilará información sobre la cobertura del código.
-  \item Después de finalizar el análisis, dotCover mostrará los resultados en una ventana especial. Aquí puedes ver métricas detalladas de cobertura, como el porcentaje de cobertura por línea, instrucción y rama.
+  \item Después de finalizar el análisis, dotCover mostrará los resultados en una ventana especial. Aquí podemos ver métricas detalladas de cobertura, como el porcentaje de cobertura por línea, instrucción y rama.
   \item Explora los informes de cobertura para identificar áreas no cubiertas por las pruebas y toma acciones para mejorar la cobertura.
   \item Además, dotCover permite exportar los informes de cobertura en diferentes formatos, como HTML o XML, para compartirlos con otros miembros del equipo o integrarlos en tus procesos.
 \end{enumerate}
@@ -5237,7 +5268,7 @@ Notemos que estamos creando, leyendo y eliminando un cliente, lo cual prueba par
 \section{SonarQube}
 SonarQube es una plataforma de análisis estático de código que ayuda a medir y mejorar la calidad del software. Proporciona un conjunto de herramientas y características para evaluar la salud y el mantenimiento del código fuente, identificar problemas de calidad y seguridad, y ofrecer recomendaciones para su mejora.
 
-La principal función de SonarQube es realizar análisis estáticos en el código fuente para detectar problemas y violaciones de buenas prácticas de programación. Utiliza una variedad de reglas predefinidas y personalizables que abarcan aspectos como complejidad del código, duplicación, seguridad, mantenibilidad y cumplimiento de estándares de codificación. Estas reglas son aplicadas de manera automática al código fuente, y los resultados se presentan en un informe detallado y fácil de entender.
+La principal función de SonarQube es realizar análisis estáticos en el código fuente para detectar problemas y violaciones de buenas prácticas de programación. Utiliza una variedad de reglas predefinidas y personalizables que abarcan aspectos como complejidad del código, duplicación, seguridad, mantenibilidad y cumplimiento de estándares de codificación. Estas reglas son aplicadas de manera automática al código fuente, y los resultados veamos en un informe detallado y fácil de entender.
 
 \begin{enumerate}
     \item \textbf{Integración continua}: SonarQube se puede integrar con herramientas de integración continua como Jenkins, Azure DevOps, GitLab CI/CD, entre otras. Esto permite realizar análisis de calidad de manera automática en cada etapa del ciclo de desarrollo de software.
