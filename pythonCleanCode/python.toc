@@ -1,0 +1,8 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}PEP 8}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Variables y Convenciones de Nombres}{5}{subsection.1.2}%
+\contentsline {paragraph}{Palabras Reservadas}{6}{section*.2}%
+\contentsline {paragraph}{Tipos de Datos y Conversiones}{6}{section*.3}%
+\contentsline {paragraph}{Variables Globales y Locales}{6}{section*.4}%
+\contentsline {paragraph}{Operadores de Asignación}{6}{section*.5}%

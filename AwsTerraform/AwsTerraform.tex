@@ -1,0 +1,119 @@
+\documentclass{article}
+
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[left=2.00cm, right=2.00cm, top=3.00cm, bottom=2.00cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\doublespacing
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible
+}
+
+% Define colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configuración de lstlisting
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    morekeywords={FROM,
+                    AS ,
+                    WORKDIR,
+                    COPY,
+                    RUN,
+                    ENTRYPOINT,
+                    EXPOSE,
+                    CMD,
+                    docker,
+                    build,
+                    run,
+                    logs,
+                    inspect,
+                    network,
+                    volume,
+                    compose,
+                    build,
+                    context,
+                    dockerfile,
+                    ports,
+                    environment,
+                    volumes,
+                    image,},
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\lstset{style=mystyle}
+
+\title{Informe sobre Terraform en aws}
+\author{Kevin Cárdenas}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{Terraform en aws}\\
+        Infraestructura como codigo.}
+        \\[18cm]
+
+        \large\emph{Autor:}\\
+        Kevin Cárdenas.
+        \\[1cm]
+        {\large 2023}
+    \end{center}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+\section{Introducción a aws}
+
+aws es una plataforma de servicios en la nube que ofrece potencia de cómputo, almacenamiento de bases de datos, entrega de contenido y otra funcionalidad para ayudar a las empresas a escalar y crecer. Explore cómo millones de clientes están actualmente aprovechando aws en la nube para crear aplicaciones sofisticadas con mayor flexibilidad, escalabilidad y fiabilidad.
+
+Para el desarrollo de este informe usted debe tener credenciales de uso de aws, si no las tiene puede crear una cuenta en aws.
+
+Vamos a crear un usuario en aws, para ello debemos ir a la consola de aws y buscar el servicio IAM. Una vez dentro del servicio IAM, vamos a la sección de usuarios y creamos un usuario con el nombre que deseemos, en este caso lo llamaremos \lstinline{terraform} y le asignaremos permisos de administrador. Una vez creado el usuario, nos vamos a la sección de credenciales de seguridad y creamos una nueva clave de acceso. Al crear la clave de acceso, aws nos mostrará la clave de acceso y la clave de acceso secreta, estas claves son las que usaremos para conectarnos a aws desde terraform.
+
+
+
+\section{Infrestructura Como Codigo}
+
+La infraestructura como código (IaC) es el proceso de gestión y aprovisionamiento de recursos de TI a través de archivos de código fuente en lugar de operaciones manuales. La infraestructura como código permite a los desarrolladores y operadores de TI administrar, aprovisionar y actualizar la infraestructura de TI de manera rápida, eficiente, segura, escalable y reutilizable.
+
+Terraform es una herramienta de infraestructura como código de código abierto creada por HashiCorp. Permite a los usuarios definir y configurar la infraestructura de un centro de datos en un lenguaje de alto nivel, generando un plan de ejecución para implementar la infraestructura en un proveedor de nube como AWS, Microsoft Azure, Google Cloud Platform, DigitalOcean y otros.
+
+
+\end{document}

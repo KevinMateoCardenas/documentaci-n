@@ -1,0 +1,43 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Primeros Pasos}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Definiciones}{6}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Método de Resolución para EDP Lineales de Primer Orden}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Metodo de Lagrange}{11}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}El método de los multiplicadores}{12}{subsection.1.3.1}%
+\contentsline {section}{\numberline {1.4}Método de las Características para EDP Cuasilineales con Condición Inicial}{14}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Ecuación Eikonal}{15}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Resolución de EDP Completamente No Lineal de Primer Orden con Condiciones Iniciales}{16}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Ecuaciones de Segundo Orden Cuasilineales y su Clasificación}{18}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Ecuaciones Elipticas}{19}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Ecuaciones Parabólicas}{20}{subsection.1.7.2}%
+\contentsline {subsection}{\numberline {1.7.3}Ecuaciones Hiperbólicas}{21}{subsection.1.7.3}%
+\contentsline {chapter}{\numberline {2}Ecuación de onda}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Solución General de la ecuación homogénea}{24}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Fórmula de D'Alambert para el Problema de Cauchy}{26}{section.2.2}%
+\contentsline {section}{\numberline {2.3}El triangulo característico y la influencia de un intervalo espacial}{28}{section.2.3}%
+\contentsline {section}{\numberline {2.4}La ecuación de onda en media recta}{30}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Problema de Dirichlet}{31}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Problema de Neuman}{33}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Problema de Robin}{35}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Problema no homogéneo en la recta real}{37}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Problema sobre un intervalo cerrado}{41}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Solución por series de Fourier al problema sobre un intervalo cerrado}{45}{section.2.10}%
+\contentsline {section}{\numberline {2.11}Comparación de las soluciones de Fourier y d'Alambert}{48}{section.2.11}%
+\contentsline {section}{\numberline {2.12}Problema no homogéneo sobre un intervalo cerrado}{49}{section.2.12}%
+\contentsline {chapter}{\numberline {3}Ecuación de calor}{53}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Transferencia de calor en una barra infinita}{54}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Ecuación no homogénea de calor en una barra infinita}{57}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Principios de Máximos y minimos}{58}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Ecuación de calor en un intervalo finito}{62}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Condiciones de contorno distintas de cero}{64}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Intercambio de calor en los extremos de una barra}{66}{section.3.6}%
+\contentsline {section}{\numberline {3.7}La transformada de Fourier}{68}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Problemas de Sturm Liouville}{73}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Propiedades de los valores propios de Sturm-Liouville}{74}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Ecuación de Laplace}{83}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Problema de Dirichlet en un rectángulo}{84}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Problema de Dirichlet en un disco unitario}{91}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Las identidades de Green}{96}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Solución Fundamental del Laplaciano}{100}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Principio del Máximo y Teormas de unicidad}{104}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Teoremas Adicionales}{106}{section.5.6}%

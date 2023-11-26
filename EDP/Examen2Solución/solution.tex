@@ -1,0 +1,450 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{amsmath,amsfonts,amssymb} % Paquetes para matemáticas
+\usepackage{graphicx} % Para incluir gráficos
+\usepackage{geometry} % Para configurar los márgenes
+\usepackage[hidelinks]{hyperref} % Para enlaces hipertextuales sin colores
+\usepackage{enumitem} % Para personalizar listas
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16} % Puede que necesites ajustar la versión
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\doublespacing
+\renewcommand{\baselinestretch}{1.5}
+
+\theoremstyle{plain}
+\newtheorem{proposición}{proposición}
+\newtheorem{lema}[proposición]{Lema}
+\newtheorem{teo}[proposición]{Teorema}
+\newtheorem{coro}[proposición]{Corolario}
+\newtheorem{obs}[proposición]{Observación}
+
+\theoremstyle{definition}
+\newtheorem{defi}[proposición]{definición}
+\newtheorem{ex}[proposición]{Ejercicio}
+
+\newcommand{\Al}{(\mathcal{A},\mathds{F},\odot)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\fu}{f:D\longrightarrow \mathds{R}}
+\newcommand{\fun}{f:[a,b]\longrightarrow \mathds{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathds{F}}
+\newcommand{\op}{``}
+\newcommand{\cl}{''}
+\newcommand{\po}{^}
+\newcommand{\Q}{\matbbb{Q}}
+\newcommand{\U}{\mathcal{U}}
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        \Huge
+        \textbf{Examen 2}
+        
+        \vspace{0.5cm}
+        \LARGE
+        Ecuaciones en derivadas parciales
+        
+        \vspace{1.5cm}
+        
+        por: \textbf{Kevin Mateo Cárdenas}\\
+        profesor: \textbf{Jairo Eloy Castellanos}
+        \vfill
+        
+        \vspace{0.8cm}
+        
+        \Large
+        Facultad de Ciencias Exactas y Naturales\\
+        Universidad de Antioquia\\
+        2023
+    \end{center}
+\end{titlepage}
+\date{24 de octubre 2023}
+\begin{teo}
+    Sea \( u \in C^2(\mathbb{R} \times (0, \infty)) \) siendo la solución de la ecuación \( u_t = a^2 u_{xx} + bu_x + cu + f(x, t) \) donde \( a, b, c \) son constantes reales y \( f \) es una función dada. Defina la función \( v \) por \( v(x, t) = e^{-ct} u(x - bt, t) \) para \( x \in \mathbb{R} \) y \( t > 0 \). Entonces \( v \) satisface la ecuación no homogénea \( v_t = a^2 v_{xx} + e^{-ct} f(x-bt, t) \).
+    
+    \begin{proof}
+        Note que si tomamos \(u(\xi,\eta)\), una solución de la ecuación
+        \[
+            u_\eta = a^2 u_{\xi\xi} + bu_\xi + cu + f(\xi, \eta), \quad \xi \in \mathbb{R}, \quad \eta > 0
+        \]
+        Entonces, si definimos \(v(x, t) = e^{-ct} u(x - bt, t)\), tenemos que
+        \begin{align*}
+            v_t &= -ce^{-ct} u(x - bt, t) + e^{-ct} (u_\eta(x - bt, t) - bu_\xi(x - bt, t)) \\
+            &= e^{-ct} (u_\eta(x - bt, t) - bu_\xi(x - bt, t) - cu(x - bt, t)) \\
+            v_x &= e^{-ct} u_\xi(x - bt, t) \\
+            v_{xx} &= e^{-ct} u_{\xi\xi}(x - bt, t)
+        \end{align*}
+        Y reemplazando en la ecuación, tenemos que
+        \begin{align*}
+            v_t- a^2 v_{xx} &= e^{-ct} (u_\eta(x - bt, t) - bu_\xi(x - bt, t) - cu(x - bt, t)) - a^2 e^{-ct} u_{\xi\xi}(x - bt, t) \\
+            &= e^{-ct} (u_\eta(x - bt, t) - bu_\xi(x - bt, t) - cu(x - bt, t) - a^2 u_{\xi\xi}(x - bt, t)) \\
+            &= e^{-ct} f(x - bt, t)
+        \end{align*}
+    \end{proof}
+\end{teo}
+
+\begin{ex}
+    Resuelve el PVI
+    \begin{align*}
+    u_t &= a^2 u_{xx} + bu_x + cu + f(x, t), \quad x \in \mathbb{R}, \quad t > 0\\
+    u(x, 0) &= u_0(x), \quad x \in \mathbb{R}
+    \end{align*}
+    con los siguientes datos:
+    \begin{enumerate}
+        \item \( f(x, t) = t \sin x, \quad u_0 = 1, \quad a = c > 0, \quad b = 0 \).
+        \item \( f(x, t) = h(t) \in C^1([0, \infty)) \) y \( u_0 \) es una función continua acotada.
+    \end{enumerate}
+    \texttt{Solución:}
+    \begin{enumerate}
+        \item \( f(x, t) = t \sin x, \quad u_0 = 1, \quad a = c > 0, \quad b = 0 \).\\
+            Para este caso, tenemos que \( f(x, t) = t \sin x \), \( u_0 = 1 \), \( a = c > 0 \) y \( b = 0 \). Entonces, por el teorema anterior, tenemos que \( v(x, t) = e^{-ct} u(x, t) \) satisface la ecuación no homogénea \( v_t = a^2 v_{xx} + e^{-ct} f(x, t) \). Entonces, tenemos que $u$ es solución del problema inicial.
+
+            Por lo que basta resolver el PVI
+            \begin{align*}
+                v_t &= a^2 v_{xx} + e^{-ct} f(x, t), \quad x \in \mathbb{R}, \quad t > 0\\
+                v(x, 0) &= e^{-c0} u_0(x) = u_0(x) = 1, \quad x \in \mathbb{R}
+            \end{align*}
+            
+            Este problema se resuelve a partir del principio de Duhamel, es decir, dividimos el problema en dos problemas, (1) y otro (2). Entonces, tenemos que
+            \begin{align*}
+                v_t &= a^2 v_{xx}, \quad x \in \mathbb{R}, \quad t > s\\
+                v(x, s) &= f(x -bt,s), \quad x \in \mathbb{R}
+            \end{align*}
+            y
+            \begin{align*}
+                v_t &= a^2 v_{xx}, \quad x \in \mathbb{R}, \quad t > 0\\
+                v(x, 0) &= u_0(x) = 1, \quad x \in \mathbb{R}
+            \end{align*}
+            Entonces, la solución del problema homogéneo (2) es
+            \[
+                v_{h}(x, t) = \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} u_{0}(\xi) d\xi
+            \]
+            y la solución del problema homogéneo (1) es
+            \[
+                v_{p}(x, t, \tau) = \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} \tau \sin \xi d\xi
+            \]
+            Por lo que la solución del problema es
+            \[
+                v(x, t) = v_{h}(x, t) + \int_0^t v_{p}(x, t, \tau) d\tau
+            \]
+            queda
+            \begin{align*}
+                v(x, t) &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x - \xi)^2}{4a^2 t}} d\xi\\
+                &\hspace{2mm} + \int_0^t \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} \tau \sin (\xi-b\tau) d\xi d\tau \\
+                &= 1 + \int_0^t \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} \tau \sin (\xi-b\tau) d\xi d\tau
+            \end{align*}
+            entonces la solución del problema inicial es 
+            \begin{align*}
+                u(x,t) &= e^{ct} v(x + bt,t)\\
+                &= e^{ct} \left( 1 + \int_0^t \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x + bt - \xi)^2}{4a^2 (t - \tau)}} \tau \sin (\xi - b\tau) d\xi d\tau \right)
+            \end{align*}
+        \item \( f(x, t) = h(t) \in C^1([0, \infty)) \) y \( u_0 \) es una función continua acotada.\\
+            Para este caso, tenemos que \( f(x, t) = h(t) \in C^1([0, \infty)) \) y \( u_0 \) es una función continua acotada. Entonces, por el teorema anterior, tenemos que \( v(x, t) = e^{-ct} u(x, t) \) satisface la ecuación no homogénea \( v_t = a^2 v_{xx} + e^{-ct} f(x, t) \). Entonces, tenemos que
+
+            Por lo que basta resolver el PVI
+            \begin{align*}
+                v_t &= a^2 v_{xx} + e^{-ct} h(t), \quad x \in \mathbb{R}, \quad t > 0\\
+                v(x, 0) &= e^{-c0} u_0(x) = u_0(x), \quad x \in \mathbb{R}
+            \end{align*}
+            
+            Este problema se resuelve a partir del principio de Duhamel, es decir, dividimos el problema en dos problemas,  (1) y (2). Entonces, tenemos que
+            \begin{align*}
+                v_t &= a^2 v_{xx}, \quad x \in \mathbb{R}, \quad t > s\\
+                v(x, s) &= h(s), \quad x \in \mathbb{R}
+            \end{align*}
+            y
+            \begin{align*}
+                v_t &= a^2 v_{xx}, \quad x \in \mathbb{R}, \quad t > 0\\
+                v(x, 0) &= u_0(x), \quad x \in \mathbb{R}
+            \end{align*}
+            Entonces, la solución del problema (2) es
+            \[
+                v_{h}(x, t) = \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} u_{0}(\xi) d\xi
+            \]
+            y la solución del problema (1)
+            \[
+                v_{p}(x, t. \tau) = \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} h(\tau) d\xi
+            \]
+            Por lo que la solución del problema es
+            \[
+                v(x, t) = v_{h}(x, t) + \int_0^t v_{p}(x, t, \tau) d\tau
+            \]
+            queda
+            \begin{align*}
+                v(x, t) &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x - \xi)^2}{4a^2 t}} u_0(\xi) d\xi + \int_0^t \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x - \xi)^2}{4a^2 (t - \tau)}} h(\tau) d\xi d\tau \\
+            \end{align*}
+
+            Y la solución del problema inicial es
+            \begin{align*}
+                u(x,t) &= e^{ct} v(x + bt,t)\\
+                &= e^{ct} ( \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x + bt - \xi)^2}{4a^2 t}} u_0(\xi) d\xi\\
+                & +\hspace{2mm} \int_0^t \int_{-\infty}^{\infty} e^{-c(t - \tau)} \frac{1}{\sqrt{4 \pi a^2 (t - \tau)}} e^{-\frac{(x + bt - \xi)^2}{4a^2 (t - \tau)}} h(\tau) d\xi d\tau)
+            \end{align*}
+            Habría que demostrar que la solución al aplicar el principio de Duhamel es en efecto una solución.
+
+            Si \(v_{h}(x,t,s)\) es solución del problema
+            \begin{align*}
+                v_t &= a^2 v_{xx}, \quad x \in \mathbb{R}, \quad t > s\\
+                v(x, s) &= f(x,s), \quad x \in \mathbb{R}
+            \end{align*}
+            y \(v_{p}\) es solución del problema
+            \begin{align*}
+                v_t &= a^2 v_{xx}, \quad x \in \mathbb{R}, \quad t > 0\\
+                v(x, 0) &= u_0(x), \quad x \in \mathbb{R}
+            \end{align*}
+            entonces \(v = v_{p} + \int_0^t v_{h}(x, t, \tau) d\tau\) es solución del problema, pues
+            \begin{align*}
+                v_t &= \frac{\partial}{\partial t} \left( v_{p} + \int_0^t v_{h}(x,t, \tau) d\tau \right) \\
+                &= \frac{\partial}{\partial t} v_{p} + \frac{\partial}{\partial t} \left( \int_0^t v_{h}(x,t, \tau) d\tau \right) \\
+                &= \frac{\partial}{\partial t} v_{p} + \int_0^t \frac{\partial v_p(x,t,\tau)}{\partial t} d\tau + v_{h}(x,t,t) \\
+                &= \frac{\partial}{\partial t} v_{p} + \int_0^t \frac{\partial v_p(x,t,\tau)}{\partial t} d\tau + f(x,t) \\
+            \end{align*}
+            y
+            \begin{align*}
+                v_{xx} &= \frac{\partial}{\partial x} (\frac{\partial}{\partial x} (v_{p} + \int_0^t v_{h}(x,t, \tau) d\tau)) \\
+                &= \frac{\partial^2 v_{p}}{\partial x^2} + \frac{\partial^2}{\partial x^2} \int_0^t v_{h}(x,t, \tau) d\tau \\
+                &= \frac{\partial^2 v_{p}}{\partial x^2} + \int_0^t \frac{\partial^2 v_{h}(x,t, \tau)}{\partial x^2} d\tau
+            \end{align*}
+            y al reemplazar en la ecuación, tenemos que
+            \begin{align*}
+                v_t - a^2 v_{xx} &= \frac{\partial}{\partial t} v_{p} + \int_0^t \frac{\partial v_h(x,t,\tau)}{\partial t} d\tau + f(x,t) - a^2 \left( \frac{\partial^2 v_{p}}{\partial x^2} + \int_0^t \frac{\partial^2 v_{h}(x,t, \tau)}{\partial x^2} d\tau \right) \\
+                &= \frac{\partial}{\partial t} v_{p} - a^2\frac{\partial^2 v_{p}}{\partial x^2} + \int_0^t \frac{\partial v_h(x,t,\tau)}{\partial t} -a^2\frac{\partial^2 v_{h}(x,t, \tau)}{\partial x^2} d\tau + f(x,t)\\
+                &= f(x,t)
+            \end{align*}
+            y la condición inicial se cumple, pues
+            \begin{align*}
+                v(x,0) &= v_{p}(x,0) + \int_0^0 v_{h}(x,0,\tau) d\tau \\
+                &= u_0(x)
+            \end{align*}
+    \end{enumerate}
+\end{ex}
+
+\newpage
+\begin{ex}
+     Supongamos que \( u_0 \in C(\mathbb{R}) \) satisface la condición de que \( |u_0(x)| \leq M e^{-\delta|x|^{2}} \) para todo \( x \in \mathbb{R} \) y para algunas constantes \( M > 0, \delta > 0 \). Demuestre que la solución \( u \) de la ecuación de calor \( u_t = a^2 u_{xx} \) con dato inicial \( u_0 \) satisface la estimativa
+\[
+|u(x, t)| \leq M(1 + 4a^2 \delta t)^{-1/2} \exp \left( -\frac{\delta |x|^2}{1 + 4a^2 \delta t} \right)
+\]
+\texttt{Solución:}
+
+Tenemos el problema
+\begin{align*}
+    u_t &= a^2 u_{xx}, \quad x \in \mathbb{R}, \quad t > 0\\
+    u(x, 0) &= u_0(x), \quad x \in \mathbb{R}
+\end{align*}
+Donde \(u_0 \in C(\mathbb{R})\) satisface la condición de que \( |u_0(x)| \leq M e^{-\delta|x|^{2}} \) para todo \( x \in \mathbb{R} \) y para algunas constantes \( M > 0, \delta > 0 \).
+
+Sabemos que la solución viene dada por
+\[
+    u(x,t) = \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x - \xi)^2}{4a^2 t}} u_0(\xi) d\xi
+\]
+y si \(|u_0(x)| \leq M e^{-\delta|x|^{2}}\), entonces
+\begin{align*}
+    |u(x,t)| &= \left| \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x - \xi)^2}{4a^2 t}} u_0(\xi) d\xi \right| \\
+    &\leq \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x - \xi)^2}{4a^2 t}} |u_0(\xi)| d\xi \\
+    &\leq \int_{-\infty}^{\infty} \frac{1}{\sqrt{4 \pi a^2 t}} e^{-\frac{(x - \xi)^2}{4a^2 t}} M e^{-\delta|\xi|^{2}} d\xi \\
+    &= \frac{M}{2a\sqrt{\pi t}} \int_{-\infty}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t} -\delta|\xi|^{2}} d\xi\\
+\end{align*}
+
+Hagamos por aparte la integral
+\begin{align*}
+    \int_{-\infty}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t} -\delta|\xi|^{2}} d\xi &= \int_{-\infty}^{0} e^{-\frac{(x - \xi)^2}{4a^2 t}} e^{-\delta|\xi|} d\xi + \int_{0}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t}} e^{-\delta|\xi|^{2}} d\xi \\
+    &= \int_{0}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t}} e^{-\delta|\xi|^{2}} d\xi + \int_{0}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t}} e^{-\delta|\xi|^{2}} d\xi \\
+    &= 2 \int_{0}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t}-\delta\xi^{2}} d\xi \\
+\end{align*}
+ Por otra parte
+
+\begin{align*}
+    \frac{(x - \xi)^2}{4a^2 t} + \delta\xi^{2} &= \frac{x^2 - 2x\xi + \xi^2}{4a^2 t} + \delta\xi^{2} \\
+    &= \frac{x^2 - 2x\xi + \xi^2 + 4a^2 t \delta \xi^2}{4a^2 t} \\
+    &= \frac{x^2 - 2x\xi + (4a^2\delta  t + 1)\xi^2}{4a^2 t}
+\end{align*}
+Completando cuadrados tenemos
+\begin{align*}
+    \frac{(x - \xi)^2}{4a^2 t} + \delta\xi^{2} &= \frac{x^2 - 2x\xi + (4a^2\delta  t + 1)\xi^2}{4a^2 t}\\
+    &= \frac{x^2 - 2x\xi + (4a^2\delta  t + 1)\xi^2 +x^2(1+4a^2\delta  t)^{-1} - x^2(1+4a^2\delta  t)^{-1}}{4a^2 t}\\
+    &= \frac{(x(1 + 4a^2 \delta  t)^{-1/2} - \xi(1+4a^2\delta  t)^{1/2})^{2}}{4a^2t} - \frac{x^2(1+4a^2\delta  t)^{-1} - x^{2}}{4a^{2}t}
+\end{align*}
+Además
+
+\begin{align*}
+    \frac{x^2(1+a^2\delta  t)^{-1} - x^{2}}{4a^{2}t} &= \frac{\frac{x^2}{1+4a^2\delta  t} - x^{2}}{4a^{2}t} \\
+    &= \frac{x^2 - x^{2}(1+4a^2\delta  t)}{4a^{2}t(1+4a^2\delta  t)} \\
+    &= \frac{x^2(4a^2\delta  t)}{4a^{2}t(1+4a^2\delta  t)} \\
+    &= \frac{x^2\delta}{1+4a^2\delta  t}
+\end{align*}
+Por lo tanto
+
+\begin{align*}
+    |u(x,t)| &= \frac{M}{2a\sqrt{\pi t}} \int_{-\infty}^{\infty} e^{-\frac{(x - \xi)^2}{4a^2 t} -\delta|\xi|^{2}} d\xi\\
+    &= \frac{M}{2a\sqrt{\pi t}} \int_{-\infty}^{\infty} e^{-\frac{(x(1 + 4a^2 \delta  t)^{-1/2} - \xi(1+4a^2\delta  t)^{1/2})^{2}}{4a^2t} + \frac{x^2(1+4a^2\delta  t)^{-1} + x^{2}}{4a^{2}t}} d\xi \\
+    &= \frac{M}{2a\sqrt{\pi t}} \int_{-\infty}^{\infty} e^{-\frac{(x(1 + 4a^2 \delta  t)^{-1/2} - \xi(1+4a^2\delta  t)^{1/2})^{2}}{4a^2t}} e^{-\frac{x^2\delta}{1+4a^2\delta  t}} d\xi \\
+    &= \frac{M}{2a\sqrt{\pi t}} e^{-\frac{x^2\delta}{1+4a^2\delta  t}} \int_{-\infty}^{\infty} e^{-\frac{(x(1 + 4a^2 \delta  t)^{-1/2} - \xi(1+4a^2\delta  t)^{1/2})^{2}}{4a^2t}} d\xi \\
+\end{align*}
+Consideremos el siguiente cambio de variable
+\[
+    \eta = \frac{x(1 + 4a^2 \delta  t)^{1/2} - \xi(1+4a^2\delta  t)^{1/2}}{2a\sqrt{t}}
+\]
+Entonces
+\begin{align*}
+    d\eta &= \frac{(1 + 4a^2 \delta  t)^{1/2}}{2a\sqrt{t}} d\xi \\
+    |u(x,t)| &\leq \frac{M}{(1 + 4a^2 \delta  t)^{1/2}\sqrt{\pi}} e^{-\frac{x^2\delta}{1+4a^2\delta  t}} \int_{-\infty}^{\infty} e^{-\eta^{2}} d\eta \\
+    &= \frac{M}{(1 + 4a^2 \delta  t)^{1/2}\sqrt{\pi}} e^{-\frac{x^2\delta}{1+4a^2\delta  t}} \sqrt{\pi} \\
+    &= \frac{M}{(1 + 4a^2 \delta  t)^{1/2}}e^{-\frac{x^2\delta}{1+4a^2\delta  t}}
+\end{align*}
+\end{ex}
+
+\newpage
+\begin{ex}
+Considere la ecuación de onda \( u_{tt} - c^2 u_{xx} = 0 \), \( x > 0 \), \( t > 0 \) en el primer cuadrante e imponga la siguiente condición de frontera en la frontera \( x = 0 \):
+
+\[
+u_t + \alpha u_x = 0, \quad x = 0, \quad t > 0,
+\]
+
+y las condiciones iniciales en \( t = 0 \), \( x > 0 \).
+
+\begin{enumerate}
+    \item Si \( \alpha \neq c \), derive una fórmula para la solución.
+    \item Si \( \alpha = c \), demuestre que no existe una solución en general, pero existe si las condiciones iniciales satisfacen algunas condiciones adicionales. Interprete la condición de frontera en este caso geométricamente.
+\end{enumerate}
+\texttt{Solución:}
+Tenemos el problema
+\begin{align*}
+    u_{tt} - c^2 u_{xx} &= 0, \quad x > 0, \quad t > 0\\
+    u_t(0,t) + \alpha u_x(0,t) &= 0, \quad x = 0, \quad t > 0\\
+    u(x, 0) &= f(x), \quad x \geq 0,\\
+    u_t(x, 0) &= g(x), \quad x > 0
+\end{align*}
+
+Si \(x_0 \geq ct_0\), de la formula de d'Alembert pues $x_0 - ct_0 \geq 0$ y $x_0 + ct_0 \geq 0$, tenemos que
+\begin{align*}
+    u(x_0,t_0) &= \frac{1}{2} \left( f(x_0 - ct_0) + f(x_0 + ct_0) \right) + \frac{1}{2c} \int_{x_0 - ct_0}^{x_0 + ct_0} g(\xi) d\xi
+\end{align*}
+\begin{align*}
+    F(\tau) &= \frac{f(\tau)}{2} - \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi \quad \tau \geq 0\\
+    G(\tau) &= \frac{f(\tau)}{2} + \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi \quad \tau \geq 0
+\end{align*}
+
+Por otra parte si \(-ct_0 < x_0 < ct_0\), tenemos que $x_0 - ct_0 < 0$ y $x_0 + ct_0 > 0$, por lo que
+\begin{align*}
+    u(x_0,t_0) &= F(x_0-ct_0) + G(x_0+ct_0)
+\end{align*}
+Derivando respecto a \(t\) y a \(x\), tenemos que
+\begin{align*}
+    \frac{\partial u}{\partial t}(x,t) &= -cF'(x-ct) + cG'(x+ct)\\
+    \frac{\partial u}{\partial x}(x,t) &= F'(x-ct) + G'(x+ct)
+\end{align*}
+Por lo que
+\begin{align*}
+    u_t(0,t) + \alpha u_x(0,t) &= cG'(ct) - cF'(-ct) + \alpha F'(-ct) + \alpha G'(ct)\\
+    &= 0
+\end{align*}
+Equivalentemente
+\[
+    (c + \alpha )G'(ct) + (\alpha -c)F'(-ct) = 0
+\]
+Es decir
+\[
+    G'(ct) = \frac{c -\alpha}{c + \alpha }F'(-ct)
+\]
+Integrando
+\[
+    -(G(ct) - G(0)) = \frac{c -\alpha}{c + \alpha }(F(-ct)-F(0))
+\]
+Por lo tanto 
+\begin{align*}
+    F(-ct) &= \frac{c +\alpha}{c - \alpha }(G(0) - G(ct)) + F(0)\\
+    &= \frac{c +\alpha}{c - \alpha }\left(\frac{f(0)}{2} - \frac{f(ct)}{2} - \frac{1}{2c} \int_{0}^{ct} g(\xi) d\xi\right) + \frac{f(0)}{2}
+\end{align*}
+Por lo tanto si $\tau > 0$
+\begin{align*}
+    F(-\tau) &= \frac{c + \alpha}{c - \alpha }\left(\frac{f(0)}{2} - \frac{f(\tau)}{2} - \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi\right) + \frac{f(0)}{2}\\
+\end{align*}
+Entonces si \(-ct_0<x_0 < ct_0\), tenemos que
+\begin{align*}
+    u(x_0,t_0) &= F(x_0-ct_0) + G(x_0+ct_0)\\
+    &= \frac{c + \alpha}{c - \alpha }\left(\frac{f(0)}{2} - \frac{f(-x_0+ct_0)}{2} - \frac{1}{2c} \int_{0}^{x_0-ct_0} g(\xi) d\xi\right) + \frac{f(0)}{2}\\
+    &\hspace{2mm} + \frac{f(x_0+ct_0)}{2} + \frac{1}{2c} \int_{0}^{x_0+ct_0} g(\xi) d\xi
+\end{align*}
+
+Por lo tanto, si $\alpha \neq c$, $u$ se define por partes de la siguiente manera
+
+\begin{align*}
+    u(x,t) &= \frac{1}{2}(f(x - ct) + f(x + ct)) + \frac{1}{2c} \int_{x - ct}^{x + ct} g(\xi) d\xi \hspace{45mm}  x \geq ct\\
+    u(x,t)&=\frac{c +\alpha}{c - \alpha }\left(\frac{f(0)}{2} - \frac{f(-x+ct)}{2} - \frac{1}{2c} \int_{0}^{x-ct} g(\xi) d\xi\right)\\
+    &\hspace{2mm} + \frac{f(0)}{2} + \frac{f(x+ct)}{2} + \frac{1}{2c} \int_{0}^{x+ct} g(\xi) d\xi \hspace{45mm}  0 \leq x < ct\\
+\end{align*}
+Por otra parte, fisicamente hablando, la condición inicial
+\[
+    \frac{\partial u}{\partial t}(0,t) + \alpha \frac{\partial u}{\partial x}(0,t) = 0 
+\]
+Es equivalente a
+\begin{align*}
+    \frac{\partial u}{\partial x}\frac{\partial x}{\partial t} = -\alpha \frac{\partial u}{\partial x}\\
+\end{align*}
+Es decir, que
+\[
+    \frac{\partial x}{\partial t} = -\alpha
+\]
+Lo que podemos interpretar como que la frontera se mueve con velocidad $-\alpha$.
+
+Notemos que $c = \alpha$, implica $G$ constante, dado que
+\begin{align*}
+    G'(ct) &= \frac{c -\alpha}{c + \alpha }F'(-ct)\\
+    &= 0
+\end{align*}
+Pero recordemos que
+\begin{align*}
+    G(\tau) &= \frac{f(\tau)}{2} + \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi \quad \tau \geq 0\\
+    F(\tau) &= \frac{f(\tau)}{2} - \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi \quad \tau \geq 0
+\end{align*}
+Y $G$ constante implica que
+\begin{align*}
+    \frac{f(\tau)}{2} + \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi &= \frac{f(0)}{2} + \frac{1}{2c} \int_{0}^{0} g(\xi) d\xi\\
+    \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi &= \frac{f(0)}{2} -\frac{f(\tau)}{2}\\
+\end{align*}
+reemplazando en $F$ tenemos que
+\begin{align*}
+    F(\tau) &= \frac{f(\tau)}{2} - \frac{1}{2c} \int_{0}^{\tau} g(\xi) d\xi\\
+    &= \frac{f(\tau)}{2} - \frac{f(0)}{2} + \frac{f(\tau)}{2}\\
+    &= f(\tau) - \frac{f(0)}{2}
+\end{align*}
+y reemplazando en $u$
+\begin{align*}
+    u(x,t) &= F(x - ct) + G(x + ct) = f(x - ct) - \frac{f(0)}{2} + \frac{f(0)}{2}\\
+    &= f(x - ct)
+\end{align*}
+En particular, derivando respecto a $t$ tenemos que
+\begin{align*}
+    u_t(x,t) &= -cf'(x - ct)\\
+    u_t(x,0) &= g(x) = -cf'(x)
+\end{align*}
+Lo cual genera una condición adicional sobre $f$ y $g$, es decir, que $g(x) = -cf'(x)$, es decir, que $f$ es de la forma $f(x) = -\frac{1}{c} \int_{0}^{x} g(\xi) d\xi + f(0)$. Por otra parte, geometricamente hablando, esto signufica que $u$ solo depende de $x - ct$, es decir, que la solución se propaga con rapidez $c$ en sentido contrario.
+\end{ex}
+\end{document}

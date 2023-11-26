@@ -1,0 +1,7 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Introducción}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{¿Qué es P vs NP?}{5}{0}{1}
+\beamer@sectionintoc {2}{Preliminares}{17}{0}{2}
+\beamer@sectionintoc {3}{Clase P}{32}{0}{3}
+\beamer@sectionintoc {4}{P vs NP}{51}{0}{4}
+\beamer@sectionintoc {5}{Conclusión}{55}{0}{5}

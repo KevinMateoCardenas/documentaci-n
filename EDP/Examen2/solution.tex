@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{amsmath,amsfonts,amssymb} % Paquetes para matemáticas
+\usepackage{graphicx} % Para incluir gráficos
+\usepackage{geometry} % Para configurar los márgenes
+\usepackage[hidelinks]{hyperref} % Para enlaces hipertextuales sin colores
+\usepackage{enumitem} % Para personalizar listas
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16} % Puede que necesites ajustar la versión
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\doublespacing
+\renewcommand{\baselinestretch}{1.5}
+
+\theoremstyle{plain}
+\newtheorem{proposición}{proposición}[section]
+\newtheorem{lema}[proposición]{Lema}
+\newtheorem{teo}[proposición]{Teorema}
+\newtheorem{coro}[proposición]{Corolario}
+\newtheorem{obs}[proposición]{Observación}
+
+\theoremstyle{definition}
+\newtheorem{defi}[proposición]{definición}
+\newtheorem{ex}[proposición]{Ejercicio}
+
+\newcommand{\Al}{(\mathcal{A},\mathds{F},\odot)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\fu}{f:D\longrightarrow \mathds{R}}
+\newcommand{\fun}{f:[a,b]\longrightarrow \mathds{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathds{F}}
+\newcommand{\op}{``}
+\newcommand{\cl}{''}
+\newcommand{\po}{^}
+\newcommand{\Q}{\matbbb{Q}}
+\newcommand{\U}{\mathcal{U}}
+\begin{document}
+
+\section*{Solución del examen 3 puntos 1,2,3,5}
+\date{24 de octubre 2023}
+\begin{teo}
+    Sea \( u \in C^2(\mathbb{R} \times (0, \infty)) \) siendo la solución de la ecuación \( u_t = a^2 u_{xx} + bu_x + cu + f(x, t) \) donde \( a, b, c \) son constantes reales y \( f \) es una función dada. Defina la función \( v \) por \( v(x, t) = e^{-ct} u(x - bt, t) \) para \( x \in \mathbb{R} \) y \( t > 0 \). Entonces \( v \) satisface la ecuación no homogénea \( v_t = a^2 v_{xx} + e^{-ct} f(x, t) \).
+    
+\end{teo}
+
+\begin{ex}
+    Resuelve el PVI
+    \[
+    u_t = a^2 u_{xx} + bu_x + cu + f(x, t), \quad x \in \mathbb{R}, \quad t > 0, \quad u(x, 0) = u_0(x), \quad x \in \mathbb{R}
+    \]
+    con los siguientes datos:
+    \begin{enumerate}
+        \item \( f(x, t) = t \sin x, \quad u_0 = 1, \quad a = c > 0, \quad b = 0 \).
+        \item \( f(x, t) = h(t) \in C^1([0, \infty)) \) y \( u_0 \) es una función continua acotada.
+    \end{enumerate}
+\end{ex}
+
+
+
+
+\begin{ex}
+     Supongamos que \( u_0 \in C(\mathbb{R}) \) satisface la condición de que \( |u_0(x)| \leq M e^{-\delta|x|} \) para todo \( x \in \mathbb{R} \) y para algunas constantes \( M > 0, \delta > 0 \). Demuestre que la solución \( u \) de la ecuación de calor \( u_t = a^2 u_{xx} \) con dato inicial \( u_0 \) satisface la estimativa
+\[
+|u(x, t)| \leq M(1 + 4a^2 \delta t)^{-1/2} \exp \left( -\frac{\delta |x|^2}{1 + 4a^2 \delta t} \right)
+\]
+
+\end{ex}
+
+
+\begin{ex}
+5. Considere la ecuación de onda \( u_{tt} - c^2 u_{xx} = 0 \), \( x > 0 \), \( t > 0 \) en el primer cuadrante e imponga la siguiente condición de frontera en la frontera \( x = 0 \):
+
+\[
+u_t + \alpha u_x = 0, \quad x = 0, \quad t > 0,
+\]
+
+y las condiciones iniciales en \( t = 0 \), \( x > 0 \).
+
+\begin{enumerate}
+    \item Si \( \alpha \neq c \), derive una fórmula para la solución.
+    \item Si \( \alpha = c \), demuestre que no existe una solución en general, pero existe si las condiciones iniciales satisfacen algunas condiciones adicionales. Interprete la condición de frontera en este caso geométricamente.
+\end{enumerate}
+
+\end{ex}
+\end{document}

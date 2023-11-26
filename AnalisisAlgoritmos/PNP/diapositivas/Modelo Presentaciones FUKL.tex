@@ -1,0 +1,402 @@
+\documentclass[dvipsnames, 11pt]{beamer}
+\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter}
+\usepackage[utf8]{inputenc}             % Acentos en español ñ y ó
+\usepackage[spanish]{babel}             % Chapter -> Capítulo etc...
+\usepackage[T1]{fontenc}                % Acentos como ö
+\usepackage{lmodern}                    % Latin modern fonts
+\usepackage{amsmath,amssymb,amsfonts,latexsym,stmaryrd}
+\usepackage{graphicx, fancyhdr, wrapfig, tikz, textpos}
+
+\usepackage{ stmaryrd }
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{ dsfont }
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{graphs,graphs.standard}
+\doublespacing
+
+\lstset{
+    inputencoding=utf8,
+    language=Java,
+    basicstyle=\ttfamily,
+    columns=fullflexible
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\theoremstyle{plain}
+
+\newcommand{\Al}{(\mathcal{A},\mathds{F},\odot)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\fu}{f:D\longrightarrow \mathds{R}}
+\newcommand{\fun}{f:[a,b]\longrightarrow \mathds{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathds{F}}
+\newcommand{\op}{``}
+\newcommand{\cl}{''}
+\newcommand{\po}{^}
+\newcommand{\Q}{\matbbb{Q}}
+\newcommand{\V}{\mathds{V}}
+\newcommand{\T}{\mathds{T}}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}
+\newtheorem{obs}{Observación}
+\newtheorem{ejemplo}{Ejemplo}
+
+% Definición de colores estilo Universidad de Antioquia
+\definecolor{udeaGreen}{RGB}{0, 104, 55} % Verde UdeA
+\definecolor{udeaGray}{RGB}{88, 88, 90}  % Gris UdeA
+
+% Aplicando colores a la presentación
+\usetheme{Madrid}
+\usecolortheme[RGB={217,217,217}]{structure}
+\setbeamercolor{palette primary}{bg=udeaGreen,fg=white}
+\setbeamercolor{title}{fg=white,bg=udeaGreen}
+\setbeamercolor{frametitle}{fg=white,bg=udeaGreen}
+\setbeamercolor{section number projected}{bg=udeaGreen,fg=white}
+\setbeamercolor{item projected}{bg=udeaGreen,fg=white}
+
+\usefonttheme{professionalfonts}       % Ecuaciones con letra profesional  
+\setbeamersize{text margin left=10mm, text margin right=10mm}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>{Tabla de contenido}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+\AtBeginSubsection[]
+{
+\begin{frame}<beamer>{Tabla de contenido}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+
+%------------------ INFORMACIÓN ------------------
+\title{P vs NP}
+\subtitle{Un problema muy Complejo}
+\author{Kevin Cárdenas Gallego}
+\institute[FCEN]{\includegraphics[scale=0.2]{UDEA.png}\vspace{5mm}
+\\{\large Universidad de Antioquia-FCEN }\\
+{\normalsize INSTITUTO DE MATEMÁTICAS}}
+\date{\today}
+\subject{Fundamentos de algoritmia}
+
+%------------------ INICIO DEL DOCUMENTO ------------------
+\begin{document}
+
+\setbeamertemplate{background}
+{
+	\parbox[c][\paperheight]{\paperwidth}
+	{
+		\vfill 
+		\begin{tikzpicture}
+			\node[opacity=.1]
+			{
+				\includegraphics[scale=0.4]{UDEA.png}
+			};
+		\end{tikzpicture}
+		\vspace{0.5cm} \hspace{-3cm}
+	}
+}
+
+
+	
+%------------------ TITLE PAGE ------------------
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{100mm}(0.86\textwidth,-1.1cm)
+	\includegraphics[scale=0.3]{logoudea.jpg}
+\end{textblock*}}
+
+\section{Introducción}
+\begin{frame}{Introducción}
+    \begin{itemize}
+        \item El problema P vs NP es uno de los siete problemas del milenio propuestos por el Clay Mathematics Institute en el año 2000. \pause
+        \item El problema P vs NP es uno de los problemas más importantes en la ciencia de la computación.
+    \end{itemize}
+\end{frame}
+
+\subsection{¿Qué es P vs NP?}
+\begin{frame}{¿Qué es P vs NP?}
+    \begin{itemize}
+        \item El problema P vs NP se pregunta si los problemas que se pueden verificar en tiempo polinomial también se pueden resolver en tiempo polinomial.\pause
+        \item Verificar la solución de un problema significa que se puede comprobar si una solución es correcta o no.\pause
+        \item Resolver un problema significa encontrar una solución correcta.    
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Por ejemplo el problema de encontrar un camino más corto entre dos nodos en un grafo.
+        Si se tiene un camino entre dos nodos, se puede verificar si es el camino más corto, pero no se sabe si se puede encontrar en tiempo polinomial.
+        Para verificarlo se debe recorrer el camino y sumar los pesos de las aristas, si el resultado es menor que el peso del camino que se quiere verificar, entonces se encontró un camino más corto.
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Tomemos un grafo $G$ con los nodos $A,B,C,D,E,F$ y las aristas con pesos homogeneos como se muestra en la siguiente figura:
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{scope}[every node/.style={circle,thick,draw}]
+              \node (A) at (0,0) {A};
+              \node (B) at (2,0) {B};
+              \node (C) at (4,0) {C};
+              \node (D) at (0,-2) {D};
+              \node (E) at (2,-2) {E};
+              \node (F) at (4,-2) {F};
+              \node (G) at (6,0) {G};
+            \end{scope}
+          
+            \begin{scope}[every edge/.style={draw=black,thick}]
+                \path (A) edge (B);
+                \path (B) edge (C);
+                \path (A) edge (D);
+                \path (D) edge (E);
+                \path (E) edge (F);
+                \path (C) edge (F);
+                \path (C) edge (D);
+                \path (F) edge (G);
+                \path (E) edge (G);
+              % Camino más corto resaltado
+              \path[draw=red,very thick] (A) edge (B);
+              \path[draw=red,very thick] (B) edge (C);
+              \path[draw=red,very thick] (C) edge (F);
+            \end{scope}
+          \end{tikzpicture}    
+    \end{center}  
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Si tenemos un camino entre $A$ y $G$ como el de la figura anterior, se puede verificar. Siga el siguiente algoritmo:
+    
+\end{frame}
+
+
+\begin{frame}{Ejemplo}
+    \begin{enumerate}
+        \item tome todos los posibles caminos entre $A$ y $G$.\pause
+        \item calcule el peso de cada camino.\pause
+        \item si el peso de un camino es menor que el peso del camino que se quiere verificar, entonces se encontró un camino más corto.\pause
+        \item si no se encontró un camino más corto, entonces el camino que se quiere verificar es el más corto.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Esta cerificación, es decir, este algoritmo, tiene un tiempo exponencial, ya que el número de caminos entre dos nodos es exponencial. la pregunta aquí es si se puede encontrar un camino más corto en tiempo polinomial.
+\end{frame}
+
+\section{Preliminares}
+\begin{frame}{Preliminares}
+    \begin{itemize}
+        \item Para entender el problema P vs NP, primero se debe entender la clase de problemas P y la clase de problemas NP.\pause
+        \item La clase de problemas P es la clase de problemas que se pueden resolver en tiempo polinomial.\pause
+        \item La clase de problemas NP es la clase de problemas que se pueden verificar en tiempo polinomial.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Preliminares}
+    \begin{defi}[Algoritmo]
+        Un algoritmo es una secuencia de pasos que se siguen para resolver un problema.
+    \end{defi}
+    \pause
+    \begin{defi}[Tiempo de ejecución]
+        El tiempo de ejecución de un algoritmo es el número de pasos que se siguen para resolver un problema. Cuando se habla de costo de un algoritmo, se refiere al tiempo de ejecución.
+    \end{defi}
+\end{frame}
+\begin{frame}{Preliminares}
+    \begin{obs}
+        El tiempo de ejecución de un algoritmo depende de la entrada. Conocer un algoritmo para hayar soluciones de un problema no significa que sea el más optimo. Es importante notar verificar una solución es igual o menos costoso que encontrarla.
+    \end{obs}
+\end{frame}
+
+\begin{frame}{Preliminares}
+    \begin{defi}[Tiempo polinomial]
+        Un algoritmo tiene tiempo polinomial si el tiempo de ejecución es una función polinomial del tamaño de la entrada.
+    \end{defi}
+    \pause
+    \begin{defi}[Tamaño de la entrada]
+        El tamaño de la entrada es el número de bits que se necesitan para representar la entrada.
+    \end{defi}
+\end{frame}
+
+\begin{frame}{Preliminares}
+    \begin{obs}
+        Vamos a tratar sólo funciones de tuplas de naturales ($\N^{t}$) en naturales ($\N$).
+    \end{obs}
+    \pause
+    \begin{defi}[Problema de decisión]
+        Un problema de decisión es un problema que tiene como respuesta sí o no.
+    \end{defi}
+\end{frame}
+
+\begin{frame}{Ejemplo}
+    Por ejemplo el problema de decidir si un número es primo o no. esta se puede escribir como una función\pause
+    \begin{equation*}
+        \begin{split}
+            \text{Primo}:\N &\longrightarrow \{0,1\}\\
+            n &\longmapsto \begin{cases}
+                1 & \text{si $n$ es primo}\\
+                0 & \text{si $n$ no es primo}
+            \end{cases}
+        \end{split}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Preliminares}
+    \begin{defi}[Instancia de un problema de decisión]
+        Una instancia de un problema de decisión es una entrada para el problema de decisión.
+    \end{defi}
+    \pause
+    Por ejemplo, la instancia del problema de decidir si un número es primo, o no, es un número natural.
+
+    \begin{defi}[Solución de un problema de decisión]
+        Una solución de un problema de decisión es la respuesta al problema de decisión.
+    \end{defi}
+\end{frame}
+
+\section{Clase P}
+\begin{frame}{Clase P}
+    \begin{defi}[Clase P]
+        La clase P es la clase de problemas de decisión que se pueden resolver en tiempo polinomial.
+    \end{defi}
+    \pause
+    Decidir si un número es primo o no, se puede resolver en tiempo polinomial.
+\end{frame}
+
+\begin{frame}{Clase P}
+    Siga el siguiente algoritmo:\pause
+    \begin{enumerate}
+        \item si $n = 1$ entonces $n$ no es primo.\pause
+        \item para $i$ entre $2$ y $n -1$:
+        \pause
+        \begin{itemize}
+            \item si $i$ divide a $n$ entonces $n$ no es primo.
+        \end{itemize}
+        \pause
+        \item $n$ es primo.
+    \end{enumerate}    
+\end{frame}
+
+\begin{frame}{Clase NP}
+    \begin{defi}[Clase NP]
+        La clase NP es la clase de problemas de decisión que se pueden verificar en tiempo no polinomial.
+    \end{defi}
+    \pause
+    Decidir si un número es primo o no, se puede verificar en tiempo no polinomial.
+\end{frame}
+
+\begin{frame}{Clase NP}
+    Siga el siguiente algoritmo:\pause
+    \begin{enumerate}
+        \item si $n = 1$ entonces $n$ no es primo.\pause
+        \item Haga $2 ^{n}$ cosas.\pause
+        \item para $i$ entre $2$ y $n -1$:\pause
+        \begin{itemize}
+            \item si $i$ divide a $n$ entonces $n$ no es primo.\pause
+        \end{itemize}
+        \item $n$ es primo.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Clase NP}
+    \begin{defi}[Certificado]
+        Un certificado es una prueba de que una solución es correcta.
+    \end{defi}
+    \pause
+    Por ejemplo, si se quiere verificar que $n = 7$ es primo, se puede dar como certificado que $7$ es sólo divisible por $1$ y $7$.
+    \pause
+    \begin{obs}
+        El certificado no es la solución, es una prueba de que la solución es correcta.
+    \end{obs}
+\end{frame}
+
+\section{P vs NP}
+\begin{frame}{Enuncioado del problema}
+    \begin{defi}[P vs NP]
+        El problema P vs NP se pregunta si los problemas que se pueden verificar en tiempo polinomial también se pueden resolver en tiempo polinomial.
+    \end{defi}
+    \pause
+    \begin{obs}
+        El problema P vs NP es un problema de decisión. Tiene mucho que ver con complejidad computacional. Pues se pregunta sobre algoritmos optimos, conteo de operaciones y tiempo de ejecución.
+    \end{obs}    
+\end{frame}
+\begin{frame}{Ejemplo}
+    Considere el problema de buscar un grupo de números entre cierto conjunto de números que sumen $0$. Si se tiene un grupo de números que sumen $0$, se puede verificar en tiempo polinomial, pero encontrar el grupo de números que sumen $0$, hasta el momento no se sabe si se puede encontrar en tiempo polinomial.
+\end{frame}
+
+\section{Conclusión}
+\begin{frame}{Conclusión}
+    \begin{itemize}
+        \item El problema P vs NP es uno de los problemas más importantes en la ciencia de la computación.\pause
+        \item El problema P vs NP se pregunta si los problemas que se pueden verificar en tiempo polinomial también se pueden resolver en tiempo polinomial.\pause
+        \item Parece intuitivo pensar que no es cierto, es decir que P es distinto de NP, pero hasta el momento no se ha podido demostrar.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Referencias}
+    \begin{thebibliography}{10}
+    \setbeamertemplate{bibliography item}[online]
+    \bibitem{WikiPvsNP}
+    Wikipedia.
+    \newblock \href{https://es.wikipedia.org/wiki/Problema_P_contra_NP}{Problema P contra NP},
+    \newblock Consultado el 14 de noviembre de 2023.
+
+    \setbeamertemplate{bibliography item}[video]
+    \bibitem{YoutubeVideo}
+    Canal de YouTube.
+    \newblock \href{https://www.youtube.com/watch?v=UR2oDYZ-Sao}{Título del Video},
+    \newblock Consultado el 14 de noviembre de 2023.
+    
+    \end{thebibliography}
+\end{frame}
+
+\begin{frame}{Referencias}
+    \begin{thebibliography}{10}
+
+
+        \setbeamertemplate{bibliography item}[book]
+        \bibitem{Libro}
+        Gilles Brassard and Paul Bratley
+        \newblock Algorithmics: Theory and Practice
+        \newblock Prentice Hall, 1988.
+    
+        \end{thebibliography}
+\end{frame}
+\end{document}

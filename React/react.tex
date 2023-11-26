@@ -208,15 +208,18 @@ console.log(precio) //Se muestra "undefined"
 \end{itemize}
 
 \subsubsection*{Tipos de datos}
-JavaScript admite varios tipos de datos, entre ellos:
+En JavaScript, cada valor tiene un tipo asociado. Hay varios tipos de datos que puedes encontrar:
 \begin{itemize}
-  \item Números (enteros y decimales)
-  \item Cadenas (texto)
-  \item Booleanos (verdadero o falso)
-  \item Objetos (colecciones de datos y funciones)
+  \item Number: Representa tanto números enteros como flotantes
+  \item String: Representa una secuencia de caracteres. Ejemplo: \lstinline{"Hello, world"}.
+  \item Boolean: Representa un valor verdadero o falso (true o false).
+  \item Undefined: Representa un valor que no ha sido asignado a una variable.
   \item Arreglos (colecciones ordenadas de datos)
-  \item Null (ausencia de valor)
-  \item Undefined (valor no definido)
+  \item Null: Representa un valor nulo o \enquote*{ningún valor}.
+  \item BigInt: Representa números enteros más grandes que el límite de $2^53 - 1$ que pueden ser representados con Number.
+  \item Symbol: Representa un valor único que no puede ser cambiado.
+  \item Object: Puede contener cualquier combinación de valores primitivos y objetos. Incluye funciones, arrays y expresiones regulares.
+  \item Function: Una secuencia de instrucciones que realiza una tarea o calcula un valor.
 \end{itemize}
 
 Por ejemplo:
@@ -232,8 +235,31 @@ let valorNoDefinido; // Valor no definido (undefined)
 \end{lstlisting}
 
 \subsubsection*{Conversión de tipos de datos}
-JavaScript permite la conversión entre diferentes tipos de datos. Puedes utilizar funciones como \emph{parseInt(), parseFloat(), String(), y Boolean()} para convertir datos de un tipo a otro.
+En muchas situaciones, es necesario convertir un tipo de dato a otro. Hay dos categorías principales de conversiones en JavaScript: explícitas y coerciones (implícitas).
 
+\begin{enumerate}
+  \item Coerción (Conversión Implícita):
+  Cuando operas con dos valores de diferentes tipos, JavaScript intentará convertir uno de los valores para que los dos valores tengan el mismo tipo. Esto se llama coerción. Por ejemplo:
+\begin{lstlisting}
+"5" + 3 // Resulta en el string "53"
+"5" - 3 // Resulta en el number 2
+\end{lstlisting}
+  \item Conversión Explícita:
+  Puedes convertir explícitamente valores de un tipo a otro usando métodos proporcionados por JavaScript:
+  \begin{itemize}
+    \item String a Number:
+\begin{lstlisting}
+parseInt("123") // 123
+parseFloat("123.45") // 123.45
+Number("123") // 123
+\end{lstlisting}
+\item Number a String:
+\begin{lstlisting}
+(123).toString() // "123"
+String(123) // "123"
+\end{lstlisting}
+  \end{itemize}
+\end{enumerate}
 Por ejemplo:
 \begin{lstlisting}
 let numeroTexto = "42";
@@ -378,6 +404,20 @@ if (edad < 18) {
 }  
 \end{lstlisting}
 
+\subsubsection*{Sentencias condicionales (if, else if, else)}
+El operador ternario es una forma más concisa de expresar una sentencia condicional simple, y tiene la estructura `condición ? valorSiVerdadero : valorSiFalso`. A continuación, un ejemplo que refleja el mismo comportamiento del código anterior utilizando operadores ternarios:
+
+\begin{lstlisting}
+let mensaje = (edad < 18) 
+             ? "Eres menor de edad" 
+             : (edad < 65) 
+             ? "Eres adulto" 
+             : "Eres un adulto mayor";
+
+console.log(mensaje);
+\end{lstlisting}
+
+El operador ternario puede ser encadenado, pero es importante usarlo con precaución para mantener la legibilidad del código. En el ejemplo anterior, se encadenaron dos operadores ternarios para cubrir las tres posibles condiciones.
 \subsubsection*{Bucles (for, while)}
 Los bucles te permiten repetir una acción varias veces. JavaScript admite bucles for y while. Aquí tienes ejemplos de ambos:
 
@@ -426,102 +466,106 @@ La Programación Orientada a Objetos es un paradigma de programación que se bas
 \end{itemize}
 
 \subsubsection*{Objetos y clases en JavaScript}
-JavaScript es un lenguaje de programación orientado a objetos, aunque su implementación de POO es diferente de otros lenguajes como Java o C++. En JavaScript, los objetos son colecciones de pares clave-valor, donde las claves son cadenas (o símbolos) y los valores pueden ser de cualquier tipo. JavaScript no tiene clases tradicionales como en otros lenguajes, pero puedes definir objetos y prototipos para crear estructuras de datos similares a clases.
+JavaScript es un lenguaje de programación orientado a objetos. Sin embargo, su acercamiento a la programación orientada a objetos (POO) se diferencia de otros lenguajes como Java o C++. En lugar de clases tradicionales, JavaScript usa objetos y prototipos para modelar estructuras de datos y relaciones de herencia. Un objeto en JavaScript es una colección de pares clave-valor, donde las claves son cadenas (o símbolos) y los valores pueden ser de cualquier tipo.
 
 \begin{lstlisting}
 // Definicion de un objeto en JavaScript
 let persona = {
-    nombre: "Juan",
-    edad: 30,
-    saludar: function() {
-        console.log("Hola, soy " + this.nombre);
-    }
+nombre: "Juan",
+edad: 30,
+saludar: function() {
+console.log("Hola, soy " + this.nombre);
+}
 };
 
 // Uso del objeto
-console.log(persona.nombre); // Acceder a propiedades
-persona.saludar(); // Llamar a metodos
+console.log(persona.nombre); // Accede a propiedades
+persona.saludar(); // Llama a metodos
 \end{lstlisting}
 
 \subsubsection*{Creación de objetos mediante funciones constructoras}
-Puedes crear objetos en JavaScript utilizando funciones constructoras. Estas funciones actúan como plantillas para crear múltiples objetos con las mismas propiedades y métodos.
+Antes de la introducción de la sintaxis de clases en ES6, las funciones constructoras eran la principal manera de crear "tipos" de objetos y emular clases en JavaScript. Estas funciones, cuando son llamadas con la palabra clave new, crean instancias de objetos con propiedades y métodos específicos.
 
 \begin{lstlisting}
 // Definicion de una funcion constructora
 function Persona(nombre, edad) {
-    this.nombre = nombre;
-    this.edad = edad;
-    this.saludar = function() {
-        console.log("Hola, soy " + this.nombre);
-    };
+this.nombre = nombre;
+this.edad = edad;
+this.saludar = function() {
+console.log("Hola, soy " + this.nombre);
+};
 }
 
 // Creacion de objetos usando la funcion constructora
 let juan = new Persona("Juan", 30);
 let maria = new Persona("Maria", 25);
-
 \end{lstlisting}
 
 \subsubsection*{Creación de objetos mediante clases (introducción a la sintaxis de clase)}
-A partir de ECMAScript 2015 (ES6), JavaScript introdujo la sintaxis de clase que se asemeja más a la programación orientada a objetos tradicional. Esto facilita la creación de clases y objetos.
+Con ECMAScript 2015 (ES6), JavaScript incorporó una sintaxis de clases que proporciona una forma más estructurada y familiar (para quienes vienen de otros lenguajes OOP) de definir y crear objetos.
 
 \begin{lstlisting}
 // Definicion de una clase
 class Persona {
-    constructor(nombre, edad) {
-        this.nombre = nombre;
-        this.edad = edad;
-    }
-    saludar() {
-        console.log("Hola, soy " + this.nombre);
-    }
+constructor(nombre, edad) {
+this.nombre = nombre;
+this.edad = edad;
+}
+saludar() {
+console.log("Hola, soy " + this.nombre);
+}
 }
 
 // Creacion de objetos usando la clase
 let juan = new Persona("Juan", 30);
 let maria = new Persona("Maria", 25);
 \end{lstlisting}
+
 \subsubsection*{Herencia}
-La herencia se implementa mediante prototipos. Un objeto puede heredar propiedades y métodos de otro objeto. La herencia se logra estableciendo el prototipo de un objeto.
+JavaScript implementa la herencia a través de prototipos. Con la sintaxis de clases de ES6, la herencia se facilita mediante la palabra clave extends. Un objeto puede heredar propiedades y métodos de otro, lo que permite establecer relaciones jerárquicas entre clases.
 
 \begin{lstlisting}
 // Definicion de una clase Padre
 class Persona {
-    constructor(nombre, edad) {
-        this.nombre = nombre;
-        this.edad = edad;
-    }
-    saludar() {
-        console.log("Hola, soy " + this.nombre);
-    }
+constructor(nombre, edad) {
+this.nombre = nombre;
+this.edad = edad;
+}
+saludar() {
+console.log("Hola, soy " + this.nombre);
+}
 }
 
 // Definicion de una clase Hijo que hereda de Persona
 class Estudiante extends Persona {
-    constructor(nombre, edad, grado) {
-        super(nombre, edad);
-        this.grado = grado;
-    }
-    estudiar() {
-        console.log(this.nombre + " esta estudiando en el grado " + this.grado);
-    }
+constructor(nombre, edad, grado) {
+super(nombre, edad); // Llama al constructor de la clase padre
+this.grado = grado;
+}
+estudiar() {
+console.log(this.nombre + " esta estudiando en el grado " + this.grado);
+}
 }
 
 let juan = new Estudiante("Juan", 15, "Noveno");
-juan.saludar(); // Puede acceder a metodos heredados
-juan.estudiar(); // Puede llamar a metodos propios
+juan.saludar(); // Accede a metodos heredados
+juan.estudiar(); // Llama a metodos propios
 \end{lstlisting}
 
 \subsubsection*{Prototipos y prototipado}
-En JavaScript, cada objeto puede tener un prototipo que es otro objeto del cual hereda propiedades y métodos. El sistema de prototipos permite el uso de herencia prototípica en lugar de herencia basada en clases.
+
+JavaScript es inherentemente un lenguaje basado en prototipos. A diferencia de los lenguajes basados en clases, donde las clases definen la estructura y los comportamientos que las instancias de la clase heredarán, en JavaScript, cada objeto puede tener un prototipo del que hereda directamente propiedades y métodos. Estos prototipos son objetos en sí mismos, y pueden tener sus propios prototipos, creando una cadena de prototipos. Al final de esta cadena está Object.prototype, el prototipo base de todos los objetos en JavaScript.
+
+Cuando intentas acceder a una propiedad o método de un objeto, JavaScript primero verifica si el objeto tiene esa propiedad o método. Si no lo encuentra, busca en el prototipo del objeto, y así sucesivamente, hasta llegar al final de la cadena de prototipos. Si la propiedad o método no se encuentra en toda la cadena, se devuelve undefined.
+
 \begin{lstlisting}
 let personaPrototipo = {
-    saludar: function() {
-        console.log("Hola, soy " + this.nombre);
-    }
+saludar: function() {
+console.log("Hola, soy " + this.nombre);
+}
 };
 
-// Creacion de objetos usando Object.create() y asignacion de prototipo
+// Creacion de objetos usando Object.create() y asignacion del prototipo
 let juan = Object.create(personaPrototipo);
 juan.nombre = "Juan";
 juan.saludar(); // Llama al metodo desde el prototipo
@@ -531,9 +575,174 @@ maria.nombre = "Maria";
 maria.saludar();
 \end{lstlisting}
 
-\subsection{Manipulación del DOM}
-El Document Object Model (DOM) es una representación en forma de árbol de la estructura de una página web. Puedes usar JavaScript para acceder y modificar elementos en el DOM, lo que te permite crear interacciones dinámicas en tu sitio web.
+Un uso común del prototipado es extender objetos existentes. Por ejemplo, si tienes una biblioteca de funciones que trabaja con objetos tipo "persona", pero deseas agregar comportamientos adicionales (como nuevos métodos) sin modificar la biblioteca original, puedes hacerlo extendiendo el prototipo.
 
+Adicionalmente, es importante mencionar que la propiedad especial \lstinline{__proto__} (aunque no está estandarizada y se considera obsoleta en favor de \lstinline{Object.getPrototypeOf() y Object.setPrototypeOf()}) permite acceder y modificar el prototipo de un objeto en tiempo de ejecución.
+
+Finalmente, aunque el prototipado es poderoso, puede ser confuso si no se utiliza adecuadamente. La introducción de la sintaxis de clases en ES6 proporciona una capa de abstracción sobre este sistema de prototipos, ofreciendo una forma más familiar y estructurada de trabajar con herencia en JavaScript.
+
+\subsection{Arrays}
+
+Un array es una estructura de datos que permite almacenar múltiples valores en una única variable. En JavaScript, estos valores pueden ser de cualquier tipo: números, cadenas, objetos, y hasta otros arrays. Los arrays son objetos del tipo \texttt{Array}, pero poseen características y métodos especiales para gestionar las colecciones de datos.
+
+\subsubsection*{Creación de Arrays}
+Puedes crear un array de las siguientes maneras:
+
+\begin{enumerate}
+    \item Usando corchetes (\texttt{[]}):
+\begin{lstlisting}
+let frutas = ["manzana", "banana", "cereza"];
+\end{lstlisting}
+
+    \item Usando el constructor \texttt{Array()}:
+\begin{lstlisting}
+let numeros = new Array(1, 2, 3, 4, 5);
+\end{lstlisting}
+\end{enumerate}
+
+\subsubsection*{Acceso a los elementos de un Array}
+Para acceder a un elemento específico, se utiliza el índice del elemento entre corchetes. Los índices comienzan en 0.
+\begin{lstlisting}
+console.log(frutas[0]); // Salida: manzana
+\end{lstlisting}
+
+\subsubsection*{Modificar un Array}
+Puedes cambiar el valor de un elemento usando su índice:
+\begin{lstlisting}
+frutas[1] = "naranja";
+console.log(frutas); // Salida: ["manzana", "naranja", "cereza"]
+\end{lstlisting}
+
+\subsubsection*{Métodos útiles de Arrays}
+JavaScript ofrece una variedad de métodos para trabajar con arrays: \texttt{push()}, \texttt{pop()}, \texttt{shift()}, \texttt{unshift()}, \texttt{splice()}, \texttt{slice()}, \texttt{join()}, \texttt{reverse()}, \texttt{sort()}, \texttt{map()}, \texttt{filter()} y \texttt{reduce()}, entre otros.
+
+\subsubsection*{Arrays multidimensionales}
+Es posible tener arrays dentro de otros arrays, conocidos como arrays multidimensionales:
+\begin{lstlisting}
+let matriz = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+console.log(matriz[1][2]); // Salida: 6
+\end{lstlisting}
+
+\subsubsection*{Iteración sobre Arrays}
+Para recorrer un array, se pueden usar bucles como \texttt{for} o \texttt{forEach()}.
+\begin{lstlisting}
+for(let i = 0; i < frutas.length; i++) {
+    console.log(frutas[i]);
+}
+
+// Usando forEach
+frutas.forEach(function(fruta) {
+    console.log(fruta);
+});
+\end{lstlisting}
+
+\subsection{Manipulación del DOM}
+
+El Document Object Model (DOM) es una representación estructurada de una página web. Usando JavaScript, es posible interactuar y modificar el DOM, permitiendo crear páginas web dinámicas.
+
+\subsubsection*{Acceder a elementos}
+
+Supongamos que tenemos el siguiente fragmento de HTML:
+\begin{lstlisting}[language=HTML]
+<div id="miDiv" class="claseDiv">Hola, soy un div.</div>
+<p class="claseP">Primer parrafo.</p>
+<p class="claseP">Segundo parrafo.</p>
+\end{lstlisting}
+
+Usando JavaScript, podemos acceder a estos elementos de varias maneras:
+\begin{lstlisting}
+let elementoPorID = document.getElementById("miDiv");
+let elementosPorClase = document.getElementsByClassName("claseP");
+let primerP = elementosPorClase[0];
+\end{lstlisting}
+
+\subsubsection*{Modificar elementos}
+
+\begin{lstlisting}
+elementoPorID.innerHTML = "Contenido cambiado!";
+primerP.style.color = "blue";
+\end{lstlisting}
+
+\subsubsection*{Agregar y eliminar elementos}
+
+\begin{lstlisting}[language=HTML]
+<div id="contenedor"></div>
+\end{lstlisting}
+
+\begin{lstlisting}
+let nuevoElemento = document.createElement("p");
+nuevoElemento.innerHTML = "Soy un parrafo nuevo.";
+document.getElementById("contenedor").appendChild(nuevoElemento);
+
+// Para eliminar
+contenedor.removeChild(nuevoElemento);
+\end{lstlisting}
+
+\subsubsection*{Eventos}
+
+Suponiendo que tienes un botón en tu HTML:
+\begin{lstlisting}[language=HTML]
+<button id="miBoton">Haz click</button>
+\end{lstlisting}
+
+Puedes agregar un oyente de eventos a este botón para que, al hacer click, muestre un mensaje:
+\begin{lstlisting}
+document.getElementById("miBoton").addEventListener("click", function() {
+    alert("Gracias por hacer click");
+});
+\end{lstlisting}
+
+A través de estos ejemplos, podemos ver cómo JavaScript interactúa con el HTML a través del DOM, permitiendo a los desarrolladores crear experiencias web ricas e interactivas.
+
+\subsubsection*{Generación de contenido HTML desde JavaScript}
+
+JavaScript, a través del DOM (Document Object Model), permite la creación dinámica de elementos HTML y la inserción de estos en una página web existente. Esta capacidad es esencial para la interacción en tiempo real y la adaptación del contenido sin necesidad de recargar toda la página.
+
+\textbf{Ejemplo práctico:} Creación de un formulario dinámico.
+
+Supongamos que queremos generar un formulario de registro dinámicamente cuando un usuario hace clic en un botón.
+
+\begin{lstlisting}[language=HTML]
+<!-- Estructura HTML inicial -->
+<button id="mostrarFormulario">Mostrar Formulario</button>
+<div id="formularioContainer"></div>
+\end{lstlisting}
+
+Ahora, usaremos JavaScript para generar el formulario dentro del `div` con id `formularioContainer` cuando se haga clic en el botón:
+
+\begin{lstlisting}
+document.getElementById("mostrarFormulario").addEventListener("click", function() {
+    let contenedor = document.getElementById("formularioContainer");
+
+    // Creacion del elemento form
+    let formulario = document.createElement("form");
+    formulario.action = "#"; // Por simplicidad no lo enviaremos a ningun lugar
+    formulario.method = "post";
+
+    // Creacion de un input para el nombre
+    let inputNombre = document.createElement("input");
+    inputNombre.type = "text";
+    inputNombre.placeholder = "Introduce tu nombre";
+    formulario.appendChild(inputNombre);
+
+    // Creacion de un boton de envio
+    let botonEnviar = document.createElement("input");
+    botonEnviar.type = "submit";
+    botonEnviar.value = "Registrar";
+    formulario.appendChild(botonEnviar);
+
+    // agregar el formulario al contenedor
+    contenedor.appendChild(formulario);
+});
+\end{lstlisting}
+
+Con el código anterior, cuando un usuario haga clic en el botón "Mostrar Formulario", se generará dinámicamente un formulario simple con un campo de texto para el nombre y un botón de envío, y se insertará dentro del `div` con id `formularioContainer`.
+
+Es importante destacar que, aunque generar contenido HTML a través de JavaScript es poderoso y flexible, también puede ser menos eficiente que tener el contenido estático en el HTML, especialmente si se genera una gran cantidad de contenido dinámico. Por lo tanto, es esencial utilizar esta técnica con prudencia y optimizar el rendimiento cuando sea necesario.
 
 \newpage
 \section{Fundamentos de HTML y CSS}

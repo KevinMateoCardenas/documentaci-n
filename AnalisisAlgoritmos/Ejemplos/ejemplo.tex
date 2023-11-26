@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{tikz}
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.5\textwidth]{logoudea.jpg}\\
+    \vspace*{1cm}
+    
+    {\Large\textbf{UNIVERSIDAD DE ANTIOQUIA}\\}
+    \vspace*{0.5cm}
+    {\large\textbf{1503}}\\
+    \vspace{3cm}
+    
+    {\Large\textbf{Título del trabajo de grado}\\}
+    \vspace{2cm}
+    
+    {\Large\textbf{Nombre del Estudiante}\\}
+    \vfill
+    
+    {\large Universidad de Antioquia\\
+    Facultad de Ciencias Exactas y Naturales\\
+    Instituto de Matemáticas\\
+    Medellín, Colombia\\}
+    
+    {\large 2023\\}
+\end{titlepage}
+
+    \begin{center}
+    \begin{tikzpicture}
+      \graph [empty nodes, nodes={circle, draw, inner sep=3pt}] {
+        subgraph K_n [n=5, clockwise, radius=1.5cm];
+      };
+      \foreach \x in {1,2,...,5}{%
+        \node at (\x*360/5:1.8cm) {\(v_\x\)};
+      }
+      \node at (0,-2) {\(K_5\)};
+    \end{tikzpicture}
+    \end{center}
+\end{document}

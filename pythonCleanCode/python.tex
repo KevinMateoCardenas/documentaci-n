@@ -1,0 +1,248 @@
+\documentclass[executivepaper]{article}
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[left=3cm, right=3cm, top=2cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\doublespacing
+
+% Define colores para el código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{mycolor}{RGB}{0,0,255}
+% Configuración de lstlisting
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    aboveskip={1.0\baselineskip},
+    belowskip={1.0\baselineskip},
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=4,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    keywordstyle=\color{mycolor},
+    commentstyle=\color{codegreen},
+    stringstyle=\color{codepurple},
+    numbers=left,
+    numberstyle=\tiny\color{codegray},
+    stepnumber=1,
+    numbersep=10pt,
+    captionpos=b,
+    escapeinside={\%*}{*)}
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\title{Python}
+\author{Kevin Cárdenas}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{Python}}\\[0.5cm]
+        {\Large \emph{Un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código.}}
+        \\[15cm]
+
+        \large\emph{Autor:}\\
+        Kevin Cárdenas.
+        \\[1cm]
+        {\large 2023}
+    \end{center}
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introducción}
+Python es un lenguaje de programación interpretado cuya filosofía enfatiza la legibilidad del código. Es un lenguaje multiparadigma, ya que soporta orientación a objetos, programación imperativa y, en menor medida, programación funcional. Además, es un lenguaje interpretado, con tipado dinámico y multiplataforma.
+
+Para hablar de código limpio en Python es esencial conocer \emph{The Zen of Python}, que es un conjunto de principios para escribir código limpio en Python.
+
+\begin{itemize}
+    \item \emph{Beautiful is better than ugly.} \\
+    Hermoso es mejor que feo. Se debe escribir código legible y entendible para cualquier persona con un mínimo de conocimiento en programación.
+    
+    \item \emph{Explicit is better than implicit.} \\
+    Explícito es mejor que implícito. Se debe escribir código que describa claramente su funcionalidad, utilizando nombres significativos para variables y funciones.
+    
+    \item \emph{Simple is better than complex.} \\
+    Simple es mejor que complejo. Se debe evitar la sobre-complicación, usando el menor número de líneas, funciones y clases necesarias para lograr el objetivo.
+    
+    \item \emph{Complex is better than complicated.} \\
+    Complejo es mejor que complicado. Aunque a veces el código puede ser complejo, debe ser siempre entendible.
+    
+    \item \emph{Flat is better than nested.} \\
+    Plano es mejor que anidado. Se debe evitar tener funciones dentro de funciones, clases dentro de clases, y anidar excesivamente condicionales o ciclos.
+    
+    \item \emph{Sparse is better than dense.} \\
+    Disperso es mejor que denso. Se debe modularizar el código, evitando tener muchas líneas de código en un solo archivo o muchas responsabilidades en un solo módulo.
+    
+    \item \emph{Readability counts.} \\
+    La legibilidad cuenta. El código debe ser legible y entendible para cualquier persona con un mínimo de conocimiento en programación.
+    
+    \item \emph{Special cases aren't special enough to break the rules.} \\
+    Los casos especiales no son lo suficientemente especiales como para romper las reglas. Se debe evitar tener casos especiales que puedan romper el código.
+    
+    \item \emph{Although practicality beats purity.} \\
+    Aunque la practicidad vence a la pureza. Es preferible tener un código funcional a un código perfecto.
+    
+    \item \emph{Errors should never pass silently.} \\
+    Los errores nunca deben pasar silenciosamente. Se deben manejar los errores adecuadamente para evitar que pasen desapercibidos.
+    
+    \item \emph{Unless explicitly silenced.} \\
+    A menos que se silencien explícitamente. Si se decide silenciar los errores, debe hacerse de forma explícita.
+    
+    \item \emph{In the face of ambiguity, refuse the temptation to guess.} \\
+    Ante la ambigüedad, rechaza la tentación de adivinar. Se debe evitar la ambigüedad en el código para que funcione como se espera y sea fácil de entender.
+    
+    \item \emph{There should be one-- and preferably only one --obvious way to do it.} \\
+    Debería haber una, y preferiblemente solo una, forma obvia de hacerlo. Se debe buscar la mejor, más simple y legible forma de hacer las cosas.
+    
+    \item \emph{Although that way may not be obvious at first unless you're Dutch.} \\
+    Aunque esa forma puede no ser obvia al principio a menos que seas holandés. La forma más obvia de hacer las cosas puede requerir práctica y experiencia para ser descubierta.
+    
+    \item \emph{Now is better than never.} \\
+    Ahora es mejor que nunca. Se debe evitar procrastinar al escribir código.
+    
+    \item \emph{Although never is often better than \emph{right} now.} \\
+    Aunque nunca es a menudo mejor que \emph{ahora} mismo.
+    
+    \item \emph{If the implementation is hard to explain, it's a bad idea.} \\
+    Si la implementación es difícil de explicar, es una mala idea. El código no debe ser difícil de explicar o entender.
+    
+    \item \emph{If the implementation is easy to explain, it may be a good idea.} \\
+    Si la implementación es fácil de explicar, puede ser una buena idea.
+    
+    \item \emph{Namespaces are one honking great idea -- let's do more of those!} \\
+    Los espacios de nombres son una gran idea, ¡hagamos más de esos!
+\end{itemize}
+
+Es también recomendable seguir el PEP (Python Enhancement Proposal), que es una guía de estilo para escribir código en Python. \href{https://www.python.org/dev/peps/pep-0008/}{PEP 8} es la guía de estilo que proporciona recomendaciones sobre cómo nombrar variables, funciones, clases, módulos, cómo escribir código, cómo indentar, cómo escribir comentarios, entre otros.
+
+Además, es beneficioso escribir código \emph{pythonic}, que es escribir código que sigue los principios de \emph{The Zen of Python} y que adhiere al PEP 8.
+
+\subsection{PEP 8}
+El PEP 8 es una guía de estilo para escribir código en Python. Esta guía proporciona recomendaciones sobre cómo nombrar variables, funciones, clases, módulos, cómo escribir código, cómo indentar, cómo escribir comentarios, entre otros.
+
+Sin embargo, esta guía también menciona que:
+\begin{itemize}
+    \item La base de una guía de estilo es la coherencia.
+    \item La coherencia con esta guía de estilo es importante.
+    \item La coherencia dentro de un proyecto es más importante.
+    \item La coherencia dentro de un módulo o función es lo más importante.
+\end{itemize}
+
+Para identificar inconsistencias: en ocasiones, al escribir código, se puede sentir que algo no está bien, que algo no está bien escrito o nombrado. En ese momento se debe revisar el código y verificar si se está siendo inconsistente. A veces, las recomendaciones de las guías de estilo no son aplicables. Cuando esto sucede, se debe usar el sentido común. En particular: ¡no rompa la compatibilidad con versiones anteriores solo para cumplir con este PEP!
+
+PEP 8 proporciona estas razones para ayudar a decidir si se debe ignorar una directriz en particular en su código:
+\begin{itemize}
+    \item La aplicación de la directriz haría que el código fuera menos legible, incluso para alguien acostumbrado a leer código que sigue esta PEP.
+    \item Para ser coherente con el código circundante que también lo rompe (tal vez por razones históricas) -- aunque esto también es una oportunidad para limpiar el desorden de otra persona.
+    \item Cuando el código en cuestión es anterior a la introducción de la directriz y no hay ninguna otra razón para modificarlo.
+    \item Cuando el código necesita seguir siendo compatible con versiones anteriores de Python que no soportan la característica recomendada por la guía de estilo.
+\end{itemize}
+
+\subsection{Variables y Convenciones de Nombres}
+
+Las variables son contenedores de información, y se pueden crear variables de diferentes tipos de datos. Las variables se pueden crear usando el signo igual (\texttt{=}), y el nombre de la variable debe seguir las convenciones de nombres de Python.
+
+Las convenciones de nombres son un conjunto de reglas que se deben seguir para nombrar variables, funciones, clases, módulos, etc. En Python, las convenciones de nombres son las siguientes:
+
+\begin{itemize}
+    \item \textbf{Variables y Funciones}: Los nombres de las variables y funciones deben ser en minúsculas, y si el nombre está compuesto por más de una palabra, estas deben estar separadas por guiones bajos. A esto se le llama \emph{snake case} (e.g., \lstinline{mi_variable}, \lstinline{mi_funcion()}).
+    
+    \item \textbf{Clases}: Los nombres de las clases deben iniciar con mayúsculas, y si el nombre de la clase está compuesto por más de una palabra, la primera letra de cada palabra debe ser mayúscula sin separaciones entre ellas. A esto se le llama \emph{Pascal Case} (e.g., \lstinline{MiClase}).
+    
+    \item \textbf{Módulos}: Los nombres de los módulos deben ser en minúsculas, y si el nombre del módulo está compuesto por más de una palabra, estas deben estar separadas por guiones bajos (e.g., \lstinline{mi_modulo.py}).
+    
+    \item \textbf{Constantes}: Los nombres de las constantes deben ser en mayúsculas, y si el nombre de la constante está compuesto por más de una palabra, estas deben estar separadas por guiones bajos (e.g., \lstinline{MI_CONSTANTE}).
+\end{itemize}
+
+\paragraph{Palabras Reservadas}
+Es importante evitar el uso de palabras reservadas de Python al nombrar variables, funciones, clases, o módulos. Las palabras reservadas son aquellas que tienen un significado especial en Python, como \lstinline{for}, \lstinline{if}, \lstinline{while}, \lstinline{import}, etc.
+
+\paragraph{Tipos de Datos y Conversiones}
+Python tiene varios tipos de datos incorporados como \lstinline{int}, \lstinline{float}, \lstinline{str}, \lstinline{list}, \lstinline{tuple}, \lstinline{dict}, \lstinline{set}, etc. Puedes convertir entre tipos de datos usando las funciones de conversión como \lstinline{int()}, \lstinline{float()}, \lstinline{str()}, etc.
+
+\paragraph{Variables Globales y Locales}
+Las variables globales son aquellas definidas fuera de una función, mientras que las variables locales son definidas dentro de una función. Es importante entender el alcance (\emph{scope}) de las variables para evitar errores en tu código.
+
+\paragraph{Operadores de Asignación}
+Los operadores de asignación son los siguientes:
+\begin{itemize}
+    \item \lstinline{=}: Asigna el valor de la derecha a la variable de la izquierda.
+    \item \lstinline{+=}: Suma el valor de la derecha a la variable de la izquierda y asigna el resultado a la variable de la izquierda.
+    \item \lstinline{-=}: Resta el valor de la derecha a la variable de la izquierda y asigna el resultado a la variable de la izquierda.
+    \item \lstinline{*=}: Multiplica el valor de la derecha a la variable de la izquierda y asigna el resultado a la variable de la izquierda.
+    \item \lstinline{/=}: Divide el valor de la derecha a la variable de la izquierda y asigna el resultado a la variable de la izquierda.
+    \item \lstinline{%=}: Divide el valor de la derecha a la variable de la izquierda y asigna el resto a la variable de la izquierda.
+    \item \lstinline{**=}: Eleva el valor de la izquierda a la potencia del valor de la derecha y asigna el resultado a la variable de la izquierda.
+    \item \lstinline{//=}: Divide el valor de la izquierda entre el valor de la derecha y asigna el resultado a la variable de la izquierda.
+\end{itemize}
+
+Por ejemplo
+\begin{lstlisting}
+CONSTANTE = 10
+def tabla_multiplicar(numero):
+    for i in range(1, 11):
+        print(f"{numero} x {i} = {numero * i}")
+
+tabla_multiplicar(CONSTANTE) # imprime la tabla de multiplicar del 10
+\end{lstlisting}
+
+\begin{lstlisting}
+def suma(a, b):
+    return a + b
+
+print(suma(5, 10)) # imprime 15
+\end{lstlisting}
+
+\begin{lstlisting}
+def factorial(numero):
+    if numero == 0:
+        return 1
+    else:
+        return numero * factorial(numero - 1)
+
+print(factorial(5)) # imprime 120
+\end{lstlisting}
+
+\begin{lstlisting}
+PERSONAS = {
+    "Kevin": 20,
+    "Juan": 30,
+    "Maria": 40
+    }
+def busqueda(nombre):
+    if nombre in PERSONAS:
+        print(f"{nombre} tiene {PERSONAS[nombre]} anios")
+    else:
+        print(f"{nombre} no existe en la base de datos")
+\end{lstlisting}
+
+\end{document}

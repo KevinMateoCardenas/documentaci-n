@@ -1,0 +1,751 @@
+\documentclass[11pt,oneside]{report} 
+
+\usepackage{ stmaryrd }
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Establece el idioma español
+\usepackage{csquotes} % Carga el paquete csquotes
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+%\usepackage[left=1.50cm, right=1.50cm, top=2.54cm, bottom=2.54cm]{geometry}
+\usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{positioning}
+\setlength{\parindent}{0.5in}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{ dsfont }
+\usepackage{amsmath,amsfonts,amssymb}
+\doublespacing
+
+\lstset{
+    inputencoding=utf8,
+    language=Java,
+    basicstyle=\ttfamily,
+    columns=fullflexible
+}
+
+% Configuración del paquete hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=gray,
+}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\theoremstyle{plain}
+\newtheorem{proposición}{proposición}[chapter] 
+\newtheorem{lema}{Lema}[chapter] 
+\newtheorem{teo}{Teorema}[chapter] 
+\newtheorem{coro}{Corolario}[chapter] 
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}[chapter] 
+\newtheorem{obs}{Observación}[chapter] 
+\newtheorem{ejemplo}{Ejemplo}[chapter] 
+
+\newcommand{\Al}{(\mathcal{A},\mathds{F},\odot)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\fu}{f:D\longrightarrow \mathds{R}}
+\newcommand{\fun}{f:[a,b]\longrightarrow \mathds{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\F}{\mathds{F}}
+\newcommand{\op}{``}
+\newcommand{\cl}{''}
+\newcommand{\po}{^}
+\newcommand{\Q}{\matbbb{Q}}
+\newcommand{\V}{\mathds{V}}
+\newcommand{\T}{\mathds{T}}
+
+\title{Definiciones inductivas}
+\author{Kevin Cárdenas}
+
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{Definiciones Inductivas}}
+        \vfill
+
+        \includegraphics[width=0.3\textwidth]{Logosímbolo+Universidad+de+Antioquia+vertical+®-02.png}\\
+        \large\emph{Autor:}\\
+        Kevin Mateo Cárdenas Gallego.\\
+        \large\emph{Asesor:}\\
+        Juan Carlos Agudelo Agudelo.\\
+        {\large Trabajo de grado en modalidad de monografía para el título como matemático.\par}
+        {Facultad de Ciencias Exactas y Naturales \par}
+        {Instituto de Matemáticas \par}
+        \vspace{1mm}
+        {Medellín, Colombia \par}
+        \vspace{1mm}
+        {\large 2023\par}
+    \end{center}
+\end{titlepage}
+
+\chapter*{Dedicatoria}
+A Evelin Yesenia Martínez, por ser un apoyo incondicional y un pilar fundamental durante estos años de compartir nuestras vidas.
+
+A mi hijo, Isaac Joaquín Cárdenas Martínez, por ser mi fuente de inspiración y motivación para seguir adelante pese a las dificultades, es la luz de mis días y el impulso detrás de cada logro.
+
+A mi madre, Adriana María Gallego, y a mi padre, Jorge Alirio Cárdenas, cuya fortaleza y amor han sido la guía de mi camino.
+
+A mis hermanos, Jorge Ivan Cárdenas Gallego, Johny Santiago Cárdenas Gallego, Juan Diego Cárdenas Gallego, Angy Paola Cárdenas Ciro y Nicol Dayana Cárdenas Ciro, por su apoyo y amor, son parte fundamental de la red que sostiene mis sueños y ambiciones.
+
+Dedico este trabajo a ustedes como símbolo de mi gratitud y afecto. Compartir este logro con cada uno de ustedes es una alegría que trasciende palabras. Con todo mi amor.
+
+\chapter*{Agradecimientos}
+
+Extiendo un sincero agradecimiento a mi asesor, Juan Carlos Agudelo Agudelo, cuya experta guía y asesoramiento intelectual fueron cruciales para la culminación de este trabajo. Su paciencia y compromiso con la excelencia han sido una fuente de inspiración y un modelo a seguir.
+
+Expreso mi gratitud a los profesores del Instituto de Matemáticas. Su dedicación a la enseñanza y su voluntad de compartir un vasto conocimiento han enriquecido mi experiencia académica y han sido fundamentales en mi formación como matemático.
+
+A mis compañeros de estudio, les agradezco por su camaradería, por los desafíos intelectuales compartidos y por los momentos de alivio durante las etapas más exigentes de este viaje. La solidaridad y el apoyo mutuo que hemos compartido han sido de un valor incalculable.
+
+Es mi esperanza que este trabajo refleje la calidad de la enseñanza, el apoyo y la inspiración que he recibido de cada uno de ustedes.
+
+\tableofcontents
+\chapter*{Introducción}
+\addcontentsline{toc}{chapter}{Introducción}
+En este trabajo se presentan las definiciones inductivas, estas son utilizadas en la matemática para describir conjuntos donde los elementos se generan a partir de unos elementos que se forman como base y unas reglas que permiten generar nuevos elementos. Un ejemplo clásico de un conjunto inductivamente definido es el conjunto de los números naturales $\N$, en este caso los elementos se generan a partir del elemento $0$ y de la función sucesor $s$. Otro ejemplo de un conjunto inductivamente definido es el conjunto de formulas de la lógica proposicional clásica (CPL), en este caso los elementos se generan a partir de un conjunto de variables proposicionales $V$ y de los conectivos lógicos $\neg, \lor, \land, \rightarrow, \leftrightarrow$. Otro ejemplo de un conjunto inductivamente definido es el conjunto de listas finitas sobre un conjunto dado, en este caso los elementos se generan a partir de un elemento $nill$ y de la función $\cdot$ que concatena un elemento en una lista ya existente.
+
+Se presentarán dos maneras alternativas de formalizar conjuntos inductivamente definidos en la teoría de conjuntos, la primera es a partir de conjuntos de reglas, y la segunda es a partir de puntos fijos de operadores monótonos sobre un retículo completo. Y se desarrollará en profundidad los tres ejemplos anteriores.
+
+Además se presentará el esquema de tipos inductivos en teoría de tipos, que permite definir los objetos básicos en dicha teoría. Dando una breve introducción a la teoría de tipos y a la teoría de tipos de Martin-Löf, para luego presentar el esquema de tipos inductivos y mostrar cómo a partir de este esquema se puede obtener un conjunto de reglas , de acuerdo con la formalización presentada anteriormente.
+
+\chapter{Definiciones inductivas}
+Los conjuntos inductivamente definidos son utilizados en la matemática para representar conjuntos donde los elementos se generan a partir de elementos ya existentes. Un ejemplo clásico de un conjunto inductivamente definido es el conjunto de los números naturales $\N$.
+\begin{ejemplo} [El conjunto de los números naturales $\N$]
+    El conjunto $\N$ de los números naturales es el \emph{menor conjunto} tal que:
+    \begin{enumerate}
+        \item $0 \in \N$.
+        \item Si $n \in \N$, entonces $s(n )\in \N$.
+    \end{enumerate}
+\end{ejemplo}
+
+Estos conjuntos se presentan, de manera informal, a partir de un conjunto de reglas, unas para indicar qué elementos base están en el conjunto, y otras reglas que definen como añadir más elementos a partir de los elementos ya existentes. El conjunto en cuestión será el más pequeño que cumple el conjunto de reglas, así como en el caso de $\N$. Existen otros conjuntos que se pueden definir de manera inductiva, como por ejemplo el conjunto de formulas de la lógica proposicional clásica (CPL).
+
+\begin{ejemplo}[El conjunto de formulas de la lógica proposicional clásica (CPL)]
+    Dado un conjunto $V = \{p_1, p_2,...\}$ de \emph{variables proposicionales}, el conjunto $Form(CPL)$ de \emph{formulas de la lógica proposicional clásica} es el menor conjunto tal que:
+    \begin{enumerate}
+        \item $V \subseteq Form(CPL)$.
+        \item Si $A, B \in Form(CPL)$, entonces $\neg A, (A \lor B), (A \land B), (A \rightarrow B), (A \leftrightarrow B) \in Form(CPL)$.
+    \end{enumerate}
+\end{ejemplo}
+
+Otro ejemplo clásico de un conjunto inductivamente definido es el conjunto de listas finitas sobre un conjunto dado.
+\begin{ejemplo}[El conjunto de listas finitas sobre un conjunto dado]
+    Dado un conjunto $A$, el conjunto $Finlist(A)$ es el menor conjunto tal que:
+    \begin{enumerate}
+        \item $nill \in Finlist(A)$.
+        \item Si $S \in Finlist(A)$ y $a \in A$ , entonces $\langle a \rangle\cdot S\in Finlist(A)$.
+    \end{enumerate}
+    El operador $\cdot$ funciona como un método para concatenar un elemento en una lista ya existente, entonces los términos en $Finlist(A)$ son de la forma $\langle a_n\rangle \cdot\langle a_{n-1} \rangle\cdot\langle a_{n-2}\rangle\cdot\ldots\cdot\langle a_{0}\rangle\cdot nill$.
+\end{ejemplo}
+
+En las siguientes dos secciones se presentan dos maneras alternativas de formalizar conjuntos inductivamente definidos, la primera es a partir de conjuntos de reglas, y la segunda es a partir de puntos fijos de operadores monótonos sobre un retículo completo.
+
+\section{Conjuntos inductivamente definidos a partir de conjuntos de reglas}
+
+En \cite{Aczel}, Aczel propone la formalización de conjuntos inductivamente definidos a partir de conjuntos de reglas. Se describe a continuación.
+
+\begin{defi}[Reglas, conjunto $\phi-$cerrado y conjunto inductivamente definido]
+    Se define:
+    \begin{enumerate}
+        \item Una \emph{regla} es un par $(X,x)$, donde $X$ es un conjunto, llamado \emph{conjunto de premisas}, y $x$ es la \emph{conclusión}.
+        \item Si $\phi$ es un conjunto de reglas, entonces un conjunto $A$ es \emph{$\phi - cerrado$} si para toda regla $(X,x) \in \phi$ si se tiene que $X \subseteq A$ implica $x \in A$.
+        \item Dado $\phi$ un conjunto de reglas, se define \emph{$I(\phi)$ como el conjunto inductivamente definido por $\phi$}, dado por:
+              $$I(\phi) = \bigcap \{A : A \hspace{2mm}\phi{-cerrado}\}$$
+    \end{enumerate}
+\end{defi}
+Se puede ver que $I(\phi)$ es $\phi -cerrado$ y que si un conjunto $B$ es $\phi -cerrado$, entonces $I(\phi) \subseteq B$.
+\begin{ejemplo}[$\N$ como conjunto inductivamente definido a partir de un conjunto de reglas]
+    Se define $\N = I(\phi)$, donde $\phi$ es el conjunto que contienen las siguientes dos reglas:
+    \begin{enumerate}
+        \item $(\emptyset,0)$.
+        \item $(\{n\},s(n))$.
+    \end{enumerate}
+\end{ejemplo}
+
+También se puede ver que $Form(CPL)$ es un conjunto inductivamente definido a partir de un conjunto de reglas.
+\begin{ejemplo}[$Form(CPL)$ como conjunto inductivamente definido a partir de un conjunto de reglas]
+    Sea $\phi$ el conjunto con las siguientes reglas:
+    \begin{enumerate}
+        \item $(\emptyset, p_i)$ para cada $p_i \in V$.
+        \item $(\{A\}, \neg A)$.
+        \item $(\{A, B\}, (A \lor B))$.
+        \item $(\{A, B\}, (A \land B))$.
+        \item $(\{A, B\}, (A \rightarrow B))$.
+        \item $(\{A, B\}, (A \leftrightarrow B))$.
+    \end{enumerate}
+    Obteniendo que $Form(CPL) = I(\phi)$.
+\end{ejemplo}
+
+\begin{ejemplo}[$Finlist(A)$ como conjunto inductivamente definido a partir de un conjunto de reglas]
+    Dado un conjunto $A$, y $\phi$ el conjunto que contiene las siguientes reglas:
+    \begin{enumerate}
+        \item $(\emptyset, nill)$.
+        \item $(\{S\},\langle a \rangle\cdot S)$, donde $a \in A$.
+    \end{enumerate}
+    Se tiene que $Finlist(A) = I(\phi)$
+\end{ejemplo}
+
+\begin{teo}
+    [Demostraciones por inducción en un conjunto inductivamente definido a partir de un conjunto de reglas]
+    Sea $A$ un conjunto inductivamente definido a partir de un conjunto de reglas $\phi$, y una propiedad sobre este $\varphi : A \rightarrow \{true, false\}$. Demostrar que $\varphi^{-1}(\{true\}) = A$, se reduce a demostrar que $\varphi^{-1}(\{true\})$ es $\phi$-cerrado.
+    \begin{proof}
+        Como $A = I(\phi)$, si $\varphi^{-1}(\{true\})$ es $\phi$-cerrado entonces $A \subseteq \varphi^{-1}(\{true\})$, y dado que $\varphi^{-1}(\{true\})\subseteq A$, se tendría que $\varphi^{-1}(\{true\}) = A$.
+    \end{proof}
+\end{teo}
+
+\begin{ejemplo}[Demostraciones por inducción en $\N$]
+    Dada una propiedad $\varphi : \N \rightarrow \{true, false\}$. Demostrar que $\varphi^{-1}(\{true\}) = \N$, se reduce a demostrar que $\varphi^{-1}(\{true\})$ cumple las reglas que definen a $\N$ como conjunto inductivamente definido.
+    \begin{enumerate}
+        \item $0 \in \varphi^{-1}(\{true\})$.
+        \item Si $n \in \varphi^{-1}(\{true\})$, entonces $s(n )\in \varphi^{-1}(\{true\})$.
+    \end{enumerate}
+    Este es el caso de la demostración por inducción en $\N$.
+\end{ejemplo}
+
+\section{Conjuntos definidos inductivamente como puntos fijos en un retículo completo}
+
+En \cite{Aczel}, Aczel también propone la formalización de conjuntos inductivamente definidos como puntos fijos de operadores monótonos sobre un retículo completo. En esta sección se presentará dicha formalización. Además se mostrará que los conjuntos inductivamente definidos a partir de un conjunto de reglas son un caso particular de los conjuntos definidos inductivamente como puntos fijos de un operador monótono sobre un retículo completo. Para esto se introducirán los conceptos de retículo completo, operador monótono y punto fijo de un operador monótono sobre un retículo completo.
+
+\begin{defi}[CPO]
+    Un \emph{conjunto parcialmente ordenado o CPO}, es un conjunto equipado con una relación de orden parcial, es decir \emph{reflexiva, antisemítica y transitiva}. Usualmente lo denotamos como $(A,\leq)$, donde $A$ es el conjunto y $\leq$ es la relación de orden parcial
+\end{defi}
+A continuación algunos ejemplos:
+\begin{ejemplo}[Conjuntos parcialmente ordenados]
+    \begin{enumerate}
+        \item El conjunto de los números enteros $\Z$, junto con la relación de orden usual $\leq$.
+        \item El conjunto de los subconjuntos de un conjunto dado $X$, junto con la relación de orden parcial $\subseteq$, que representa la contención.
+        \item El conjunto de los productos cartesianos $A \times B$ de dos conjuntos parcialmente ordenados $(A,\leq_A)$ y $(B,\leq_B)$, junto con la relación de orden parcial $\leq_{\times}$ llamada \emph{orden lexicográfico}. Es decir, para $(a_1,b_1),(a_2,b_2) \in A \times B$, $(a_1,b_1) \leq_{\times} (a_2,b_2)$ si y solo si $a_1 \leq_{A} a_2$ o ($a_1 = a_2$ y $b_1 \leq_{B} b_2$).
+    \end{enumerate}
+\end{ejemplo}
+\begin{ejemplo}[Conjunto parcialmente ordenado a partir de un conjunto pre-ordenado]
+    Un conjunto pre-ordenado es un conjunto equipado con una relación \emph{reflexiva y transitiva}. Si $L = (B, \leq)$ es un pre-orden, definimos la relación de equivalencia:
+    $$x \sim y \quad si\hspace{2mm} y \hspace{2mm} solo \hspace{2mm} si \quad x \leq y \hspace{2mm} \land \hspace{2mm} y \leq x.$$
+    Se define $A = (B/\sim , \leq_{\sim})$, con el orden inducido por la relación de equivalencia. Se tiene que $A$ es un CPO.
+\end{ejemplo}
+
+\begin{defi}[Ínfimo y supremo]
+    Sea $(A,\leq)$ un CPO, definimos:
+    \begin{itemize}
+        \item \emph{Ínfimo:} Dado un conjunto $X \subseteq A$, $m \in A$ se llama ínfimo de $X$ si se cumple que:
+              \begin{enumerate}
+                  \item $m$ es \emph{cota inferior} de $X$. Es decir, $m \leq a$ para todo $a \in X$, esto se puede denotar con $m \leq X$.
+                  \item Cualquier otra cota inferior de $X$ es menor o igual que $m$, es decir, si $m' \leq X$, entonces $m' \leq m$.
+              \end{enumerate}
+              El ínfimo de $X$ se denota como $\inf(X)$, en caso de existir.
+        \item \emph{Supremo:}  Dado un conjunto $X \subseteq A$, $s \in A$ se llama supremo de $X$ si se cumple que:
+              \begin{enumerate}
+                  \item $s$ es \emph{cota superior} de $X$. Es decir, $a \leq s$ para todo $a \in X$, esto se puede denotar con $X \leq s$.
+                  \item Cualquier otra cota superior de $X$ es mayor o igual que $s$, es decir, si $X \leq s'$, entonces $s\leq s'$.
+              \end{enumerate}
+              El supremo de $A$ se denota como $\sup(A)$, en caso de existir.
+    \end{itemize}
+\end{defi}
+
+\begin{defi}[Dual de un CPO]
+    Dado un CPO $L=(A,\leq)$, su dual o inverso $L^{op}$ es el CPO que se obtiene al invertir la relación de orden, es decir, $a\leq_{op} b$ en el dual si y solo si $b\leq a$ en el CPO original.
+
+    El dual de un CPO es también un CPO.
+
+    Si $(A, \geq)$ es un CPO y $B \subseteq A$ tiene un ínfimo $m$ en $(A, \geq)$, entonces $m$ es el supremo de $B$ en $(A, \leq_{op} )$. Por otro lado, si $B$ tiene un supremo $s$ en $(A, \leq)$, entonces $s$ es el ínfimo de $B$ en $(A, \leq_{op})$.
+\end{defi}
+
+\begin{defi}
+    Dado un CPO $(L, \leq)$ y un operador $F: L \rightarrow L$, definimos:
+    \begin{itemize}
+        \item $F$ es \emph{monótono} si preserva el orden parcial, es decir, para todo $x, y \in L$, si $x \leq y$, entonces $f(x) \leq f(y)$.
+        \item Los \emph{puntos pre-fijos} de $F$ son los elementos $x \in L$ tales que $F(x) \leq x$. De manera similar, los \emph{puntos post-fijos} de $F$ son los elementos $x \in L$ tales que $x \leq f(x)$.\\
+              Es decir, un punto pre-fijo es un elemento que el operador no puede llevar más allá de sí mismo, mientras que un punto post-fijo es un elemento que el operador no puede llevar por debajo de sí mismo.
+        \item Los \emph{puntos fijos} de $F$ son los elementos $x \in L$ tales que $F(x) = x$. Es decir, son los elementos que el operador deja inalterados.
+    \end{itemize}
+\end{defi}
+
+\begin{defi}[Retículo completo]
+    Un retículo completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjuntos tienen supremo.
+\end{defi}
+Note que basta con exigir la existencia del supremo en todo conjunto para tener la existencia del ínfimo en todo conjunto. Pues, dado $A=(L,\leq)$ un retículo completo, sea $X \subseteq L$, se considera $\overline{X} = \{y\in A : \hspace{2mm} y \leq X\}$, se tiene que  $\overline{X} \subseteq L$, luego existe $\sup(\overline{X})$ y este coincide con el $\inf(X)$.
+Es decir en un retículo completo todo subconjunto posee ínfimo.
+
+También se tiene que los retículos completos son acotados, es decir poseen máximo y mínimo.
+
+\begin{teo}[Teorema del punto fijo]
+    En un retículo completo $L$, un operador monótono $F:L\rightarrow L$ tiene un retículo completo de puntos fijos. En particular el punto fijo más pequeño de la función es el ínfimo de los puntos pre-fijos, el más grande es el supremo de los puntos post-fijos. Más aún, si se da la sobreyectividad estos son el mínimo y el máximo del retículo de puntos fijos.
+\end{teo}
+La demostración de este teorema se encuentra, como ejercicio, en \cite{Davide Sangiorgi}.
+
+\begin{defi}[Conjuntos definidos inductiivamente como puntos fijos de operadores monótonos sobre un retículo completo]
+    Sea L un retículo completo cuyos puntos son conjuntos (se puede decir que $L\subseteq P(A)$, para algún conjunto $A$), ordenado bajo la relación de inclusión, y $F:L\rightarrow L$ un operador en $L$.
+
+    \emph{El conjunto definido inductivamente por $F$} es el conjunto:
+    $$F_{ind} = \bigcap \{x \hspace{2mm}:F(x)\subseteq x\}$$
+    %$$F_{coind} = \bigcup \{x \hspace{2mm}:x\subseteq F(x)\}$$
+    Es decir, el conjunto $F_{ind}$ es el ínfimo de los pre-fijos de $F$. %y el conjunto $F_{coind}$ es el supremo de los post-fijos de $F$.
+\end{defi}
+
+\begin{teo}[Conjunto de reglas para un punto fijo de un operador monótono sobre un retículo completo]
+    Sean $A$ un conjunto, $(L, \subseteq)$ un retículo completo, con $L\subseteq P(A)$, $F: L \to L$ un operador monótono sobre $L$, entonces existe un conjunto de reglas $\phi$ tal que $F_{ind} = I(\phi)$.
+    \begin{proof}
+        Sea $\phi$ el conjunto formado por las reglas $(X,y)$ con $X \in L$ y $y \in F(X)$. Si $F(Y) \subseteq Y$, entonces $Y$ es $\phi$-cerrado, pues dada una regla $(X, y)$, si $X\subseteq Y$, como $F$ es un operador monótono, entonces $F(X) \subseteq F(Y)$, y por lo tanto, si $y\in F(X)$, y como $F(Y)\subseteq Y$, entonces $y\in F(Y)$.
+        Ahora bien, si tomamos un $\phi$-cerrado $Y\subseteq L$, entonces este será pre-fijo. Pues sea $y \in F(Y)$, entonces $(Y,y)\in \phi$ y como $Y$ es $\phi$-cerrado $y \in Y$.
+
+        Luego.
+        $$F_{ind} = \bigcap \{A\in L \hspace{2mm}:F(A)\subseteq A\} = \bigcap \{A\in L : A \hspace{2mm}\phi{-cerrado}\} = I(\phi)$$
+    \end{proof}
+\end{teo}
+
+A partir de los Teoremas 1.1 y 1.3 se tiene un método para demostrar que una propiedad vale para todos los elementos de un punto fijo de un operador monótono sobre un retículo completo por inducción. Es decir, dada $\varphi : A \to \{true, false\}$ una propiedad sobre $A$ (donde $A = F_{ind}$ para algún operador monótono $F$ sobre un retículo completo $(L,\subseteq)$ con $L\subseteq P(B)$ para algún conjunto $B$), para demostrar que $\varphi^{-1}(\{true\}) = A$ basta con demostrar que $X \subseteq \varphi^{-1}(\{true\})$ implica que $F(X) \subseteq \varphi^{-1}(\{true\})$.
+
+\begin{coro}[Principio de inducción]
+    Dado $F$ definido como en el teorema anterior, entonces:
+    \begin{center}
+        $F(X)\subseteq X \rightarrow F_{ind}\subseteq X$\\
+        %$F(x)\geq x \rightarrow F_{coind}\geq x$ (principio de coinducción)
+    \end{center}
+    \begin{proof}
+        Si $F(X)\subseteq X$, entonces:
+        $$\bigcap \{Y \hspace{2mm}:F(Y)\subseteq Y\} \subseteq X.$$
+        %Si $X \subseteq F(X)$, entonces:
+        %$$X \subseteq \bigcup \{x \hspace{2mm}:x\subseteq F(x)\}$$
+    \end{proof}
+\end{coro}
+
+Este principio plantea un método de verificación para que un conjunto sea igual al conjunto inductivo definido por $F$. %y para que un conjunto contenga al coinductivo definido por $F$. Es decir, si $X\subseteq L$ es pre-fijo, entonces $F_{ind}\subseteq X$, además, si $X$ es post-fijo, entonces $X \subseteq F_{coind}$.
+
+Volviendo a los ejemplos que se trataron antes.
+
+\begin{ejemplo}[El conjunto de los números naturales definido como punto fijo de un operador monótono sobre un retículo]
+    Sea $X$ el conjunto de cadenas finitas o infinitas de elementos en el alfabeto $\{0, s, (, )\} $, sabiendo que $(P(X), \subseteq)$ es un retículo completo, sea $\varphi:P(X)\longrightarrow P(X)$ definido por:
+    $$\varphi(T)=\{0\} \cup \{s(x)\hspace{2mm}:\hspace{2mm}x\in T\}.$$
+    Se tiene que los naturales se pueden definir como
+    $\N=\bigcap \{x \hspace{2mm}: \varphi(x)\subseteq x\}$.\\
+    Pues $0\in \varphi_{ind}$ y si $n\in \varphi_{ind}$ entonces $s(n) \in \varphi_{ind}$. Por otra parte si $A\subseteq X$ es tal que $\varphi(A)\subseteq\ A$, entonces $0\in A$, además si $n\in A$, entonces $s(n) \in A$. Por lo tanto $\N \subseteq A$ para cada $A$ pre-fijo bajo $\varphi$. También, como $\varphi(\N) \subseteq \N$, se tiene que $\N$ es pre-fijo.
+    %Por otra parte el conjunto $\varphi_{coind}$ contiene a $\N$ y también contiene un elemento máximo.
+
+    %Por otro lado, si $X$ fuera sólo el conjunto de cadenas finitas se ve que:
+    %$$\varphi_{ind} = \varphi_{coind}$$
+    %Pues como $\N = \varphi(\N)$, se tiene que $\N$ es post-fijo es decir $\N \subseteq \varphi_{coind}$. \\
+    %Además si $x\subseteq \varphi(x)$, entonces dado $t_0 \in x$, se tendría que $t_0 = 0$ o $t_0 = s(t_1)$ para algún $t_1 \in x$, y asi generando una secuencia $\{t_0, t_1, \ldots, t_n\}$, donde $t_{i+1} = s(t_i)$ y $t_n = 0$, pues si no existiera se tendía un elemento $t_0$ que representaría un string infinito.\\
+    %Se concluye así que $x \subseteq \N$ para todo post-fijo $x$, Es decir $\varphi_{coind} \subseteq \N$.\\
+\end{ejemplo}
+
+\begin{ejemplo}[El conjunto de listas finitas de elementos en un conjunto dado definido como punto fijo de un operador monótono sobre un retículo]
+    Tomemos:
+    $X$ como el conjunto de todas las cadenas finitas o infinitas con elementos del alfabeto $A\cup\{nill, \cdot, \rangle, \langle\}$, $(P(X),\subseteq)$ el retículo, y el operador correspondiente $\varphi_{L_A}$ es:
+    $$\varphi_{L_A}(T) = \{ nill\} \cup \{\langle a\rangle \cdot s \hspace{2mm}: a\in A \land s \in T \}$$
+    Se tiene que el conjunto de listas finitas con elementos en $A$ es el conjunto inductivamente definido por el operador $\varphi_{L_A}$, que denotamos por $FinList_{A}$. %y el conjunto de listas finitas e infinitas es el coinductivamente definido por $\varphi_{L_A}$.
+\end{ejemplo}
+
+\begin{ejemplo}[El conjunto de formulas de la lógica proposicional clásica como punto fijo de un operador monótono sobre un retículo]
+    Dado un conjunto $V = \{p_1, p_2,...\}$ de variables proposicionales, $X$ el conjunto de todas las cadenas finitas o infinitas con elementos del alfabeto $V\cup\{\lor, \lnot, \land, \rightarrow, \leftrightarrow, (, )\}$, $(P(X),\subseteq)$ el retículo, y el operador correspondiente $\varphi$ es:
+    $$\varphi(T) = V \cup \{(A \# B) \hspace{2mm}: (A , B\in T) \land (\#\in \{\lor, \land, \rightarrow, \leftrightarrow\})\}\cup \{\lnot A \hspace{2mm}:A\in T\}$$
+    Se tiene finalmente que $Form(CPL) = \varphi_{ind}$, es el conjunto inductivamente definido por este operador, y los elementos aquí son justamente formulas.\\
+    %Además, El conjunto coinductivamente definido $\varphi_{coind} = \bigcup \{T \hspace{2mm}: T\subseteq\varphi(T)\}$, coincide con $Form(CPL)$, similar al ejemplo 1.20.
+\end{ejemplo}
+
+\chapter{Esquema de tipos inductivos en teoría de tipos}
+
+Los fundamentos de la teoría de tipos se remontan a los trabajos de Bertrand Russell y Alfred North Whitehead en el siglo XX, quienes introdujeron la idea de tipos para resolver las paradojas en la teoría de conjuntos. La Teoría de Tipos de Martín-Löf fue introducida por él en la década de 1970. Martín-Löf, un matemático y filósofo sueco, desarrolló su teoría de tipos como un sistema lógico y matemático constructivo. Después se expandió introduciendo conceptos como tipos dependientes y polimorfismo. También se ha explorado la relación entre la teoría de tipos de Martín-Löf y la teoría de conjuntos, revise \cite{Peter Dybjer}. La teoría de tipos de Martín-Löf se ha convertido en un área de investigación activa en la lógica matemática y la informática teórica.
+
+Existen varias versiones de la teoría de tipos de Martín-Löf, en este trabajo se estudiará la versión de la teoría de tipos de Martín-Löf (MLTT) que se presenta en \cite{Peter Dybjer}, que es una versión de la teoría de tipos de Martin-Löf lo suficientemente simple para implementar el esquema que se presentará en este trabajo.
+
+\section{Introducción a la teoría de tipos de Martín-Löf MLTT}
+
+Se dará una breve introducción a la teoría de tipos de Martín-Löf, para esto se introducirán los conceptos de contexto, juicio y expresión. Luego se introducirán las reglas de inferencia para el sistema, y en la siguiente sección se presentará el esquema de tipos inductivos. Finalmente se dará una breve interpretación en el contexto de la teoría de conjuntos.
+
+La teoría de tipos de Martin-Löf cuenta con cuatro formas básicas de juicio y representa un sistema más complejo que la lógica de primer orden. Esto se debe a que se maneja más información en las derivaciones por la necesidad de identificar proposiciones y tipos. Además, la sintaxis requiere más atención ya que las fórmulas bien formadas (tipos) y las fórmulas demostrablemente verdaderas (tipos habitados) deben generarse de forma simultánea.
+
+Las cuatro formas de juicio \emph{categórico} son:
+
+\begin{itemize}
+  \item \(\vdash A\) set, lo que indica que \(A\) es un tipo bien formado,
+  \item \(\vdash a:A\), que significa que \(a\) es del tipo \(A\),
+  \item \(A = A'\), que denota que \(A\) y \(A'\) son tipos equivalentes,
+  \item \(a = a':A\), lo cual muestra que \(a\) y \(a'\) son elementos equivalentes del tipo \(A\).
+\end{itemize}
+
+La teoría de tipos de Martin-Löf (MLTT) extiende los juicios categóricos básicos para incluir juicios hipotéticos, los cuales se realizan bajo supuestos. Estos juicios permiten manejar información más compleja en las derivaciones, como la identificación de proposiciones y tipos, y la generación simultánea de tipos bien formados y términos habitados.
+
+Los juicios hipotéticos se introducen de la siguiente manera:
+
+\begin{itemize}
+  \item Un juicio de la forma \(B(x) \ \text{set} \ (x : A)\) indica que bajo la suposición de que \(x\) es un elemento de \(A\), \(B(x)\) es un tipo bien formado. Esto se escribe como:
+  \[
+  \frac{x : A}{B(x) \ \text{set}}
+  \]
+  
+  \item Si se asume que \(a : A\) y bajo esta suposición, \(B(x)\) es un tipo, entonces \(B(a)\) es también un tipo. Esto se representa por la regla de sustitución:
+  \[
+  \frac{a : A \quad B(x) \ \text{set}}{B(a) \ \text{set}}
+  \]
+  
+  \item En el caso de que \(a = c : A\) y bajo la suposición de \(x : A\), \(B(x)\) es un tipo, entonces \(B(a) = B(c)\). Esto se muestra mediante:
+  \[
+  \frac{a = c : A \quad B(x) \ \text{set}}{B(a) = B(c)}
+  \]
+\end{itemize}
+
+Siguiendo la interpretación de proposiciones como tipos, la expresión
+\begin{equation}
+\vdash a:A
+\end{equation}
+puede interpretarse como el juicio que establece que \(a\) es un término de prueba para la proposición \(A\). Si prescindimos de este objeto, obtenemos un juicio que corresponde al de la lógica de primer orden ordinaria.
+
+\begin{equation}
+    \vdash A \text{ verdadero}.
+\end{equation}
+
+Cada forma de juicio admite varias lecturas diferentes, como conjuntos, elementos, pruebas, métodos de construcción y métodos de resolución de problemas. Estas lecturas se pueden resumir en la siguiente tabla:
+
+\begin{center}
+    \begin{tabular}{ll}
+        \hline
+        \(a : A\) & \(a\) es de tipo \(A\) \\
+        \(a \in A\) & \(a\) es un elemento de \(A\) \\
+        \(a\) es una prueba (construcción) de \(A\) & \(A\) es verdadera \\
+        \(a\) es un método de realizar (cumplir) la intención \(A\) & \(A\) es realizable \\
+        \(a\) es un método de resolver el problema \(A\) & \(A\) es resoluble \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{defi}[Expresiones]
+    Se usa notación ordinaria, pero se omite mencionar restricciones de variables.
+    \begin{itemize}
+        \item Expresiones de conjuntos
+              $$A ::= \Pi x:A_{0}.A_{1}[x].$$
+        \item Expresiones de elementos
+              $$a ::= x \hspace{2mm}|\hspace{2mm} \lambda x:A.a[x] \hspace{2mm}|\hspace{2mm} a_1(a_0).$$
+        \item Expresiones de contextos
+              $$\Gamma ::= \epsilon \hspace{2mm}|\hspace{2mm} \Gamma, x:A.$$
+        \item Expresiones de juicios
+              $$J ::= \Gamma \hspace{2mm}|\hspace{2mm} \Gamma \vdash A \hspace{2mm}|\hspace{2mm} \Gamma \vdash a:A \hspace{2mm}|\hspace{2mm} \Gamma \vdash A = A' \hspace{2mm}|\hspace{2mm} \Gamma \vdash a = a':A.$$
+    \end{itemize}
+\end{defi}
+
+Las expresiones de conjuntos representan conjuntos creados a partir de otros conjuntos. \(\Pi x:A_{0}.A_{1}[x]\) representa el conjunto generado como el producto cartesiano de los elementos de \(A_{1}[x]\) evaluados en cada elemento de \(x \in A_{0}\). Las expresiones de elementos representan elementos de conjuntos. \(x\) representa un elemento de un conjunto, \(\lambda x:A.a[x]\) representa una función que mapea cada elemento de \(x \in A\) a un elemento \(a[x]\), y \(a_1(a_0)\) representa la aplicación de la función \(a_1\) al elemento \(a_0\). Las expresiones de contextos representan contextos, que son conjuntos de juicios. \(\epsilon\) representa el contexto vacío, y \(\Gamma, x:A\) representa la extensión del contexto \(\Gamma\) con el juicio \(x:A\). 
+
+Se puede ver que se está diferenciando términos que representan conjuntos y términos que representan elementos. Esto con el fin de conocer tanto el tipo que define un conjunto como sus elementos.
+
+\begin{defi}[Reglas de inferencia]
+    Las reglas de inferencia para el sistema de tipos de Martín-Löf son las siguientes:
+    \begin{center}
+        \begin{tabular}{p{6cm}p{6cm}}
+            $$\epsilon \hspace{2mm} contexto$$
+                                                        &
+            $$\frac{\Gamma\hspace{2mm} contexto \hspace{4mm} \Gamma \vdash A \hspace{2mm} set}{\Gamma,x:A \hspace{2mm} contexto}$$ \\
+
+            $$\frac{\Gamma \vdash A \hspace{2mm} set}{\Gamma \vdash A = A}$$
+                                                        &
+            $$\frac{\Gamma \vdash a : A}{\Gamma \vdash a = a : A}$$                                               \\
+
+            $$\frac{\Gamma \vdash A = A'}{\Gamma \vdash A' = A}$$ &
+            $$\frac{\Gamma \vdash a = a' : A}{\Gamma \vdash a' = a : A}$$                                         \\
+
+            $$\frac{\Gamma \vdash A = A' \hspace{8mm} \Gamma \vdash A' = A''}{\Gamma \vdash A = A''}$$
+                                                        &
+            $$\frac{\Gamma \vdash a = a' : A \hspace{8mm} \Gamma \vdash a' = a'' : A}{\Gamma \vdash a = a'' : A}$$     \\
+            $$\frac{\Gamma \vdash A = A' \hspace{8mm} \Gamma \vdash a : A}{\Gamma \vdash a : A'}$$
+                                                        &
+            $$\frac{\Gamma \vdash A = A' \hspace{8mm} \Gamma \vdash a = a' : A}{\Gamma \vdash a = a'' : A'}$$          \\
+        \end{tabular}
+
+        $$\frac{\Gamma\vdash A \hspace{2mm} set}{\Gamma, x:A \vdash x:A}$$
+
+        \begin{tabular}{p{7cm}p{7cm}}
+            $$\frac{\Gamma\vdash A_{0} \hspace{2mm} set \hspace{8mm} \Gamma\vdash A_{1} \hspace{2mm} set}{\Gamma, x:A_{0} \vdash A_{1} \hspace{2mm}set}$$
+             &
+            $$\frac{\Gamma\vdash A_{0} \hspace{2mm} set \hspace{8mm} \Gamma\vdash a:A_{1}}{\Gamma, x:A_{0} \vdash a:A_{1}}$$ \\
+        \end{tabular}
+
+    \end{center}
+
+    las reglas de inferencia para el producto cartesiano de una familia de conjuntos son las siguientes:
+    \begin{itemize}
+        \item Reglas de formación de tipos:
+        \[
+            \frac{\Gamma\vdash A_{0} \hspace{2mm} set \hspace{4mm} \Gamma, x:A_{0}\vdash A_{1}[x] \hspace{2mm} set}{\Gamma \vdash \Pi x:A_{0}.A_{1}[x] \hspace{2mm}set}
+        .\]
+        \[
+            \frac{\Gamma, x:A_{0}\vdash a[x]:A_{1}}{\Gamma \vdash \lambda x:A_{0}.a[x] : \Pi x:A_{0}.A_{1}[x]} 
+        .\]
+        \[
+            \frac{\Gamma \vdash a_{1}: \Pi x:A_{0}.A_{1}[x] \hspace{3mm} \Gamma\vdash a_{0}:A_{0}}{\Gamma \vdash a_{1}(a_{0}) : A_{1}[a_{0}]}
+        .\]
+        \item Reglas de igualdad:
+        \[
+            \frac{\Gamma\vdash A_{0} = A_{0}' \hspace{4mm} \Gamma, x:A_{0}\vdash A_{1}[x] = A_{1}'[x]}{\Gamma \vdash \Pi x:A_{0}.A_{1}[x] = \Pi x:A_{0}'.A_{1}'[x]}
+        .\]
+        \[
+            \frac{\Gamma, x:A_{0}\vdash a[x] = a'[x] : A_{1}}{\Gamma \vdash \lambda x:A_{0}.a[x] = \lambda x:A_{0}.a'[x] : \Pi x:A_{0}.A_{1}[x]}
+        .\]
+        \[
+            \frac{\Gamma \vdash a_{1} = a_{1}' : \Pi x:A_{0}.A_{1}[x] \hspace{3mm} \Gamma \vdash a_{0} = a_{0}':A_{0}}{\Gamma \vdash a_{1}(a_{0}) = a_{1}'(a_{0}'): A_1[a_{0}]}
+        .\]
+        \[
+            \frac{\Gamma.x:A_{0}\vdash a_{1}[x]: A_{1}[x] \hspace{4mm} \Gamma\vdash a_{0} : A_{0}}{\Gamma\vdash(\lambda x:A_{0}.a_1[x])(a_{0}) = a_{1}(a_{0}) : A_{1}[a_{0}]}
+        .\]
+    \end{itemize}
+\end{defi}
+
+\begin{defi}[Telescopios]
+    Un \emph{telescopio} es una secuencia de tipos dependientes \(T_{1}, \ldots, T_{n}\), donde cada \(T_{i}\) es un tipo dependiente de los parámetros \(x_{1}:T_{1}, \ldots, x_{i-1}:T_{i-1}\) para todo \(i \in \{2, \ldots, n\}\).
+\end{defi}
+
+\begin{obs}
+    Hay una relación entre los contextos y los telescopios, pues un contexto \(\Gamma\) con tipos dependientes tiene ligado un telescopio \(T_{1}, \ldots, T_{n}\) donde cada \(T_{i}\) es un tipo dependiente de los parámetros \(x_{1}:T_{1}, \ldots, x_{i-1}:T_{i-1}\) para todo \(i \in \{2, \ldots, n\}\). Por ejemplo, el contexto \(x:A, y:B[x], z:C[y]\) tiene ligado el telescopio \(A, B[x], C[y]\).
+\end{obs}
+
+\section{Esquema de tipos inductivos en MLTT}
+Se tiene la sintaxis y las reglas del $\lambda$-cálculo con tipos dependientes. Llamamos a esta teoría $T_{0}$. $T_{0}$ puede ser extendida sucesivamente obteniendo las teorías $T_{1}, T_{2}, \ldots$ de la siguiente manera:
+    \begin{itemize}
+        \item $T_{0}$ es la teoría de tipos dependientes que se acaba de definir.
+        \item $T_{i+1}$ es la teoría $T_{i}$ extendida con un nuevo tipo de datos $I_{i}$.
+    \end{itemize}
+
+\begin{defi}[Reglas de formación y de introducción]
+    Se tiene que $J$ abrevia $\Gamma\vdash J$, en una teoría $T$, para no llevar una notación tan cargada.
+    \begin{itemize}
+        \item Reglas de formación:
+              $$P \hspace{2mm} set.$$
+              $$P=P$$
+        \item Reglas de introducción i-ésima:
+                $$\frac{as::Gs_{i} \hspace{8mm} (b_{k}:Hs_{ik}[as]\to P)_{k}}{intro_{i}(as,(b_{k})_{k}) :P}.$$
+                $$\frac{as=as'::Gs_{i} \hspace{8mm} (b_{k}=b'_{k}:Hs_{ik}[as]\to P)_{k}}{intro_{i}(as,(b_{k})_{k}) = intro_{i}(as,(b´'_{k})_{k}) :P}.$$
+    \end{itemize}
+    Donde
+    \begin{itemize}
+        \item $Gs_{i}$ es un telescopio relativo a $T$;
+
+        \item $Hs_{ik}[xs]$ es un telescopio relativo a $T$ en el contexto $xs::Gs_{i}$ para cada $k$.
+    \end{itemize}
+\end{defi}
+
+En ese sentido, se tienen expresiones de conjuntos
+$$A::=P.$$
+y expresiones de elementos
+$$a::= intro_{i}(as,(b_k)_k).$$
+
+\begin{ejemplo}[Naturales]
+    Definimos:
+    \begin{itemize}
+        \item Regla de formación:
+        \begin{center}
+            $\N$ set\\
+            $\N=\N$.
+        \end{center}
+        \item Reglas de introducción:
+        $$\frac{}{0:\N} \hspace{16mm} \frac{}{0=0:\N}.$$
+        $$\frac{n:\N}{s(n):\N} \hspace{16mm} \frac{n = n':\N}{s(n) = s(n'):\N}.$$
+    \end{itemize}
+\end{ejemplo}
+
+\begin{ejemplo}[Listas finitas sobre un conjunto dado]
+    Dado $A :set$ definimos
+    \begin{itemize}
+        \item Regla de formación:
+        \begin{center}
+            $FinList_A$ set\\
+            $FinList_A=FinList_A$.
+        \end{center}
+        \item Reglas de introducción:
+        $$\frac{}{nill:FinList_A} \hspace{16mm} \frac{}{nill=nill:FinList_A}.$$
+        $$\frac{a:A\hspace{8mm}l:FinList_A}{\langle a\rangle\cdot l:FinList_A} \hspace{16mm} \frac{a=a':A\hspace{8mm}l=l':FinList_A}{\langle a\rangle\cdot l=\langle a'\rangle\cdot l':FinList_A}.$$
+    \end{itemize}
+\end{ejemplo}
+
+\begin{ejemplo}[El conjunto de formulas de la lógica proposicional clásica]
+    Dado $V :set$ el conjunto de variables proposicionales, definimos
+    \begin{itemize}
+        \item 
+        Regla de formación:
+        \begin{center}
+            $Form(CPL)$ set.\\
+            $Form(CPL)=Form(CPL)$.
+        \end{center}
+        \item Reglas de introducción:
+        $$\frac{a:V}{a:Form(CPL)} \hspace{6mm} \frac{a=a':V}{a=a':Form(CPL)}$$
+        $$\frac{g:Form(CPL)}{(\lnot g):Form(CPL)} \hspace{6mm} \frac{g=g':Form(CPL)}{(\lnot g)=(\lnot g'):Form(CPL)}.$$
+        $$\frac{g:Form(CPL)\hspace{4mm}f:Form(CPL)}{(g\lor f):Form(CPL)} \hspace{6mm} \frac{g=g':Form(CPL)\hspace{4mm}f=f':Form(CPL)}{(g\lor f)=(g'\lor f'):Form(CPL)}.$$
+        $$\frac{g:Form(CPL)\hspace{4mm}f:Form(CPL)}{(g\land f):Form(CPL)} \hspace{6mm} \frac{g=g':Form(CPL)\hspace{4mm}f=f':Form(CPL)}{(g\land f)=(g'\land f'):Form(CPL)}.$$
+        $$\frac{g:Form(CPL)\hspace{4mm}f:Form(CPL)}{(g\rightarrow f):Form(CPL)} \hspace{6mm} \frac{g=g':Form(CPL)\hspace{4mm}f=f':Form(CPL)}{(g\rightarrow f)=(g'\rightarrow f'):Form(CPL)}.$$
+        $$\frac{g:Form(CPL)\hspace{4mm}f:Form(CPL)}{(g\leftrightarrow f):Form(CPL)} \hspace{6mm} \frac{g=g':Form(CPL)\hspace{4mm}f=f':Form(CPL)}{(g\leftrightarrow f)=(g'\leftrightarrow f'):Form(CPL)}.$$
+    \end{itemize}
+\end{ejemplo}
+
+\section{Interpretación de MLTT en Teoría de Conjuntos}
+
+La idea básica en esta sección es interpretar cada concepto de teoría de tipos como el correspondiente concepto de teoría de conjuntos. Así, un conjunto en teoría de tipos se interpreta como un conjunto en teoría de conjuntos, un término de un conjunto como un elemento de un conjunto, la igualdad definitoria como la igualdad extensional. En \cite{Peter Dybjer} se puede ver una explicación más detallada de la interpretación.
+
+Sea $\llbracket a \rrbracket\rho$ denota la interpretación de la expresión $a$ bajo la asignación $\rho$. Esta asignación es una función que asigna un conjunto a cada variable $x$ en una lista finita de variables que contenga todas las variables libres de $a$. Se tiene que \(\emptyset\) representa la asignación vacía, \(\rho_{x}^{u}\) abrevia \(\rho\cup\{(x,u)\}\) y \(\llbracket a \rrbracket\) abrevia \(\llbracket a \rrbracket\emptyset\).
+
+A continuación se mostrará la interpretación de expresiones de elementos.
+
+    $$\llbracket \Pi_x : A_0. A_1(x) \rrbracket\rho = \prod_{u \in \llbracket A_0 \rrbracket\rho} \llbracket A_1(x) \rrbracket\rho_{x}^{u}.$$
+    Está definida si y solo si $\llbracket A_0 \rrbracket \rho$ está definida y $\llbracket A_1(x) \rrbracket \rho ^{u}_x$ está definido para todo $u \in \llbracket A_0 \rrbracket_p$.
+
+A continuación se mostrará la interpretación de expresiones de elementos.
+
+    $$\llbracket x \rrbracket\rho = \rho(x).$$
+    Siempre está definida.
+
+    $$\llbracket \lambda x : A. a[x] \rrbracket\rho = \left\{ \left( u, \llbracket a[x] \rrbracket\rho_{x}^{u} \right) : u \in \llbracket A \rrbracket\rho \right\}.$$
+    Está definida si y solo si $\llbracket A \rrbracket\rho$ está definida y $\llbracket a[x] \rrbracket\rho_{x}^{u}$ está definida para todo $u \in \llbracket A \rrbracket\rho$.
+
+    $$\llbracket a_1(a_0) \rrbracket\rho = \llbracket a_1 \rrbracket\rho\left( \llbracket a_0 \rrbracket\rho \right).$$
+    Está definida si y solo si $\llbracket a_1 \rrbracket\rho$ está definida y $\llbracket a_0 \rrbracket\rho$ está definida.
+
+A continuación se mostrará la interpretación de expresiones de contextos.
+
+    $$\llbracket \epsilon \rrbracket\rho = \emptyset.$$
+    Siempre está definida.
+
+    $$\llbracket \Gamma, x : A \rrbracket\rho = \{ \rho_{x}^{u} :\rho\in\llbracket\Gamma\rrbracket \land u \in \llbracket A \rrbracket\rho \}$$
+    Está definida si y solo si $\llbracket\Gamma\rrbracket$ y $\llbracket A \rrbracket\rho$ están definidas siempre que $\rho\in\llbracket\Gamma\rrbracket$.
+
+A continuación se mostrará la interpretación de las expresiones de juicio:
+
+    \begin{equation*}
+    \llbracket\Gamma \ \text{contexto}\rrbracket \ \text{si y solo si} \ \llbracket\Gamma\rrbracket \ \text{es un conjunto de asignaciones.}
+    \end{equation*}
+    Está definida si y solo si $\llbracket\Gamma\rrbracket$ está definida.
+
+    \begin{equation*}
+    \llbracket\Gamma \vdash A \ \text{set}\rrbracket \ \text{si y solo si} \ \llbracket A \rrbracket\rho \ \text{es un conjunto siempre que} \ \rho \in \llbracket\Gamma\rrbracket.
+    \end{equation*}
+    Está definida si y solo si $\llbracket \Gamma \rrbracket$ y $\llbracket A \rrbracket\rho$ están definidas siempre que $\rho \in \llbracket\Gamma\rrbracket$.
+
+    \begin{equation*}
+    \llbracket\Gamma \vdash a : A\rrbracket \ \text{si y solo si} \ \llbracket a \rrbracket\rho \in \llbracket A \rrbracket\rho \ \text{siempre que} \ \rho \in \llbracket\Gamma\rrbracket.
+    \end{equation*}
+    Está definida si y solo si $\llbracket \Gamma \rrbracket$ está definida y si $\llbracket a \rrbracket\rho$ y $\llbracket A \rrbracket\rho$ están definidas siempre que $\rho \in \llbracket \Gamma \rrbracket$.
+
+    \begin{equation*}
+    \llbracket\Gamma \vdash A = A'\rrbracket \ \text{si y solo si} \ \llbracket A \rrbracket\rho = \llbracket A' \rrbracket\rho \ \text{siempre que} \ \rho \in \llbracket\Gamma\rrbracket.
+    \end{equation*}
+    Está definida si y solo si $\llbracket \Gamma \rrbracket$ está definida y si $\llbracket A \rrbracket\rho$ y $\llbracket A' \rrbracket\rho$ están definidas siempre que $\rho \in \llbracket\Gamma\rrbracket$.
+
+    \begin{equation*}
+    \llbracket\Gamma \vdash a = a' : A\rrbracket \ \text{si y solo si} \ \llbracket a \rrbracket\rho = \llbracket a' \rrbracket\rho \ \text{y} \ \llbracket a \rrbracket\rho, \llbracket a' \rrbracket\rho \in \llbracket A \rrbracket\rho \ \text{siempre que} \ \rho \in \llbracket\Gamma\rrbracket.
+    \end{equation*}
+    Está definida si y solo si $\llbracket \Gamma \rrbracket$ está definida y si $\llbracket a \rrbracket\rho$, $\llbracket a' \rrbracket\rho$, y $\llbracket A \rrbracket\rho$ están definidas siempre que $\rho \in \llbracket\Gamma\rrbracket$.
+
+En \cite{Peter Dybjer} se puede ver una explicación más detallada de la interpretación, y un bosquejo de la demostración de la validez de la interpretación.
+
+Anteriormente se indicó cómo definir un conjunto inductivamente definido por medio de un conjunto de reglas. Se mostrará cómo interpretar tipos inductivos definidos en MLTT mediante el esquema de la sección anterior, en la teoría de conjuntos, usando la formalización por medio de reglas. Para un tipo inductivo $P$, tome el siguiente conjunto de reglas:
+$$\Phi = \bigcup \{(\bigcup_{k} ran(v_{f}), \langle |intro_{i}|, us, (v_{k})_{k})\rangle)\hspace{2mm}: us\in\llbracket Gs_{i}\rrbracket, (v_k\in \llbracket Hs_{ik}[xs]\rrbracket_{xs}^{us}\to U)_{k} \}$$
+Entonces $\llbracket P \rrbracket \rho = I(\Phi)$, donde $I(\Phi)$ es el conjunto inductivamente definido por $\Phi$. Donde:
+\begin{enumerate}
+    \item $\llbracket\cdot\rrbracket$ es la interpretación de tipos y $\llbracket\cdot\rrbracket_{xs}^{us}$ es la interpretación de telescopios.
+    \item $ \langle |intro_{i}|, us, (v_{k})_{k})\rangle$ representa una codificación de $intro_{i}(us,(v_{k})_{k})$. Donde $|intro_{i}|$ es el código de $intro_{i}$.
+    \item $ran(v_{f})$ es el rango de la función $v_{f}$.
+    \item El conjunto $U$ debe tomarse de tal manera que contenga todos los conjuntos involucrados en la interpretación para que $\Phi$ esté bien definido. Puede tomarse $U = V_{\alpha}$, donde $V_\alpha$ es el conjunto generado en la llamada jerarquía acumulativa de conjuntos antes del estado $\alpha$, para un ordinal $\alpha$ suficientemente grande. Por simplicidad se tomará a $U$ como el conjunto de cadenas finitas o infinitas sobre un alfabeto que contenga la sintaxis necesaria para representar los términos en el conjunto de reglas, como se hizo en la sección donde se definió los conjuntos inductivamente definidos como puntos fijos de operadores monótonos sobre retículos completos.
+\end{enumerate}
+
+Para los siguientes ejemplos se verán las reglas de introducción como funciones, adaptando la notación de \cite{Dybjer and Chalmer}.
+
+\begin{ejemplo}
+    Para el Ejemplo 2.1 (el conjunto $\N$), Sea $U$ el conjunto de cadenas finitas o infinitas sobre un alfabeto que contenga a $\{s, (,), 0\}$. En el esquema se tiene:
+    \begin{itemize}
+        \item (Regla de formación)
+              $$\N : set.$$
+        \item (Reglas de introducción)
+              $$0:\N.$$
+              $$s:\N\to\N.$$
+    \end{itemize}
+
+    Entonces el conjunto de reglas bajo la interpretación es:
+    \begin{align*}
+        \Phi = & \{(\emptyset, 0)\}\\
+               & \cup \{(\{n\}, \langle s\rangle\cdot n)\hspace{2mm}: n \in U\}
+    .\end{align*}
+\end{ejemplo}
+
+\begin{ejemplo}
+    Para el Ejemplo 2.2 (Listas finitas sobre un conjunto dado $A$), Sea $U$ el conjunto de cadenas finitas o infinitas sobre le alfabeto $A\cup\{nill, \cdot, \rangle, \langle\}$. En el esquema se tiene:
+    \begin{itemize}
+        \item (Regla de formación)
+              $$FinList_A : set.$$
+        \item (Reglas de introducción)
+              $$nill:FinList_A.$$
+              $$intro(\cdot,\cdot):A \to FinList_A\to FinList_A.$$
+              Donde $intro(a,l) = \langle a\rangle\cdot l$.
+    \end{itemize}
+
+    Entonces el conjunto de reglas bajo la interpretación es:
+    \begin{align*}
+        \Phi = & \{(\emptyset, nill)\}\\
+               & \cup \{(\{l\}, \langle a\rangle\cdot l)\hspace{2mm}: l \in U, a\in A\}
+    .\end{align*}
+\end{ejemplo}
+
+\begin{ejemplo}
+    Para el Ejemplo 2.3 (el conjunto de formulas de la lógica proposicional clásica), Sea $U$ el conjunto de cadenas finitas o infinitas sobre el alfabeto $V \cup \{\lnot, \lor, \land, \rightarrow, \leftrightarrow, (, )\}$, donde $V$ es el conjunto de variables proposicionales. En el esquema se tiene:
+    \begin{itemize}
+        \item (Regla de formación)
+              $$Form(CPL) : set.$$
+        \item (Reglas de introducción)
+              $$a:Form(CPL).$$
+              $$(\lnot (\cdot)):V\to Form(CPL).$$
+              $$(\cdot\lor \cdot): Form(CPL)\to Form(CPL)\to Form(CPL).$$
+              $$(\cdot\land \cdot): Form(CPL)\to Form(CPL)\to Form(CPL).$$
+              $$(\cdot\rightarrow \cdot): Form(CPL)\to Form(CPL)\to Form(CPL).$$
+              $$(\cdot\leftrightarrow \cdot): Form(CPL)\to Form(CPL)\to Form(CPL).$$
+    \end{itemize}
+
+    Entonces el conjunto de reglas bajo la interpretación es:
+    \begin{align*}
+        \Phi = & \{(\emptyset, a)\hspace{2mm}: a \in V\}\\
+               & \cup \{(\{g\}, (\lnot g))\hspace{2mm}: g \in U\}\\
+               & \cup \{(\{g, f\}, (g\lor f))\hspace{2mm}: g, f \in U\} \\
+               & \cup \{(\{g, f\}, (g\land f))\hspace{2mm}: g, f \in U\} \\
+               & \cup \{(\{g, f\}, (g\rightarrow f))\hspace{2mm}: g, f \in U\}      \\
+               & \cup \{(\{g, f\}, (g\leftrightarrow f))\hspace{2mm}: g, f \in U\}
+    .\end{align*}
+\end{ejemplo}
+
+\chapter*{Conclusiones}
+\addcontentsline{toc}{chapter}{Conclusiones}
+Se ha visto que las definiciones inductivas son una herramienta útil para describir conjuntos, y este tipo de definiciones pueden ser formalizadas por medio de conjuntos de reglas. Además se ha visto que los tipos inductivos pueden ser definidos en teoría de tipos usando un esquema bastante general, y que estas definiciones pueden ser interpretados en teoría de conjuntos. Se definió la interpretación de expresiones en teoría de tipos de Martín-Löf en teoría de conjuntos.
+
+Se definió y formalizó el método de demostración por inducción en un conjunto definido inductivamente a partir de un conjunto de reglas o como punto fijo de un operador monótono sobre un retículo completo.
+
+Se desarrollaron ejemplos típicos de conjuntos inductivos (naturales ($\N$), listas finitas sobre un conjunto dado ($FinList_A$), formulas de la lógica proposicional clásica ($Form(CPL)$)), como tipos inductivos, como puntos fijos de operadores monótonos sobre retículos completos y como conjuntos inductivamente definidos en teoría de tipos de Martín-Löf.
+
+\begin{thebibliography}{9}
+    \bibitem{Davide Sangiorgi}
+    Sangiorgi, D. (2011)
+    Introduction to Bisimulation and Coinduction.
+    Cambridge University Press.
+    
+    \bibitem{Peter Dybjer}
+    Dybjer, P (1991)
+    Inductive Sets and Families in Martín-Lof's Types Theory and theis Set-Theoretic Semantics. In G. Huet and G. Plotkin, editors, Logical Frameworks, pages 280-306. Cambridge University Press.
+    
+    \bibitem{Dybjer and Chalmer}
+    Dybjer, P. Chalmer, T. H. (2005)
+    Lectures on Inductive and Recursive Definitions in Constructive Type Theory. TYPES Summer School, Göteborg, August 2005.
+
+    \bibitem{Aczel}
+    Aczel, P. (1997)
+    An Introduction to Inductive Definitions. In Studies in Logic and the Foundations of Mathematics, volume 90. pages 739-782.
+\end{thebibliography}
+
+\end{document}

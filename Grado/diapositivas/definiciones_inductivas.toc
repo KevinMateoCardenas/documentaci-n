@@ -1,0 +1,5 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Formalización a partir de conjuntos de reglas}{11}{0}{1}
+\beamer@sectionintoc {2}{Formalización a partir de operadores monótonos}{23}{0}{2}
+\beamer@sectionintoc {3}{Esquema de tipos inductivos en teoría de tipos}{39}{0}{3}
+\beamer@sectionintoc {4}{Interpretación de MLTT en Teoría de Conjuntos}{78}{0}{4}
