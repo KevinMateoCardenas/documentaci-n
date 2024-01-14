@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1701009598 "/home/kevin/Documentos/documentation/Grado/diapositivas/definiciones_inductivas.tex" "definiciones_inductivas.pdf" "definiciones_inductivas" 1701009604 0
-  "/home/kevin/Documentos/documentation/Grado/diapositivas/definiciones_inductivas.tex" 1701009594 25153 6a88a594ab84e8b786e91411f8a3c8d8 ""
+["pdflatex"] 1701144702 "/home/kevin/Documentos/documentation/Grado/diapositivas/definiciones_inductivas.tex" "definiciones_inductivas.pdf" "definiciones_inductivas" 1701144708 0
+  "/home/kevin/Documentos/documentation/Grado/diapositivas/definiciones_inductivas.tex" 1701144702 25285 a36210d1ee71bb6e7be545a6d12253d1 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -302,11 +302,12 @@
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1696744218 8183048 ca7dfd49e7c5866f3f04c9be042f6114 ""
   "/usr/local/texlive/2023/texmf.cnf" 1696744157 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "UDEA.png" 1699732265 151434 07034f67ee81364a4237f287cf5705d9 ""
-  "definiciones_inductivas.aux" 1701009603 6918 28d82fac689a47ad92b2f4a2a7d31c53 "pdflatex"
-  "definiciones_inductivas.nav" 1701009603 4081 0784d7f6c1921859215e52fcb0932383 "pdflatex"
-  "definiciones_inductivas.out" 1701009603 1172 a2dcf71684bb020f956ebe32fdc3f3f2 "pdflatex"
-  "definiciones_inductivas.tex" 1701009594 25153 6a88a594ab84e8b786e91411f8a3c8d8 ""
-  "definiciones_inductivas.toc" 1701009603 366 1a694a719643178791e6879bfc9232c3 "pdflatex"
+  "definiciones_inductivas.aux" 1701144707 6918 d60d85e1a10fd1c44262316bb0865020 "pdflatex"
+  "definiciones_inductivas.nav" 1701144707 4081 e2876a1662804dc1585eeefcc19fec71 "pdflatex"
+  "definiciones_inductivas.out" 1701144707 1172 a2dcf71684bb020f956ebe32fdc3f3f2 "pdflatex"
+  "definiciones_inductivas.tex" 1701144702 25285 a36210d1ee71bb6e7be545a6d12253d1 ""
+  "definiciones_inductivas.toc" 1701144707 366 1a694a719643178791e6879bfc9232c3 "pdflatex"
+  "logosimbolo-horizontal-png.png" 1701012611 100300 8aac2ba623d49fa04317a05a266c7170 ""
   (generated)
   "definiciones_inductivas.aux"
   "definiciones_inductivas.log"

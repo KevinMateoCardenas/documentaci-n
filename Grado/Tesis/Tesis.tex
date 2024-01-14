@@ -5,13 +5,12 @@
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[spanish]{babel} % Establece el idioma español
-\usepackage{csquotes} % Carga el paquete csquotes
-\usepackage{graphicx} % Required for inserting images
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
-%\usepackage[left=1.50cm, right=1.50cm, top=2.54cm, bottom=2.54cm]{geometry}
 \usepackage{geometry}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
@@ -22,16 +21,7 @@
 \usepackage{amsthm}
 \usepackage{ dsfont }
 \usepackage{amsmath,amsfonts,amssymb}
-\doublespacing
-
-\lstset{
-    inputencoding=utf8,
-    language=Java,
-    basicstyle=\ttfamily,
-    columns=fullflexible
-}
-
-% Configuración del paquete hyperref
+\usepackage{ragged2e}
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -78,46 +68,108 @@
 
 \begin{document}
 \begin{titlepage}
-    \begin{center}
-        {\Huge \textbf{Definiciones Inductivas}}
-        \vfill
+    \centering
+        \includegraphics[width=0.5\textwidth]{udea_portada.png}\par\vspace{1cm}
+        {\Huge \textbf{Definiciones Inductivas}}\par\vspace{2cm}
+        {\LARGE \textbf{Kevin Mateo Cárdenas Gallego}}
 
-        \includegraphics[width=0.3\textwidth]{Logosímbolo+Universidad+de+Antioquia+vertical+®-02.png}\\
-        \large\emph{Autor:}\\
-        Kevin Mateo Cárdenas Gallego.\\
-        \large\emph{Asesor:}\\
-        Juan Carlos Agudelo Agudelo.\\
-        {\large Trabajo de grado en modalidad de monografía para el título como matemático.\par}
-        {Facultad de Ciencias Exactas y Naturales \par}
-        {Instituto de Matemáticas \par}
+        \vfill
+        {Universidad de Antioquia\par}
         \vspace{1mm}
-        {Medellín, Colombia \par}
+        {Facultad de Ciencias Exactas y Naturales\par}
         \vspace{1mm}
-        {\large 2023\par}
+        {Instituto de Matemáticas\par}
+        \vspace{1mm}
+        {Medellín, Colombia\par}
+        \vspace{1mm}
+        {2023\par}
+\end{titlepage}
+\newpage
+\null
+\thispagestyle{empty}
+\newpage
+\begin{titlepage}
+    \begin{center}
+        {\Huge \textbf{Definiciones Inductivas}}\\
+        \vspace{2cm}
+        {\LARGE \textbf{Kevin Mateo Cárdenas Gallego}}\\
+        \vspace{2cm}
+        Trabajo de grado presentado como requisito parcial para optar al título de:\\
+        \vspace{0.5cm}
+        {\large \textbf{MATEMÁTICO}}\\
+        \vspace{3cm}
+        {\large Asesor:}\\
+        {\large Juan Carlos Agudelo Agudelo\\
+        Profesor del Instituto de Matemáticas\\}
+        \vfill
+        {Universidad de Antioquia\par}
+        \vspace{1mm}
+        {Facultad de Ciencias Exactas y Naturales\par}
+        \vspace{1mm}
+        {Instituto de Matemáticas\par}
+        \vspace{1mm}
+        {Medellín, Colombia\par}
+        \vspace{1mm}
+        {2023\par}
     \end{center}
 \end{titlepage}
+\newpage
+\null
+\thispagestyle{empty}
+\newpage
 
-\chapter*{Dedicatoria}
-A Evelin Yesenia Martínez, por ser un apoyo incondicional y un pilar fundamental durante estos años de compartir nuestras vidas.
+\newpage
+\thispagestyle{empty}
+\vspace*{\stretch{5}}
 
+\noindent\hspace*{\stretch{1}}
+\vspace*{\stretch{2}A Evelin Yesenia Martínez, por ser un apoyo incondicional y ser un pilar fundamental durante estos años de compartir nuestras vidas.
 A mi hijo, Isaac Joaquín Cárdenas Martínez, por ser mi fuente de inspiración y motivación para seguir adelante pese a las dificultades, es la luz de mis días y el impulso detrás de cada logro.
-
 A mi madre, Adriana María Gallego, y a mi padre, Jorge Alirio Cárdenas, cuya fortaleza y amor han sido la guía de mi camino.
+A mis hermanos, Jorge Ivan Cárdenas Gallego, Johny Santiago Cárdenas Gallego, Juan Diego Cárdenas Gallego,
+Angy Paola Cárdenas Ciro y Nicol Dayana Cárdenas Ciro, por su apoyo y amor, son parte fundamental de la red que sostiene mis sueños y ambiciones.
+Dedico este trabajo a ustedes como símbolo de mi gratitud y afecto. Compartir este logro con cada uno de ustedes es una alegría que trasciende palabras. Con todo mi amor.}
 
-A mis hermanos, Jorge Ivan Cárdenas Gallego, Johny Santiago Cárdenas Gallego, Juan Diego Cárdenas Gallego, Angy Paola Cárdenas Ciro y Nicol Dayana Cárdenas Ciro, por su apoyo y amor, son parte fundamental de la red que sostiene mis sueños y ambiciones.
-
-Dedico este trabajo a ustedes como símbolo de mi gratitud y afecto. Compartir este logro con cada uno de ustedes es una alegría que trasciende palabras. Con todo mi amor.
-
-\chapter*{Agradecimientos}
-
+\newpage
+\centering
+{\LARGE \textbf{Agradecimientos}} \\[1.5cm]
+\thispagestyle{empty}
+\justifying
+\textit{
 Extiendo un sincero agradecimiento a mi asesor, Juan Carlos Agudelo Agudelo, cuya experta guía y asesoramiento intelectual fueron cruciales para la culminación de este trabajo. Su paciencia y compromiso con la excelencia han sido una fuente de inspiración y un modelo a seguir.
-
 Expreso mi gratitud a los profesores del Instituto de Matemáticas. Su dedicación a la enseñanza y su voluntad de compartir un vasto conocimiento han enriquecido mi experiencia académica y han sido fundamentales en mi formación como matemático.
-
 A mis compañeros de estudio, les agradezco por su camaradería, por los desafíos intelectuales compartidos y por los momentos de alivio durante las etapas más exigentes de este viaje. La solidaridad y el apoyo mutuo que hemos compartido han sido de un valor incalculable.
-
 Es mi esperanza que este trabajo refleje la calidad de la enseñanza, el apoyo y la inspiración que he recibido de cada uno de ustedes.
+}
+\newpage
+\null
+\thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+{\Huge \textbf{Resumen}}\\
+Se presentan dos formalizaciones para las definiciones inductivas:
+como conjuntos de reglas y como puntos fijos de operadores monótonos, y se
+establecen relaciones entre estas formalizaciones. Luego se presenta un
+esquema de definiciones inductivas en la Teoría de Tipos de Martin-löf, y se
+muestra como dicho esquema puede ser interpretado en teoría de conjuntos,
+bajo la formalización de conjuntos de reglas.
 
+\vspace{2cm}
+{\textbf{Palabras clave: Definiciones inductivas, Conjuntos de reglas, Puntos fijos, Operadores monótonos, Teoría de Tipos de Martin-Löf, Teoría de Conjuntos, Retículos completos, Relaciones de orden parcial, inducción, 
+}}
+
+\vspace{2cm}
+{\Huge \textbf{Abstract}}\\
+Two formalizations for inductive definitions are presented: as sets of rules and as fixed points of monotone operators, and relations between these formalizations are established. Then an inductive definitions scheme in Martin-Löf's Type Theory is presented, and it is shown how this scheme can be interpreted in set theory, under the formalization of sets of rules.
+
+\vspace{2cm}
+{\textbf{Keywords: Inductive definitions, Sets of rules, Fixed points, Monotone operators, Martin-Löf's Type Theory, Set Theory, Complete lattices, Partial order relations, induction, 
+}}
+
+\newpage
+\null
+\thispagestyle{empty}
+\newpage
 \tableofcontents
 \chapter*{Introducción}
 \addcontentsline{toc}{chapter}{Introducción}
@@ -277,7 +329,6 @@ A continuación algunos ejemplos:
         \item Los \emph{puntos fijos} de $F$ son los elementos $x \in L$ tales que $F(x) = x$. Es decir, son los elementos que el operador deja inalterados.
     \end{itemize}
 \end{defi}
-
 \begin{defi}[Retículo completo]
     Un retículo completo es un conjunto parcialmente ordenado $(L,\leq)$ en el que todos los subconjuntos tienen supremo.
 \end{defi}

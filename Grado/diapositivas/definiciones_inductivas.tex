@@ -73,7 +73,8 @@
 
 % Definición de colores estilo Universidad de Antioquia
 \definecolor{udeaGreen}{RGB}{0, 104, 55} % Verde UdeA
-\definecolor{udeaGray}{RGB}{88, 88, 90}  % Gris UdeA
+\definecolor{udeaGray}{RGB}{88, 88, 90}  
+% Verde Obscuro UdeA
 
 % Aplicando colores a la presentación
 \usetheme{Madrid}
@@ -97,7 +98,7 @@
         Instituto de Matemáticas\\
         Universidad de Antioquia}
 \date[Noviembre 2023]{}
-
+\logo{\includegraphics[scale=0.1]{logosimbolo-horizontal-png.png}}
 %------------------ INICIO DEL DOCUMENTO ------------------
 \begin{document}
 
@@ -233,7 +234,7 @@
         Dado un CPO $(L, \leq)$ y un operador $F: L \rightarrow L$, definimos:\pause
         \begin{itemize}
             \item $F$ es \emph{monótono} si preserva el orden parcial.\pause
-            \item Los \emph{puntos pre-fijos} de $F$ son los elementos $x \in L$ tales que $F(x) \leq x$. De manera similar, los \emph{puntos post-fijos} de $F$ son los elementos $x \in L$ tales que $x \leq f(x)$.\pause
+            \item Los \emph{puntos pre-fijos} de $F$ son los elementos $x \in L$ tales que $F(x) \leq x$. De manera similar, los \emph{puntos post-fijos} de $F$ son los elementos $x \in L$ tales que $x \leq F(x)$.\pause
             \item Los \emph{puntos fijos} de $F$ son los elementos $x \in L$ tales que $F(x) = x$.
         \end{itemize}
     \end{defi}\pause
@@ -298,7 +299,7 @@
     \begin{itemize}
         \item Las reglas de inferencia para el sistema de tipos de Martín-Löf son las siguientes:\pause
     \end{itemize}
-    $$\epsilon \hspace{2mm} contexto \hspace{6mm} \frac{\Gamma\hspace{2mm} contexto \hspace{4mm} \Gamma \vdash A \hspace{2mm} set}{\Gamma,x:A \hspace{2mm} contexto}$$
+    $$\epsilon \hspace{2mm} contexto \hspace{6mm} \frac{\Gamma\hspace{2mm} contexto \hspace{4mm} \Gamma \vdash A \hspace{2mm} set}{\Gamma,x:A \hspace{2mm} contexto}.$$
     \vspace{0.3mm}
     $$\frac{\Gamma \vdash A \hspace{2mm} set}{\Gamma \vdash A = A} \hspace{6mm} \frac{\Gamma \vdash a : A}{\Gamma \vdash a = a : A}$$
     \vspace{0.3mm}
@@ -359,7 +360,7 @@
         \item Se tiene la sintaxis y las reglas del $\lambda$-cálculo con tipos dependientes. Llamamos a esta teoría $T_{0}$. \pause
         \item $T_{0}$ puede ser extendida sucesivamente obteniendo las teorías $T_{1}, T_{2}, \ldots$ de la siguiente manera:\pause
         \item $T_{0}$ es la teoría de tipos dependientes que se acaba de definir. $T_{i+1}$ es la teoría $T_{i}$ extendida con un nuevo tipo de datos $I_{i}$.\pause
-        \item Se tiene que $J$ abrevia $\Gamma\vdash J$, en una teoría $T$, para no llevar una notación tan cargada.
+        \item Se tiene que $J$ abrevia $\Gamma\vdash J$, en una teoría $T$.
     \end{itemize}
 \end{frame}
 
@@ -437,7 +438,7 @@
 
 \begin{frame}{Esquema de tipos inductivos en teoría de tipos}
     \begin{ejemplo}[El conjunto de formulas de la lógica proposicional clásica]
-        $$\frac{a:V}{a:F(CPL)} \hspace{6mm} \frac{a=a':V}{a=a':F(CPL)}$$
+        $$\frac{a:V}{a:F(CPL)} \hspace{6mm} \frac{a=a':V}{a=a':F(CPL)}.$$
         $$\frac{g:F(CPL)}{(\lnot g):F(CPL)} \hspace{6mm} \frac{g=g':F(CPL)}{(\lnot g)=(\lnot g'):F(CPL)}.$$
         $$\frac{g:F(CPL)\hspace{4mm}f:F(CPL)}{(g\lor f):F(CPL)} \hspace{6mm} \frac{g=g':F(CPL)\hspace{4mm}f=f':F(CPL)}{(g\lor f)=(g'\lor f'):F(CPL)}.$$
         $$\frac{g:F(CPL)\hspace{4mm}f:F(CPL)}{(g\land f):F(CPL)} \hspace{6mm} \frac{g=g':F(CPL)\hspace{4mm}f=f':F(CPL)}{(g\land f)=(g'\land f'):F(CPL)}.$$
@@ -450,15 +451,14 @@
 
 \begin{frame}{Interpretación de MLTT en Teoría de Conjuntos}
     \begin{itemize}
-        \item Sea $\llbracket a \rrbracket\rho$ denota la interpretación de la expresión $a$ bajo la asignación $\rho$. Esta asignación es una función que asigna un conjunto a cada variable $x$ en una lista finita de variables que contenga todas las variables libres de $a$.\pause
+        \item $\llbracket a \rrbracket\rho$ denota la interpretación de la expresión $a$ bajo la asignación $\rho$. Esta asignación es una función que asigna un conjunto a cada variable $x$ en una lista finita de variables que contenga todas las variables libres de $a$.\pause
         \item Para un tipo inductivo $P$, tome el siguiente conjunto de reglas:\pause    
         \begin{align*}
-            \Phi = \bigcup \{(\bigcup_{k} ran(v_{k}), &\langle |intro_{i}|, us, (v_{k})_{k})\rangle)\hspace{2mm}:\\
-            & us\in\llbracket Gs_{i}\rrbracket,\\
-            & (v_k\in \llbracket Hs_{ik}[xs]\rrbracket_{xs}^{us}\to U)_{k} \}.
-        \end{align*}\pause
-        Donde. \pause
+            \Phi = \bigcup \left\{\left(X, x\right)\hspace{2mm}: us\in\llbracket Gs_{i}\rrbracket, (v_k\in \llbracket Hs_{ik}[xs]\rrbracket_{xs}^{us}\to U)_{k} \right\}.
+        \end{align*}
+        Donde.
         \begin{enumerate}
+            \item $ X = \bigcup_{k} ran(v_{k})$, $x = \langle |intro_{i}|, us, (v_{k})_{k})\rangle$.\pause
             \item $\llbracket\cdot\rrbracket$ es la interpretación de tipos y $\llbracket\cdot\rrbracket_{xs}^{us}$ es la interpretación de telescopios.\pause
             \item $ \langle |intro_{i}|, us, (v_{k})_{k})\rangle$ representa una codificación de $intro_{i}(us,(v_{k})_{k})$. Donde $|intro_{i}|$ es el código de $intro_{i}$.
         \end{enumerate}
@@ -495,21 +495,21 @@
 \begin{frame}{Referencias}
     \begin{thebibliography}{9}
         \bibitem{Davide Sangiorgi}
-        Sangiorgi, D. (2011)
-        Introduction to Bisimulation and Coinduction.
+        \textcolor{black}{Sangiorgi, D. (2011)Introduction to Bisimulation and Coinduction.
         Cambridge University Press.
-        
+        }
         \bibitem{Peter Dybjer}
-        Dybjer, P (1991)
+        \textcolor{black}{Dybjer, P (1991)
         Inductive Sets and Families in Martín-Lof's Types Theory and theis Set-Theoretic Semantics. In G. Huet and G. Plotkin, editors, Logical Frameworks, pages 280-306. Cambridge University Press.
-        
+        }
         \bibitem{Dybjer and Chalmer}
-        Dybjer, P. Chalmer, T. H. (2005)
+        \textcolor{black}{Dybjer, P. Chalmer, T. H. (2005)
         Lectures on Inductive and Recursive Definitions in Constructive Type Theory. TYPES Summer School, Göteborg, August 2005.
-    
+        }
         \bibitem{Aczel}
-        Aczel, P. (1997)
+        \textcolor{black}{Aczel, P. (1997)
         An Introduction to Inductive Definitions. In Studies in Logic and the Foundations of Mathematics, volume 90. pages 739-782.
+        }
     \end{thebibliography}
 \end{frame}
 
