@@ -1,0 +1,3 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Patrones de diseño}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Reducer}{2}{subsection.1.1}%
